@@ -1,11 +1,6 @@
 ﻿var sql = require('mssql');
 var settings = require('../config/settings');
-//var log4js = require('../config/log4js');
 
-
-// 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
-//log4js.configure('log4js.json');
-//var logger = log4js.getLogger('dateFileLog');
 
 // var config = {
 //     user: 'sa',
@@ -30,19 +25,30 @@ function gps_data() {
 
 gps_data.get_carlist = function(gprsid, cb) {
     var sqlText = "select * from [gserver_synth].[dbo].[View_CarList] where GPRS='" + gprsid + "'";
-    sql.connect(config).then(function() {
-        new sql.Request().query(sqlText).then(function(result) {
-            cb(null, result)
-        }).catch(function(err) {
-            logger.error('error = ' + err);
-            cb(err, '')
-        });
-
-    }).catch(function(err) {
-        logger.error('error = ' + err);
-        cb(err, '')
+    var pool = new sql.ConnectionPool(config, err => {
+        if (err) {
+            logger.error('error = ', err);
+            pool.close();
+            cb(err, '');
+        }
+        // Query
+        pool.request() // or: new sql.Request(pool1)
+            .query(sqlText, (err, result) => {
+                if (err) {
+                    logger.error('error = ', err);
+                    pool.close();
+                    cb(err, '');
+                }
+                cb(null, result);
+            });
     });
-}
+
+    pool.on('error', err => {
+        logger.error('error = ', err);
+        pool.close();
+        cb(err, '');
+    });
+};
 
 gps_data.get_driver_vhc = function(vid, cb) {
     var sqlText = "select * from driver_vhc where VehicleID='" + vid + "'";
@@ -50,11 +56,13 @@ gps_data.get_driver_vhc = function(vid, cb) {
         new sql.Request().query(sqlText).then(function(result) {
             cb(null, result)
         }).catch(function(err) {
+            sql.close();
             logger.error('error = ' + err);
             cb(err, '')
         });
 
     }).catch(function(err) {
+        sql.close();
         logger.error('error = ' + err);
         cb(err, '')
     });

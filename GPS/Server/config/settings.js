@@ -1,7 +1,7 @@
 module.exports.hosts = {
     host: '127.0.0.1',
     port: 6666
-}
+};
 
 module.exports.dbconfig = {
     user: 'sa',
@@ -10,5 +10,10 @@ module.exports.dbconfig = {
     database: 'gserver_data',
     options: {
         encrypt: false // Use this if you're on Windows Azure
+    },
+    pool: {
+        max: 50,
+        min: 0,
+        idleTimeoutMillis: 30000
     }
 };
