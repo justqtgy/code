@@ -1,0 +1,14 @@
+module.exports.hosts = {
+    host: '127.0.0.1',
+    port: 6666
+}
+
+module.exports.dbconfig = {
+    user: 'sa',
+    password: 'DSERVER@123',
+    server: '120.24.68.95', // You can use 'localhost\\instance' to connect to named instance
+    database: 'gserver_data',
+    options: {
+        encrypt: false // Use this if you're on Windows Azure
+    }
+};

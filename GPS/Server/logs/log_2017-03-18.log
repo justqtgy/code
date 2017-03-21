@@ -1,0 +1,7 @@
+[2017-03-18 15:56:59.084] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = greeting from client socket
+[2017-03-18 15:56:59.086] [INFO] dateFileLog - [ 'greeting from client socket' ]
+[2017-03-18 15:57:10.281] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = helo
+[2017-03-18 15:57:10.282] [INFO] dateFileLog - [ 'helo' ]
+[2017-03-18 15:57:51.201] [ERROR] dateFileLog - Error:Error: read ECONNRESET
+[2017-03-18 16:03:42.968] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = greeting from client socket
+[2017-03-18 16:03:42.969] [INFO] dateFileLog - update from socket

@@ -1,5 +1,5 @@
 @echo off
-E:
-cd nodejs
 
+cd %cd%
+ 
 cmd
