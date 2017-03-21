@@ -52,19 +52,19 @@ gps_data.get_carlist = function(gprsid, cb) {
 
 gps_data.get_driver_vhc = function(vid, cb) {
     var sqlText = "select * from driver_vhc where VehicleID='" + vid + "'";
-    sql.connect(config).then(function() {
-        new sql.Request().query(sqlText).then(function(result) {
-            cb(null, result)
-        }).catch(function(err) {
-            sql.close();
-            logger.error('error = ' + err);
-            cb(err, '')
-        });
+    sql.connect(config).then(function(connection) {
+        new sql.Request(connection)
+            .query(sqlText)
+            .then(function(result) {
+                cb(null, result);
+            }).catch(function(err) {
+                logger.error('error = ' + err);
+                cb(err, '');
+            });
 
     }).catch(function(err) {
-        sql.close();
         logger.error('error = ' + err);
-        cb(err, '')
+        cb(err, '');
     });
 }
 
@@ -81,8 +81,8 @@ gps_data.add_data = function(data, cb) {
         _temp = data.temp.toString();
 
 
-    sql.connect(config).then(function() {
-        new sql.Request()
+    sql.connect(config).then(function(connection) {
+        new sql.Request(connection)
             .input('VehicleID', sql.VarChar(20), _vehicleid)
             .input('Version', sql.VarChar(20), _version)
             .input('GPSTime', sql.VarChar(20), _gpstime)
@@ -95,10 +95,10 @@ gps_data.add_data = function(data, cb) {
             .input('Temp', sql.VarChar(20), _temp)
             .execute('cp_gps_data_add').then(function(err, recordsets, returnValue) {
                 //console.dir(returnValue);
-                cb(null, 1)
+                cb(null, 1);
             }).catch(function(err) {
                 //console.log(err);
-                cb(err, 0)
+                cb(err, 0);
             });
 
     }).catch(function(err) {
@@ -121,8 +121,8 @@ gps_data.add_capacity = function(data) {
         _temp = data.temp;
 
 
-    sql.connect(config).then(function() {
-        new sql.Request()
+    sql.connect(config).then(function(connection) {
+        new sql.Request(connection)
             .input('VehicleID', sql.VarChar(20), _vehicleid)
             .input('Version', sql.VarChar(20), _version)
             .input('GPSTime', sql.DateTime, _gpstime)
@@ -154,8 +154,8 @@ gps_data.add_quality = function(data, cb) {
         _init = data.init,
         _volume = data.volume;
 
-    sql.connect(config).then(function() {
-        new sql.Request()
+    sql.connect(config).then(function(connection) {
+        new sql.Request(connection)
             .input('VehicleID', sql.VarChar(20), _vehicleid)
             .input('C1', sql.VarChar(20), _c1)
             .input('C2', sql.VarChar(20), _c2)
@@ -183,11 +183,10 @@ gps_data.add_alarm = function(data, cb) {
         "'" + data.addtime + "'," +
         "'" + data.typeid + "'" +
         ");SELECT @@IDENTITY as ID;";
-    sql.connect(config).then(function() {
-        new sql.Request().query(sqlText).then(function(result) {
-            cb(null, result)
+    sql.connect(config).then(function(connection) {
+        new sql.Request(connection).query(sqlText).then(function(result) {
+            cb(null, result);
         }).catch(function(err) {
-            logger.error('error = ' + err);
             cb(err, '');
         });
 
