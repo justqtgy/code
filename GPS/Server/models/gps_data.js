@@ -156,13 +156,13 @@ gps_data.add_quality = function(data, cb) {
             .input('Init', sql.Decimal(18, 2), _init)
             .input('Volume', sql.Decimal(18, 2), _volume)
             .execute('cp_gps_quality_add').then(function(err, recordsets, returnValue) {
-                cb(null, 1)
+                cb(null, 1);
             }).catch(function(err) {
-                cb(err, 0)
+                cb(err, 0);
             });
 
     }).catch(function(err) {
-        cb(err, 0)
+        cb(err, 0);
     });
 }
 
@@ -180,11 +180,11 @@ gps_data.add_alarm = function(data, cb) {
             cb(null, result)
         }).catch(function(err) {
             logger.error('error = ' + err);
-            cb(err, '')
+            cb(err, '');
         });
 
     }).catch(function(err) {
-        cb(err, 0)
+        cb(err, 0);
     });
 }
 
