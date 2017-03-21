@@ -29,7 +29,7 @@ net.createServer(function(socket) {
     //     soketList[ipAddress].push(socket);
     // }
     var obj = socketList[ipAddress] || [];
-    if (obj.indexOf(socket) < 0) {
+    if (!obj || obj.indexOf(socket) < 0) {
         obj.push(socket);
         socketList[ipAddress] = obj;
     }
