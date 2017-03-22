@@ -25,27 +25,16 @@ function gps_data() {
 
 gps_data.get_carlist = function(gprsid, cb) {
     var sqlText = "select * from [gserver_synth].[dbo].[View_CarList] where GPRS='" + gprsid + "'";
-    var pool = new sql.ConnectionPool(config, err => {
-        if (err) {
-            logger.error('error = ', err);
-            pool.close();
-            cb(err, '');
-        }
-        // Query
-        pool.request() // or: new sql.Request(pool1)
-            .query(sqlText, (err, result) => {
-                if (err) {
-                    logger.error('error = ', err);
-                    pool.close();
-                    cb(err, '');
-                }
+    sql.connect(config).then(function(connection) {
+        new sql.Request(connection)
+            .query(sqlText)
+            .then(function(result) {
                 cb(null, result);
+            }).catch(function(err) {
+                cb(err, '');
             });
-    });
 
-    pool.on('error', err => {
-        logger.error('error = ', err);
-        pool.close();
+    }).catch(function(err) {
         cb(err, '');
     });
 };
@@ -58,12 +47,10 @@ gps_data.get_driver_vhc = function(vid, cb) {
             .then(function(result) {
                 cb(null, result);
             }).catch(function(err) {
-                logger.error('error = ' + err);
                 cb(err, '');
             });
 
     }).catch(function(err) {
-        logger.error('error = ' + err);
         cb(err, '');
     });
 }
@@ -93,7 +80,8 @@ gps_data.add_data = function(data, cb) {
             .input('Direct', sql.VarChar(20), _direct)
             .input('Status', sql.VarChar(20), _status)
             .input('Temp', sql.VarChar(20), _temp)
-            .execute('cp_gps_data_add').then(function(err, recordsets, returnValue) {
+            .execute('cp_gps_data_add')
+            .then(function(err, recordsets, returnValue) {
                 //console.dir(returnValue);
                 cb(null, 1);
             }).catch(function(err) {
@@ -163,7 +151,8 @@ gps_data.add_quality = function(data, cb) {
             .input('Full', sql.Decimal(18, 2), _full)
             .input('Init', sql.Decimal(18, 2), _init)
             .input('Volume', sql.Decimal(18, 2), _volume)
-            .execute('cp_gps_quality_add').then(function(err, recordsets, returnValue) {
+            .execute('cp_gps_quality_add')
+            .then(function(err, recordsets, returnValue) {
                 cb(null, 1);
             }).catch(function(err) {
                 cb(err, 0);
@@ -184,11 +173,13 @@ gps_data.add_alarm = function(data, cb) {
         "'" + data.typeid + "'" +
         ");SELECT @@IDENTITY as ID;";
     sql.connect(config).then(function(connection) {
-        new sql.Request(connection).query(sqlText).then(function(result) {
-            cb(null, result);
-        }).catch(function(err) {
-            cb(err, '');
-        });
+        new sql.Request(connection)
+            .query(sqlText)
+            .then(function(result) {
+                cb(null, result);
+            }).catch(function(err) {
+                cb(err, '');
+            });
 
     }).catch(function(err) {
         cb(err, 0);
