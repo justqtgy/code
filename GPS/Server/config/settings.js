@@ -12,7 +12,7 @@ module.exports.dbconfig = {
         encrypt: false // Use this if you're on Windows Azure
     },
     pool: {
-        max: 50,
+        max: 10,
         min: 0,
         idleTimeoutMillis: 30000
     }
