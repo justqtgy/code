@@ -1,6 +1,8 @@
 var http = require('http');
 var qs = require('querystring');
 var fs = require('fs');
+var gps_data = require('../../models/gps_data');
+var bin = require('../../../../framework/binjs');
 
 var _fileBuffer = fs.readFileSync('./update/GPS.hex');
 var len = Buffer.byteLength(_fileBuffer);
