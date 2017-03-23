@@ -73,8 +73,9 @@ function send_update_file(value) {
         return str;
     };
 }
-
-
+/*
+格式如下：*HQ,2000000218,V1,160012,A,2240.8123,N,11347.2645,E,0000,356,210317,FFFFFBFF#,T0.0#
+*/
 function add_base_data(data) {
     var item = {};
     if (data[0].indexOf('*HQ') >= 0) {
@@ -206,7 +207,7 @@ function add_capacity_data(data) {
 }
 
 function add_data(data) {
-    var json = {};
+    var item = {};
     if (data.length <= 32) {
         return;
     }
@@ -217,21 +218,50 @@ function add_data(data) {
         end = data.slice(data.length - 2);
 
     if (start == '7e' && end == '7e') {
-        json.deviceid = data.slice(10, 22);
-        json.sn = parseInt(data.slice(22, 26), 16);
-        json.alarm = parseInt(data.slice(26, 34), 16);
-        json.status = parseInt(data.slice(34, 42), 16);
+        item.gprsid = data.slice(10, 22);
+        item.sn = parseInt(data.slice(22, 26), 16);
+        item.alarm = parseInt(data.slice(26, 34), 16);
+        item.status = parseInt(data.slice(34, 42), 16);
         var _lng = parseInt(data.slice(42, 50), 16);
-        json.lng = parseFloat(_lng) / 100000;
+        item.lng = parseFloat(_lng) / 100000;
         var _lat = parseInt(data.slice(50, 58), 16);
-        json.lat = parseFloat(_lat) / 100000;
-        json.high = parseInt(data.slice(58, 62), 16);
+        item.lat = parseFloat(_lat) / 100000;
+        item.high = parseInt(data.slice(58, 62), 16);
         var _speed = parseInt(data.slice(62, 66), 16);
-        json.speed = parseFloat(_speed) / 10;
-        json.direct = parseInt(data.slice(66, 70), 16);
+        item.speed = parseFloat(_speed) / 10;
+        item.direct = parseInt(data.slice(66, 70), 16);
         var _datetime = data.slice(70, 82);
-        json.datetime = '20' + _datetime.slice(0, 2) + "-" + _datetime.slice(2, 4) + "-" + _datetime.slice(4, 6) + " " +
+        item.datetime = '20' + _datetime.slice(0, 2) + "-" + _datetime.slice(2, 4) + "-" + _datetime.slice(4, 6) + " " +
             _datetime.slice(6, 8) + ":" + _datetime.slice(8, 10) + ":" + _datetime.slice(10, 12);
+        var _oil = data.slice(82, 94);
+        item.oil1 = parseInt(_oil.slice(4, 8), 16) * 0.01;
+        item.oil2 = parseInt(_oil.slice(8, 12), 16) * 0.01;
 
+        var _temp = data.slice(94, 114);
+        item.temp1 = parseInt(_temp(4, 8), 16);
+        item.temp2 = parseInt(_temp(8, 12), 16);
+        item.temp3 = parseInt(_temp(12, 16), 16);
+        item.temp4 = parseInt(_temp(16, 20), 16);
+
+        gps_data.get_carlist(item.gprsid, function(err, rows) {
+            if (err) {
+                logger.error('获取车辆信息失败：' + err);
+                return;
+            }
+
+            if (rows.length === 0) {
+                logger.error('获取车辆信息失败：该车不存在');
+                return;
+            }
+
+            item.vehicleid = rows[0].VehicleID;
+
+            gps_data.add_data(item, function(err, result) {
+                if (err) {
+                    logger.error('Error = ' + err);
+                }
+                logger.info('Result = ' + result);
+            });
+        });
     }
 }
