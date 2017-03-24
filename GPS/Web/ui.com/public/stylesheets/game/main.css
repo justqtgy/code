@@ -1,0 +1,63 @@
+*{margin:0;padding:0}
+*:focus{outline:none}
+body{font-family:'微软雅黑';font-size:12px}
+.disnone{display:none}
+a{outline:medium none;text-decoration:none}
+img{border:0}
+.logo{display:none}
+.right_panel{position:fixed;_position:absolute;right:0;top:210px;background:url("http://r.syyx.com/mlyx/guide/right_panel.png") 0 0 no-repeat;width:124px;height:142px;overflow:hidden}
+.container{min-width:980px;height:1050px;background:url("http://r.syyx.com/mlyx/guide/bg.jpg") no-repeat top center;}
+.container .main{position:relative;width:980px;height:100%;margin:0 auto;}
+.container .main .icon{position:absolute;width:47px;height:47px;top:4px;left:28px}
+.container .main .home{position:absolute;width:113px;height:50px;top:0;left:264px;background:url("http://r.syyx.com/mlyx/guide/btn.jpg") no-repeat 9999cm;}
+.container .main .home:hover{background-position:-32px -280px}
+.container .main .game{position:absolute;width:129px;height:50px;top:0;left:378px;background:url("http://r.syyx.com/mlyx/guide/btn.jpg") no-repeat 9999cm;}
+.container .main .game:hover{background-position:-146px -280px}
+.container .main .news{position:absolute;width:129px;height:50px;top:0;left:509px;background:url("http://r.syyx.com/mlyx/guide/btn.jpg") no-repeat 9999cm;}
+.container .main .news:hover{background-position:-277px -280px}
+.container .main .video{position:absolute;width:129px;height:50px;top:0;left:635px;background:url("http://r.syyx.com/mlyx/guide/btn.jpg") no-repeat 9999cm;}
+.container .main .video:hover{background-position:-403px -280px}
+.container .main .bbs{position:absolute;width:109px;height:50px;top:0;left:764px;background:url("http://r.syyx.com/mlyx/guide/btn.jpg") no-repeat 9999cm;}
+.container .main .bbs:hover{background-position:-532px -280px}
+.container .main .v_btn{position:absolute;width:67px;height:68px;top:532px;left:637px;background:url("http://r.syyx.com/mlyx/guide/btn.jpg") no-repeat 9999cm}
+.container .main .apple{position:absolute;width:187px;height:57px;top:659px;left:168px}
+.container .main .android{position:absolute;width:187px;height:57px;top:720px;left:168px}
+.container .main .jailbreak{position:absolute;width:187px;height:57px;top:782px;left:168px}
+.container .main .event{position:absolute;width:170px;height:181px;top:659px;left:-10px;}
+.container .main .event img{width:170px;height:181px}
+.container .main .more_news{position:absolute;width:20px;height:20px;left:962px;top:663px}
+.container .main #news_news{position:absolute;top:691px;left:662px;width:341px;height:148px;overflow:hidden;}
+.container .main #news_news ul li{padding-left:17px;color:#fff;height:28px;margin-top:1px;list-style-type:none;}
+.container .main #news_news ul li a{width:266px;display:inline-block;height:26px;line-height:26px;color:#fff;margin-right:5px;overflow:hidden;float:left;}
+.container .main #news_news ul li a:hover{color:#b7b6b4}
+.container .main #news_news ul li span{line-height:26px}
+.container .main #tabs_picture_news{position:absolute;width:292px;height:180px;left:363px;top:659px;overflow:hidden;background:none;border:0;}
+.container .main #tabs_picture_news .ui-widget-content{background:none;border:0}
+.container .main #tabs_picture_news .ui-widget-header{border:0;padding:14px 2px 3px 110px}
+.container .main #tabs_picture_news ul{position:absolute;left:0;top:144px;width:292px;height:36px;}
+.container .main #tabs_picture_news ul li{float:left;padding:0 3px;}
+.container .main #tabs_picture_news ul li.ui-tabs-selected a{background:url("http://r.syyx.com/mlyx/guide/tab1.png") no-repeat}
+.container .main #tabs_picture_news ul li a{background:url("http://r.syyx.com/mlyx/guide/tab2.png") no-repeat;float:left;width:11px;height:11px;line-height:11px;overflow:hidden}
+.container .main #tabs_picture_news .img{width:292px;height:180px;cursor:pointer}
+.container .main .copy_right{width:750px;position:absolute;top:972px;line-height:23px;padding-left:245px;color:#886f59;}
+.container .main .copy_right .feet_logo{position:absolute;width:120px;height:45px;left:66px;top:0}
+.pop_video_detail{background-color:#221411;border:1px solid #420c0a}
+.ui-dialog .ui-dialog-titlebar-close{background:url("http://r.syyx.com/mlyx/guide/close_s.jpg") no-repeat center center;width:36px;height:32px;top:4px;right:-9px}
+* html,* html body /* 修正IE6振动bug */{background-image:url("about:blank");background-attachment:fixed}
+* html .fixed-bottom{ /* IE6 底部固定  */
+      position:absolute;
+      bottom:auto;
+      top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+  }
+  
+  * html .fixed-right{/* IE6 右侧固定 */ 
+      position:absolute;
+      right:auto;
+      left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0));
+  }
+  
+  * html .fixed-top{/* IE6 头部固定 */
+      position:absolute;
+      bottom:auto;
+      top:expression(eval(document.documentElement.scrollTop + 400));
+  }

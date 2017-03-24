@@ -5,9 +5,9 @@ var send_alarm_msg = module.exports.send_alarm_msg = function(data) {
     data.typeid = 1;
     gps_data.add_alarm(data, function(err, result) {
         if (err) {
-            logger.error('Error = ' + err);
+            logger.error('Error = ', err);
         }
-        logger.info('Result = ' + JSON.stringify(result));
+        logger.info('Result = ', JSON.stringify(result));
     });
     logger.info('给司机发送报警短信...');
     var sender = {};
@@ -22,7 +22,7 @@ var send_servicearea_msg = module.exports.send_servicearea_msg = function(data) 
     //获取司机设置的服务区号码
     gps_data.get_driver_vhc(data.vehicleid, function(err, result) {
         if (err) {
-            logger.error('获取司机信息失败：' + err)
+            logger.error('获取司机信息失败：', err)
             return;
         }
         logger.info('司机设置的服务区信息 = ', result);
@@ -33,9 +33,10 @@ var send_servicearea_msg = module.exports.send_servicearea_msg = function(data) 
             data.mobile = sa_tel;
             gps_data.add_alarm(data, function(err, result) {
                 if (err) {
-                    logger.error('Error = ' + err);
+                    logger.error('Error = ', err);
+                    return
                 }
-                logger.info('Result = ' + JSON.stringify(result));
+                logger.info('Result = ', JSON.stringify(result));
             });
 
             logger.info('给服务区发送短信...');

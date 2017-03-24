@@ -1,7 +1,7 @@
 var http = require('http');
 var qs = require('querystring');
 var fs = require('fs');
-var gps_data = require('../../models/gps_data');
+var gps_data = require('./../models/gps_data');
 var bin = require('../../../../framework/binjs');
 
 var _fileBuffer = fs.readFileSync('./update/GPS.hex');
@@ -94,7 +94,7 @@ function add_base_data(data) {
 
         gps_data.get_carlist(item.gprsid, function(err, rows) {
             if (err) {
-                logger.error('获取车辆信息失败：' + err);
+                logger.error('获取车辆信息失败：', err);
                 return;
             }
 
@@ -107,9 +107,9 @@ function add_base_data(data) {
 
             gps_data.add_data(item, function(err, result) {
                 if (err) {
-                    logger.error('Error = ' + err);
+                    logger.error('Error = ', err);
                 }
-                logger.info('Result = ' + result);
+                logger.info('Result = ', result);
             });
         });
     }
@@ -129,7 +129,7 @@ function add_quality_data(data) {
 
         gps_data.get_carlist(item.gprsid, function(err, rows) {
             if (err) {
-                logger.error('获取车辆信息失败：' + err);
+                logger.error('获取车辆信息失败：', err);
                 return;
             }
 
@@ -142,9 +142,9 @@ function add_quality_data(data) {
 
             gps_data.add_quality(item, function(err, result) {
                 if (err) {
-                    logger.error('Error = ' + err);
+                    logger.error('Error = ', err);
                 }
-                logger.info('Result = ' + result);
+                logger.info('Result = ', result);
             });
         });
     }
@@ -164,7 +164,7 @@ function add_alarm_data(data) {
 
         gps_data.get_carlist(item.gprsid, function(err, rows) {
             if (err) {
-                logger.error('获取车辆信息失败：' + err);
+                logger.error('获取车辆信息失败：', err);
                 return;
             }
 
@@ -245,7 +245,7 @@ function add_data(data) {
 
         gps_data.get_carlist(item.gprsid, function(err, rows) {
             if (err) {
-                logger.error('获取车辆信息失败：' + err);
+                logger.error('获取车辆信息失败：', err);
                 return;
             }
 
@@ -258,9 +258,9 @@ function add_data(data) {
 
             gps_data.add_data(item, function(err, result) {
                 if (err) {
-                    logger.error('Error = ' + err);
+                    logger.error('Error = ', err);
                 }
-                logger.info('Result = ' + result);
+                logger.info('Result = ', result);
             });
         });
     }

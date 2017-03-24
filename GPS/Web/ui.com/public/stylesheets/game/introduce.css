@@ -1,0 +1,69 @@
+*{outline:none}
+body{margin:0;font-size:14px;font-family:"Microsoft Yahei",'SimSun'}
+a{color:#5170a7;text-decoration:none;}
+a:hover{color:#f3d034}
+.container{height:1080px;min-width:1100px;overflow:hidden;background:url("http://r.syyx.com/mlyx/game/bg.jpg") top center no-repeat}
+.content{position:relative;width:960px;height:100%;margin:0 auto}
+.syyx{position:absolute;top:967px;left:31px}
+.to_index{position:absolute;width:176px;height:108px;left:-50px}
+.nav{position:absolute;top:0;left:129px;width:847px;height:108px;}
+.nav .one{position:absolute;top:0;left:0;width:137px;height:108px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") 9999cm no-repeat;}
+.nav .one:hover{background-position:-10px -24px}
+.nav .one.active{background-position:-10px -24px}
+.nav .two{position:absolute;top:0;left:138px;width:178px;height:108px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") 9999cm no-repeat;}
+.nav .two:hover{background-position:-148px -24px}
+.nav .two.active{background-position:-148px -24px}
+.nav .three{position:absolute;top:0;left:316px;width:186px;height:108px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") 9999cm no-repeat;}
+.nav .three:hover{background-position:-326px -24px}
+.nav .three.active{background-position:-326px -24px}
+.nav .four{position:absolute;top:0;left:502px;width:186px;height:108px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") 9999cm no-repeat;}
+.nav .four:hover{background-position:-512px -24px}
+.nav .four.active{background-position:-512px -24px}
+.nav .five{position:absolute;top:0;left:688px;width:136px;height:108px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") 9999cm no-repeat;}
+.nav .five:hover{background-position:-698px -24px}
+.nav .five.active{background-position:-698px -24px}
+.fullpage{position:absolute;top:108px;height:841px;width:100%;overflow:hidden;}
+.fullpage .sc_left{display:none;position:absolute;top:420px;left:50px;width:110px;height:108px;background:url("http://r.syyx.com/mlyx/game/sc_left.png") 0 0 no-repeat}
+.fullpage .sc_right{position:absolute;top:420px;right:50px;width:110px;height:108px;background:url("http://r.syyx.com/mlyx/game/sc_right.png") 0 0 no-repeat}
+.fullpage .section{position:absolute;min-width:1100px;width:100%;height:841px}
+.fullpage .one{left:0;background:url("http://r.syyx.com/mlyx/game/1.jpg") center 0 no-repeat;}
+.fullpage .one .apple{position:absolute;top:700px;left:131px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -154px -312px}
+.fullpage .one .android{position:absolute;top:701px;left:275px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -298px -313px}
+.fullpage .one .jailbreak{position:absolute;top:700px;left:-13px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -10px -312px}
+.fullpage .two{left:9999cm;background:url("http://r.syyx.com/mlyx/game/2.jpg") center 0 no-repeat;}
+.fullpage .two .apple{position:absolute;top:611px;left:121px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -154px -312px}
+.fullpage .two .android{position:absolute;top:612px;left:265px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -298px -313px}
+.fullpage .two .jailbreak{position:absolute;top:611px;left:-23px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -10px -312px}
+.fullpage .three{left:9999cm;background:url("http://r.syyx.com/mlyx/game/3.jpg") center 0 no-repeat;}
+.fullpage .three .apple{position:absolute;top:615px;left:134px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -154px -312px}
+.fullpage .three .android{position:absolute;top:616px;left:278px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -298px -313px}
+.fullpage .three .jailbreak{position:absolute;top:615px;left:-10px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") 9999cm no-repeat}
+.fullpage .four{left:9999cm;background:url("http://r.syyx.com/mlyx/game/4.jpg") center 0 no-repeat;}
+.fullpage .four .apple{position:absolute;top:569px;left:113px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -154px -312px}
+.fullpage .four .android{position:absolute;top:569px;left:260px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -298px -313px}
+.fullpage .four .jailbreak{position:absolute;top:569px;left:-34px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -10px -312px}
+.fullpage .five{left:9999cm;background:url("http://r.syyx.com/mlyx/game/5.jpg") center 0 no-repeat;}
+.fullpage .five .apple{position:absolute;top:582px;left:135px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -154px -312px}
+.fullpage .five .android{position:absolute;top:583px;left:279px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -298px -313px}
+.fullpage .five .jailbreak{position:absolute;top:582px;left:-9px;width:134px;height:41px;background:url("http://r.syyx.com/mlyx/game/btn.jpg") -10px -312px}
+.copy_right{font-size:12px;width:750px;position:absolute;top:986px;line-height:23px;padding-left:208px;color:#886f59;}
+.copy_right .feet_logo{position:absolute;width:120px;height:45px;left:56px;top:0}
+.disnone{display:none}
+* html,* html body /* 修正IE6振动bug */{background-image:url("about:blank");background-attachment:fixed}
+* html .fixed-bottom{ /* IE6 底部固定  */
+      position:absolute;
+      bottom:auto;
+      top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+  }
+  
+  * html .fixed-right{/* IE6 右侧固定 */ 
+      position:absolute;
+      right:auto;
+      left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0));
+  }
+  
+  * html .fixed-top{/* IE6 头部固定 */
+      position:absolute;
+      bottom:auto;
+      top:expression(eval(document.documentElement.scrollTop + 210));
+  }

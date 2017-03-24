@@ -81,14 +81,12 @@ gps_data.add_data = function(data, cb) {
             .input('Status', sql.VarChar(20), _status)
             .input('Temp', sql.VarChar(20), _temp)
             .execute('cp_gps_data_add')
-            .then(function(err, recordsets, returnValue) {
-                //console.dir(returnValue);
-                cb(null, 1);
+            .then(function(result) {
+                cb(null, result);
             }).catch(function(err) {
                 //console.log(err);
                 cb(err, 0);
             });
-
     }).catch(function(err) {
         //console.log(err);
         cb(err, 0)
@@ -121,8 +119,8 @@ gps_data.add_capacity = function(data) {
             .input('Direct', sql.Decimal(18, 2), _direct)
             .input('Status', sql.VarChar(20), _status)
             .input('Temp', sql.VarChar(20), _temp)
-            .execute('cp_gps_data_add').then(function(err, recordsets, returnValue) {
-                console.dir(recordsets);
+            .execute('cp_gps_data_add').then(function(result) {
+                console.dir(result);
             }).catch(function(err) {
                 console.log(err);
             });
@@ -152,8 +150,8 @@ gps_data.add_quality = function(data, cb) {
             .input('Init', sql.Decimal(18, 2), _init)
             .input('Volume', sql.Decimal(18, 2), _volume)
             .execute('cp_gps_quality_add')
-            .then(function(err, recordsets, returnValue) {
-                cb(null, 1);
+            .then(function(result) {
+                cb(null, result);
             }).catch(function(err) {
                 cb(err, 0);
             });
