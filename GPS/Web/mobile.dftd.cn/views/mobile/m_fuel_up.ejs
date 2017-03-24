@@ -1,0 +1,242 @@
+<%- include ../shared/_header %>
+<link href="/plugins/bootstrap-validator/css/bootstrapvalidator.css" rel="stylesheet" />
+</head>
+
+<body style="background-color:#ffffff;">
+    <div class="container">
+        <div class="row">
+            <!-- form: -->
+            <section>
+                <div class="col-lg-8 col-lg-offset-2" style="margin-top:15px">                    
+
+                    <form id="defaultForm"  class="form-horizontal" >
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">车辆：</label>
+                            <div class="col-lg-4">
+                               <select id='sel_vehicle'  class="form-control" name ="vehicleid">      
+                                    <% vehicle.forEach(function(item){ %>
+                                        <option value="<%=item.VhcID%>" ><%=item.CarNumber%></option>
+                                    <% }) %> 
+                                </select>             
+                            </div>
+                           
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">时间：</label>
+                            <div class="col-lg-4">
+                                <input type="text" name="fueltime" class="form-control" value="<%=today%>" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">总金额：</label>
+                            <div class="col-lg-4">                                
+                                 <input type="text" class="form-control" name="amount" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">升数：</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" name="number" onblur="calc_price(this.value);"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">油价：</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" name="price" />
+                            </div>
+                        </div>                        
+                         <div class="form-group">
+                            <label class="col-lg-3 control-label">地点：</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" name="station" />
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                         
+                                <button type="button" id="btnAdd"" class="btn btn-info" id="validateBtn">加油记账</button>
+ 
+                            </div>
+                        </div>
+                    </form>
+
+                     <form id="okForm" style="display:none"  class="form-horizontal" >
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">车辆：</label>
+                            <div class="col-lg-4">
+                               <label class="form-control" id="lbl_vehicle" />
+                            </div>
+                           
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">时间：</label>
+                            <div class="col-lg-4">
+                                 <label class="form-control" id="lbl_fueltime" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">总金额：</label>
+                            <div class="col-lg-4">                                
+                                  <label class="form-control" id="lbl_amount" />
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="col-lg-3 control-label">升数：</label>
+                            <div class="col-lg-4">
+                                 <label class="form-control" id="lbl_number" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">油价：</label>
+                            <div class="col-lg-4">
+                                 <label class="form-control" id="lbl_price" />
+                            </div>
+                        </div>
+                       
+                         <div class="form-group">
+                            <label class="col-lg-3 control-label">地点：</label>
+                            <div class="col-lg-4">
+                                 <label class="form-control" id="lbl_station" />
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                          <button type="button" id="btnBack" class="btn btn-info" >  返回  </button>
+                                <button type="button" id="btnOK" class="btn btn-info" >确认记账</button>
+ 
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <!-- :form -->
+        </div>
+    </div>
+
+  </body>
+<%- include ../shared/_scripts %>
+	<script src="/javascripts/include/date-utils.min.js"></script>    
+ 
+	<script src="/plugins/bootstrap-validator/js/bootstrapvalidator.min.js"></script>
+
+    <script>
+        $(function(){          
+			 
+            $("#defaultForm").bootstrapValidator({
+                message:'该项不能为空',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    vehicleid: {
+                        validators: {
+                            notEmpty: {
+                                message: '请选择车辆'
+                            }
+                        }
+                    },
+                    fueltime: {
+                        validators: {
+                            notEmpty: {
+                                message: '请填写日期'
+                            },
+                            date: {
+                                format: 'YYYY-MM-DD',
+                                message: '请填写日期'          
+                            }
+                        }
+                    },
+                    amount: {
+                        validators: {
+                            notEmpty: {
+                                message: '请填写总金额'
+                            },
+                            numeric:{
+                                message:'请输入正确的总金额'
+                            }
+                        }
+                    },
+                    price: {
+                        validators: {
+                            notEmpty: {
+                                message: '请填写单价'
+                            },
+                            numeric:{
+                                message:'请输入正确的单价'
+                            }
+                        }
+                    },
+                    number: {
+                        validators: {
+                            notEmpty: {
+                                message: '请填写加油升数'
+                            },
+                            numeric:{
+                                message:'请输入正确的升数'
+                            }
+                        }
+                    },
+                }
+            });
+
+            var data ={};
+            $("#btnAdd").click(function(){
+                var validator = $("#defaultForm").data('bootstrapValidator');
+                validator.validate();
+                if(validator.isValid()){                     
+                        
+                    var ctrls = $('#defaultForm').serializeArray();        
+                    for(var c in ctrls){
+                        data[ctrls[c].name]=ctrls[c].value;
+                        $("#lbl_"+ctrls[c].name).text(ctrls[c].value);
+                    }
+                    data.carnumber=$('#sel_vehicle').find('option:selected').text();
+                    $("#lbl_vehicle").text(data.carnumber);
+
+                    $("#defaultForm").hide();
+                    $("#okForm").show();
+                    
+                }                    
+            });
+
+            $("#btnBack").click(function(){
+                    
+                    $("#defaultForm").show();
+                    $("#okForm").hide();
+                            
+            });
+
+            $("#btnOK").click(function(){
+                    
+                    $.post('/oil_ticket/add', data, function(result){
+                        if(result.ok==1);{
+                            alert('加油记账成功');  
+                            location.href="/m_d_index";                      
+                        }
+                    })
+                            
+            });     
+ 
+		});
+
+        function calc_price(number){
+            if(!number || number==0){
+                $(":input[name='price']").val(0);    
+                return;
+            }
+            var amount = $(":input[name='amount']").val();
+            var price = amount/number;
+            $(":input[name='price']").val(price.toFixed(2));
+        }
+    </script>
+<%- include ../shared/_footer %>

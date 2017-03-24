@@ -1,0 +1,81 @@
+<%- include ../shared/_header %>
+<link href="/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" />
+</head>
+
+<body style="background-color:#ffffff;">
+    <div  class="box-body chart-responsive"> 
+        <form  id='search'>          
+            <div class="form-group">
+                <label class="control-label" for="txtBeginTime">开始时间：</label>
+                <input type="text" id="txtBeginTime" name="begintime" class="form_datetime"  value="<%= start_date %>"/>
+            </div>
+            <div class="form-group">
+            	<label class="control-label" for="txtEndTime">结束时间：</label>
+                <input type="text" id="txtEndTime" name="endtime" class="form_datetime" value="<%= end_date %>"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="selCar">车辆选择：</label>
+                <select class="multiselect" multiple="multiple" >
+                    <optgroup label="鼎丰泰达">
+                        <option value="5621668" >粤BX1743</option>
+                        <option value="6341179" >赣L55070</option>
+                        <option value="5977939" >湘AB3490</option>
+                        <option value="6549913" >湘6549913</option>        
+                    </optgroup>
+                </select>
+            </div>
+            <!--
+            <div class="form-group">
+                <label class="control-label" for="txtCarNumber">车牌号码：</label>
+                <input type="text" id="txtCarNumber" />
+            </div>
+            -->                
+            <button type="button" id="btnSearch" class="btn btn-success"> <i class="fa fa-search"></i>查询 </button>  
+        </form>
+    </div>
+    <div class="box-footer">    
+         <div class="note note-warning note-bordered">
+            <p> 系统加油 ：<span id="sp_oil1"/></p>
+        </div>
+        <div class="note note-info note-bordered">
+            <p> 手动加油 ：<span id="sp_oil2"/></p>
+        </div>
+
+    </div>
+  </body>
+<%- include ../shared/_scripts %>
+	<script src="/javascripts/include/date-utils.min.js"></script>    
+	<script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+	<script src="/javascripts/oil_ticket.js" type="text/javascript"></script>
+	
+    <script src="/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+
+    <script>
+        $(function(){
+            $('.multiselect').multiselect({ nonSelectedText: '请选择', includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 164, maxHeight: 300 });
+			$(".form_datetime").datepicker({ format: 'yyyy-mm-dd' });
+			$("#btnSearch").click(function(){
+                var data ={}        
+                var ctrls = $('#search').serializeArray();        
+                for(var c in ctrls){
+                    data[ctrls[c].name]=ctrls[c].value;
+                }
+                
+                var carlist = $(".multiselect").val();
+                if (carlist) {
+                    carlist = carlist.join(",");
+                }
+                data.carlist = carlist;
+                console.log(data);
+                
+                $.post('/oil_ticket/check_ticket', data, function(result){console.log(result);
+                    if(result.ok == "0"){
+                        $("#sp_oil1").text(result.oil_sum1.toFixed(2));
+                        $("#sp_oil2").text(result.oil_sum2.toFixed(2));
+                    }
+                })
+            });
+		});
+    </script>
+<%- include ../shared/_footer %>

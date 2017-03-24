@@ -1,0 +1,101 @@
+<%- include ../shared/_header %>
+</head>
+
+<body style="background-color:#ffffff;">
+    <div class="container">
+        <div class="row">
+            <div  class="box-body chart-responsive"> 
+            
+                <table id="grid" class="table table-striped table-bordered table-hover dataTable display-none">
+                    <thead>
+                    <tr>
+                        <th>ID</th> 
+                        <th>车牌号</th>  
+                    
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                    </table>		
+           
+
+            <form id="defaultForm"  class="form-horizontal" >
+                <input type="hidden" name="id" value="<%=vehicle.ID%>"/>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">车辆：</label>
+                    <div class="col-lg-4">
+                        <select id='sel_vehicle'  class="form-control" name ="vehicleid">      
+                          
+                                <option value="<%=vehicle.VehicleID%>" ><%=vehicle.CarNumber%></option>
+
+                        </select>             
+                    </div>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">服务区电话：</label>
+                    <div class="col-lg-4">                                
+                            <input type="text" class="form-control" name="sa_tel" value="<%=vehicle.SA_Tel%>" />
+                    </div>
+                </div>
+                                    
+                    <div class="form-group">
+                    <label class="col-lg-3 control-label">备注：</label>
+                    
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" name="remark" value="<%=vehicle.Remark%>"/>
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <div class="col-lg-9 col-lg-offset-3">
+                    
+                        <button type="button" id="btnOK"" class="btn btn-info" id="validateBtn">修改</button>
+
+                    </div>
+                </div> </div>
+            </form>		
+    </div>
+    </div>
+  </body>
+<%- include ../shared/_scripts %>
+	<script src="/javascripts/include/date-utils.min.js"></script>    
+    <script>
+        $(function(){   
+			$.get('/driver_vhc/mylist', function(result){console.log(result);
+                if(result.ok == "0"){
+                    $("#grid tbody").find("tr.newrow").remove();
+                    //显示记录
+                    $.each(result.rows, function(i, item) {
+                        $("<tr class='newrow'></tr>").append(
+                            "<td>" + (i+1)+ "</td>" +                                         
+                            "<td>" + item.CarNumber+ "</td>" 
+                                    
+                        ).appendTo($("#grid tbody"));
+                    });
+                }
+            })
+
+            $("#btnOK").click(function(){
+                var data = {}
+                var ctrls = $('#defaultForm').serializeArray();        
+                for(var c in ctrls){
+                    data[ctrls[c].name]=ctrls[c].value;
+                    $("#lbl_"+ctrls[c].name).text(ctrls[c].value);
+                }
+                data.carnumber=$('#sel_vehicle').find('option:selected').text();
+
+                $.post('/driver_vhc/update', data, function(result){
+                    if(result.ok == 0);{
+                        alert('修改服务区信息成功');  
+                        location.href="/m_d_index";                      
+                    }
+                })
+                            
+            });     
+		});
+    </script>
+<%- include ../shared/_footer %>

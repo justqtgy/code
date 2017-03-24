@@ -1,0 +1,222 @@
+<%- include shared/_header %>
+<%- include shared/_top %>
+<%- include shared/_sidebar %>
+        
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+		      <div class="page-content">
+            <!-- BEGIN PAGE HEADER-->
+            <h3 class="page-title">
+            货车油管家 <small>鼎丰泰达</small>
+            </h3>
+            
+            <!-- END PAGE HEADER-->
+            
+            <!-- BEGIN PAGE CONTENT-->
+			<!-- BEGIN DASHBOARD STATS -->
+			<div class="row display-none">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat blue-madison">
+						<div class="visual">
+							<i class="fa fa-comments"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 1349
+							</div>
+							<div class="desc">
+								 New Feedbacks
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						查看里程 <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat red-intense">
+						<div class="visual">
+							<i class="fa fa-bar-chart-o"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 12,5M$
+							</div>
+							<div class="desc">
+								 Total Profit
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						告警明显 <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+				
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat purple-plum">
+						<div class="visual">
+							<i class="fa fa-globe"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 +89%
+							</div>
+							<div class="desc">
+								 Brand Popularity
+							</div>
+						</div>
+						<a class="more" href="javascript:;">
+						油量分析 <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- END DASHBOARD STATS -->
+            <div class="row"> 
+				<div class="col-md-9 col-sm-6" style="width:100%; ">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light">
+						<div class="portlet-title tabbable-line">
+							<div class="caption">
+								<i class="icon-share font-red-sunglo"></i>
+								<span class="caption-subject font-green-sharp bold uppercase">推送信息</span>
+							</div>
+							
+						</div>
+						<div class="portlet-body" style="min-height:500px; height:100%;">
+							<!--BEGIN TABS-->
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab_1_1">
+									<div class="scroller" style="height: 500px;" data-always-visible="1" data-rail-visible="0">
+										<ul class="feeds">
+											<li>
+												<div class="col1">
+													<div class="cont">
+														<div class="cont-col1">
+															<div class="label label-sm label-success">
+																<i class="fa fa-bell-o"></i>
+															</div>
+														</div>
+														<div class="cont-col2">
+															<div class="desc">
+																 You have 4 pending tasks. 
+																</span>
+															</div>
+														</div>
+													</div>
+												</div>											 
+											</li>
+											<li>
+												<a href="javascript:;">
+												<div class="col1">
+													<div class="cont">
+														<div class="cont-col1">
+															<div class="label label-sm label-success">
+																<i class="fa fa-bell-o"></i>
+															</div>
+														</div>
+														<div class="cont-col2">
+															<div class="desc">
+																 New version v1.4 just lunched!
+															</div>
+														</div>
+													</div>
+												</div>
+												 
+												</a>
+											</li>
+											<li>
+												<div class="col1">
+													<div class="cont">
+														<div class="cont-col1">
+															<div class="label label-sm label-danger">
+																<i class="fa fa-bolt"></i>
+															</div>
+														</div>
+														<div class="cont-col2">
+															<div class="desc">
+																 Database server #12 overloaded. Please fix the issue.
+															</div>
+														</div>
+													</div>
+												</div>
+												 
+											</li>
+											<li>
+												<div class="col1">
+													<div class="cont">
+														<div class="cont-col1">
+															<div class="label label-sm label-info">
+																<i class="fa fa-bullhorn"></i>
+															</div>
+														</div>
+														<div class="cont-col2">
+															<div class="desc">
+																 New order received. Please take care of it.
+															</div>
+														</div>
+													</div>
+												</div>
+												 
+											</li>
+											
+										</ul>
+									</div>
+								</div>								 
+					 
+							</div>
+							<!--END TABS-->
+						</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+			</div>
+            <!-- END PAGE CONTENT-->
+          </div>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    
+<%- include shared/_bottom %>
+<%- include shared/_scripts %>
+    <script>
+        $(function(){
+			get_alarm();
+		});
+
+		function get_alarm(){
+			$(".feeds").empty();
+			var info = "\
+				<li>\
+					<div class=\"col1\">\
+						<div class=\"cont\">\
+							<div class=\"cont-col1\">\
+								<div class=\"label label-sm label-success\">\
+									<i class=\"fa fa-bell-o\"></i>\
+								</div>\
+							</div>\
+							<div class=\"cont-col2\">\
+								<div class=\"desc\"></div>\
+							</div>\
+						</div>\
+					</div>\
+				</li>";
+			
+			
+			$.get('/vehicle/vhc_group',function(result){  
+				var carlist = result.group;     
+				$.get('/oil_vhc_dv/detail?carlist='+carlist, function(result){
+					$.each(result.rows, function(i,item){
+						var des = item.CarNumber+","+item.createtime+","+item.cstate+","+item.posinfo;
+						var ele = $(".feeds").append(info).find(".desc").last();
+						ele.append(des);
+					});
+					
+				});
+			})
+			
+		}
+    
+    </script>
+<%- include shared/_footer %>
