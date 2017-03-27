@@ -129,7 +129,7 @@ gps_data.add_capacity = function(data) {
             .input('Direct', sql.Decimal(18, 2), _direct)
             .input('Status', sql.VarChar(20), _status)
             .input('Temp', sql.VarChar(20), _temp)
-            .execute('cp_gps_data_add').then(function(result) {
+            .execute('cp_gps_capacity_add').then(function(result) {
                 console.dir(result);
             }).catch(function(err) {
                 console.log(err);

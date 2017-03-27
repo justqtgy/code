@@ -31,9 +31,12 @@ module.exports.parse = function(socket, data) {
     } else {
         if (_data.substring(0, 2) == '59') {
             add_capacity_data(_data);
-        } else {
-            logger.info('server reponse: ', data);
-            socket.write(data);
+        }
+
+        if (_data.substring(0, 2) == '7E') {
+            //logger.info('server reponse: ', data);
+            //socket.write(data);
+            add_data(data);
         }
     }
 };
@@ -80,7 +83,7 @@ function send_update_file(value) {
 */
 function add_base_data(data) {
     var item = {};
-    if (data[0].indexOf('*HQ') >= 0) {
+    if (data[0].indexOf('*HQ') >= 0 && data.length >= 13) {
         item.gprsid = data[1];
         item.version = data[2];
         item.gpstime = common.format_time(data[11], data[3]);
@@ -124,7 +127,7 @@ function add_base_data(data) {
 
 function add_quality_data(data) {
     var item = {};
-    if (data[0].indexOf('*DFTD_YP') >= 0) {
+    if (data[0].indexOf('*DFTD_YP') >= 0 && data.length >= 7) {
         item.gprsid = data[1];
         item.c1 = data[2].replace('pF', '');
         item.c2 = data[3].replace('pF', '');
@@ -164,7 +167,7 @@ function add_quality_data(data) {
 function add_alarm_data(data) {
     var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
     var item = {};
-    if (data[0].indexOf('*DFTD_LYBJ') >= 0) {
+    if (data[0].indexOf('*DFTD_LYBJ') >= 0 && data.length >= 3) {
         item.gprsid = data[1];
         item.mobile = data[2].replace('#', '');
         item.addtime = now;
@@ -213,9 +216,15 @@ function add_capacity_data(data) {
     */
 }
 
+/**
+ * 7E0200002C0134185891046EBC00000000000C00030157B95506CC00C4000200A101271601041103442B04000023205108012C039800000000A47E
+ * 
+ * @param {any} data 
+ * @returns 
+ */
 function add_data(data) {
     var item = {};
-    if (data.length <= 32) {
+    if (data.length <= 114) {
         return;
     }
 
