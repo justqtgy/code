@@ -1,4 +1,5 @@
-var sms = require('/cores/smslib');
+var sms = require('./../cores/smslib');
+var gps_data = require('./../models/gps_data');
 
 var send_alarm_msg = module.exports.send_alarm_msg = function(data) {
     //写入数据库

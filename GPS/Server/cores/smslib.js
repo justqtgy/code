@@ -11,7 +11,7 @@ var iconv = require('iconv-lite');
  * usage:
  * 
  */
-var sms_request = module.exports.sms_request = function(sms) {
+var send_sms_request = module.exports.send_sms_request = function(sms) {
     var data = {
         un: 'szdftd-1',
         pwd: '890423',

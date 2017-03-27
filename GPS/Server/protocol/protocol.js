@@ -1,8 +1,10 @@
 var http = require('http');
 var qs = require('querystring');
 var fs = require('fs');
+var date = require('date-utils')
 var gps_data = require('./../models/gps_data');
-var bin = require('../../../../framework/binjs');
+var common = require('./../cores/common');
+var sendmsg = require('./sendmsg');
 
 var _fileBuffer = fs.readFileSync('./update/GPS.hex');
 var len = Buffer.byteLength(_fileBuffer);
@@ -81,16 +83,21 @@ function add_base_data(data) {
     if (data[0].indexOf('*HQ') >= 0) {
         item.gprsid = data[1];
         item.version = data[2];
-        item.gpstime = bin.format_time(data[11], data[3]);
+        item.gpstime = common.format_time(data[11], data[3]);
         item.location = data[4];
         item.lng = data[5];
         item.lat = data[7];
         item.speed = data[9];
         item.direct = data[10];
         item.status = data[12].replace('#', '');
-        item.temp = 0;
+        item.temp1 = 0;
         if (data.length > 12)
-            item.temp = data[13].replace('T', '').replace('#', '');
+            item.temp1 = data[13].replace('T', '').replace('#', '');
+        item.temp2 = 0;
+        item.temp3 = 0;
+        item.temp4 = 0;
+        item.oil1 = 0;
+        item.oil2 = 0;
 
         gps_data.get_carlist(item.gprsid, function(err, rows) {
             if (err) {
@@ -107,7 +114,7 @@ function add_base_data(data) {
 
             gps_data.add_data(item, function(err, result) {
                 if (err) {
-                    logger.error('Error = ', err);
+                    return logger.error('Error = ', err);
                 }
                 logger.info('Result = ', result);
             });
@@ -142,7 +149,7 @@ function add_quality_data(data) {
 
             gps_data.add_quality(item, function(err, result) {
                 if (err) {
-                    logger.error('Error = ', err);
+                    return logger.error('Error = ', err);
                 }
                 logger.info('Result = ', result);
             });
@@ -177,10 +184,10 @@ function add_alarm_data(data) {
             item.vehicleid = rows[0].VehicleID;
 
             //发送短信
-            send_alarm_msg(item);
+            sendmsg.send_alarm_msg(item);
             //延时一秒发送服务区短信
             setTimeout(function() {
-                send_servicearea_msg(item);
+                sendmsg.send_servicearea_msg(item);
             }, 1000);
 
         });
@@ -195,7 +202,7 @@ function add_capacity_data(data) {
         item.oil1 = parseInt(oil1, 16);
         var oil2 = data.substr(6, 4);
         item.oil2 = parseInt(oil2, 16);
-        item.gpstime = bin.format_time(data.substr(12, 6), data.substr(18, 6));
+        item.gpstime = common.format_time(data.substr(12, 6), data.substr(18, 6));
         item.lng = data.substr(24, 8);
         item.lat = data.substr(34, 8);
         item.speed = data.substr(44, 3);
@@ -258,7 +265,7 @@ function add_data(data) {
 
             gps_data.add_data(item, function(err, result) {
                 if (err) {
-                    logger.error('Error = ', err);
+                    return logger.error('Error = ', err);
                 }
                 logger.info('Result = ', result);
             });

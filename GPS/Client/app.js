@@ -1,5 +1,5 @@
 var serverPort = 6666;
-var server = 'localhost';
+var server = '120.24.68.95';
 
 var net = require('net');
 var readline = require('readline');

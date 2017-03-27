@@ -65,7 +65,12 @@ gps_data.add_data = function(data, cb) {
         _speed = data.speed,
         _direct = data.direct,
         _status = data.status,
-        _temp = data.temp.toString();
+        _temp1 = data.temp1.toString(),
+        _temp2 = data.temp2.toString(),
+        _temp3 = data.temp3.toString(),
+        _temp4 = data.temp4.toString(),
+        _oil1 = data.oil1.toString(),
+        _oil2 = data.oil2.toString();
 
 
     sql.connect(config).then(function(connection) {
@@ -79,7 +84,12 @@ gps_data.add_data = function(data, cb) {
             .input('Speed', sql.VarChar(20), _speed)
             .input('Direct', sql.VarChar(20), _direct)
             .input('Status', sql.VarChar(20), _status)
-            .input('Temp', sql.VarChar(20), _temp)
+            .input('Temp1', sql.VarChar(20), _temp1)
+            .input('Temp2', sql.VarChar(20), _temp2)
+            .input('Temp3', sql.VarChar(20), _temp3)
+            .input('Temp4', sql.VarChar(20), _temp4)
+            .input('Oil1', sql.VarChar(20), _oil1)
+            .input('Oil2', sql.VarChar(20), _oil2)
             .execute('cp_gps_data_add')
             .then(function(result) {
                 cb(null, result);
