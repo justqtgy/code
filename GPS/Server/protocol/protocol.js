@@ -42,7 +42,7 @@ module.exports.parse = function(socket, data) {
 };
 
 function update_clients(list) {
-    var clients = list[1].split(',');
+    var clients = list[1].split(';');
     if (clients.length === 1 && clients[0] == 'all') {
         clients.length = 0;
         for (var s in socketList) {
@@ -73,7 +73,7 @@ function send_update_file(value) {
     var i = 0;
     return function() {
         if (i > value) return "";
-        var str = _fileBuffer.toString('utf8', i, i + 1000);
+        var str = _fileBuffer.toString('binary', i, i + 1000);
         i = i + 1000;
         return str;
     };
