@@ -1,13 +1,9 @@
-﻿var admin = require('./routes/admin');
-var game  = require('./routes/game');
-var web   = require('./routes/web');
+﻿var gps_alarm = require('./routes/gps_alarm');
 
-exports.init_route=function(app){
-	console.log('init_route begin');
-	
-	app.use('/admin', admin);
-	app.use('/game', game);
-	app.use('/web', web);
+exports.init_route = function(app) {
+    console.log('init_route begin');
 
-	console.log('init_route end');
+    app.use('/gps_alarm', gps_alarm);
+
+    console.log('init_route end');
 }

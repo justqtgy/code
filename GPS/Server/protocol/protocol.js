@@ -125,6 +125,11 @@ function add_base_data(data) {
     }
 }
 
+/**
+ * 油品信息
+ * 
+ * @param {any} data 
+ */
 function add_quality_data(data) {
     var item = {};
     if (data[0].indexOf('*DFTD_YP') >= 0 && data.length >= 7) {
@@ -162,8 +167,9 @@ function add_quality_data(data) {
 
 
 /*
-格式如下：*DFTD_LYBJ,ID,phoneNumber# ,如(*DFTD_LYBJ,2000000100,13554766446#)
-*/
+ *偷油漏油发送短信报警
+ *格式如下：*DFTD_LYBJ,ID,phoneNumber# ,如(*DFTD_LYBJ,2000000100,13554766446#)
+ */
 function add_alarm_data(data) {
     var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
     var item = {};
@@ -217,8 +223,8 @@ function add_capacity_data(data) {
 }
 
 /**
+ * 部标协议：
  * 7E0200002C0134185891046EBC00000000000C00030157B95506CC00C4000200A101271601041103442B04000023205108012C039800000000A47E
- * 
  * @param {any} data 
  * @returns 
  */

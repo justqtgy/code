@@ -1,5 +1,5 @@
 var sql = require('mssql');
-var config = require('../config/gserver_data_config');
+var config = require('../config/settings').dbconfig;
 
 module.exports.execSQL = function(sqlText, cb) {
     /*sql.connect(config).then(function() {
