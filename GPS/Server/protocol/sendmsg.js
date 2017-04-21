@@ -1,15 +1,16 @@
 var sms = require('./../cores/smslib');
 var gps_data = require('./../models/gps_data');
 
-var send_alarm_msg = module.exports.send_alarm_msg = function(data) {
+var send_alarm_msg = module.exports.send_alarm_msg = async function(data) {
     //写入数据库
     data.typeid = 1;
-    gps_data.add_alarm(data, function(err, result) {
-        if (err) {
-            logger.error('Error = ', err);
-        }
-        logger.info('Result = ', JSON.stringify(result));
-    });
+    try {
+        var result = await gps_data.add_alarm(data);
+        logger.info('Result = ', result);
+    } catch (error) {
+        logger.error('Error = ', error);
+    }
+
     logger.info('给司机发送报警短信...');
     var sender = {};
     sender.mobile = data.mobile;

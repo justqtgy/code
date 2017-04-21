@@ -2,18 +2,6 @@ var sql = require('mssql');
 var config = require('../config/settings').dbconfig;
 
 module.exports.execSQL = function(sqlText, cb) {
-    /*sql.connect(config).then(function() {
-        new mssql.Request().query(sqlText).then(function(result) {
-            cb(null, result)
-        }).catch(function(err) {
-            console.log(err);
-            cb(err, '')
-        });
-
-    }).catch(function(err) {
-        console.log(err);
-        cb(err, '')
-    });*/
     var connection = new sql.Connection(config, function(err) {
         if (err) {
             console.log('error => ', err);
@@ -36,25 +24,6 @@ module.exports.execSQL = function(sqlText, cb) {
 }
 
 module.exports.execSP = function(spName, params, cb) {
-    /*
-    sql.connect(config, function(err){
-    	if(err){
-    		console.log(err);
-    		cb(err, '')
-    	}
-
-    	var request = new sql.Request();
-    	request.verbose = true;
-    	for(var p in params){
-    		request.input(params[p].name, params[p].value);
-    	}
-
-    	request.execute(spName, function(err, recordsets, returnValue){
-    		cb(err, recordsets, returnValue)
-    	})
-    })
-    */
-
     var connection = new sql.Connection(config, function(err) {
         // ... error checks 
         if (err) {
@@ -65,7 +34,7 @@ module.exports.execSP = function(spName, params, cb) {
         var request = new sql.Request(connection); // or: var request = connection.request(); 
         request.verbose = true;
         for (var p in params) {
-            request.input(params[p].name, params[p].value);
+            request.input(params[p].name, params[p].type, params[p].value);
         }
         request.execute(spName, function(err, result) {
             /*

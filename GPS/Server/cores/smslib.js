@@ -40,9 +40,9 @@ var send_sms_request = module.exports.send_sms_request = function(sms) {
             var ret = iconv.decode(new Buffer(str, 'binary'), 'GBK')
 
             if (ret.indexOf('result=1') >= 0) {
-                logger.info('send_sms ok' + ret)
+                logger.info('send_sms ok', ret)
             } else {
-                logger.error('send_sms err' + ret)
+                logger.error('send_sms err', ret)
             }
         })
 

@@ -5,6 +5,7 @@ var date = require('date-utils')
 var gps_data = require('./../models/gps_data');
 var common = require('./../cores/common');
 var sendmsg = require('./sendmsg');
+var online = require('./../models/stat_online');
 
 var _fileBuffer = fs.readFileSync('./update/GPS.hex');
 var len = Buffer.byteLength(_fileBuffer);
@@ -25,9 +26,9 @@ module.exports.parse = function(socket, data) {
         if (list[0].indexOf('*DFTD_LYBJ') >= 0) {
             add_alarm_data(list);
         }
-        if (list[0].indexOf('update') >= 0) {
-            update_clients(list);
-        }
+        // if (list[0].indexOf('update') >= 0) {
+        //     update_clients(list);
+        // }
     } else {
         if (_data.substring(0, 2) == '59') {
             add_capacity_data(_data);
@@ -39,7 +40,34 @@ module.exports.parse = function(socket, data) {
             add_data(data);
         }
     }
+
+    //setOnline(data);
+
 };
+
+function setOnline(data) {
+    try {
+        var now = new Date().toFormat('YYYY-MM-DD');
+        data.createdate = now;
+        online.get_info(data, function(err, result) {
+            if (err) {
+                return logger.error(err);
+            }
+
+            if (result.length == 0) {
+                online.add_record(data, function(err, result) {
+
+                })
+            } else {
+                online.update_record(data, function(err, result) {
+
+                })
+            }
+        });
+    } catch (error) {
+        logger.error(error);
+    }
+}
 
 function update_clients(list) {
     var clients = list[1].split(';');
@@ -81,7 +109,7 @@ function send_update_file(value) {
 /*
 格式如下：*HQ,2000000218,V1,160012,A,2240.8123,N,11347.2645,E,0000,356,210317,FFFFFBFF#,T0.0#
 */
-function add_base_data(data) {
+async function add_base_data(data) {
     var item = {};
     if (data[0].indexOf('*HQ') >= 0 && data.length >= 13) {
         item.gprsid = data[1];
@@ -102,26 +130,22 @@ function add_base_data(data) {
         item.oil1 = 0;
         item.oil2 = 0;
 
-        gps_data.get_carlist(item.gprsid, function(err, rows) {
-            if (err) {
-                logger.error('获取车辆信息失败：', err);
-                return;
-            }
-
-            if (rows.length === 0) {
+        try {
+            let result = await gps_data.get_carlist(item.gprsid);
+            let rows = result.recordsets;
+            if (rows.length == 0) {
                 logger.error('获取车辆信息失败：该车不存在');
                 return;
             }
 
             item.vehicleid = rows[0].VehicleID;
 
-            gps_data.add_data(item, function(err, result) {
-                if (err) {
-                    return logger.error('Error = ', err);
-                }
-                logger.info('Result = ', result);
-            });
-        });
+            result = await gps_data.add_data(item);
+            logger.info('Result = ', result);
+
+        } catch (error) {
+            return logger.error('Error = ', err);
+        }
     }
 }
 
@@ -130,7 +154,7 @@ function add_base_data(data) {
  * 
  * @param {any} data 
  */
-function add_quality_data(data) {
+async function add_quality_data(data) {
     var item = {};
     if (data[0].indexOf('*DFTD_YP') >= 0 && data.length >= 7) {
         item.gprsid = data[1];
@@ -141,67 +165,27 @@ function add_quality_data(data) {
         item.init = data[6].replace('pF', '');
         item.volume = data[7].replace('L#', '');
 
-
-        gps_data.get_carlist(item.gprsid, function(err, rows) {
-            if (err) {
-                logger.error('获取车辆信息失败：', err);
-                return;
-            }
-
-            if (rows.length === 0) {
+        try {
+            let result = await gps_data.get_carlist(item.gprsid);
+            let rows = result.recordsets;
+            if (rows.length == 0) {
                 logger.error('获取车辆信息失败：该车不存在');
                 return;
             }
 
             item.vehicleid = rows[0].VehicleID;
 
-            gps_data.add_quality(item, function(err, result) {
-                if (err) {
-                    return logger.error('Error = ', err);
-                }
-                logger.info('Result = ', result);
-            });
-        });
+            result = await gps_data.add_quality(item);
+            logger.info('Result = ', result);
+
+        } catch (error) {
+            return logger.error('Error = ', err);
+        }
     }
 }
 
 
-/*
- *偷油漏油发送短信报警
- *格式如下：*DFTD_LYBJ,ID,phoneNumber# ,如(*DFTD_LYBJ,2000000100,13554766446#)
- */
-function add_alarm_data(data) {
-    var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
-    var item = {};
-    if (data[0].indexOf('*DFTD_LYBJ') >= 0 && data.length >= 3) {
-        item.gprsid = data[1];
-        item.mobile = data[2].replace('#', '');
-        item.addtime = now;
 
-        gps_data.get_carlist(item.gprsid, function(err, rows) {
-            if (err) {
-                logger.error('获取车辆信息失败：', err);
-                return;
-            }
-
-            if (rows.length === 0) {
-                logger.error('获取车辆信息失败：该车不存在');
-                return;
-            }
-
-            item.carnumber = rows[0].CarNumber;
-            item.vehicleid = rows[0].VehicleID;
-
-            //发送短信
-            sendmsg.send_alarm_msg(item);
-            //延时一秒发送服务区短信
-            setTimeout(function() {
-                sendmsg.send_servicearea_msg(item);
-            }, 1000);
-
-        });
-    }
-}
 
 function add_capacity_data(data) {
     /*
@@ -228,7 +212,7 @@ function add_capacity_data(data) {
  * @param {any} data 
  * @returns 
  */
-function add_data(data) {
+async function add_data(data) {
     var item = {};
     if (data.length <= 114) {
         return;
@@ -265,25 +249,21 @@ function add_data(data) {
         item.temp3 = parseInt(_temp(12, 16), 16);
         item.temp4 = parseInt(_temp(16, 20), 16);
 
-        gps_data.get_carlist(item.gprsid, function(err, rows) {
-            if (err) {
-                logger.error('获取车辆信息失败：', err);
-                return;
-            }
-
-            if (rows.length === 0) {
+        try {
+            let result = await gps_data.get_carlist(item.gprsid);
+            let rows = result.recordsets;
+            if (rows.length == 0) {
                 logger.error('获取车辆信息失败：该车不存在');
                 return;
             }
 
             item.vehicleid = rows[0].VehicleID;
 
-            gps_data.add_data(item, function(err, result) {
-                if (err) {
-                    return logger.error('Error = ', err);
-                }
-                logger.info('Result = ', result);
-            });
-        });
+            result = await gps_data.add_data(item);
+            logger.info('Result = ', result);
+
+        } catch (error) {
+            return logger.error('Error = ', err);
+        }
     }
 }

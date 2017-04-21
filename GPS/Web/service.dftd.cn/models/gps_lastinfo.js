@@ -1,22 +1,20 @@
 var db = require('./mssql_helper');
 var util = require('util');
 
-function gps_status(model) {
+function gps_lastinfo(model) {
     this.ID = model.id;
-    this.GPRS_ID = model.gprs_id;
+    this.GprsID = model.gprs_id;
     this.VehicleID = model.vehicle_id;
-    this.VehicleNo = mode.vhicle_no;
-    this.Distance = model.distance; //距离
-    this.OilUsed = model.oil_used; //油耗
-    this.Duration = model.duration; //时间
+    this.VehicleNo = model.vehicle_no;
+    this.Lat = model.lat;
+    this.Lng = model.lng;
     this.CreateDate = model.create_date;
-    this.UpdateTime = model.update_time;
 };
 
-module.exports = gps_status
+module.exports = gps_lastinfo
 
-gps_status.get_count = function(args, callback) {
-    var sql = " select count(*) as total from gps_status where addtime >='%s' and addtime<dateadd(day, 1, '%s')";
+gps_lastinfo.get_count = function(args, callback) {
+    var sql = " select count(*) as total from gps_lastinfo where addtime >='%s' and addtime<dateadd(day, 1, '%s')";
     sql = util.format(sql, args.begintime, args.endtime);
     db.execSQL(sql, function(err, result) {
         if (err) {
@@ -36,13 +34,13 @@ gps_status.get_count = function(args, callback) {
 /**
  * args:{ begintime, endtime, pageindex, pagesize}
  */
-gps_status.get_list = function(args, callback) {
+gps_lastinfo.get_list = function(args, callback) {
     var pageIndex = parseInt(args.pageIndex);
     var pageSize = parseInt(args.pageSize);
     var start_id = (pageIndex - 1) * pageSize + 1;
     var end_id = pageIndex * pageSize;
 
-    var sql = ";with t as (select *, row_number() over(order by addtime desc) as rid  from gps_status  where addtime >='%s' and addtime<dateadd(day, 1, '%s'))  " +
+    var sql = ";with t as (select *, row_number() over(order by addtime desc) as rid  from gps_lastinfo  where addtime >='%s' and addtime<dateadd(day, 1, '%s'))  " +
         "select * from t where rid between %s and %s";
     sql = util.format(sql, args.begintime, args.endtime, start_id, end_id);
     console.log(sql)
