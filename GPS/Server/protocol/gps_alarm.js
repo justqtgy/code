@@ -1,3 +1,6 @@
+var sms = require('./../msm_helper');
+var gps_data = require('./../models/gps_data');
+
 /*
  *偷油漏油发送短信报警
  *格式如下：*DFTD_LYBJ,ID,phoneNumber# ,如(*DFTD_LYBJ,2000000100,13554766446#)
