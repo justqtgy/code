@@ -3,9 +3,9 @@ var util = require('util');
 
 function stat_online() {
 
-};
+}
 
-module.exports = stat_online
+module.exports = stat_online;
 
 stat_online.get_info = function(args, callback) {
     var sql = "select top 1 * from stat_online where CreateDate ='%s' and GprsID = '%s'";
@@ -18,7 +18,7 @@ stat_online.get_info = function(args, callback) {
 
         callback(err, rows);
     });
-}
+};
 
 stat_online.add_record = function(args, callback) {
     var sql = "insert into stat_online values('%s', '%s', '%s', '%s', '%s', %s);SELECT @@IDENTITY as ID;";
@@ -31,7 +31,7 @@ stat_online.add_record = function(args, callback) {
 
         callback(err, result);
     });
-}
+};
 
 stat_online.update_record = function(args, callback) {
     var sql = "update stat_online set UpdateTime = '%s', Online = %s where CreateDate = '%s' and GprsID='%s'";
@@ -39,9 +39,9 @@ stat_online.update_record = function(args, callback) {
 
     db.execSQL(sql, function(err, result) {
         if (err) {
-            throw err
+            throw err;
         }
 
         callback(err, result);
     });
-}
+};
