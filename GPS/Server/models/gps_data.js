@@ -86,10 +86,10 @@ gps_data.add_data = function(data, cb) {
 
 gps_data.get_carlist = function(gprsid, callback) {
 
-    var sqlText = "select *, CarNumber as VehicleNo from [gserver_synth].[dbo].[View_CarList] where GPRS='" + gprsid + "'";
+    var sqlText = "select *, CarNumber as VehicleNo from [gserver_synth].[dbo].[View_CarList] with(nolock) where GPRS='" + gprsid + "'";
     db.execSQL(sqlText, function(err, result) {
         if (err) {
-            throw err;
+            return callback(err, '');
         }
 
         callback(err, result);
@@ -99,10 +99,10 @@ gps_data.get_carlist = function(gprsid, callback) {
 
 gps_data.get_driver_vhc = function(vid) {
 
-    var sqlText = "select * from gserver_data.dbo.driver_vhc where VehicleID='" + vid + "'";
+    var sqlText = "select * from gserver_data.dbo.driver_vhc with(nolock) where VehicleID='" + vid + "'";
     db.execSQL(sqlText, function(err, result) {
         if (err) {
-            throw err;
+            return callback(err, '');
         }
 
         callback(err, result);
@@ -152,7 +152,7 @@ gps_data.add_data = function(data, callback) {
 
     db.execSP("cp_gps_data_add", params, function(err, result) {
         if (err) {
-            throw err;
+            return callback(err, '');
         }
 
         callback(err, result);

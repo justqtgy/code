@@ -108,7 +108,7 @@ gps_oil.add_oilreal_data = function(data, callback) {
     console.log(sqlText);
     db.execSQL(sqlText, function(err, result) {
         if (err) {
-            throw err;
+            return callback(err, '');
         }
 
         callback(err, result);
@@ -133,7 +133,7 @@ gps_oil.add_oiladd_data = function(data, callback) {
     console.log(sqlText);
     db.execSQL(sqlText, function(err, result) {
         if (err) {
-            throw err;
+            return callback(err, '');
         }
 
         callback(err, result);
@@ -161,7 +161,7 @@ gps_oil.add_oilleak_data = function(data, callback) {
     console.log(sqlText);
     db.execSQL(sqlText, function(err, result) {
         if (err) {
-            throw err;
+            return callback(err, '');
         }
 
         callback(err, result);

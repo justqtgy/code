@@ -1,4 +1,5 @@
 var date = require('date-utils');
+var iconv = require('iconv-lite');
 var sms = require('./../cores/sms_helper');
 var gps_alarm = require('./../models/gps_alarm');
 var gps_data = require('./../models/gps_data');
@@ -103,13 +104,13 @@ module.exports.add_alarm_data = function(data) {
             }
 
             var rows = result;
-            if (rows.length == 0) {
+            if (rows.length === 0) {
                 logger.error('获取车辆信息失败：该车不存在');
                 return;
             }
 
             item.vehicleID = rows[0].VehicleID;
-            item.vehicleNo = rows[0].VehicleNo;
+            item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
 
             //发送短信
             send_alarm_msg(item);

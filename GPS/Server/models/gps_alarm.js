@@ -44,7 +44,7 @@ gps_alarm.add_alarm = function(data, callback) {
     console.log(sqlText)
     db.execSQL(sqlText, function(err, result) {
         if (err) {
-            throw err
+            return callback(err, '');
         }
 
         callback(err, result);

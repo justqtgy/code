@@ -1,4 +1,5 @@
 var date = require('date-utils');
+var iconv = require('iconv-lite');
 var common = require('./../cores/common');
 var gps_data = require('./../models/gps_data');
 var gps_oil = require('./../models/gps_oil');
@@ -66,7 +67,7 @@ module.exports.add_realoil_data = function(data) {
             }
 
             item.vehicleID = rows[0].VehicleID;
-            item.vehicleNo = rows[0].CarNumber;
+            item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
 
             //写入数据库 
             gps_oil.add_oilreal_data(item, function(error, result) {
@@ -146,7 +147,7 @@ module.exports.add_addoil_data = function(data) {
             }
 
             item.vehicleID = rows[0].VehicleID;
-            item.vehicleNo = rows[0].CarNumber;
+            item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
 
             //写入数据库 
             gps_oil.add_oiladd_data(item, function(error, result) {
@@ -225,7 +226,7 @@ module.exports.add_leakoil_data = function(data) {
             }
 
             item.vehicleID = rows[0].VehicleID;
-            item.vehicleNo = rows[0].CarNumber;
+            item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
 
             //写入数据库 
             gps_oil.add_oilleak_data(item, function(error, result) {
