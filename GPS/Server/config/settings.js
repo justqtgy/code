@@ -7,7 +7,7 @@ module.exports.dbconfig = {
     user: 'sa',
     password: 'DSERVER@123',
     server: '120.24.68.95', // You can use 'localhost\\instance' to connect to named instance
-    database: 'gserver_data',
+    database: 'gserver_packet',
     options: {
         encrypt: false // Use this if you're on Windows Azure
     },

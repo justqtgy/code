@@ -10,8 +10,6 @@ module.exports.execSQL = function(sqlText, cb) {
         // Query 
         var request = new sql.Request(connection); // or: var request = connection.request(); 
         request.query(sqlText, function(err, result) {
-
-
             cb(err, result);
         });
     });
@@ -19,7 +17,7 @@ module.exports.execSQL = function(sqlText, cb) {
     connection.on('error', function(err) {
         // ... error handler 
         console.log('error => ', err);
-        cb(err)
+        cb(err);
     });
 }
 
@@ -46,7 +44,7 @@ module.exports.execSP = function(spName, params, cb) {
             console.log(result.rowsAffected) // array of numbers, each number represents the number of rows affected by executed statemens 
             */
 
-            cb(err, result)
+            cb(err, result);
         });
     });
 

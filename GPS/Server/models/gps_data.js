@@ -1,4 +1,5 @@
-﻿var db = require('../models/mssql_helper');
+﻿var sql = require('mssql');
+var db = require('../models/mssql_helper');
 
 function gps_data() {
 
@@ -6,7 +7,7 @@ function gps_data() {
 
 gps_data.get_carlist = function(gprsid) {
     return new Promise(function(resolve, reject) {
-        var sqlText = "select * from [gserver_synth].[dbo].[View_CarList] where GPRS='" + gprsid + "'";
+        var sqlText = "select *, CarNumber as VehicleNo from [gserver_synth].[dbo].[View_CarList] where GPRS='" + gprsid + "'";
         db.execSQL(sqlText, function(err, result) {
             if (err) {
                 reject(err);
@@ -19,7 +20,7 @@ gps_data.get_carlist = function(gprsid) {
 
 gps_data.get_driver_vhc = function(vid) {
     return new Promise(function(resolve, reject) {
-        var sqlText = "select * from driver_vhc where VehicleID='" + vid + "'";
+        var sqlText = "select * from gserver_data.dbo.driver_vhc where VehicleID='" + vid + "'";
         db.execSQL(sqlText, function(err, result) {
             if (err) {
                 reject(err);
@@ -32,9 +33,11 @@ gps_data.get_driver_vhc = function(vid) {
 
 gps_data.add_data = function(data, cb) {
     return new Promise(function(resolve, reject) {
-        var _vehicleid = data.vehicleid,
+        var _gpsID = data.gpsID,
+            _vehicleID = data.vehicleID,
+            _vehicleNo = data.vehicleNo,
             _version = data.version,
-            _gpstime = data.gpstime,
+            _gpsTime = data.gpsTime,
             _location = data.location,
             _lng = data.lng,
             _lat = data.lat,
@@ -49,9 +52,11 @@ gps_data.add_data = function(data, cb) {
             _oil2 = data.oil2.toString();
 
         var params = [
-            { name: 'VehicleID', type: sql.VarChar(20), value: _vehicleid },
+            { name: 'GPSID', type: sql.VarChar(20), value: _gpsID },
+            { name: 'VehicleID', type: sql.VarChar(20), value: _vehicleID },
+            { name: 'VehicleNo', type: sql.VarChar(20), value: _vehicleNo },
             { name: 'Version', type: sql.VarChar(20), value: _version },
-            { name: 'GPSTime', type: sql.DateTime, value: _gpstime },
+            { name: 'GPSTime', type: sql.VarChar(20), value: _gpsTime },
             { name: 'Location', type: sql.VarChar(20), value: _location },
             { name: 'Lng', type: sql.Float, value: _lng },
             { name: 'Lat', type: sql.Float, value: _lat },
@@ -68,17 +73,18 @@ gps_data.add_data = function(data, cb) {
 
         db.execSP("cp_gps_data_add", params, function(err, result) {
             if (err) {
-                reject(err)
+                reject(err);
             } else {
-                resolve(result)
+                resolve(result);
             }
         });
     });
 }
 
+/*
 gps_data.add_capacity = function(data) {
     return new Promise(function(resolve, reject) {
-        var _vehicleid = data.vehicleid,
+        var _vehicle_id = data.vehicle_id,
             _version = data.version,
             _gpsdate = data.gpsdate,
             _gpstime = data.gpstime,
@@ -91,7 +97,7 @@ gps_data.add_capacity = function(data) {
             _temp = data.temp;
 
         var params = [
-            { name: 'VehicleID', type: sql.VarChar(20), value: _vehicleid },
+            { name: 'VehicleID', type: sql.VarChar(20), value: _vehicle_id },
             { name: 'Version', type: sql.VarChar(20), value: _version },
             { name: 'GPSTime', type: sql.DateTime, value: _gpstime },
             { name: 'Location', type: sql.VarChar(20), value: _location },
@@ -116,7 +122,7 @@ gps_data.add_capacity = function(data) {
 
 gps_data.add_quality = function(data) {
     return new Promise(function(resolve, reject) {
-        var _vehicleid = data.vehicleid,
+        var _vehicle_id = data.vehicle_id,
             _c1 = data.c1,
             _c2 = data.c2,
             _empty = data.empty,
@@ -125,7 +131,7 @@ gps_data.add_quality = function(data) {
             _volume = data.volume;
 
         var params = [
-            { name: 'VehicleID', type: sql.VarChar(20), value: _vehicleid },
+            { name: 'VehicleID', type: sql.VarChar(20), value: _vehicle_id },
             { name: 'C1', type: sql.VarChar(20), value: _c1 },
             { name: 'C2', type: sql.VarChar(20), value: _c2 },
             { name: 'Empty', type: sql.Decimal(18, 2), value: _empty },
@@ -143,10 +149,10 @@ gps_data.add_quality = function(data) {
         });
     });
 }
-
+*/
 // gps_data.add_alarm = function(data, cb) {
-//     var sqlText = "INSERT INTO gps_alarm (VehicleID, CarNumber, Mobile, GPRSID, AddTime, TypeID) " +
-//         "VALUES(" + data.vehicleid + "," +
+//     var sqlText = "INSERT INTO gps_alarm (vehicle_id, CarNumber, Mobile, GPRSID, AddTime, TypeID) " +
+//         "VALUES(" + data.vehicle_id + "," +
 //         "'" + data.carnumber + "'," +
 //         "'" + data.mobile + "'," +
 //         "'" + data.gprsid + "'," +
@@ -168,25 +174,25 @@ gps_data.add_quality = function(data) {
 // }
 
 
-gps_data.add_alarm = function(data) {
-    return new Promise(function(resolve, reject) {
-        var sqlText = "INSERT INTO gps_alarm (VehicleID, CarNumber, Mobile, GPRSID, AddTime, TypeID) " +
-            "VALUES(" + data.vehicleid + "," +
-            "'" + data.carnumber + "'," +
-            "'" + data.mobile + "'," +
-            "'" + data.gprsid + "'," +
-            "'" + data.addtime + "'," +
-            "'" + data.typeid + "'" +
-            ");SELECT @@IDENTITY as ID;";
-        db.execSQL(sqlText, function(err, result) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(result);
-            }
+// gps_data.add_alarm = function(data) {
+//     return new Promise(function(resolve, reject) {
+//         var sqlText = "INSERT INTO gps_alarm (vehicle_id, CarNumber, Mobile, GPRSID, AddTime, TypeID) " +
+//             "VALUES(" + data.vehicle_id + "," +
+//             "'" + data.carnumber + "'," +
+//             "'" + data.mobile + "'," +
+//             "'" + data.gprsid + "'," +
+//             "'" + data.addtime + "'," +
+//             "'" + data.typeid + "'" +
+//             ");SELECT @@IDENTITY as ID;";
+//         db.execSQL(sqlText, function(err, result) {
+//             if (err) {
+//                 reject(err);
+//             } else {
+//                 resolve(result);
+//             }
 
-        })
-    });
-}
+//         })
+//     });
+// }
 
 module.exports = gps_data;

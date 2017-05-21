@@ -13,7 +13,7 @@ common.bytes2str = function(arr) {
         str += tmp;
     }
     return str;
-}
+};
 
 common.format_time = function(d, t) {
     if (d.length >= 6 && t.length >= 6)
@@ -22,4 +22,4 @@ common.format_time = function(d, t) {
         return new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
 }
 
-module.exports = common
+module.exports = common;

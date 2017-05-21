@@ -1,6 +1,7 @@
 var http = require('http');
 var qs = require('querystring');
 var iconv = require('iconv-lite');
+var smsResult = require('../config/settings').smsResult;
 
 /**
  * 请求第三方模块，发送短信
@@ -29,12 +30,12 @@ var send_sms_request = module.exports.send_sms_request = function(sms) {
     };
 
     var req = http.request(options, function(res) {
-        var str = ''
-        res.setEncoding('binary')
+        var str = '';
+        res.setEncoding('binary');
 
         res.on('data', function(chunk) {
-            str += chunk
-        })
+            str += chunk;
+        });
 
         res.on('end', function() {
             var ret = iconv.decode(new Buffer(str, 'binary'), 'GBK')
@@ -42,15 +43,14 @@ var send_sms_request = module.exports.send_sms_request = function(sms) {
             if (ret.indexOf('result=1') >= 0) {
                 logger.info('send_sms ok', ret)
             } else {
-                logger.error('send_sms err', ret)
+                logger.error('send_sms err', ret, smsResult[ret.replace('result=', '').replace('&', '')]);
             }
-        })
-
-    })
+        });
+    });
 
     req.on('error', function(e) {
-        logger.info(e)
-    })
+        logger.info(e);
+    });
 
-    req.end()
-}
+    req.end();
+};

@@ -1,6 +1,6 @@
 var net = require('net');
 var log4js = require('log4js');
-var protocol = require('./protocol/protocol');
+var protocol = require('./protocol');
 
 var HOST = '127.0.0.1';
 var PORT = 6666;
