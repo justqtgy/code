@@ -88,3 +88,10 @@ TypeError: Cannot read property 'VehicleID' of undefined
 [2017-05-21 21:41:46.518] [INFO] dateFileLog - Result =  [ { ID: 25 } ]
 [2017-05-21 21:41:47.452] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,2000000407,A,200.2L,A,094506,240116,2239.5530,N,11404.4116,E #
 [2017-05-21 21:41:50.568] [INFO] dateFileLog - Result =  [ { ID: 26 } ]
+[2017-05-21 21:42:37.981] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,2000000407,A,200.2L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-05-21 21:42:38.197] [INFO] dateFileLog - Result =  [ { ID: 27 } ]
+[2017-05-21 21:42:39.516] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,2000000407,A,200.2L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-05-21 21:42:43.172] [INFO] dateFileLog - Result =  [ { ID: 28 } ]
+[2017-05-21 21:42:43.908] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,2000000407,A,200.2L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-05-21 21:42:44.334] [INFO] dateFileLog - Result =  [ { ID: 29 } ]
+[2017-05-21 21:42:45.076] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,2000000407,A,200.2L,A,094506,240116,2239.5530,N,11404.4116,E #
