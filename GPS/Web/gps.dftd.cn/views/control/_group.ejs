@@ -1,0 +1,8 @@
+<link href="/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+<script >    
+    $.get('/vehicle/vhc_group',function(result){       
+        $('.multiselect').html(result.group);
+        $('.multiselect').multiselect({ nonSelectedText: '请选择', includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300,enableFiltering:true });
+    })
+</script>

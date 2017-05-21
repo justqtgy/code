@@ -1,0 +1,81 @@
+<%- include ../shared/_header %>
+ 
+</head>
+
+<body class="page-header-fixed" style="background-color:#ffffff;">
+    <div  class="box-body chart-responsive"> 
+		<div class="tiles">
+			<div class="tile bg-purple">
+			<div class="tile-body">
+				<i class="fa fa-car"></i>
+			</div>
+			<div class="tile-object">
+				<div class="name">
+					车辆状态
+				</div>				
+			</div>
+		</div>
+
+		<div class="tile bg-yellow" >
+			<div class="tile-body">
+				<i class="icon-social-dropbox"></i>
+			</div>
+			<div class="tile-object">
+				<div class="name">
+					油票核对
+				</div>
+			</div>
+		</div>
+		<div class="tile bg-blue">
+			<div class="tile-body">
+				<i class="icon-calendar"></i>
+			</div>
+			<div class="tile-object">
+				<div class="name">
+					成本核算
+				</div>	
+			</div>
+		</div>
+
+		<div class="tile bg-green">
+			<div class="tile-body">
+				<i class="icon-briefcase"></i>
+			</div>
+			<div class="tile-object">
+				<div class="name">
+					维护保养
+				</div>
+			
+			</div>
+		</div>
+
+			
+
+			<div class="tile bg-red">
+				<div class="tile-body">
+					<i class="icon-bar-chart"></i>
+				</div>
+				<div class="tile-object">
+					<div class="name">
+						漏油告警
+					</div>						
+				</div>
+			</div>
+			
+			
+
+    </div>
+     
+  </body>
+<%- include ../shared/_scripts %>
+<%- include ../shared/_footer %>
+<script>
+	$(function(){
+		$(".bg-purple").click(function(){location.href='vehicle_status/m_index';});
+		$(".bg-green").click(function(){location.href='/m_maintenance';});
+		$(".bg-blue").click(function(){location.href='daily_report/m_index';});
+		$(".bg-yellow").click(function(){location.href='oil_ticket/m_check';});		
+		$(".bg-red").click(function(){location.href='oil_vhc_dv/m_index';});
+		
+	})
+</script>
