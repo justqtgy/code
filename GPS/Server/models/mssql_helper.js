@@ -19,7 +19,20 @@ module.exports.execSQL = function(sqlText, cb) {
         console.log('error => ', err);
         cb(err);
     });
-}
+
+    // sql.connect(config).then(function(connection) {
+    //     new sql.Request(connection)
+    //         .query(sqlText)
+    //         .then(function(result) {
+    //             cb(null, result);
+    //         }).catch(function(err) {
+    //             cb(err, '');
+    //         });
+
+    // }).catch(function(err) {
+    //     cb(err, '');
+    // });
+};
 
 module.exports.execSP = function(spName, params, cb) {
     var connection = new sql.Connection(config, function(err) {

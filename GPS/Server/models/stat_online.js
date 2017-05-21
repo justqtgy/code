@@ -13,7 +13,7 @@ stat_online.get_info = function(args, callback) {
 
     db.execSQL(sql, function(err, rows) {
         if (err) {
-            throw err
+            throw err;
         }
 
         callback(err, rows);
@@ -26,7 +26,7 @@ stat_online.add_record = function(args, callback) {
 
     db.execSQL(sql, function(err, result) {
         if (err) {
-            throw err
+            throw err;
         }
 
         callback(err, result);
