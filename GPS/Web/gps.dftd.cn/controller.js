@@ -1,5 +1,4 @@
-﻿
-var gps_data = require('./routes/gps_data');
+﻿var gps_data = require('./routes/gps_data');
 var gps_quality = require('./routes/gps_quality');
 var oil_vhc_dv = require('./routes/oil_vhc_dv');
 var vhc_online = require('./routes/vhc_online');
@@ -11,21 +10,23 @@ var driver_vhc = require('./routes/driver_vhc');
 var vehicle = require('./routes/vehicle');
 var gps_alarm = require('./routes/gps_alarm');
 var traffic = require('./routes/traffic');
+var gps_oil = require('./routes/gps_oil');
 
-exports.init_route=function(app){
-	console.log('init_route begin');
-	app.use('/oil_vhc_dv', oil_vhc_dv);
-	app.use('/vhc_online', vhc_online);
-	app.use('/gps_data', gps_data);
-	app.use('/gps_quality', gps_quality);
-	app.use('/oil_ticket', oil_ticket);
-	app.use('/vehicle_status', vehicle_status);
-	app.use('/daily_report', daily_report);
-	app.use('/driver', driver);
-	app.use('/driver_vhc', driver_vhc);
-	app.use('/vehicle', vehicle);
-	app.use('/gps_alarm', gps_alarm);
-	app.use('/traffic', traffic);
+exports.init_route = function(app) {
+    console.log('init_route begin');
+    app.use('/oil_vhc_dv', oil_vhc_dv);
+    app.use('/vhc_online', vhc_online);
+    app.use('/gps_data', gps_data);
+    app.use('/gps_quality', gps_quality);
+    app.use('/oil_ticket', oil_ticket);
+    app.use('/vehicle_status', vehicle_status);
+    app.use('/daily_report', daily_report);
+    app.use('/driver', driver);
+    app.use('/driver_vhc', driver_vhc);
+    app.use('/vehicle', vehicle);
+    app.use('/gps_alarm', gps_alarm);
+    app.use('/traffic', traffic);
+    app.use('/gps_oil', gps_oil);
 
-	console.log('init_route end');
+    console.log('init_route end');
 }

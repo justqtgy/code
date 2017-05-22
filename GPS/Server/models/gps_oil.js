@@ -100,8 +100,8 @@ gps_oil.add_oilreal_data = function(data, callback) {
         "'" + data.oilStatus + "'," +
         "'" + data.curOil + "'," +
         "'" + data.gpsStatus + "'," +
-        "'" + data.lng + "'," +
-        "'" + data.lat + "'," +
+        "'" + data.lng.toFixed(6) + "'," +
+        "'" + data.lat.toFixed(6) + "'," +
         "'" + data.gpsTime + "'," +
         "'" + data.addTime + "'" +
         ");SELECT @@IDENTITY as ID;";
@@ -125,8 +125,8 @@ gps_oil.add_oiladd_data = function(data, callback) {
         "'" + data.preOil + "'," +
         "'" + data.curOil + "'," +
         "'" + data.gpsStatus + "'," +
-        "'" + data.lng + "'," +
-        "'" + data.lat + "'," +
+        "'" + data.lng.toFixed(6) + "'," +
+        "'" + data.lat.toFixed(6) + "'," +
         "'" + data.gpsTime + "'," +
         "'" + data.addTime + "'" +
         ");SELECT @@IDENTITY as ID;";
@@ -153,8 +153,8 @@ gps_oil.add_oilleak_data = function(data, callback) {
         "'" + data.preOil + "'," +
         "'" + data.curOil + "'," +
         "'" + data.gpsStatus + "'," +
-        "'" + data.lng + "'," +
-        "'" + data.lat + "'," +
+        "'" + data.lng.toFixed(6) + "'," +
+        "'" + data.lat.toFixed(6) + "'," +
         "'" + data.gpsTime + "'," +
         "'" + data.addTime + "'" +
         ");SELECT @@IDENTITY as ID;";
