@@ -31,7 +31,7 @@ function get_list(pageIndex) {
 
     $.ajax({
         url: "/gps_oil/get_rt_list",
-        type: "GET",
+        type: "post",
         dataType: "json",
         data: data_format,
         beforeSend: function() { $("#loading").show(); },

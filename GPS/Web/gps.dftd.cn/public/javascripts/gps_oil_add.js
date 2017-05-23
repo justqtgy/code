@@ -18,7 +18,7 @@ $(function() {
         }
         data.carlist = carlist.toString();
 
-        $.get('/gps_oil/get_add_list', data, function(result) {
+        $.post('/gps_oil/get_add_list', data, function(result) {
             console.log(result);
             if (result.ok == "0") {
                 $("#grid tbody").find("tr.newrow").remove();

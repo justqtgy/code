@@ -32,7 +32,7 @@ $(function() {
         //     }
         // })
 
-        $.get('/gps_oil/get_leak_list', data, function(result) {
+        $.post('/gps_oil/get_leak_list', data, function(result) {
             if (result.ok == "0") {
                 $("#grid tbody").find("tr.newrow").remove();
                 //显示记录

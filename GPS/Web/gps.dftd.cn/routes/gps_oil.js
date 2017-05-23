@@ -24,9 +24,9 @@ router.get('/realtime', function(req, res, next) {
 });
 
 
-router.get('/get_rt_list', function(req, res, next) {
-    var params = req.query;
-    console.log(req.query);
+router.post('/get_rt_list', function(req, res, next) {
+    var params = req.body;
+    console.log(req.body);
     gps_oil_data.get_list(params, function(err, result) {
         if (err) {
             throw err;
@@ -36,9 +36,9 @@ router.get('/get_rt_list', function(req, res, next) {
     });
 });
 
-router.get('/get_add_list', function(req, res, next) {
-    var params = req.query;
-    console.log(req.query);
+router.post('/get_add_list', function(req, res, next) {
+    var params = req.body;
+    console.log(req.body);
     gps_oil_add.get_list(params, function(err, result) {
         if (err) {
             throw err;
@@ -48,9 +48,9 @@ router.get('/get_add_list', function(req, res, next) {
     });
 });
 
-router.get('/get_leak_list', function(req, res, next) {
-    var params = req.query;
-    console.log(req.query);
+router.post('/get_leak_list', function(req, res, next) {
+    var params = req.body;
+    console.log(req.body);
     gps_oil_leak.get_list(params, function(err, result) {
         if (err) {
             throw err;
