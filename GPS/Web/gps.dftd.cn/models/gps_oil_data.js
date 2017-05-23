@@ -25,7 +25,7 @@ gps_oil_data.get_count = function(params, callback) {
     });
 }
 
-gps_oil_data.get_rt_list = function(params, callback) {
+gps_oil_data.get_list = function(params, callback) {
     // var pageIndex = parseInt(params.pageindex);
     // var pageSize = parseInt(params.pagesize);
     // var start_id = (pageIndex - 1) * pageSize + 1;

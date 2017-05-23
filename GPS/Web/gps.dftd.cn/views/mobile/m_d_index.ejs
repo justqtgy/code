@@ -35,7 +35,7 @@
 				</div>
 				<div class="tile-object">
 					<div class="name">
-						加油记录
+						我的油票
 					</div>	
 				</div>
 			</div>
@@ -50,6 +50,31 @@
 					</div>						
 				</div>
 			</div>
+
+			<div class="tile bg-green">
+			<div class="tile-body">
+				<i class="icon-briefcase"></i>
+			</div>
+			<div class="tile-object">
+				<div class="name">
+					加油记录
+				</div>
+			
+			</div>
+		</div>
+
+			
+
+			<div class="tile bg-red">
+				<div class="tile-body">
+					<i class="icon-bar-chart"></i>
+				</div>
+				<div class="tile-object">
+					<div class="name">
+						漏油告警
+					</div>						
+				</div>
+			</div>
     </div>
      
   </body>
@@ -61,7 +86,8 @@
 		$(".bg-green").click(function(){location.href='driver_vhc/m_mylist';});
 		$(".bg-blue").click(function(){location.href='oil_ticket/m_mylist';});
 		$(".bg-blue-hoki").click(function(){location.href='traffic/m_index';});
-		
+		$(".bg-green").click(function(){location.href='gps_oil/m_add_index';});
+		$(".bg-red").click(function(){location.href='gps_oil/m_leak_index';});
 
 	})
 </script>

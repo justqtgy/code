@@ -49,7 +49,7 @@ module.exports.add_realoil_data = function(data) {
     if (data[0].indexOf('*DFTD_OIL') >= 0 && data.length >= 5) {
         item.gpsID = data[1];
         item.oilStatus = data[2] == 'A' ? 1 : 0;
-        item.curOil = data[3].replace('L', '');
+        item.curOil = parseFloat(data[3].replace('L', '')).toFixed(2);
         item.gpsStatus = data[4] == 'A' ? 1 : 0;
         item.gpsTime = common.format_time(data[6], data[5]);
         item.lat = parseFloat(data[7]) * 0.01; //纬度
@@ -127,9 +127,9 @@ module.exports.add_addoil_data = function(data) {
     var item = {};
     if (data[0].indexOf('*DFTD_ADD_OIL') >= 0 && data.length >= 5) {
         item.gpsID = data[1];
-        item.addOil = data[2].replace('L', '');
-        item.preOil = data[3].replace('L', '');
-        item.curOil = data[4].replace('L', '');
+        item.addOil = parseFloat(data[2].replace('L', '')).toFixed(2);
+        item.preOil = parseFlat(data[3].replace('L', '')).toFixed(2);
+        item.curOil = parseFloat(data[4].replace('L', '')).toFixed(2);
         item.gpsStatus = data[5] == 'A' ? 1 : 0;
         item.gpsTime = common.format_time(data[7], data[6]);
         item.lat = parseFloat(data[8]) * 0.01; //纬度
@@ -206,9 +206,9 @@ module.exports.add_leakoil_data = function(data) {
     var item = {};
     if (data[0].indexOf('*DFTD_ADD_LEAK_OIL') >= 0 && data.length >= 5) {
         item.gpsID = data[1];
-        item.addOil = data[2].replace('L', '');
-        item.preOil = data[3].replace('L', '');
-        item.curOil = data[4].replace('L', '');
+        item.addOil = parseFloat(data[2].replace('L', '')).toFixed(2);
+        item.preOil = parseFlat(data[3].replace('L', '')).toFixed(2);
+        item.curOil = parseFloat(data[4].replace('L', '')).toFixed(2);
         item.gpsStatus = data[5] == 'A' ? 1 : 0;
         item.gpsTime = common.format_time(data[7], data[6]);
         item.lat = parseFloat(data[8]) * 0.01; //纬度

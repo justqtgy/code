@@ -43,7 +43,7 @@
 			</div>
 			<div class="tile-object">
 				<div class="name">
-					维护保养
+					加油记录
 				</div>
 			
 			</div>
@@ -61,9 +61,18 @@
 					</div>						
 				</div>
 			</div>
-			
-			
 
+
+			<div class="tile bg-blue-chambray">
+				<div class="tile-body">
+					<i class="icon-plane"></i>
+				</div>
+				<div class="tile-object">
+					<div class="name">
+						行驶轨迹
+					</div>						
+				</div>
+			</div>
     </div>
      
   </body>
@@ -71,11 +80,12 @@
 <%- include ../shared/_footer %>
 <script>
 	$(function(){
-		$(".bg-purple").click(function(){location.href='vehicle_status/m_index';});
-		$(".bg-green").click(function(){location.href='/m_maintenance';});
+		$(".bg-purple").click(function(){location.href='vehicle_status/m_index';});		
 		$(".bg-blue").click(function(){location.href='daily_report/m_index';});
-		$(".bg-yellow").click(function(){location.href='oil_ticket/m_check';});		
-		$(".bg-red").click(function(){location.href='oil_vhc_dv/m_index';});
-		
+		$(".bg-yellow").click(function(){location.href='oil_ticket/m_check';});				
+		$(".bg-green").click(function(){location.href='gps_oil/m_add_index';});
+		$(".bg-red").click(function(){location.href='gps_oil/m_leak_index';});
+		//$(".bg-red").click(function(){location.href='oil_vhc_dv/m_index';});
+		$(".bg-blue-chambray").click(function(){location.href='/m_maintenance';});
 	})
 </script>
