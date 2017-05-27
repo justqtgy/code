@@ -4,7 +4,7 @@ var common = require('./../cores/common');
 var gps_data = require('./../models/gps_data');
 
 /*
-格式如下：*HQ,2000000407,V1,155959,A,3451.0352,N,11909.9121,E,0000,292,200517,FFFFFBFF#,T0.0#
+格式如下：*HQ,2000000576,V1,155959,A,3451.0352,N,11909.9121,E,0000,292,200517,FFFFFBFF#,T0.0#
 */
 /*
 module.exports.add_data_tianhe = async function(data) {

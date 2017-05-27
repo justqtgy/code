@@ -142,6 +142,17 @@ gps_oil.add_oiladd_data = function(data, callback) {
 
 };
 
+gps_oil.get_oiladd_record = function(data, callback) {
+    var sqlText = "SELECT SUM(AddOil) as AddOil FROM GPS_Oil_Add WHERE GPSID = '" + data.gpsID + "' AND AddTime>='" + data.beginTime + "' and AddTime = '" + data.endTime + "'";
+    db.execSQL(sqlText, function(err, result) {
+        if (err) {
+            return callback(err, '');
+        }
+
+        callback(err, result);
+    });
+};
+
 
 gps_oil.add_oilleak_data = function(data, callback) {
 

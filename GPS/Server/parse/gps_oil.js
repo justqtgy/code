@@ -1,4 +1,4 @@
-var date = require('date-utils');
+﻿var date = require('date-utils');
 var iconv = require('iconv-lite');
 var common = require('./../cores/common');
 var gps_data = require('./../models/gps_data');
@@ -6,7 +6,7 @@ var gps_oil = require('./../models/gps_oil');
 
 /*
  *实时油量协议
- *格式如下：*DFTD_OIL,2000000407,A,200.2L,A,094506,240116,2239.5530,N,11404.4116,E #
+ *格式如下：*DFTD_OIL,2000000576,A,200.2L,A,094506,240116,2239.5530,N,11404.4116,E #
  */
 /*
 module.exports.add_realoil_data = async function(data) {
@@ -67,7 +67,7 @@ module.exports.add_realoil_data = function(data) {
             }
 
             item.vehicleID = rows[0].VehicleID;
-            item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
+            item.vehicleNo = rows[0].VehicleNo; //iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); 
 
             //写入数据库 
             gps_oil.add_oilreal_data(item, function(error, result) {
@@ -83,7 +83,7 @@ module.exports.add_realoil_data = function(data) {
 
 /*
  *加油协议
- *格式如下：*DFTD_ADD_OIL,2000000407,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+ *格式如下：*DFTD_ADD_OIL,2000000576,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
  */
 /*
 module.exports.add_addoil_data = async function(data) {
@@ -128,7 +128,7 @@ module.exports.add_addoil_data = function(data) {
     if (data[0].indexOf('*DFTD_ADD_OIL') >= 0 && data.length >= 5) {
         item.gpsID = data[1];
         item.addOil = parseFloat(data[2].replace('L', '')).toFixed(2);
-        item.preOil = parseFlat(data[3].replace('L', '')).toFixed(2);
+        item.preOil = parseFloat(data[3].replace('L', '')).toFixed(2);
         item.curOil = parseFloat(data[4].replace('L', '')).toFixed(2);
         item.gpsStatus = data[5] == 'A' ? 1 : 0;
         item.gpsTime = common.format_time(data[7], data[6]);
@@ -147,7 +147,7 @@ module.exports.add_addoil_data = function(data) {
             }
 
             item.vehicleID = rows[0].VehicleID;
-            item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
+            item.vehicleNo = rows[0].VehicleNo; //iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); 
 
             //写入数据库 
             gps_oil.add_oiladd_data(item, function(error, result) {
@@ -207,7 +207,7 @@ module.exports.add_leakoil_data = function(data) {
     if (data[0].indexOf('*DFTD_ADD_LEAK_OIL') >= 0 && data.length >= 5) {
         item.gpsID = data[1];
         item.addOil = parseFloat(data[2].replace('L', '')).toFixed(2);
-        item.preOil = parseFlat(data[3].replace('L', '')).toFixed(2);
+        item.preOil = parseFloat(data[3].replace('L', '')).toFixed(2);
         item.curOil = parseFloat(data[4].replace('L', '')).toFixed(2);
         item.gpsStatus = data[5] == 'A' ? 1 : 0;
         item.gpsTime = common.format_time(data[7], data[6]);
@@ -226,7 +226,7 @@ module.exports.add_leakoil_data = function(data) {
             }
 
             item.vehicleID = rows[0].VehicleID;
-            item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
+            item.vehicleNo = rows[0].VehicleNo; //iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); 
 
             //写入数据库 
             gps_oil.add_oilleak_data(item, function(error, result) {

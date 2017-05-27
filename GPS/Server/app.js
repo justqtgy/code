@@ -3,7 +3,7 @@ var log4js = require('log4js');
 var protocol = require('./protocol');
 
 var HOST = '127.0.0.1';
-var PORT = 6668;
+var PORT = 6666;
 
 // 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
 try {
