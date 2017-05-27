@@ -268,3 +268,5 @@ RequestError: Timeout: Request failed to complete in 15000ms
 [2017-05-27 17:33:01.798] [INFO] dateFileLog - Result =  [ { ID: 31 } ]
 [2017-05-27 17:34:14.110] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,2000000576,A,200.2L,A,094506,240116,2239.5530,N,11404.4116,E #
 [2017-05-27 17:34:14.190] [INFO] dateFileLog - Result =  [ { ID: 37264 } ]
+[2017-05-27 18:13:30.708] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *HQ,2000000576,V1,155959,A,3451.0352,N,11909.9121,E,0000,292,200517,FFFFFBFF#,T0.0#
+[2017-05-27 18:13:31.100] [INFO] dateFileLog - Result =  [ returnValue: 363248 ]

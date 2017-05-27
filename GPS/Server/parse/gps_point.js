@@ -12,7 +12,6 @@ var gps_point = require('./../models/gps_point');
  *格式如下：*DFTD_START_A,2000000576,100.1L,A,094506,240116,2239.5530,N,11404.4116,E# 
  */
 module.exports.add_startpoint_data = function(data) {
-    var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
     if (data[0].indexOf('*DFTD_START_A') >= 0 && data.length >= 10) {
         async.waterfall([
             async.apply(parseParams, data),

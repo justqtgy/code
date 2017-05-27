@@ -1,4 +1,4 @@
-var date = require('date-utils');
+﻿var date = require('date-utils');
 var iconv = require('iconv-lite');
 var common = require('./../cores/common');
 var gps_data = require('./../models/gps_data');
@@ -81,6 +81,7 @@ module.exports.add_data_tianhe = function(data) {
             }
 
             item.vehicleID = rows[0].VehicleID;
+            //此处调用的存储过程，所以需要转换
             item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
 
             gps_data.add_data(item, function(error, result) {
