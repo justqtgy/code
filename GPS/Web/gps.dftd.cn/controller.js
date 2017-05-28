@@ -11,6 +11,7 @@ var vehicle = require('./routes/vehicle');
 var gps_alarm = require('./routes/gps_alarm');
 var traffic = require('./routes/traffic');
 var gps_oil = require('./routes/gps_oil');
+var gps_point = require('./routes/gps_point');
 
 exports.init_route = function(app) {
     console.log('init_route begin');
@@ -27,6 +28,7 @@ exports.init_route = function(app) {
     app.use('/gps_alarm', gps_alarm);
     app.use('/traffic', traffic);
     app.use('/gps_oil', gps_oil);
+    app.use('/gps_point', gps_point);
 
     console.log('init_route end');
 }
