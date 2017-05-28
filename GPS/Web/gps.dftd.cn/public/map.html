@@ -24,6 +24,7 @@
 </body>
 
 </html>
+
 <script type="text/javascript">
     // 百度地图API功能
     var map = new BMap.Map("allmap");
@@ -42,7 +43,7 @@
     }
 
     function showLocation() {
-        map.centerAndZoom(new BMap.Point(lng1, lat1), 14);
+        map.centerAndZoom(new BMap.Point(lng1, lat1), 13);
         map.clearOverlays();
         var new_point = new BMap.Point(lng1, lat1);
         var marker = new BMap.Marker(new_point); // 创建标注
@@ -52,7 +53,7 @@
     }
 
     function showDriving() {
-        map.centerAndZoom(new BMap.Point(lng1, lat1), 13);
+        map.centerAndZoom(new BMap.Point(lng1, lat1), 11);
         map.enableScrollWheelZoom(true);
 
         var p1 = new BMap.Point(lng1, lat1);

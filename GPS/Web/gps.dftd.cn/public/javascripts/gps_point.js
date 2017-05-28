@@ -37,7 +37,8 @@ function get_list(pageIndex) {
                     "<td>" + (item.Distance ? item.Distance.toFixed(2) : 0) + "</td>" +
                     "<td>" + (item.OilUsed ? item.OilUsed.toFixed(2) : 0) + "</td>" +
                     "<td>" + (item.TimeUsed || 0) + "</td>" +
-                    "<td><a href='/map.html?lng1=" + item.Lng1 + "&lng2=" + (item.Lng2 || 0) + "&lat1=" + item.Lat1 + "&lat2=" + (item.Lat2 || 0) + "' target='_blank'>查看</a></td>"
+                    //"<td><a href='/map.html?lng1=" + item.Lng1 + "&lng2=" + (item.Lng2 || 0) + "&lat1=" + item.Lat1 + "&lat2=" + (item.Lat2 || 0) + "' target='_blank'>查看</a></td>"
+                    "<td><a href='#map-modal' data-toggle=\"modal\"  onclick='showMap(" + item.Lng1 + "," + (item.Lng2 || 0) + "," + item.Lat1 + "," + (item.Lat2 || 0) + ")'>查看</a></td>"
                 ).appendTo($("#grid tbody"));
             });
             $("#total_distance").html("<i>里程</i>" + totalDistance);
@@ -46,26 +47,12 @@ function get_list(pageIndex) {
 }
 
 
-//获取记录列表
-function get_excel() {
-    var params = '';
-    var ctrls = $('#search').serializeArray();
-    for (var c in ctrls) {
-        params += "&" + ctrls[c].name + "=" + ctrls[c].value
-    }
 
-    var carlist = $(".multiselect").val();
-    if (carlist) {
-        carlist = carlist.join(",");
-    }
-    if (!carlist) {
-        alert('请选择车辆');
-        return;
-    }
-    params += "&carlist=" + carlist
-
-
-    var url = "/oil_ticket/excel?r=" + Math.random() + params;
-    console.log(url);
-    location.href = url;
+function showMap(lng1, lng2, lat1, lat2) {
+    // var $modal = $('#map-modal');
+    // $modal.load('/map.html', '', function() {
+    //     $modal.modal();
+    // });
+    $("#mapUrl").attr("src", "/map.html?lng1=" + lng1 + "&lng2=" + lng2 + "&lat1=" + lat1 + "&lat2=" + lat2 + "");
+    return;
 }
