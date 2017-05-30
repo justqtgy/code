@@ -68,6 +68,8 @@ module.exports.add_data_tianhe = function(data) {
         item.temp4 = 0;
         item.oil1 = 0;
         item.oil2 = 0;
+        item.lat = item.lat.toFixed(6);
+        item.lng = item.lng.toFixed(6);
 
         gps_data.get_carlist(item.gpsID, function(error, rows) {
             if (error) {
