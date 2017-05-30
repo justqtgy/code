@@ -51,7 +51,7 @@ gps_traffic.update_record = function(args, callback) {
         sql += " ,EndOil = " + args.curOil;
     }
     if (args.addOil) {
-        sql += " ,AddOil = " + args.addOil;
+        sql += " ,AddOil = AddOil + " + args.addOil;
     }
     sql += "  where ID=%s; select @@rowcount as ret;";
     sql = util.format(sql, args.trafficID);
