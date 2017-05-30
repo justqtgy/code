@@ -1,8 +1,7 @@
 ﻿var date = require('date-utils');
-var iconv = require('iconv-lite');
 var common = require('./../cores/common');
 var gps_data = require('./../models/gps_data');
-
+var gps_last = require('./gps_last');
 /*
 格式如下：*HQ,2000000576,V1,155959,A,3451.0352,N,11909.9121,E,0000,292,200517,FFFFFBFF#,T0.0#
 */
@@ -82,7 +81,7 @@ module.exports.add_data_tianhe = function(data) {
 
             item.vehicleID = rows[0].VehicleID;
             //此处调用的存储过程，所以需要转换
-            item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
+            item.vehicleNo = rows[0].VehicleNo;
 
             gps_data.add_data(item, function(error, result) {
                 if (error) {
@@ -91,7 +90,8 @@ module.exports.add_data_tianhe = function(data) {
 
                 logger.info('Result = ', result);
             });
-
+            //定位和轨迹
+            gps_last.set_lastinfo(item);
         });
     }
 };

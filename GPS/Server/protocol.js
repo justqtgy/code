@@ -1,9 +1,9 @@
-//var online = require('./../models/stat_online');
-
 var gps_alarm = require('./parse/gps_alarm');
 var gps_oil = require('./parse/gps_oil');
 var gps_point = require('./parse/gps_point');
 var gps_data = require('./parse/gps_data');
+var gps_online = require('./parse/gps_online');
+
 /**
  * 解析协议
  */
@@ -51,6 +51,8 @@ module.exports.parse = function(socket, data) {
         // if (list[0].indexOf('update') >= 0) {
         //     update_clients(list);
         // }
+
+        gps_online.set_online(list);
     }
 
     /*else {
@@ -63,31 +65,5 @@ module.exports.parse = function(socket, data) {
         }
     }
     */
-    //setOnline(data);
+
 };
-
-/*
-function setOnline(data) {
-    try {
-        var now = new Date().toFormat('YYYY-MM-DD');
-        data.createdate = now;
-        online.get_info(data, function(err, result) {
-            if (err) {
-                return logger.error(err);
-            }
-
-            if (result.length == 0) {
-                online.add_record(data, function(err, result) {
-
-                })
-            } else {
-                // online.update_record(data, function(err, result) {
-
-                // })
-            }
-        });
-    } catch (error) {
-        logger.error(error);
-    }
-}
-*/

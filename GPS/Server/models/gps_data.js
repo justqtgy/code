@@ -1,4 +1,5 @@
 ﻿var sql = require('mssql');
+var iconv = require('iconv-lite');
 var db = require('../models/mssql_helper');
 
 function gps_data() {
@@ -98,7 +99,6 @@ gps_data.get_carlist = function(gprsid, callback) {
 };
 
 gps_data.get_driver_vhc = function(vid) {
-
     var sqlText = "select * from gserver_data.dbo.driver_vhc with(nolock) where VehicleID='" + vid + "'";
     db.execSQL(sqlText, function(err, result) {
         if (err) {
@@ -107,14 +107,13 @@ gps_data.get_driver_vhc = function(vid) {
 
         callback(err, result);
     });
-
 }
 
 gps_data.add_data = function(data, callback) {
 
     var _gpsID = data.gpsID,
         _vehicleID = data.vehicleID,
-        _vehicleNo = data.vehicleNo,
+        _vehicleNo = iconv.encode(data.vehicleNo, 'gbk').toString('binary'),
         _version = data.version,
         _gpsTime = data.gpsTime,
         _location = data.location,

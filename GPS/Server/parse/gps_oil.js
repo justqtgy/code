@@ -3,7 +3,7 @@ var iconv = require('iconv-lite');
 var common = require('./../cores/common');
 var gps_data = require('./../models/gps_data');
 var gps_oil = require('./../models/gps_oil');
-
+var gps_last = require('./gps_last');
 /*
  *实时油量协议
  *格式如下：*DFTD_OIL,2000000576,A,200.2L,A,094506,240116,2239.5530,N,11404.4116,E #
@@ -76,6 +76,8 @@ module.exports.add_realoil_data = function(data) {
                 }
 
                 logger.info('Result = ', result);
+                //定位和轨迹
+                gps_last.set_lastinfo(item);
             });
         });
     }
@@ -141,13 +143,13 @@ module.exports.add_addoil_data = function(data) {
                 return logger.error('Error = ', error);
             }
 
-            if (rows.length == 0) {
+            if (rows.length === 0) {
                 logger.error('获取车辆信息失败：该车不存在');
                 return;
             }
 
             item.vehicleID = rows[0].VehicleID;
-            item.vehicleNo = rows[0].VehicleNo; //iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); 
+            item.vehicleNo = rows[0].VehicleNo;
 
             //写入数据库 
             gps_oil.add_oiladd_data(item, function(error, result) {
@@ -156,6 +158,8 @@ module.exports.add_addoil_data = function(data) {
                 }
 
                 logger.info('Result = ', result);
+                //定位和轨迹
+                gps_last.set_lastinfo(item);
             });
 
         });
@@ -235,6 +239,9 @@ module.exports.add_leakoil_data = function(data) {
                 }
 
                 logger.info('Result = ', result);
+
+                //定位和轨迹
+                gps_last.set_lastinfo(item);
             });
         });
     }

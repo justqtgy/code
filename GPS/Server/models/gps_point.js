@@ -49,7 +49,7 @@ gps_point.add_startpoint_data = function(data, callback) {
 };
 
 gps_point.add_endpoint_data = function(data, callback) {
-    var sqlText = "UPDATE GPS_Point SET CurOil2 = %s, GPSStatus2 = %s, Lng2 = %s , Lat2 = %s, GPSTime2='%s', AddTime2 = '%s', IsEnd = 1, Distance = %s, OilUsed = %s WHERE ID = %s;SELECT @@ROWCOUNT AS result;";
+    var sqlText = "UPDATE GPS_Point SET CurOil2 = %s, GPSStatus2 = %s, Lng2 = %s , Lat2 = %s, GPSTime2='%s', AddTime2 = '%s', IsEnd = 1, Distance = %s, OilUsed = %s WHERE ID = %s;SELECT @@ROWCOUNT AS ret;";
     sqlText = util.format(sqlText, data.curOil, data.gpsStatus, data.lng.toFixed(6), data.lat.toFixed(6), data.gpsTime, data.addTime, data.distance, data.oilUsed, data.id);
     console.log(sqlText);
     db.execSQL(sqlText, function(err, result) {
