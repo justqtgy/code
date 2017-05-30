@@ -164,3 +164,13 @@
 [2017-05-30 21:11:38.285] [INFO] dateFileLog - Result =  [ { ID: 35 } ]
 [2017-05-30 21:11:38.331] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
 [2017-05-30 21:11:38.410] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-05-30 21:14:31.562] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,2000000576,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-05-30 21:14:31.859] [INFO] dateFileLog - Result =  [ { ID: 36 } ]
+[2017-05-30 21:14:31.937] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-05-30 21:14:32.015] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-05-30 21:14:32.140] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-05-30 21:14:51.992] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,2000000576,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-05-30 21:14:58.024] [INFO] dateFileLog - Result =  [ { ID: 37 } ]
+[2017-05-30 21:14:58.086] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-05-30 21:14:58.180] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-05-30 21:14:58.321] [INFO] dateFileLog - Result =  [ { ret: 1 } ]

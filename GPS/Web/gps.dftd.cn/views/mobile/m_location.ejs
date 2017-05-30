@@ -1,0 +1,49 @@
+<%- include ../shared/_header %>
+<link href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="/stylesheets/pricing-tables.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body style="background-color:#ffffff;">
+    <div  class="box-body chart-responsive"> 
+        <form  id='search'>          
+            <div class="form-group">
+                <label class="control-label" for="selCar">车辆选择：</label>
+                <select class="multiselect" multiple="multiple" >
+                     
+                </select><button type="button" id="btnSearch" class="btn btn-success"> <i class="fa fa-search"></i>查询 </button>  
+            </div>              
+            
+        </form>
+    </div>
+    <div class="box-footer">    
+     <div class="row-fluid">
+        <!-- Pricing -->
+        <div class="row-fluid margin-bottom-40">
+            <div class="span3 pricing hover-effect">
+                <div class="pricing-head">
+                    <h3>当前定位 </h3>
+                </div>
+                <div id="allmap"></div>
+            </div>
+        </div>
+        <!--//End Pricing -->
+    </div>
+    
+
+    </div>	
+  </body>
+<%- include ../shared/_scripts %>
+	<script src="/javascripts/include/date-utils.min.js"></script>    
+	<script src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="/javascripts/gps_location.js" type="text/javascript"></script>
+    
+    <script>
+        $(function(){
+			$("#btnSearch").click(function(){
+                
+            });         
+		});
+    </script>
+    <%- include ../control/_group %> 
+<%- include ../shared/_footer %>
