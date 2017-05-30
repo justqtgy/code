@@ -10,7 +10,7 @@ var gps_last = require('../models/gps_last');
 //     res.render('traffic', { start_date: start_date, end_date: end_date });
 // });
 
-router.get('/m_location', function(req, res, next) {
+router.get('/m_index', function(req, res, next) {
     var start_date = new Date().toFormat('YYYY-MM-DD HH24:MI:SS'),
         end_date = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
     res.render('mobile/m_location', { start_date: start_date, end_date: end_date });

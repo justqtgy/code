@@ -28,22 +28,75 @@
         </div>
         <!--//End Pricing -->
     </div>
-    
-
     </div>	
   </body>
 <%- include ../shared/_scripts %>
 	<script src="/javascripts/include/date-utils.min.js"></script>    
 	<script src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-	<script src="/javascripts/gps_location.js" type="text/javascript"></script>
-    
+	<!--<script src="/javascripts/gps_last.js" type="text/javascript"></script>-->
+     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=MYRG9RF3I1NXCGCwFX8NZ4h3"></script>
     <script>
+        
         $(function(){
 			$("#btnSearch").click(function(){
-                
-            });         
+                get_location();
+            });       
 		});
+
+        //获取定位
+        function get_location() {
+            var data_format = { r: Math.random() };
+            var ctrls = $('#search').serializeArray();
+            for (var c in ctrls) {
+                data_format[ctrls[c].name] = ctrls[c].value;
+            }
+
+            var carlist = $(".multiselect").val();
+            if (carlist.length > 1) {
+                alert('只能查询一辆车');
+                return;
+                // carlist = carlist.join(",");
+            }
+            carlist = carlist.join(",");
+            if (!carlist) {
+                alert('请选择车辆');
+                return;
+            }
+            data_format.carlist = carlist;
+
+            $.ajax({
+                url: "/gps_last/get_location",
+                type: "POST",
+                dataType: "json",
+                data: data_format,
+                beforeSend: function() { $("#loading").show(); },
+                complete: function() { $("#loading").hide(); },
+                success: function(result) {
+                    var item = result.rows[0];
+                    var lng = item.Lng;
+                    var lat = item.Lat;
+
+                    showMap(lng, lat);
+                }
+            });
+        }
+
+        function showMap(lng, lat) {
+            var mainheight = window.screen.height-160; 
+            var mainwidth =  window.screen.width-26;
+            $("#allmap").height(mainheight);
+			$("#allmap").width(mainwidth);
+
+            // 百度地图API功能
+            var map = new BMap.Map("allmap");
+            map.centerAndZoom(new BMap.Point(lng, lat), 13);
+            map.enableScrollWheelZoom(true);
+            map.clearOverlays();
+            var new_point = new BMap.Point(lng, lat);
+            var marker = new BMap.Marker(new_point); // 创建标注
+            map.addOverlay(marker); // 将标注添加到地图中
+        }
     </script>
     <%- include ../control/_group %> 
 <%- include ../shared/_footer %>
