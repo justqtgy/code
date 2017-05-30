@@ -57,6 +57,9 @@ function parseParams(data, cb) {
     item.lat = parseFloat(data[6]) * 0.01; //纬度
     item.lng = parseFloat(data[8]) * 0.01; //经度
     item.addTime = now;
+    item.lat = item.lat.toFixed(6);
+    item.lng = item.lng.toFixed(6);
+
     return cb(null, item);
 }
 
