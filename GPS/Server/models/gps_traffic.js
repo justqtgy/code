@@ -44,7 +44,7 @@ gps_traffic.add_record = function(args, callback) {
 
 gps_traffic.update_record = function(args, callback) {
     var sql = "update GPS_Traffic set UpdateTime = GETDATE() ";
-    if (args.distance > 0) {
+    if (args.distance > 1000) {
         sql += " ,EndDistance = EndDistance + " + args.distance + ", Traffic = Traffic + '" + args.traffic + "' ";
     }
     if (args.curOil) {

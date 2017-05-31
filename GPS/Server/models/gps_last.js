@@ -34,12 +34,15 @@ gps_last.add_record = function(args, callback) {
 };
 
 gps_last.update_record = function(args, callback) {
-    var sql = "update GPS_LastInfo set UpdateTime = GETDATE() , Lng = '%s', Lat = '%s'";
+    var sql = "update GPS_LastInfo set UpdateTime = GETDATE() ";
+    if (args.distance > 1000) {
+        sql += ", Lng = '" + args.lng + "', Lat = '" + args.lat + "' ";
+    }
     if (args.curOil) {
         sql += ", CurOil = " + args.curOil;
     }
     sql += "  where VehicleID='%s';SELECT @@ROWCOUNT AS ret;";
-    sql = util.format(sql, args.lng, args.lat, args.vehicleID);
+    sql = util.format(sql, args.vehicleID);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {

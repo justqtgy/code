@@ -21,6 +21,9 @@ module.exports.set_lastinfo = function(data) {
         }
         logger.info('Result = ', result);
 
+        if (data.distance < 1000) {
+            logger.info('Tip = 距离太短不更新坐标：' + data.gpsID + ', ' + data.vehicleID + ', ' + data.vehicleNo + ', ' + data.distance);
+        }
         console.log(data);
         //设置轨迹
         gps_traffic.set_traffic(data);
@@ -39,10 +42,6 @@ function getLastInfo(args, cb) {
             args.lat0 = result[0].Lat;
             //args.curOil = result[0].CurOil;
             args.distance = map_helper.getDistance(args.lng0, args.lat0, args.lng, args.lat);
-
-            if (args.distance < 100) {
-                return cb('距离太短不更新(' + args.distance + ')');
-            }
         }
         cb(null, args);
     });
