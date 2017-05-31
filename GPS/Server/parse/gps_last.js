@@ -39,8 +39,11 @@ function getLastInfo(args, cb) {
             args.lat0 = result[0].Lat;
             //args.curOil = result[0].CurOil;
             args.distance = map_helper.getDistance(args.lng0, args.lat0, args.lng, args.lat);
-        }
 
+            if (args.distance < 100) {
+                return cb('距离太短不更新(' + args.distance + ')');
+            }
+        }
         cb(null, args);
     });
 }

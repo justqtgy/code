@@ -17,14 +17,14 @@ router.get('/m_index', function(req, res, next) {
 });
 
 router.post('/get_location', function(req, res, next) {
-    console.log('get point data =======>', req.body);
+    console.log('get last data =======>', req.body);
     var ctx = req.body;
 
     gps_last.get_list(ctx, function(err, result) {
         if (err) {
             throw err;
         }
-        console.log('get point result ======>', result);
+        console.log('get last result ======>', result);
         res.send({ ok: 0, rows: result });
     });
 });
