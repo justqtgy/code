@@ -49,16 +49,3 @@ gps_last.update_record = function(args, callback) {
         callback(err, result);
     });
 };
-
-gps_last.update_oil = function(args, callback) {
-    var sql = "update GPS_LastInfo set CurOil = %s, UpdateTime = GETDATE()  where VehicleID='%s';SELECT @@ROWCOUNT AS ret;";
-    sql = util.format(sql, args.oil, args.vehicleID);
-
-    db.execSQL(sql, function(err, result) {
-        if (err) {
-            throw err;
-        }
-
-        callback(err, result);
-    });
-};
