@@ -1,0 +1,6 @@
+[2017-05-31 09:52:06.445] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,2000000447,A,0.1L,A,162351,300517,2239.5753,N,11404.4254,E#
+[2017-05-31 09:53:38.840] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,2000000447,A,0.1L,A,162351,300517,2239.5753,N,11404.4254,E#
+[2017-05-31 09:53:39.117] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-05-31 09:53:39.125] [INFO] dateFileLog - Result =  [ { ID: 76414 } ]
+[2017-05-31 09:53:39.250] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-05-31 09:53:39.447] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
