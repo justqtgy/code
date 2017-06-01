@@ -31,9 +31,9 @@ function get_list(pageIndex) {
             $("#grid tbody").find("tr.newrow").remove();
             var totalDistance = 0;
             $.each(result.rows, function(i, item) {
-                totalDistance += (item.Distance ? item.Distance.toFixed(2) : 0);
+                totalDistance += parseFloat(item.Distance ? item.Distance : 0);
                 $("<tr class='newrow'></tr>").append(
-                    "<td>" + new Date(item.AddTime1).toUTCFormat('MM-DD HH:MI:SS') + "</td>" +
+                    "<td>" + new Date(item.AddTime1).toUTCFormat('MM-DD HH24:MI:SS') + "</td>" +
                     "<td>" + (item.Distance ? item.Distance.toFixed(2) : 0) + "</td>" +
                     "<td>" + (item.OilUsed ? item.OilUsed.toFixed(2) : 0) + "</td>" +
                     "<td>" + (item.TimeUsed || 0) + "</td>" +
@@ -41,7 +41,7 @@ function get_list(pageIndex) {
                     "<td><a href='#map-modal' data-toggle=\"modal\"  onclick='showMap(" + item.Lng1 + "," + (item.Lng2 || 0) + "," + item.Lat1 + "," + (item.Lat2 || 0) + ")'>查看</a></td>"
                 ).appendTo($("#grid tbody"));
             });
-            $("#total_distance").html("<i>里程</i>" + totalDistance);
+            $("#total_distance").html("<i>里程</i>" + totalDistance.toFixed(2));
         }
     });
 }

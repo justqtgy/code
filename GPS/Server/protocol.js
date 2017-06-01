@@ -13,9 +13,9 @@ module.exports.parse = function(socket, data) {
 
     if (list.length > 1) {
 
-        if (list[0].indexOf('*HQ') >= 0) {
-            gps_data.add_data_tianhe(list);
-        }
+        // if (list[0].indexOf('*HQ') >= 0) {
+        //     gps_data.add_data_tianhe(list);
+        // }
 
         if (list[0].indexOf('*DFTD_LYBJ') >= 0) {
             gps_alarm.add_alarm_data(list);

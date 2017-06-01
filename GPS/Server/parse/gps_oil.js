@@ -52,11 +52,12 @@ module.exports.add_realoil_data = function(data) {
         item.curOil = parseFloat(data[3].replace('L', '')).toFixed(2);
         item.gpsStatus = data[4] == 'A' ? 1 : 0;
         item.gpsTime = common.format_time(data[6], data[5]);
-        item.lat = parseFloat(data[7]) * 0.01; //纬度
-        item.lng = parseFloat(data[9]) * 0.01; //经度
         item.addTime = now;
-        item.lat = item.lat.toFixed(6);
-        item.lng = item.lng.toFixed(6);
+        var lat = parseFloat(data[7]) * 0.01; //纬度
+        var lng = parseFloat(data[9]) * 0.01; //经度
+        item.lat = common.changeLocation(lat.toString());
+        item.lng = common.changeLocation(lng.toString());
+
 
         gps_data.get_carlist(item.gpsID, function(error, rows) {
             if (error) {
@@ -136,11 +137,13 @@ module.exports.add_addoil_data = function(data) {
         item.curOil = parseFloat(data[4].replace('L', '')).toFixed(2);
         item.gpsStatus = data[5] == 'A' ? 1 : 0;
         item.gpsTime = common.format_time(data[7], data[6]);
-        item.lat = parseFloat(data[8]) * 0.01; //纬度
-        item.lng = parseFloat(data[10]) * 0.01; //经度
         item.addTime = now;
-        item.lat = item.lat.toFixed(6);
-        item.lng = item.lng.toFixed(6);
+
+        var lat = parseFloat(data[8]) * 0.01; //纬度
+        var lng = parseFloat(data[10]) * 0.01; //经度
+        item.lat = common.changeLocation(lat.toString());
+        item.lng = common.changeLocation(lng.toString());
+
 
         gps_data.get_carlist(item.gpsID, function(error, rows) {
             if (error) {
@@ -219,11 +222,12 @@ module.exports.add_leakoil_data = function(data) {
         item.curOil = parseFloat(data[4].replace('L', '')).toFixed(2);
         item.gpsStatus = data[5] == 'A' ? 1 : 0;
         item.gpsTime = common.format_time(data[7], data[6]);
-        item.lat = parseFloat(data[8]) * 0.01; //纬度
-        item.lng = parseFloat(data[10]) * 0.01; //经度
         item.addTime = now;
-        item.lat = item.lat.toFixed(6);
-        item.lng = item.lng.toFixed(6);
+
+        var lat = parseFloat(data[8]) * 0.01; //纬度
+        var lng = parseFloat(data[10]) * 0.01; //经度
+        item.lat = common.changeLocation(lat.toString());
+        item.lng = common.changeLocation(lng.toString());
 
         gps_data.get_carlist(item.gpsID, function(error, rows) {
             if (error) {

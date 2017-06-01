@@ -54,11 +54,12 @@ function parseParams(data, cb) {
     item.curOil = parseFloat(data[2].replace('L', '')).toFixed(2);
     item.gpsStatus = data[3] == 'A' ? 1 : 0;
     item.gpsTime = common.format_time(data[5], data[4]);
-    item.lat = parseFloat(data[6]) * 0.01; //纬度
-    item.lng = parseFloat(data[8]) * 0.01; //经度
     item.addTime = now;
-    item.lat = item.lat.toFixed(6);
-    item.lng = item.lng.toFixed(6);
+
+    var lat = parseFloat(data[6]) * 0.01; //纬度
+    var lng = parseFloat(data[8]) * 0.01; //经度
+    item.lat = common.changeLocation(lat.toString());
+    item.lng = common.changeLocation(lng.toString());
 
     return cb(null, item);
 }
