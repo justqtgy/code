@@ -98,7 +98,7 @@ gps_data.get_carlist = function(gprsid, callback) {
 
 };
 
-gps_data.get_driver_vhc = function(vid) {
+gps_data.get_driver_vhc = function(vid, callback) {
     var sqlText = "select * from gserver_data.dbo.driver_vhc with(nolock) where VehicleID='" + vid + "'";
     db.execSQL(sqlText, function(err, result) {
         if (err) {
