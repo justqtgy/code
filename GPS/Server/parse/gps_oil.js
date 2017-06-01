@@ -46,7 +46,7 @@ module.exports.add_realoil_data = async function(data) {
 module.exports.add_realoil_data = function(data) {
     var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
     var item = {};
-    if (data[0].indexOf('*DFTD_OIL') >= 0 && data.length >= 5) {
+    if (data[0].indexOf('*DFTD_OIL') >= 0 && data.length >= 10) {
         item.gpsID = data[1];
         item.oilStatus = data[2] == 'A' ? 1 : 0;
         item.curOil = parseFloat(data[3].replace('L', '')).toFixed(2);
@@ -129,7 +129,7 @@ module.exports.add_addoil_data = async function(data) {
 module.exports.add_addoil_data = function(data) {
     var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
     var item = {};
-    if (data[0].indexOf('*DFTD_ADD_OIL') >= 0 && data.length >= 5) {
+    if (data[0].indexOf('*DFTD_ADD_OIL') >= 0 && data.length >= 11) {
         item.gpsID = data[1];
         item.addOil = parseFloat(data[2].replace('L', '')).toFixed(2);
         item.preOil = parseFloat(data[3].replace('L', '')).toFixed(2);
@@ -212,7 +212,7 @@ module.exports.add_addoil_data = function(data) {
 module.exports.add_leakoil_data = function(data) {
     var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
     var item = {};
-    if (data[0].indexOf('*DFTD_ADD_LEAK_OIL') >= 0 && data.length >= 5) {
+    if (data[0].indexOf('*DFTD_ADD_LEAK_OIL') >= 0 && data.length >= 11) {
         item.gpsID = data[1];
         item.addOil = parseFloat(data[2].replace('L', '')).toFixed(2);
         item.preOil = parseFloat(data[3].replace('L', '')).toFixed(2);
