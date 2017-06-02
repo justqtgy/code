@@ -20,3 +20,47 @@
 [2017-06-02 12:56:53.960] [INFO] dateFileLog - Result =  [ { ID: 1023 } ]
 [2017-06-02 12:56:54.009] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
 [2017-06-02 12:56:54.868] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-02 18:29:58.775] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,2000000578,A,226.3L,A,102802,020617,2216.7796,N,11220.1631,E#
+[2017-06-02 18:29:59.705] [INFO] dateFileLog - Result =  [ { ID: 87173 } ]
+[2017-06-02 18:29:59.756] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 18:29:59.836] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 18:29:59.837] [INFO] dateFileLog - Tip = 距离太短不更新坐标：2000000578, 8914248, 粤BCG215, 0
+[2017-06-02 18:30:00.080] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 18:41:22.707] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_START_A,3000000219,0.0L,A,103749,020617,2239.5837,N,11404.4342,E#
+[2017-06-02 18:41:25.931] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 18:41:25.942] [INFO] dateFileLog - Result =  [ { ID: 1068 } ]
+[2017-06-02 18:41:26.779] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-02 18:43:09.398] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_START_A,3000000219,0.0L,A,103749,020617,2239.5837,N,11404.4342,E#
+[2017-06-02 18:43:09.495] [INFO] dateFileLog - Result =  [ { ID: 1072 } ]
+[2017-06-02 18:43:09.547] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 18:43:10.411] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-02 18:59:12.676] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_START_A,3000000219,0.0L,A,103749,020617,2239.5837,N,11404.4342,E#
+[2017-06-02 18:59:12.877] [INFO] dateFileLog - Result =  [ { ID: 1103 } ]
+[2017-06-02 18:59:12.959] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 18:59:13.684] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-02 19:01:40.932] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_OIL,3000000219,A,0.0L,A,103820,020617,2239.5794,N,11404.4282,E#
+[2017-06-02 19:01:41.018] [INFO] dateFileLog - Result =  [ { ID: 87292 } ]
+[2017-06-02 19:01:41.049] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:01:41.098] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:01:41.100] [INFO] dateFileLog - Tip = 距离太短不更新坐标：3000000219, 9613088, 3000000219, 144.78239843490056
+[2017-06-02 19:01:41.196] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:05:02.003] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *HQ,3000000219,V1,103923,V,2239.5780,N,11404.4260,E,0000,185,020617,FFFFFBFF#,T0.0#
+[2017-06-02 19:05:02.505] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:05:02.523] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:05:02.606] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:05:02.612] [INFO] dateFileLog - Result =  [ returnValue: 682074 ]
+[2017-06-02 19:08:20.301] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = var lat = parseFloat(data[6]) * 0.01; //纬度
+[2017-06-02 19:08:20.307] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = var lng = parseFloat(data[8]) * 0.01; //经度
+[2017-06-02 19:08:20.317] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = item.lat = common.changeLocation(lat.toString());
+[2017-06-02 19:08:21.856] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = item.lng = common.changeLocation(lng.toString());
+[2017-06-02 19:08:35.519] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *HQ,3000000219,V1,103923,V,2239.5780,N,11404.4260,E,0000,185,020617,FFFFFBFF#,T0.0#
+[2017-06-02 19:08:35.782] [INFO] dateFileLog - Result =  [ returnValue: 682075 ]
+[2017-06-02 19:08:35.802] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:08:35.821] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:08:35.823] [INFO] dateFileLog - Tip = 距离太短不更新坐标：3000000219, 9613088, 3000000219, 149.024904143685
+[2017-06-02 19:08:35.919] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:09:06.175] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *HQ,3000000219,V1,103923,V,2239.5780,N,11404.4260,E,0000,185,020617,FFFFFBFF#,T0.0#
+[2017-06-02 19:09:06.300] [INFO] dateFileLog - Result =  [ returnValue: 682076 ]
+[2017-06-02 19:09:06.323] [INFO] dateFileLog - Result =  [ { ID: 104 } ]
+[2017-06-02 19:09:06.340] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 19:09:06.410] [INFO] dateFileLog - Result =  [ { ret: 1 } ]

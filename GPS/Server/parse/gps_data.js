@@ -55,8 +55,8 @@ module.exports.add_data_tianhe = function(data) {
         item.version = data[2];
         item.gpsTime = common.format_time(data[11], data[3]);
         item.location = data[4];
-        item.lat = parseFloat(data[5]) * 0.01; //纬度
-        item.lng = parseFloat(data[7]) * 0.01; //经度 
+        // item.lat = parseFloat(data[5]) * 0.01; //纬度
+        // item.lng = parseFloat(data[7]) * 0.01; //经度 
         item.speed = data[9];
         item.direct = data[10];
         item.status = data[12].replace('#', '');
@@ -68,8 +68,11 @@ module.exports.add_data_tianhe = function(data) {
         item.temp4 = 0;
         item.oil1 = 0;
         item.oil2 = 0;
-        item.lat = item.lat.toFixed(6);
-        item.lng = item.lng.toFixed(6);
+
+        var lat = parseFloat(data[5]) * 0.01; //纬度
+        var lng = parseFloat(data[7]) * 0.01; //经度
+        item.lat = common.changeLocation(lat.toString());
+        item.lng = common.changeLocation(lng.toString());
 
         gps_data.get_carlist(item.gpsID, function(error, rows) {
             if (error) {

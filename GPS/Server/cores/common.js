@@ -39,7 +39,11 @@ common.format_time = function(d, t) {
 //     var point = du + '.' + fen + miao;
 //     return Number(point).toFixed(6);
 // };
-
+/**
+ * double t = ddmm.mmmmm（纬度原始数据）
+int  a = (int)(t/100); // 纬度的整数部分
+double b = (t - a*100)/60.0;		//纬度的小数部分
+ */
 common.changeLocation = function(value) {
     var temp = value.toString();
     var arr = temp.split('.');
