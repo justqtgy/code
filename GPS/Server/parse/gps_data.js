@@ -77,7 +77,7 @@ module.exports.add_data_tianhe = function(data) {
             }
 
             if (rows.length === 0) {
-                logger.error('获取车辆信息失败：该车不存在');
+                logger.error('获取车辆信息失败：该车不存在', item.gpsID);
                 return;
             }
 

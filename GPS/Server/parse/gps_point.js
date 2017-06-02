@@ -71,7 +71,7 @@ function getGPSInfo(args, cb) {
         }
 
         if (rows.length === 0) {
-            return cb('获取车辆信息失败：该车不存在');
+            return cb('获取车辆信息失败：该车不存在' + args.gpsID);
         }
 
         args.vehicleID = rows[0].VehicleID;

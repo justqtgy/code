@@ -105,7 +105,7 @@ module.exports.add_alarm_data = function(data) {
 
             var rows = result;
             if (rows.length === 0) {
-                logger.error('获取车辆信息失败：该车不存在');
+                logger.error('获取车辆信息失败：该车不存在', item.gpsID);
                 return;
             }
 
