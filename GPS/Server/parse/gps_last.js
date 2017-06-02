@@ -41,7 +41,8 @@ function getLastInfo(args, cb) {
             args.lng0 = result[0].Lng;
             args.lat0 = result[0].Lat;
             //args.curOil = result[0].CurOil;
-            args.distance = map_helper.getDistance(args.lng0, args.lat0, args.lng, args.lat);
+            var distance = map_helper.getDistance(args.lng0, args.lat0, args.lng, args.lat);
+            args.range = (Number(result[0].OverRange) + Number(distance)).toFixed(4);
         }
         cb(null, args);
     });

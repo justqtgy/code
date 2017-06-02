@@ -30,7 +30,7 @@ gps_traffic.add_record = function(args, callback) {
         "      SELECT '%s' as GPSID, '%s' AS VehicleID, '%s' as VehicleNo, 0 as EndDistance, 0 as EndOil,  1 as Rid" +
         "    ) T ORDER BY Rid " +
         "SELECT @@IDENTITY as ID;";
-    sql = util.format(sql, args.createDate, args.distance, args.curOil, args.addOil, args.traffic, args.createDate, args.gpsID,
+    sql = util.format(sql, args.createDate, args.range, args.curOil, args.addOil, args.traffic, args.createDate, args.gpsID,
         args.gpsID, args.vehicleID, args.vehicleNo);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
@@ -44,8 +44,8 @@ gps_traffic.add_record = function(args, callback) {
 
 gps_traffic.update_record = function(args, callback) {
     var sql = "update GPS_Traffic set UpdateTime = GETDATE() ";
-    if (args.distance > 1000) {
-        sql += " ,EndDistance = EndDistance + " + args.distance + ", Traffic = Traffic + '" + args.traffic + "' ";
+    if (args.range >= 1000) {
+        sql += " ,EndDistance = EndDistance + " + args.range + ", Traffic = Traffic + '" + args.traffic + "' ";
     }
     if (args.curOil) {
         sql += " ,EndOil = " + args.curOil;

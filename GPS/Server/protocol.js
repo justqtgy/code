@@ -28,7 +28,7 @@ module.exports.parse = function(socket, data) {
         if (list[0].indexOf('*DFTD_ADD_OIL') >= 0) {
             gps_oil.add_addoil_data(list);
 
-            REPLY_MSG = '*DFTD_ADD_OIL_OK#'
+            REPLY_MSG = '*DFTD_ADD_OIL_OK#';
             setTimeout(function() {
                 socket.write(REPLY_MSG);
                 logger.info('REPLY = ', REPLY_MSG);
@@ -41,7 +41,7 @@ module.exports.parse = function(socket, data) {
             setTimeout(function() {
                 socket.write(REPLY_MSG);
                 logger.info('REPLY = ', REPLY_MSG);
-            }, 1000)
+            }, 1000);
         }
         if (list[0].indexOf('*DFTD_URGENT_ADD_OIL') >= 0) {
             gps_oil.add_urgentoil_data(list);
@@ -50,10 +50,16 @@ module.exports.parse = function(socket, data) {
             gps_point.add_startpoint_data(list);
 
             REPLY_MSG = '*DFTD_START_A_OK#';
-            setTimeout(function() {
+            var i = 0;
+            var int = setInterval(function() {
+                i++;
                 socket.write(REPLY_MSG);
                 logger.info('REPLY = ', REPLY_MSG);
-            }, 1000)
+                if (i >= 100) {
+                    i = 0;
+                    clearInterval(int);
+                }
+            }, 1000);
         }
         if (list[0].indexOf('*DFTD_END_B') >= 0) {
             gps_point.add_endpoint_data(list);

@@ -16,11 +16,11 @@ var client = net.connect({ server: server, port: serverPort }, function() {
     // send data
     //console.log('send data to server');
     //client.write('greeting from client socket');
-    setInterval(function() {
-        // send data
-        //console.log('send data to server');
-        client.write('*DFTD_LEAK_OIL,311111111219,-115.5L,131.0L,15.5L,A,094506,240116,2239.5530,N,11404.4116,E# ');
-    }, 100);
+    // setInterval(function() {
+    //     // send data
+    //     //console.log('send data to server');
+    //     client.write('*DFTD_LEAK_OIL,311111111219,-115.5L,131.0L,15.5L,A,094506,240116,2239.5530,N,11404.4116,E# ');
+    // }, 100);
 
     rl.prompt();
 });

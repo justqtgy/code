@@ -21,7 +21,7 @@ gps_last.get_info = function(args, callback) {
 };
 
 gps_last.add_record = function(args, callback) {
-    var sql = "insert into GPS_LastInfo values('%s', '%s', '%s', '%s', '%s',0, 0, GETDATE());SELECT @@IDENTITY as ID;";
+    var sql = "insert into GPS_LastInfo values('%s', '%s', '%s', '%s', '%s',0, 0, 0, GETDATE());SELECT @@IDENTITY as ID;";
     sql = util.format(sql, args.gpsID, args.vehicleID, args.vehicleNo, args.lng, args.lat);
     console.log(sql);
     db.execSQL(sql, function(err, result) {
@@ -34,10 +34,13 @@ gps_last.add_record = function(args, callback) {
 };
 
 gps_last.update_record = function(args, callback) {
-    var sql = "update GPS_LastInfo set UpdateTime = GETDATE() ";
-    if (args.distance > 1000) {
-        sql += ", Lng = '" + args.lng + "', Lat = '" + args.lat + "' ";
+    var sql = "update GPS_LastInfo set UpdateTime = GETDATE(), Lng = '" + args.lng + "', Lat = '" + args.lat + "' ";
+    if (args.range >= 1000) {
+        sql += ", OverRange = 0 ";
+    } else {
+        sql += ", OverRange = " + args.range;
     }
+
     if (args.curOil) {
         sql += ", CurOil = " + args.curOil;
     }
