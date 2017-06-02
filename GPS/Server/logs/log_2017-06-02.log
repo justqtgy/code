@@ -1,0 +1,10 @@
+[2017-06-02 09:59:44.941] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_LEAK_OIL,2000000578,-12.9L,54.5L,41.6L,A,015500,020617,2143.7805,N,11101.4644,E#
+[2017-06-02 09:59:44.949] [INFO] dateFileLog - REPLY =  *DFTD_LEAK_OIL_OK#
+[2017-06-02 09:59:45.902] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 10:01:52.954] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_LEAK_OIL,2000000578,-12.9L,54.5L,41.6L,A,015500,020617,2143.7805,N,11101.4644,E#
+[2017-06-02 10:01:52.957] [INFO] dateFileLog - REPLY =  *DFTD_LEAK_OIL_OK#
+[2017-06-02 10:01:53.265] [INFO] dateFileLog - Result =  [ { ID: 2 } ]
+[2017-06-02 10:01:53.331] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 10:01:53.422] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 10:01:53.423] [INFO] dateFileLog - Tip = 距离太短不更新坐标：2000000578, 8914248, 粤BCG215, 0
+[2017-06-02 10:01:53.586] [INFO] dateFileLog - Result =  [ { ret: 1 } ]

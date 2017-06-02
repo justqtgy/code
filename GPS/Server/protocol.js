@@ -26,31 +26,43 @@ module.exports.parse = function(socket, data) {
             gps_oil.add_realoil_data(list);
         }
         if (list[0].indexOf('*DFTD_ADD_OIL') >= 0) {
-            REPLY_MSG = '*DFTD_ADD_OIL_OK#'
-            socket.write(REPLY_MSG);
-            logger.info('REPLY = ', REPLY_MSG);
             gps_oil.add_addoil_data(list);
+
+            REPLY_MSG = '*DFTD_ADD_OIL_OK#'
+            setTimeout(function() {
+                socket.write(REPLY_MSG);
+                logger.info('REPLY = ', REPLY_MSG);
+            }, 1000)
         }
         if (list[0].indexOf('*DFTD_LEAK_OIL') >= 0) {
-            REPLY_MSG = '*DFTD_LEAK_OIL_OK#';
-            socket.write(REPLY_MSG);
-            logger.info('REPLY = ', REPLY_MSG);
             gps_oil.add_leakoil_data(list);
+
+            REPLY_MSG = '*DFTD_LEAK_OIL_OK#';
+            setTimeout(function() {
+                socket.write(REPLY_MSG);
+                logger.info('REPLY = ', REPLY_MSG);
+            }, 1000)
         }
         if (list[0].indexOf('*DFTD_URGENT_ADD_OIL') >= 0) {
             gps_oil.add_urgentoil_data(list);
         }
         if (list[0].indexOf('*DFTD_START_A') >= 0) {
-            REPLY_MSG = '*DFTD_START_A_OK#';
-            socket.write(REPLY_MSG);
-            logger.info('REPLY = ', REPLY_MSG);
             gps_point.add_startpoint_data(list);
+
+            REPLY_MSG = '*DFTD_START_A_OK#';
+            setTimeout(function() {
+                socket.write(REPLY_MSG);
+                logger.info('REPLY = ', REPLY_MSG);
+            }, 1000)
         }
         if (list[0].indexOf('*DFTD_END_B') >= 0) {
-            REPLY_MSG = '*DFTD_END_B_OK#';
-            socket.write(REPLY_MSG);
-            logger.info('REPLY = ', REPLY_MSG);
             gps_point.add_endpoint_data(list);
+
+            REPLY_MSG = '*DFTD_END_B_OK#';
+            setTimeout(function() {
+                socket.write(REPLY_MSG);
+                logger.info('REPLY = ', REPLY_MSG);
+            }, 1000)
         }
 
         // if (list[0].indexOf('*DFTD_YP') >= 0) {
