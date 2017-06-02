@@ -8,3 +8,15 @@
 [2017-06-02 10:01:53.422] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
 [2017-06-02 10:01:53.423] [INFO] dateFileLog - Tip = 距离太短不更新坐标：2000000578, 8914248, 粤BCG215, 0
 [2017-06-02 10:01:53.586] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 12:54:07.402] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_START_A,2000000576,100.1L,A,094506,240116,2239.5530,N,11404.4116,E#
+[2017-06-02 12:54:07.824] [INFO] dateFileLog - Result =  [ { ID: 1021 } ]
+[2017-06-02 12:54:07.889] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 12:54:08.516] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-02 12:55:47.814] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_START_A,2000000576,100.1L,A,094506,240116,2239.5530,N,11404.4116,E#
+[2017-06-02 12:55:48.045] [INFO] dateFileLog - Result =  [ { ID: 1022 } ]
+[2017-06-02 12:55:48.101] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 12:55:48.904] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-02 12:56:53.777] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_START_A,2000000576,100.1L,A,094506,240116,2239.5530,N,11404.4116,E#
+[2017-06-02 12:56:53.960] [INFO] dateFileLog - Result =  [ { ID: 1023 } ]
+[2017-06-02 12:56:54.009] [INFO] dateFileLog - Result =  [ { ret: 1 } ]
+[2017-06-02 12:56:54.868] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
