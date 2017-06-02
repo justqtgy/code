@@ -175,7 +175,7 @@ module.exports.add_addoil_data = function(data) {
 
 /*
  *漏油协议
- *格式如下：*DFTD_ADD_LEAK_OIL,2000000407,-115.5L,131.0L,15.5L,A,094506,240116,2239.5530,N,11404.4116,E # ,
+ *格式如下：*DFTD_LEAK_OIL,3000000219,-115.5L,131.0L,15.5L,A,094506,240116,2239.5530,N,11404.4116,E # ,
  */
 // module.exports.add_leakoil_data = async function(data) {
 //     var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
