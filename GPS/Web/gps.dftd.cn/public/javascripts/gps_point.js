@@ -41,7 +41,7 @@ function get_list(pageIndex) {
                     "<td><a href='#map-modal' data-toggle=\"modal\"  onclick='showMap(" + item.Lng1 + "," + (item.Lng2 || 0) + "," + item.Lat1 + "," + (item.Lat2 || 0) + ")'>查看</a></td>"
                 ).appendTo($("#grid tbody"));
             });
-            $("#total_distance").html("<i>里程</i>" + totalDistance.toFixed(2));
+            $("#total_distance").html("<i>里程</i>" + Number(totalDistance).toFixed(2));
         }
     });
 }

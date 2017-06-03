@@ -1,0 +1,464 @@
+[2017-06-03 07:49:32.022] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三| 
+[2017-06-03 07:50:00.503] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三|李四|*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 07:50:00.734] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 07:50:00.736] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 07:50:01.642] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 07:50:15.802] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三|李四|*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 07:50:19.151] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 07:50:19.152] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 07:50:20.083] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:02:12.425] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:02:12.498] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:02:12.509] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:02:13.429] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:02:19.004] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:02:19.082] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:02:19.096] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:02:20.014] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:02:30.140] [ERROR] dateFileLog - Error:Error: read ECONNRESET
+[2017-06-03 08:02:30.145] [INFO] dateFileLog - 
+[2017-06-03 08:02:32.511] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:02:32.573] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:02:32.585] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:02:33.516] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:03:00.260] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_START_A,11112000000576,100.1L,A,094506,240116,2239.5530,N,11404.4116,E#
+[2017-06-03 08:03:00.359] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11112000000576
+[2017-06-03 08:03:00.363] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11112000000576
+[2017-06-03 08:03:01.269] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:02.282] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:03.288] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:04.294] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:05.296] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:06.298] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:07.304] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:08.308] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:09.313] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:10.317] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:11.321] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:12.327] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:13.332] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:14.335] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:15.340] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:16.343] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:17.347] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:18.351] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:19.353] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:20.356] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:21.360] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:22.364] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:23.369] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:24.373] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:25.375] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:26.381] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:27.387] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:28.391] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:29.394] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:30.404] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:31.421] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:32.425] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:33.428] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:34.441] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:35.446] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:36.450] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:37.458] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:38.462] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:39.467] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:40.470] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:41.473] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:42.475] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:43.477] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:44.481] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:45.489] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:46.494] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:47.498] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:48.507] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:49.511] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:50.514] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:51.519] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:52.524] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:53.526] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:54.528] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:55.532] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:56.539] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:57.542] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:58.549] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:03:59.552] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:00.554] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:01.559] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:02.564] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:03.567] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:04.572] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:05.577] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:06.583] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:07.588] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:08.592] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:09.595] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:10.600] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:11.604] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:12.608] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:13.615] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:14.621] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:15.624] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:16.630] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:17.650] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:18.655] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:19.661] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:20.672] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:21.674] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:22.678] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:23.684] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:24.688] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:25.696] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:26.698] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:27.709] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:28.713] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:29.719] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:30.721] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:31.725] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:32.730] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:33.738] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:34.742] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:35.746] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:36.752] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:37.756] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:38.759] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:39.761] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:04:40.767] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:07:39.976] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 王五| 
+[2017-06-03 08:08:50.100] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 王五|张三|*DFTD_START_A,11112000000576,100.1L,A,094506,240116,2239.5530,N,11404.4116,E#
+[2017-06-03 08:08:50.154] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11112000000576
+[2017-06-03 08:08:50.173] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11112000000576
+[2017-06-03 08:08:51.102] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:08:52.103] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:08:53.109] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:08:54.112] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:08:55.115] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:08:56.118] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:08:57.121] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:08:58.123] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:08:59.127] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:00.131] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:01.134] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:02.137] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:03.143] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:04.150] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:05.154] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:06.157] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:07.160] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:08.165] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:09.168] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:10.170] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:11.174] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:12.179] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:13.182] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:14.187] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:15.190] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:16.194] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:17.198] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:18.203] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:19.208] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:20.213] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:21.216] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:22.220] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:23.224] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:24.226] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:25.228] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:26.231] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:27.235] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:28.239] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:29.243] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:30.252] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:31.255] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:32.260] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:33.264] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:34.266] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:35.268] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:36.269] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:37.272] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:38.276] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:39.279] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:40.283] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:41.287] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:42.291] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:43.294] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:44.298] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:45.303] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:46.306] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:47.310] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:48.313] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:49.316] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:50.319] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:51.321] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:52.325] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:53.329] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:54.331] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:55.334] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:56.338] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:57.343] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:58.348] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:09:59.352] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:00.354] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:01.361] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:02.091] [ERROR] dateFileLog - Error:Error: read ECONNRESET
+[2017-06-03 08:10:02.095] [INFO] dateFileLog - 
+[2017-06-03 08:10:02.366] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:02.369] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:03.372] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:03.374] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:04.375] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:04.378] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:05.381] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:05.384] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:06.386] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:06.389] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:07.391] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:07.393] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:08.394] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:08.397] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:09.398] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:09.401] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:10.402] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:10.404] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:11.405] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:11.407] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:12.408] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:12.410] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:13.412] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:13.414] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:14.415] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:14.420] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:15.426] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:15.428] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:16.431] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:16.435] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:17.437] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:17.439] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:18.440] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:18.443] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:19.444] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:19.446] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:20.448] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:20.449] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:21.451] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:21.454] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:22.456] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:22.468] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:23.471] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:23.474] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:24.475] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:24.478] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:25.479] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:25.482] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:26.484] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:26.487] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:27.488] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:27.490] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:28.492] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:28.495] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:29.500] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:29.503] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:10:30.507] [ERROR] dateFileLog - Error:Error: This socket is closed
+[2017-06-03 08:10:30.522] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:25.274] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三| 
+[2017-06-03 08:11:31.453] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三|李四|*DFTD_START_A,11112000000576,100.1L,A,094506,240116,2239.5530,N,11404.4116,E#
+[2017-06-03 08:11:31.517] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11112000000576
+[2017-06-03 08:11:31.524] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11112000000576
+[2017-06-03 08:11:32.459] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:33.463] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:34.466] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:35.469] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:36.472] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:37.475] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:38.478] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:39.481] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:40.484] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:41.488] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:42.494] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:43.499] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:44.503] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:45.510] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:46.514] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:47.520] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:48.524] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:49.529] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:50.534] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:51.538] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:52.545] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:53.548] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:54.554] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:55.558] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:56.561] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:57.563] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:58.565] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:11:59.572] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:00.575] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:01.578] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:02.583] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:03.587] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:04.590] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:05.301] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:12:05.379] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:12:05.395] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:12:05.593] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:06.331] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:12:06.598] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:07.603] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:08.607] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:09.612] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:10.617] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:11.620] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:12.625] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:13.629] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:14.634] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:15.638] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:15.730] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:12:15.739] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:12:15.800] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:12:15.823] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:12:15.826] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:12:15.827] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:12:16.644] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:16.738] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:12:16.742] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:12:17.648] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:18.654] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:19.658] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:20.665] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:21.671] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:22.674] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:23.680] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:24.683] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:25.694] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:26.698] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:27.702] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:28.709] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:29.713] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:30.716] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:31.718] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:32.721] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:33.726] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:34.731] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:35.736] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:36.742] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:37.747] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:38.750] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:39.754] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:40.757] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:41.761] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:42.766] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:43.775] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:44.780] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:45.784] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:46.787] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:47.789] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:48.793] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:49.799] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:50.805] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:51.810] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:52.815] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:53.821] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:54.828] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:55.839] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:56.847] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:57.850] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:58.855] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:12:59.524] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. 
+[2017-06-03 08:12:59.603] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. 
+[2017-06-03 08:12:59.862] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:00.868] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:01.870] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:02.874] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:03.879] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:04.881] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:05.886] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:06.891] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:07.897] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:08.904] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:09.906] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:10.147] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = ��ݭݗ�UU�UU�1pv�	E@f"9�S �@DA. 
+[2017-06-03 08:13:10.912] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:11.916] [INFO] dateFileLog - REPLY =  *DFTD_START_A_OK#
+[2017-06-03 08:13:16.812] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:13:16.880] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:13:16.892] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:13:17.822] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:13:27.105] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:13:27.112] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:13:27.166] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:13:27.176] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:13:27.186] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:13:27.197] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:13:28.111] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:13:28.115] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:13:44.507] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+
+[2017-06-03 08:13:44.512] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+
+[2017-06-03 08:13:44.561] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:13:44.571] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:13:44.572] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:13:44.574] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:13:45.512] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:13:45.516] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:14:17.033] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:14:17.151] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:14:17.168] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:14:18.040] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:14:21.586] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:14:21.644] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:14:21.646] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:14:22.593] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:14:24.710] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:14:24.769] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:14:24.774] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:14:25.718] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:14:32.868] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三|李四|*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:14:32.930] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:14:32.933] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:14:33.874] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:14:36.127] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三|李四|*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:14:36.192] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:14:36.210] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:14:37.135] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:28:07.920] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:28:19.039] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:28:19.107] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:28:19.110] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:28:19.112] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:28:19.133] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:28:20.038] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:28:20.044] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:28:45.246] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三|李四|*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:28:45.311] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:28:45.314] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:28:46.252] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:28:48.502] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三|李四|*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:28:48.565] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:28:48.581] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:28:49.509] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:28:54.055] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:28:54.118] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:28:54.127] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:28:55.064] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:28:56.609] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:28:56.670] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:28:56.675] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:28:57.616] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 08:29:01.355] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = *DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 08:29:01.416] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 08:29:01.433] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 08:29:02.362] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 16:26:24.010] [INFO] dateFileLog - [::ffff:127.0.0.1] Date = 张三|李四|*DFTD_ADD_OIL,11111111111,115.5L,15.5L,131.0L,A,094506,240116,2239.5530,N,11404.4116,E #
+[2017-06-03 16:26:24.116] [ERROR] dateFileLog - 获取车辆信息失败：该车不存在 11111111111
+[2017-06-03 16:26:24.117] [ERROR] dateFileLog - Error =  获取车辆信息失败：该车不存在11111111111
+[2017-06-03 16:26:25.024] [INFO] dateFileLog - REPLY =  *DFTD_ADD_OIL_OK#
+[2017-06-03 16:26:26.980] [ERROR] dateFileLog - Error:Error: read ECONNRESET
+[2017-06-03 16:26:26.983] [INFO] dateFileLog - 

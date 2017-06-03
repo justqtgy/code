@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body,
+        html,
+        #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=MYRG9RF3I1NXCGCwFX8NZ4h3"></script>
+    <title>行驶轨迹</title>
+</head>
+
+<body>
+    <div id="allmap"></div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    //经度
+    var lng1 = getUrlParam('lng1');
+    var lng2 = getUrlParam('lng2');
+
+    //纬度
+    var lat1 = getUrlParam('lat1');
+    var lat2 = getUrlParam('lat2');
+
+    if (lng2 != 0 && lat2 != 0) {
+        showDriving();
+    } else {
+        showLocation();
+    }
+
+    function showLocation() {
+        map.centerAndZoom(new BMap.Point(lng1, lat1), 13);
+        map.clearOverlays();
+        var new_point = new BMap.Point(lng1, lat1);
+        var marker = new BMap.Marker(new_point); // 创建标注
+        map.addOverlay(marker); // 将标注添加到地图中
+
+
+    }
+
+    function showDriving() {
+        map.centerAndZoom(new BMap.Point(lng1, lat1), 11);
+        map.enableScrollWheelZoom(true);
+
+        var p1 = new BMap.Point(lng1, lat1);
+        var p2 = new BMap.Point(lng2, lat2);
+
+        var driving = new BMap.DrivingRoute(map, {
+            renderOptions: {
+                map: map,
+                autoViewport: true
+            }
+        });
+        driving.search(p1, p2);
+    }
+
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+</script>
