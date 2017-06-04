@@ -17,7 +17,10 @@ var app = new Vue({
     },
     methods: {
         loadPage: function() {
-            $(".form_datetime").datepicker({ format: 'yyyy-mm-dd' });
+            $(".date-picker").datepicker({
+                autoclose: 1,
+                todayHighlight: 1
+            });
         },
         init: function() {
             var that = this;

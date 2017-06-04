@@ -1,4 +1,8 @@
+
 <%- include ./shared/_header %>
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="../assets/global/plugins/bootstrap-datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
 <%- include ./shared/_top %>
 <%- include ./shared/_sidebar %>        
 
@@ -17,10 +21,9 @@
                     <h3 class="box-title">查询</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                    <form  id='search'>         
-                        <label class="control-label" for="txtBeginTime">开始时间：</label><input type="text" name="begintime" class="form_datetime" value="<%=start_date%>" />
-                        <label class="control-label" for="txtEndTime">结束时间：</label><input type="text" name="endtime" class="form_datetime" value="<%=end_date%>" />
-                            
+                    <form  id='search'>                       
+                        <label class="control-label" for="txtBeginTime">开始时间：</label><input type="text" name="begintime"  class="date-picker"  data-date-format="yyyy-mm-dd"/>
+                        <label class="control-label" for="txtEndTime">结束时间：</label><input type="text" name="endtime"  class="date-picker"  data-date-format="yyyy-mm-dd"/>
                         <button type="button" id="btnSearch" class="btn btn-success"> <i class="fa fa-search"></i>查询 </button>
                     </form>
                 </div><!-- /.box-body -->
@@ -77,11 +80,13 @@
     
 <%- include ./shared/_bottom %>
 <%- include ./shared/_scripts %>
-	<script src="/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-	<script src="/plugins/pagination/bootstrap-paginator.js"></script>	
-    <script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
-	<script src="/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
-    <script src="/javascripts/include/date-utils.min.js"></script>
+	<script src="../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/bootstrap-paginator/bootstrap-paginator.js"></script>	    
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js" type="text/javascript"></script>    
+    <!-- END PAGE LEVEL PLUGINS -->
     <script src="/javascripts/include/query.js"></script>
     <script src="/javascripts/gps_alarm.js"></script>
 <%- include ./shared/_footer %>
