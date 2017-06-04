@@ -1,54 +1,49 @@
 /**
  * 记录偷油漏油报警信息：typeid{1：发送给司机，2：发送给服务区}
  */
-
+var util = require('util');
 var db = require('../models/mssql_helper');
 
 function gps_alarm() {
 
 }
-/**
- * 写告警记录到表gps_alarm
- * data:
- */
-// gps_alarm.add_alarm = function(data) {
-//     return new Promise(function(resolve, reject) {
-//         var sqlText = "INSERT INTO GPS_Alarm (GPSID, VehicleID, VehicleNo, Mobile,  AddTime, TypeID) " +
-//             "VALUES('" + data.gpsID + "'," +
-//             "'" + data.vehicleID + "'," +
-//             "'" + data.vehicleNo + "'," +
-//             "'" + data.mobile + "'," +
-//             "'" + data.addTime + "'," +
-//             "'" + data.typeID + "'" +
-//             ");SELECT @@IDENTITY as ID;";
-//         console.log(sqlText)
-//         db.execSQL(sqlText, function(err, result) {
-//             if (err) {
-//                 reject(err);
-//             } else {
-//                 resolve(result);
-//             }
-//         });
-//     });
-// };
 
-gps_alarm.add_alarm = function(data, callback) {
-    var sqlText = "INSERT INTO GPS_Alarm (GPSID, VehicleID, VehicleNo, Mobile,  AddTime, TypeID) " +
-        "VALUES('" + data.gpsID + "'," +
-        "'" + data.vehicleID + "'," +
-        "'" + data.vehicleNo + "'," +
-        "'" + data.mobile + "'," +
-        "'" + data.addTime + "'," +
-        "'" + data.typeID + "'" +
-        ");SELECT @@IDENTITY as ID;";
-    console.log(sqlText)
-    db.execSQL(sqlText, function(err, result) {
+module.exports = gps_alarm;
+
+
+gps_alarm.get_count = function(params, callback) {
+    console.log(params);
+    var sql = " select count(*) as total from gps_alarm where addtime >='%s' and addtime<dateadd(day, 1, '%s')";
+    sql = util.format(sql, params.begintime, params.endtime);
+    db.execSQL(sql, function(err, result) {
         if (err) {
-            return callback(err, '');
+            return cb(err);
         }
 
-        callback(err, result);
+        var total = 0;
+        if (result.length > 0) {
+            total = result[0].total;
+        }
+
+        callback(err, total);
     });
 };
 
-module.exports = gps_alarm;
+gps_alarm.get_list = function(params, callback) {
+    var pageIndex = parseInt(params.pageIndex);
+    var pageSize = parseInt(params.pageSize);
+    var start_id = (pageIndex - 1) * pageSize + 1;
+    var end_id = pageIndex * pageSize;
+
+    var sql = ";with t as (select *, row_number() over(order by addtime desc) as rid  from gps_alarm  where addtime >='%s' and addtime<dateadd(day, 1, '%s'))  " +
+        "select * from t where rid between %s and %s";
+    sql = util.format(sql, params.begintime, params.endtime, start_id, end_id);
+    console.log(sql)
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            return cb(err);
+        }
+
+        callback(err, rows);
+    });
+}

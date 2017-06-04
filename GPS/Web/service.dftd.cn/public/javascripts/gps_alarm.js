@@ -23,6 +23,7 @@ var app = new Vue({
             });
         },
         init: function() {
+            //$(document).ajaxStop($.unblockUI);
             var that = this;
             that.loadPage();
             $("#btnSearch").click(function() {

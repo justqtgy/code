@@ -1,6 +1,6 @@
 @echo off
 
 cd %cd%
-SET DEBUG=gps.dftd.cn:* & npm start
+SET DEBUG=service.dftd.cn:* & npm start
 
 cmd

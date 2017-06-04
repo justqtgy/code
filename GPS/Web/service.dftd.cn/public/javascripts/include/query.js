@@ -31,8 +31,8 @@ Query.prototype = {
             type: self.type,
             dataType: "json",
             data: data,
-            beforeSend: function() { $("#loading").show(); },
-            complete: function() { $("#loading").hide(); },
+            beforeSend: function() { App.blockUI({ boxed: true, message: '正在处理，请稍等...' }); },
+            complete: function() { App.unblockUI(); },
             success: function(json) {
                 cb(json);
             }

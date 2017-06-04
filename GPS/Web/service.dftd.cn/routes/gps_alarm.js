@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var date = require('date-utils');
-//var gps_alarm = require('../models/gps_alarm');
+var gps_alarm = require('../models/gps_alarm');
 
 /* GET gps_alarm home page. */
 router.get('/', function(req, res, next) {

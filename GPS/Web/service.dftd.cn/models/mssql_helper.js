@@ -1,5 +1,5 @@
 var sql = require('mssql');
-var config = require('../config/settings').dbconfig;
+var config = require('./../config/settings').dbconfig;
 
 module.exports.execSQL = function(sqlText, cb) {
     var connection = new sql.Connection(config, function(err) {

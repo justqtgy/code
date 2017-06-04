@@ -110,7 +110,7 @@ module.exports.add_alarm_data = function(data) {
             }
 
             item.vehicleID = rows[0].VehicleID;
-            item.vehicleNo = iconv.encode(rows[0].VehicleNo, 'gbk').toString('binary'); //rows[0].VehicleNo;
+            item.vehicleNo = rows[0].VehicleNo;
 
             //发送短信
             send_alarm_msg(item);
