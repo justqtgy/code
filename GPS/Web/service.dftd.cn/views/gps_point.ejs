@@ -11,7 +11,7 @@
         <div class="page-content">
             <!-- BEGIN PAGE HEADER-->
             <h3 class="page-title">
-                短信告警 <small>漏油告警</small>
+                区间轨迹 <small>查看起点到终点的轨迹</small>
             </h3>
                 
             <!-- END PAGE HEADER-->
@@ -21,7 +21,9 @@
                     <h3 class="box-title">查询</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                    <form  id='search'>                       
+                    <form  id='search'>   
+                        <label class="control-label" for="selCar">车辆选择：</label>
+                        <select class="multiselect display-none" multiple="multiple" ></select>                        
                         <label class="control-label" for="txtBeginTime">开始时间：</label>
                         <input type="text" name="begintime"  class="date-picker" value="<%= start_date %>"  data-date-format="yyyy-mm-dd"/>
                         <label class="control-label" for="txtEndTime">结束时间：</label>
@@ -90,5 +92,6 @@
     <!-- END PAGE LEVEL PLUGINS -->
     <script src="/javascripts/include/date-utils.min.js"></script>
     <script src="/javascripts/include/query.js"></script>
-    <script src="/javascripts/gps_alarm.js"></script>
+    <script src="/javascripts/gps_point.js"></script>
+<%- include ./control/_group %> 
 <%- include ./shared/_footer %>

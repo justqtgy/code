@@ -14,7 +14,8 @@ var get_count = function(req, res, next) {
     var args = req.query;
     gps_alarm.get_count(args, function(err, result) {
         if (err) {
-            throw err;
+            log.error('Error = ', err);
+            return next();
         }
         req.total = result;
         next();
@@ -25,7 +26,8 @@ router.get('/list', [get_count], function(req, res, next) {
     var args = req.query;
     gps_alarm.get_list(args, function(err, rows) {
         if (err) {
-            throw err;
+            log.error('Error = ', err);
+            return;
         }
         res.send({ ok: 1, total: req.total, rows: rows });
     });

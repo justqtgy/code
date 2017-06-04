@@ -18,4 +18,4 @@ gps_last.get_list = function(params, callback) {
 
         callback(err, rows);
     });
-}
+};

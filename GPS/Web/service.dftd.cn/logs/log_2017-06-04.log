@@ -1,0 +1,540 @@
+[2017-06-04 16:48:42.212] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near '2017'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near \'2017\'.',
+  code: 'EREQUEST',
+  number: 102,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near '2017'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 17:40:42.199] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near the keyword \'select\'.',
+  code: 'EREQUEST',
+  number: 156,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 17:47:05.081] [ERROR] dateFileLog - Error =  { RequestError: Invalid column name 'undefined'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Invalid column name \'undefined\'.',
+  code: 'EREQUEST',
+  number: 207,
+  lineNumber: 1,
+  state: 1,
+  class: 16,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Invalid column name 'undefined'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 17:47:05.146] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near the keyword \'select\'.',
+  code: 'EREQUEST',
+  number: 156,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 17:49:05.090] [ERROR] dateFileLog - Error =  { RequestError: Invalid column name 'undefined'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Invalid column name \'undefined\'.',
+  code: 'EREQUEST',
+  number: 207,
+  lineNumber: 1,
+  state: 1,
+  class: 16,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Invalid column name 'undefined'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 17:49:05.160] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near the keyword \'select\'.',
+  code: 'EREQUEST',
+  number: 156,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 17:51:54.800] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near the keyword \'select\'.',
+  code: 'EREQUEST',
+  number: 156,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 17:52:05.058] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near the keyword \'select\'.',
+  code: 'EREQUEST',
+  number: 156,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near the keyword 'select'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 17:53:00.197] [ERROR] dateFileLog - Error =  { RequestError: Invalid column name 'addtime'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Invalid column name \'addtime\'.',
+  code: 'EREQUEST',
+  number: 207,
+  lineNumber: 1,
+  state: 1,
+  class: 16,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Invalid column name 'addtime'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 21:28:52.445] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near 's'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near \'s\'.',
+  code: 'EREQUEST',
+  number: 102,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near 's'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 21:28:52.511] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near 's'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near \'s\'.',
+  code: 'EREQUEST',
+  number: 102,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near 's'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 21:31:04.242] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near 's'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near \'s\'.',
+  code: 'EREQUEST',
+  number: 102,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near 's'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 21:31:04.307] [ERROR] dateFileLog - Error =  { RequestError: Incorrect syntax near 's'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Incorrect syntax near \'s\'.',
+  code: 'EREQUEST',
+  number: 102,
+  lineNumber: 1,
+  state: 1,
+  class: 15,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: [] }
+RequestError: Incorrect syntax near 's'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 21:32:11.488] [ERROR] dateFileLog - Error =  { RequestError: Invalid column name 'addtime'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Invalid column name \'addtime\'.',
+  code: 'EREQUEST',
+  number: 207,
+  lineNumber: 1,
+  state: 1,
+  class: 16,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: 
+   [ { RequestError: Invalid column name 'addtime'.
+         at E:\code\node_modules\mssql\lib\tedious.js:739:17
+         at emitOne (events.js:96:13)
+         at Connection.emit (events.js:191:7)
+         at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+         at emitOne (events.js:96:13)
+         at Parser.emit (events.js:191:7)
+         at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+         at emitOne (events.js:96:13)
+         at Parser.emit (events.js:191:7)
+         at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+       name: 'RequestError',
+       message: 'Invalid column name \'addtime\'.',
+       code: 'EREQUEST',
+       number: 207,
+       lineNumber: 1,
+       state: 1,
+       class: 16,
+       serverName: 'iZ948wnf8ufZ',
+       procName: '' } ] }
+RequestError: Invalid column name 'addtime'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+[2017-06-04 21:32:11.563] [ERROR] dateFileLog - Error =  { RequestError: Invalid column name 'addtime'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+  name: 'RequestError',
+  message: 'Invalid column name \'addtime\'.',
+  code: 'EREQUEST',
+  number: 207,
+  lineNumber: 1,
+  state: 1,
+  class: 16,
+  serverName: 'iZ948wnf8ufZ',
+  procName: '',
+  precedingErrors: 
+   [ { RequestError: Invalid column name 'addtime'.
+         at E:\code\node_modules\mssql\lib\tedious.js:739:17
+         at emitOne (events.js:96:13)
+         at Connection.emit (events.js:191:7)
+         at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+         at emitOne (events.js:96:13)
+         at Parser.emit (events.js:191:7)
+         at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+         at emitOne (events.js:96:13)
+         at Parser.emit (events.js:191:7)
+         at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+       name: 'RequestError',
+       message: 'Invalid column name \'addtime\'.',
+       code: 'EREQUEST',
+       number: 207,
+       lineNumber: 1,
+       state: 1,
+       class: 16,
+       serverName: 'iZ948wnf8ufZ',
+       procName: '' },
+     { RequestError: Invalid column name 'addtime'.
+         at E:\code\node_modules\mssql\lib\tedious.js:739:17
+         at emitOne (events.js:96:13)
+         at Connection.emit (events.js:191:7)
+         at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+         at emitOne (events.js:96:13)
+         at Parser.emit (events.js:191:7)
+         at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+         at emitOne (events.js:96:13)
+         at Parser.emit (events.js:191:7)
+         at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
+       name: 'RequestError',
+       message: 'Invalid column name \'addtime\'.',
+       code: 'EREQUEST',
+       number: 207,
+       lineNumber: 1,
+       state: 1,
+       class: 16,
+       serverName: 'iZ948wnf8ufZ',
+       procName: '' } ] }
+RequestError: Invalid column name 'addtime'.
+    at E:\code\node_modules\mssql\lib\tedious.js:739:17
+    at emitOne (events.js:96:13)
+    at Connection.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\connection.js:204:16)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at Parser.<anonymous> (E:\code\node_modules\mssql\node_modules\tedious\lib\token\token-stream-parser.js:42:15)
+    at emitOne (events.js:96:13)
+    at Parser.emit (events.js:191:7)
+    at readableAddChunk (E:\code\node_modules\mssql\node_modules\tedious\node_modules\readable-stream\lib\_stream_readable.js:213:18)
