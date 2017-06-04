@@ -7,7 +7,6 @@ var driver_vhc = require('../models/driver_vhc');
 router.get_my_vehicle = function(req, res, cb) {
     var list = new Array();
 
-
     if (req.cookies.member) {
         var member = req.cookies.member;
 
@@ -29,7 +28,7 @@ router.get_my_vehicle = function(req, res, cb) {
     }
 };
 
-router.get('/vhc_group', function(req, res, next) {
+router.get('/group', function(req, res, next) {
     var member = req.cookies.member;
     var vhc_group = req.session[member.userid + "_group"];
     if (vhc_group) {
@@ -39,7 +38,7 @@ router.get('/vhc_group', function(req, res, next) {
             var group;
             for (var i in result) {
                 var item = result[i];
-                if (item.level == 0) {
+                if (item.level === 0) {
                     if (!group) {
                         group = "<optgroup label='" + item.groupname + "'>";
                     } else {
@@ -58,7 +57,6 @@ router.get('/vhc_group', function(req, res, next) {
             res.send({ error: 0, group: group });
         });
     }
-
-})
+});
 
 module.exports = router;

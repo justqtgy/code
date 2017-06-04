@@ -1,7 +1,7 @@
-var Login = function () {
-    var handleLogin = function () {
+var Login = function() {
+    var handleLogin = function() {
         $('.login-form').bootstrapValidator({
-            message: '该项不能为空',            
+            message: '该项不能为空',
             // feedbackIcons: {
             //      valid: 'glyphicon glyphicon-ok',
             //      invalid: 'glyphicon glyphicon-remove',
@@ -25,7 +25,7 @@ var Login = function () {
             }
         });
 
-        $('.login-form input').keypress(function (e) {
+        $('.login-form input').keypress(function(e) {
             if (e.which == 13) {
                 if ($('.login-form').validate().form()) {
                     $('.login-form').submit(); //form validation success, call ajax form submit
@@ -34,7 +34,7 @@ var Login = function () {
             }
         });
 
-        $("#login-btn").click(function () {
+        $("#login-btn").click(function() {
             var validator = $(".login-form").data('bootstrapValidator');
             validator.validate();
             if (validator.isValid()) {
@@ -47,19 +47,18 @@ var Login = function () {
                     data[ctrls[c].name] = ctrls[c].value;
                 }
 
-                $.post('/users/login', data, function (result) {
+                $.post('/users/login', data, function(result) {
                     if (result.ok != 1) {
                         $('.alert-danger').find('span').text(result.msg);
                         $('.alert-danger', $('.login-form')).show();
                         return;
                     }
-                    
-                    if(url){
-                        location.href= url;
+
+                    if (url) {
+                        location.href = url;
+                    } else {
+                        location.href = '/';
                     }
-                    else{
-                        location.href='/';
-                    }                   
                 });
 
             }
@@ -67,17 +66,18 @@ var Login = function () {
     }
 
     //获取url中的参数
-    var getUrlParam = function (name) {
+    var getUrlParam = function(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        if (r != null) return unescape(r[2]); return null; //返回参数值
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
     }
 
     return {
         //main function to initiate the module
-        init: function () {
+        init: function() {
             handleLogin();
-            handleRegister();
+            //handleRegister();
         }
     };
-} ();
+}();
