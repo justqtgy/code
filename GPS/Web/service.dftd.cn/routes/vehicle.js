@@ -35,10 +35,10 @@ router.get('/group', function(req, res, next) {
         res.send({ error: 0, group: vhc_group });
     } else {
         vehicle.get_grouplist(member.userid, member.user_type, function(err, result) {
-            var group;
+            var group = '';
             for (var i in result) {
                 var item = result[i];
-                if (item.level === 0) {
+                if (item.level == 0) {
                     if (!group) {
                         group = "<optgroup label='" + item.groupname + "'>";
                     } else {

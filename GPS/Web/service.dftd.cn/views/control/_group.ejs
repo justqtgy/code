@@ -6,7 +6,7 @@
     if(window.sessionStorage){
         vehicleGroup = sessionStorage.getItem("vehicle_group");
         if(vehicleGroup){
-            $('.multiselect').html(vehicleGroup);    
+            renderList(vehicleGroup);
         }
     }
     if(!vehicleGroup){
@@ -14,8 +14,13 @@
             if(window.sessionStorage){
                 sessionStorage.setItem("vehicle_group",result.group);
             }
-            $('.multiselect').html(result.group);        
+            renderList(result.group);
         })
     }
-    $('.multiselect').multiselect({ nonSelectedText: '请选择',enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });    
+
+    function renderList(vehicleGroup){
+        $('.multiselect').html(vehicleGroup);   
+        $('.multiselect').multiselect({ nonSelectedText: '请选择',enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });     
+    }
+    
 </script>

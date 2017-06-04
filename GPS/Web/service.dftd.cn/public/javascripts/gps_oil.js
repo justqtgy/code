@@ -3,7 +3,6 @@ var displayNumber = 10;
 function get_list(pageIndex) {
     var q = new Query('/gps_oil/list', 'GET', pageIndex, displayNumber);
     var vehicleList = $(".multiselect").val();
-    var vehicleList = $(".multiselect").val();
     if (!vehicleList) {
         alert('请选择车辆');
         return;
