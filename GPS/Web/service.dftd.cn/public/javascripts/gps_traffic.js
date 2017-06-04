@@ -3,11 +3,12 @@ var displayNumber = 10;
 function get_list(pageIndex) {
     var q = new Query('/gps_traffic/list', 'GET', pageIndex, displayNumber);
     var vehicleList = $(".multiselect").val();
-    vehicleList = vehicleList.join(",");
     if (!vehicleList) {
-        alert('请选择车辆');
+        //alert('请选择车辆');
+        bootbox.alert('请选择车辆......');
         return;
     }
+    vehicleList = vehicleList.join(",");
     var data_foramt = {
         vehicleList: vehicleList
     };

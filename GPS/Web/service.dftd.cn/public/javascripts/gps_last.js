@@ -4,17 +4,16 @@ function get_list(pageIndex) {
     var q = new Query('/gps_last/list', 'GET', pageIndex, displayNumber);
 
     var vehicleList = $(".multiselect").val();
-    vehicleList = vehicleList.join(",");
     if (!vehicleList) {
         alert('请选择车辆');
         return;
     }
+    vehicleList = vehicleList.join(",");
     var data_foramt = {
         vehicleList: vehicleList
     };
     var params = q.init(data_foramt);
     q.request(params, function(json) {
-        console.log(json);
         app.DataList = json.rows;
         q.showPagination(json.total, get_list);
     });
