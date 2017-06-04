@@ -2,7 +2,7 @@
 var gps_point = require('./routes/gps_point');
 var gps_oil = require('./routes/gps_oil');
 var gps_traffic = require('./routes/gps_traffic');
-var gps_algps_lastarm = require('./routes/gps_last');
+var gps_last = require('./routes/gps_last');
 
 exports.init_route = function(app) {
     console.log('init_route begin');
