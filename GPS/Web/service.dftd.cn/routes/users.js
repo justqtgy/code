@@ -68,8 +68,15 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res) {
-    req.clearCookie("member");
-    res.redirect('/login');
+    res.clearCookie("member");
+    res.redirect('/users/login');
+});
+
+router.get('/check_login', function(req, res) {
+    if (req.cookies.member) {
+        var member = req.cookies.member;
+        res.send({ member: member });
+    }
 });
 
 module.exports = router;
