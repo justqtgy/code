@@ -1,7 +1,7 @@
 var displayNumber = 10;
 
 function get_list(pageIndex) {
-    var q = new Query('/gps_point/list', 'POST', pageIndex, displayNumber);
+    var q = new Query('/gps_oil_leak/list', 'POST', pageIndex, displayNumber);
     var vehicleList = $(".multiselect").val();
     if (!vehicleList) {
         alert('请选择车辆');
@@ -32,7 +32,7 @@ var app = new Vue({
             });
         },
         init: function() {
-            $('.gps_point').addClass("active open");
+            $('.gps_oil_leak').addClass("active open");
             var that = this;
             that.loadPage();
             $("#btnSearch").click(function() {

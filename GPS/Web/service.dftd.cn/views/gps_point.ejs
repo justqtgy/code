@@ -55,8 +55,8 @@
                                             </tr>
                                         </thead>
                                         <tbody v-if = "DataList.length > 0">
-                                            <tr v-for = "item in DataList">
-                                                <td>{{ item.ID }}</td> 
+                                            <tr v-for = "(item, index) in DataList">
+                                                <td>{{ index+1 }}</td> 
                                                 <td>{{ item.VehicleNo }}</td> 
                                                 <td>{{ item.GPSID }}</td> 
                                                 <td>{{ item.Distance }}</td>                             

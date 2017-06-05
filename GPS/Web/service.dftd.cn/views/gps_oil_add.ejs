@@ -11,7 +11,7 @@
         <div class="page-content">
             <!-- BEGIN PAGE HEADER-->
             <h3 class="page-title">
-                车辆状态 <small>查看我的定位、实时油量</small>
+                加油记录 <small>加油明细</small>
             </h3>
                 
             <!-- END PAGE HEADER-->
@@ -21,7 +21,7 @@
                     <h3 class="box-title">查询</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                    <form  id='search'>  
+                    <form  id='search'>     
                         <label class="control-label" for="selCar">车辆选择：</label>
                         <select class="multiselect display-none" multiple="multiple" ></select>                     
                         <label class="control-label" for="txtBeginTime">开始时间：</label>
@@ -49,23 +49,27 @@
                                                 <th>#</th> 
                                                 <th>车牌号</th> 
                                                 <th>设备号</th> 
-                                                <th>当前油量</th>                             
-                                                <th>我的位置</th> 
-                                                <th>最后更新时间</th>                                
+                                                <th>上次油量</th>                             
+                                                <th>加油量</th>
+                                                <th>当前油量</th>
+                                                <th>记录时间</th>                             
+                                                <th>位置</th>
                                             </tr>
                                         </thead>
                                         <tbody v-if = "DataList.length > 0">
                                             <tr v-for = "(item, index) in DataList">
-                                                <td>{{ index+1 }}</td> 
+                                                <td>{{index+1}}</td> 
                                                 <td>{{ item.VehicleNo }}</td> 
                                                 <td>{{ item.GPSID }}</td> 
-                                                <td>{{ item.CurOil }}</td>       
-                                                <td><a  v-bind:href="'map.html?lng1='+item.Lng+'&lat1='+item.Lat+'&type=location'" target="_blank">查看</a> </td>                                                         
-                                                <td>{{ new Date(item.UpdateTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}</td>  
+                                                <td>{{ item.PreOil }}</td>  
+                                                <td>{{ item.AddOil }}</td>  
+                                                <td>{{ item.CurOil }}</td>                             
+                                                <td>{{ new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}</td>  
+                                                <td><a href="#">查看</a></td>   
                                             </tr>
                                         </tbody>
                                         <tbody v-else>
-                                            <tr><td colspan="6" style="text-align:center;">没有数据</td></tr>
+                                            <tr><td colspan="7" style="text-align:center;">没有数据</td></tr>
                                         </tbody>
                                     </table>				
                             </div>
@@ -81,26 +85,6 @@
     </div>
     <!-- END CONTENT -->
 
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;height:auto;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        轨迹地图
-                    </h4>
-                </div>
-                <div class="modal-body" style="padding:1px;">
-                    <iframe id="mapUrl" src="" style="width:100%;height:100%;border:0;  overflow:hidden;">
-                    </iframe>
-                </div>
-                
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
 </div>
 <!-- END CONTAINER -->
     
@@ -114,6 +98,6 @@
     <!-- END PAGE LEVEL PLUGINS -->
     <script src="/javascripts/include/date-utils.min.js"></script>
     <script src="/javascripts/include/query.js"></script>
-    <script src="/javascripts/gps_last.js"></script>
+    <script src="/javascripts/gps_oil_add.js"></script>
 <%- include ./control/_group %> 
 <%- include ./shared/_footer %>

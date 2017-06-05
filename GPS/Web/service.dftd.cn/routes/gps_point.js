@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 var get_count = function(req, res, next) {
-    var args = req.query;
+    var args = req.body;
     gps_point.get_count(args, function(err, result) {
         if (err) {
             log.error('Error = ', err);
@@ -22,8 +22,8 @@ var get_count = function(req, res, next) {
     });
 };
 
-router.get('/list', [get_count], function(req, res, next) {
-    var args = req.query;
+router.post('/list', [get_count], function(req, res, next) {
+    var args = req.body;
     gps_point.get_list(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);

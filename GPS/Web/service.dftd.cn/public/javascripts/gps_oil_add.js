@@ -1,7 +1,7 @@
 var displayNumber = 10;
 
 function get_list(pageIndex) {
-    var q = new Query('/gps_oil/list', 'GET', pageIndex, displayNumber);
+    var q = new Query('/gps_oil_add/list', 'POST', pageIndex, displayNumber);
     var vehicleList = $(".multiselect").val();
     if (!vehicleList) {
         alert('请选择车辆');
@@ -32,7 +32,7 @@ var app = new Vue({
             });
         },
         init: function() {
-            $('.gps_oil').addClass("active open");
+            $('.gps_oil_add').addClass("active open");
             var that = this;
             that.loadPage();
             $("#btnSearch").click(function() {
