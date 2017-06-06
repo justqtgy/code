@@ -33,7 +33,6 @@ var app = new Vue({
             });
         },
         init: function() {
-            $('.gps_traffic').addClass("active open");
             var that = this;
             that.loadPage();
             $("#btnSearch").click(function() {

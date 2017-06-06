@@ -4,6 +4,13 @@ var vehicle = require('../models/vehicle');
 var driver = require('../models/driver');
 var driver_vhc = require('../models/driver_vhc');
 
+router.get('/', function(req, res, next) {
+    var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
+        end_date = new Date().toFormat('YYYY-MM-DD');
+    res.render('vehicle', { start_date: start_date, end_date: end_date });
+});
+
+
 router.get_my_vehicle = function(req, res, cb) {
     var list = new Array();
 

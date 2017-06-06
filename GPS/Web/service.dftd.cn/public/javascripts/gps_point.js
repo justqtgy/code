@@ -32,7 +32,6 @@ var app = new Vue({
             });
         },
         init: function() {
-            $('.gps_point').addClass("active open");
             var that = this;
             that.loadPage();
             $("#btnSearch").click(function() {

@@ -6,7 +6,7 @@ function get_list() {
         $.get('/oil_vhc_dv/detail?carlist=' + carlist, function(result) {
             app.DataList = result.rows;
         });
-    })
+    });
 }
 
 
@@ -17,6 +17,7 @@ var app = new Vue({
     },
     methods: {
         init: function() {
+            $('#real_data').addClass(" active open");
             get_list(1);
         }
     }
