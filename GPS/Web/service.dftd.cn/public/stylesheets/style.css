@@ -3,6 +3,12 @@
  * --------------
  */
 
+.input-control {
+    border: 1px solid #c2cad8;
+    height: 30px;
+    background-color: #fff;
+}
+
 .box {
     position: relative;
     border-radius: 3px;

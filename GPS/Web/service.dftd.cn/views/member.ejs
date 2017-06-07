@@ -8,13 +8,14 @@
 
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
-        <div class="page-content">
+        <div class="page-content ">
             <!-- BEGIN PAGE HEADER-->
             <h3 class="page-title">
                 人员信息 <small>登录管理员信息</small>
-            </h3>
-                
+            </h3>                
             <!-- END PAGE HEADER-->
+
+            <!-- BEGIN SAMPLE TABLE PORTLET-->
             <div class="box box-solid">
                 <div class="box-header with-border">
                     <i class="fa fa-search"></i>
@@ -23,21 +24,28 @@
                 <div class="box-body">
                     <form  id='search'>  
                                            
-                        <label class="control-label" for="txtBeginTime">账号：</label>
-                        <input type="text" name="account"  />
+                        <label class="control-label" >账号：</label>
+                        <input type="text" name="account"  class="input-control" />
                        
                         <button type="button" id="btnSearch" class="btn btn-success"> <i class="fa fa-search"></i>查询 </button>
                     </form>
                 </div><!-- /.box-body -->
             </div>
+            <!-- END SAMPLE TABLE PORTLET-->
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
                 <div class="col-md-12">
                     <div class="portlet box green">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-picture"></i> 数据列表
-                            </div>                            
+                                <i class="fa fa-picture text-center"></i> 数据列表
+                                
+                            </div> 
+                            <div class="tools caption">                            
+                                <a href="#" onclick="app.show_modal(0);" title='添加记录'>
+                                    <i class="fa fa-plus"></i>
+                                </a>                               
+                            </div>                       
                         </div>
                         <div class="portlet-body">
                             <div class="table-scrollable">                  
@@ -45,25 +53,27 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th> 
-                                                <th>车牌号</th> 
-                                                <th>设备号</th> 
-                                                <th>当前油量</th>                             
-                                                <th>我的位置</th> 
-                                                <th>最后更新时间</th>                                
+                                                <th>组织名称</th> 
+                                                <th>联系人</th> 
+                                                <th>联系方式</th>                             
+                                                <th>地址</th>  
+                                                <th>备注</th>                                                                           
+                                                <th>操作</th> 
                                             </tr>
                                         </thead>
                                         <tbody v-if = "DataList.length > 0">
                                             <tr v-for = "(item, index) in DataList">
                                                 <td>{{ index+1 }}</td> 
-                                                <td>{{ item.VehicleNo }}</td> 
-                                                <td>{{ item.GPSID }}</td> 
-                                                <td>{{ item.CurOil }}</td>       
-                                                <td><a  v-bind:href="'map.html?lng1='+item.Lng+'&lat1='+item.Lat+'&type=location'" target="_blank">查看</a> </td>                                                         
-                                                <td>{{ new Date(item.UpdateTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}</td>  
+                                                <td>{{ item.GroupName }}</td> 
+                                                <td>{{ item.Linker }}</td> 
+                                                <td>{{ item.Phone }}</td> 
+                                                <td>{{ item.Address }}</td>       
+                                                <td>{{ item.Remark }}</td>       
+                                                <td><a href='#'>编辑</a><a href='#'>删除</a></td>
                                             </tr>
                                         </tbody>
                                         <tbody v-else>
-                                            <tr><td colspan="6" style="text-align:center;">没有数据</td></tr>
+                                            <tr><td colspan="7" style="text-align:center;">没有数据</td></tr>
                                         </tbody>
                                     </table>				
                             </div>
@@ -80,32 +90,70 @@
     <!-- END CONTENT -->
 
     <!-- edit -->
-    <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal fade" id="mod_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="box-header with-border">
                     <i class="fa fa-list-alt"></i>
-                    <h3 class="box-title">用户管理</h3>
+                    <h3 class="box-title">用户信息</h3>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div><!-- /.box-header -->
-                <div class="modal-body">
+                <div class="modal-body ">                       
+                        <div class="form-body"> 
+                        
+                            <div class="row">    
+                                <div class="col-md-6">          
+                                    <div class="form-group">
+                                        <label for="txtAccount">账号</label>
+                                        
+                                        <input type="text" id="txtAccount" name="Account" autocomplete="off" class="form-control" placeholder="请输入账号"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="txtPassword">密码</label>
+                                        <input type="password" id="txtPassword" name="Password" autocomplete="new-password" class="form-control" placeholder="请输入密码"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">    
+                                <div class="form-group">
+                                <label for="txtTrueName">姓名</label>                                    
+                                <input type="text" id="txtTrueName" name="TrueName" class="form-control" placeholder="请输入姓名"/>
+                            </div>
+                                </div>
+                                <div class="col-md-6"> 
+                                <div class="form-group">
+                        <label for="txtEmail">Email</label>
+                        <input type="text" id="txtEmail" name="Email" class="form-control" placeholder="请输入Email"/>
+                    </div>   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"> 
+                                <div class="form-group">
+                        <label for="txtMobile">联系电话</label>
+                        <input type="text" id="txtMobile" name="Mobile" class="form-control" placeholder="请输入联系电话"/>
+                    </div>   
+                                </div>
+                                <div class="col-md-6">   
+                                <div class="form-group">
+                        <label for="txtExpireTime">过期时间</label>
+                        <input type="text" id="txtExpireTime" name="ExpireTime" class="form-control date-picker"   data-date-format="yyyy-mm-dd" placeholder="请输入ExpireTime"/>
+                    </div>         
+                                </div>
+                            </div>
+                        </div>
+                   
                     
+                    
+                    
+                                
                     <div class="form-group">
-                        <label for="txtUserName">姓名：</label>
-                        <input type="text" id="txtUserName" name="UserName" class="form-control" placeholder="请输入UserName" />
+                        <input type="hidden" id="txtID" name="ID" class="form-control" placeholder="请输入ID" />                        
                     </div>
-                    <div class="form-group">
-                        <label for="txtMobile">联系方式：</label>
-                        <input type="text" id="txtMobile" name="Mobile" class="form-control" placeholder="请输入Mobile" />
-                    </div>
-                    <div class="form-group">
-                        <label for="txtParkID">所属园区：</label>
-                        <input type="text" id="txtParkID" name="ParkID" class="form-control" placeholder="请输入ParkID" />
-                    </div>                    
-                    <div class="form-group">
-                        <input type="hidden" id="txtID" name="ID" class="form-control" placeholder="请输入ID" />
-                        <input type="hidden" id="txtWeiXinID" name="WeiXinID" class="form-control" placeholder="请输入WeiXinID" />
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
