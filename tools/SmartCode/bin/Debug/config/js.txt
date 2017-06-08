@@ -1,0 +1,95 @@
+/*************************************************************************************************
+作者：晴天观雨
+时间：<%=DateTime%>
+功能：
+**************************************************************************************************/
+
+//获取记录列表
+function get_list() {
+
+    $.ajax({
+        url: "../Ajax/<%=FileName%>Handler.ashx",
+        type: "post",
+        dataType: "json",
+        data: { m: "table" },
+        beforeSend: function() { $("#loading").show(); },
+        complete: function() { $("#loading").hide(); },
+        success: function(json) {
+            $("#tt tbody").find("tr.newrow").remove();
+            //显示记录
+            $.each(json.rows, function(i, item) {
+                $("<tr class='newrow'></tr>").append(
+                        <%=List%>"<td><a href='#' onclick='get_record("+item.ID+")'>查看</a><a href='#' onclick='del_record("+item.ID+")'>删除</a></td>"
+                     ).appendTo($("#tt tbody"));
+            });
+        }
+    });
+
+}
+
+//获取当前记录信息
+function get_record(v_id){
+    $.ajax({
+        url: "../Ajax/<%=FileName%>Handler.ashx",
+        type: "post",
+        dataType: "json",
+        data: { m: "single" ,id:v_id},
+        beforeSend: function() { $("#loading").show(); },
+        complete: function() { $("#loading").hide(); },
+        success: function(json) {
+            //显示记录
+	    $.each(json.rows, function(i, item) {
+                <%=Record%>
+            });            
+        }
+    });
+}
+
+//新增记录
+function add_record() {
+    <%=Field%>
+    $.ajax({
+        url: "../Ajax/<%=FileName%>Handler.ashx",
+        type: "post",
+        dataType: "text",
+        data: { m: "add"<%=Params%>},
+        beforeSend: function() { $("#loading").show(); },
+        complete: function() { $("#loading").hide(); },
+        success: function(value) {
+            
+        }
+    });
+}
+
+//修改记录
+function edit_record() {
+    <%=Field%>
+    $.ajax({
+        url: "../Ajax/<%=FileName%>Handler.ashx",
+        type: "post",
+        dataType: "text",
+        data: { m: "edit"<%=Params%>},
+        beforeSend: function() { $("#loading").show(); },
+        complete: function() { $("#loading").hide(); },
+        success: function(value) {
+            
+        }
+    });
+}
+
+//删除记录
+function del_record(v_id) {
+    $.ajax({
+        url: "../Ajax/<%=FileName%>Handler.ashx",
+        type: "post",
+        dataType: "text",
+        data: { m: "delete",id:v_id},
+        beforeSend: function() { $("#loading").show(); },
+        complete: function() { $("#loading").hide(); },
+        success: function(value) {
+            
+        }
+    });
+}
+
+

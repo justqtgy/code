@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DBConnections>
+  <DBConnection>
+    <SqlServer>Server=192.168.1.246\SQL2008;database=JBL_NYCS;uid=sa;pwd=soholife123</SqlServer>
+    <SqlExpress>Server = .\SQLExpress;AttachDbFilename = D:\Trancell\Trancell.SmartHome\SQL\SmartHome.mdf;Database = dbname; Trusted_Connection = Yes;</SqlExpress>
+    <SqlExpress_db>Data Source=.\SQLEXPRESS;Initial Catalog=SmartHome;User Id=sa;Password=showme</SqlExpress_db>    
+    <SqlCe>Data Source=D:\MyWeb\WebBlog\WebBlog\App_Data\Blog.sdf</SqlCe>
+    <Access></Access>
+  </DBConnection>
+</DBConnections>

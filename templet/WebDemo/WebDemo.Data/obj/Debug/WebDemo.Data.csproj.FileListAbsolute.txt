@@ -1,0 +1,5 @@
+E:\WebDemo\WebDemo.Data\bin\Debug\WebDemo.Data.dll
+E:\WebDemo\WebDemo.Data\bin\Debug\WebDemo.Data.pdb
+E:\WebDemo\WebDemo.Data\obj\Debug\WebDemo.Data.csprojResolveAssemblyReference.cache
+E:\WebDemo\WebDemo.Data\obj\Debug\WebDemo.Data.dll
+E:\WebDemo\WebDemo.Data\obj\Debug\WebDemo.Data.pdb

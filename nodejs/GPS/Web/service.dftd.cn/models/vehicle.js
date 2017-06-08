@@ -7,9 +7,9 @@ function vehicle(model) {
 
 module.exports = vehicle;
 
-vehicle.get_single = function(carNumber, callback) {
-    var sql = "select top 1 * from gserver_synth.dbo.View_CarList where CarNumber='%s'";
-    sql = util.format(sql, carNumber);
+vehicle.get_single = function(args, callback) {
+    var sql = "select top 1 * from gserver_data.dbo.vehicle where ID='%s'";
+    sql = util.format(sql, args.id);
 
     db.execSQL(sql, function(err, rows, fileds) {
         if (err) {
@@ -32,6 +32,42 @@ vehicle.get_grouplist = function(userid, user_type, callback) {
         if (err) {
             return callback(err);
         }
+        callback(err, rows);
+    });
+}
+
+vehicle.get_count = function(params, callback) {
+    var sql = " select count(*) as total from gserver_data.dbo.vehicle";
+    sql = util.format(sql);
+    db.execSQL(sql, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+
+        var total = 0;
+        if (result.length > 0) {
+            total = result[0].total;
+        }
+
+        callback(err, total);
+    });
+};
+
+vehicle.get_list = function(params, callback) {
+    var pageIndex = parseInt(params.pageIndex);
+    var pageSize = parseInt(params.pageSize);
+    var start_id = (pageIndex - 1) * pageSize + 1;
+    var end_id = pageIndex * pageSize;
+
+    var sql = ";with t as (select *, row_number() over(order by id desc) as rid  from gserver_data.dbo.vehicle) " +
+        "select * from t where rid between %s and %s";
+    sql = util.format(sql, start_id, end_id);
+    console.log(sql)
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            return callback(err);
+        }
+
         callback(err, rows);
     });
 }

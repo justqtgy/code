@@ -10,11 +10,12 @@ function get_list(pageIndex) {
     var q = new Query('/vehicle/list', 'POST', $("#search"), pageIndex, displayNumber);
     var params = q.init();
     q.request(params, function(json) {
+        console.log(json)
         $("#grid tbody").find("tr.newrow").remove();
         //显示记录
-        $.each(json.Data, function(i, item) {
+        $.each(json.rows, function(i, item) {
             $("<tr class='newrow'></tr>").append(
-                "<td>" + item.ID + "</td>" +
+                "<td>" + (i + 1) + "</td>" +
                 "<td>" + item.GPSID + "</td>" +
                 "<td>" + item.VehicleNo + "</td>" +
                 "<td>" + item.Mobile + "</td>" +
@@ -33,12 +34,13 @@ function get_record(id) {
     };
     var q = new Query('/vehicle/single', 'POST');
     q.request(params, function(json) {
+        var item = json.rows[0];
         //显示记录
-        $("#txtID").val(json.ID);
-        $("#txtGPSID").val(json.GPSID);
-        $("#txtVehicleNo").val(json.VehicleNo);
-        $("#txtMobile").val(json.Mobile);
-        $("#txtRemark").val(json.Remark);
+        $("#txtID").val(item.ID);
+        $("#txtGPSID").val(item.GPSID);
+        $("#txtVehicleNo").val(item.VehicleNo);
+        $("#txtMobile").val(item.Mobile);
+        $("#txtRemark").val(item.Remark);
         $("#mod_info").modal({ backdrop: 'static', keyboard: false });
     });
 }
@@ -57,7 +59,6 @@ function set_record() {
             $("#Pagination").page('destroy');
             get_list(1);
         });
-
     });
 }
 

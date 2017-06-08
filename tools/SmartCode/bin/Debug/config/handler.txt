@@ -1,0 +1,72 @@
+/*************************************************************************************************
+作者：晴天观雨
+时间：<%=DateTime%>
+功能：
+**************************************************************************************************/
+
+<%@ WebHandler Language="C#" Class="<%=FileName%>Handler" %>
+
+using System;
+using System.Web;
+using System.Data;
+
+public class <%=FileName%>Handler : IHttpHandler {
+    
+    public void ProcessRequest (HttpContext context) {
+        context.Response.ContentType = "text/plain";
+        
+        string strType = context.Request["m"];
+        if (!string.IsNullOrEmpty(strType))
+        {
+            switch (strType)
+            {
+                case "table":
+					GetTable(context);
+                    break;
+                case "single":
+                    GetSingle(context);
+                    break;
+                case "add":   
+					AddRecord(context);          
+                    break;
+                case "delete":                    
+					DeleteRecord(context);
+                    break;
+            }
+        }
+    }
+
+    private void GetTable(HttpContext context)
+    {
+	int iPage = ShangYoo.Common.CommonUtils.GetIntValue(context.Request["pageindex"]);
+        int iPageSize = ShangYoo.Common.CommonUtils.GetIntValue(context.Request["pagesize"]);        
+	<%=GetList%>
+        ShangYoo.DB.SplitPage sp = bll.GetRecordList(iPage, iPageSize);
+        string jsonData = JsonHelper.DataTableToJSON(sp.PageData, "rows");
+        jsonData = jsonData.Insert(1, "\"total\":\"" + sp.TotalRecords.ToString() + "\",");
+        context.Response.Write(jsonData);
+	
+    }
+
+    private void GetSingle(HttpContext context)
+    {
+	<%=GetRecord%>
+    }
+
+    private void AddRecord(HttpContext context)
+    {
+	<%=AddRecord%>
+    }
+
+    private void DeleteRecord(HttpContext context)
+    {
+	<%=DeleteRecord%>
+    }
+
+    public bool IsReusable {
+        get {
+            return false;
+        }
+    }
+
+}

@@ -1,0 +1,80 @@
+﻿@{
+//SmartLib.Common.UserCookies uc = new SmartLib.Common.UserStatus().GetUserCookies();
+//if (uc.UserID == 0)
+//{
+//    Response.Redirect("/login");
+//    return;
+//}
+}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@Page.Title - 我的 ASP.NET 网页</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="~/content/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/content/plugins/font-awesome/css/font-awesome.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/content/dist/css/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+     folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="~/content/dist/css/skins/_all-skins.min.css">
+    @RenderSection("Css", required: false)
+
+    <link rel="stylesheet" href="~/content/style.css">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <header class="main-header">
+            @RenderPage("~/Views/Shared/_Header.cshtml")
+        </header>
+
+        <!-- Left side column. contains the sidebar -->
+        <aside class="main-sidebar">            
+            @RenderPage("~/Views/Shared/_Sidebar.cshtml")            
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div id="body">
+                @RenderSection("featured", required: false)
+                <section class="clear-fix">
+                    @RenderBody()
+                </section>
+            </div>
+        </div><!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.0
+            </div>
+            <strong>Copyright &copy; 2014-2015 <a href="#">Almsaeed Studio</a>.</strong> All rights reserved.
+        </footer>
+
+    </div><!-- ./wrapper -->
+	
+	<!-- jQuery 2.1.4 -->
+    <script src="~/content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="~/content/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="~/content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/content/plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/content/dist/js/app.min.js"></script>
+	
+	<script src="~/JS/_init.js"></script>
+	
+    @RenderSection("Scripts", required: false)
+
+    
+</body>
+</html>

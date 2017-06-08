@@ -1,0 +1,10 @@
+﻿{
+  "message": {
+    "save_success": "记录保存成功",
+    "save_fail": "记录保存失败",
+    "delete_success": "记录删除成功",
+    "delete_fail": "记录删除失败",
+    "confirm_delete": "确定要删除该记录吗 ?",
+    "box_title": "提示"
+  }
+}
