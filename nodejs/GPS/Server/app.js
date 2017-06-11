@@ -46,7 +46,7 @@ net.createServer(function(socket) {
     // 为这个socketet实例添加一个"close"事件处理函数
     socket.on('close', function(data) {
         socketList[ipAddress].splice(socketList[ipAddress].indexOf(socket), 1);
-        logger.log('CLOSED: ' + socket.remoteAddress + ' ' + socket.remotePort);
+        logger.error('CLOSED: ' + socket.remoteAddress + ' ' + socket.remotePort);
     });
 
     socket.on('error', function(data) {
@@ -58,4 +58,4 @@ net.createServer(function(socket) {
 }).listen(PORT);
 
 
-console.log('Server listening on ' + HOST + ':' + PORT);
+logger.info('Server listening on ' + HOST + ':' + PORT);
