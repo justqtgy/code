@@ -97,7 +97,39 @@ router.post('/single', function(req, res, next) {
             log.error('Error = ', err);
             return;
         }
-        res.send({ ok: 1, total: req.total, rows: rows });
+        res.send({ ok: 1, rows: rows });
+    });
+});
+
+router.post('/set', function(req, res, next) {
+    var args = req.body;
+    if (args.id) {
+        vehicle.update(args, function(err, result) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            res.send({ ok: 1 });
+        });
+    } else {
+        vehicle.add(args, function(err, result) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            res.send({ ok: 1 });
+        });
+    }
+});
+
+router.post('/delete', function(req, res, next) {
+    var args = req.body;
+    vehicle.delete(args, function(err, result) {
+        if (err) {
+            res.send({ ok: 0, msg: err });
+            return;
+        }
+        res.send({ ok: 1 });
     });
 });
 

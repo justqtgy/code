@@ -13,7 +13,6 @@ router.requireAuthentication = function(req, res, next) {
     if (req.cookies.member) {
         var member = req.cookies.member;
         req.account = member.account;
-        req.isboss = member.isboss;
         next();
     } else {
         req.session.vehicle_group = '';
@@ -38,7 +37,7 @@ router.get('/login', function(req, res, next) {
 router.post('/login', function(req, res, next) {
     var url = req.body.url || '';
     var account = req.body.username;
-    var password = utils.md5(req.body.password);
+
     users.get_info(account, function(err, result) {
         if (err) {
             console.log(err);
@@ -49,18 +48,19 @@ router.post('/login', function(req, res, next) {
             res.send({ ok: 1, msg: "账号错误" });
             return;
         }
+        var userid = result[0].ID;
+        // var boss = result[0].boss;
+        // var user_type = result[0].user_type;
 
-        // if (password != result[0].password) {
-        //     res.send({ ok: 1, msg: "密码错误" });
-        //     return;
-        // }
-
-        var userid = result[0].id;
-        var boss = result[0].boss;
-        var user_type = result[0].user_type;
+        var password = req.body.password;
+        password = utils.md5(result[0].ID + '&' + password);
+        if (password != result[0].Password) {
+            res.send({ ok: 1, msg: "密码错误" });
+            return;
+        }
 
         //res.clearCookie('member');
-        res.cookie('member', { userid: userid, account: account, boss: 1, user_type: user_type }, { maxAge: 3600000, httpOnly: true, path: '/' });
+        res.cookie('member', { userid: userid, account: account }, { maxAge: 3600000, httpOnly: true, path: '/' });
         res.cookie('userinfo', account, { maxAge: 3600000, httpOnly: true, path: '/' });
 
         res.send({ ok: 1 })

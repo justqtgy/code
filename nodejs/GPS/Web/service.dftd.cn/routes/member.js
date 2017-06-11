@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var utils = require('utility');
 var date = require('date-utils');
-var gps_last = require('../models/gps_last');
+var member = require('../models/member');
 
-/* GET gps_last home page. */
+/* GET member home page. */
 router.get('/', function(req, res, next) {
     var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
         end_date = new Date().toFormat('YYYY-MM-DD');
@@ -12,11 +13,11 @@ router.get('/', function(req, res, next) {
 
 var get_count = function(req, res, next) {
     var args = req.body;
-    gps_last.get_count(args, function(err, result) {
+    console.log(args);
+    member.get_count(args, function(err, result) {
         if (err) {
             log.error('Error = ', err);
-            next();
-            return;
+            return next(err);
         }
         req.total = result;
         next();
@@ -25,7 +26,7 @@ var get_count = function(req, res, next) {
 
 router.post('/list', [get_count], function(req, res, next) {
     var args = req.body;
-    gps_last.get_list(args, function(err, rows) {
+    member.get_list(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
             return;
@@ -33,5 +34,86 @@ router.post('/list', [get_count], function(req, res, next) {
         res.send({ ok: 1, total: req.total, rows: rows });
     });
 });
+
+
+router.get('/single', function(req, res, next) {
+    var id = req.query.id;
+    member.get_single(id, function(err, result) {
+        if (err) {
+            res.send({ ok: 0, msg: err });
+            return;
+        }
+        res.send({ ok: 1, rows: result });
+    });
+});
+
+router.post('/set', function(req, res, next) {
+    var args = {
+        id: req.body.id,
+        account: req.body.account,
+        password: req.body.password,
+        trueName: req.body.trueName,
+        email: req.body.email,
+        mobile: req.body.mobile,
+        expireTime: req.body.expireTime
+    };
+    console.log(req.body);
+    if (args.id) {
+        member.update(args, function(err, result) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            res.send({ ok: 1 });
+        });
+    } else {
+        member.add(args, function(err, result) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            res.send({ ok: 1 });
+        });
+    }
+});
+
+router.post('/delete', function(req, res, next) {
+    var args = req.body;
+    member.delete(args, function(err, result) {
+        if (err) {
+            res.send({ ok: 0, msg: err });
+            return;
+        }
+        res.send({ ok: 1 });
+    });
+});
+
+router.post('/password', function(req, res, next) {
+    console.log(req.body)
+    var args = {
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword,
+        id: req.body.id
+    };
+
+    if (!args.password) {
+        return res.send({ ok: 0, msg: '密码不能为空，请输入密码' });
+    }
+
+    if (args.password != args.confirmPassword) {
+        return res.send({ ok: 0, msg: '密码不一致，请重新输入' });
+    }
+
+    args.password = utils.md5(args.id + '&' + args.password).digest("hex");
+
+    member.change_password(args, function(err, result) {
+        if (err) {
+            res.send({ ok: 0, msg: err });
+            return;
+        }
+        res.send({ ok: 1 });
+    });
+});
+
 
 module.exports = router;

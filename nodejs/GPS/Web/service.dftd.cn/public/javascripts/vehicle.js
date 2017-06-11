@@ -1,6 +1,6 @@
-var displayNumber = 20;
+var displayNumber = 10;
 $(function() {
-
+    get_list(1);
     $("#btnSearch").click(function() { get_list(1); });
     $("#btnOK").click(function() { set_record(); });
 });
@@ -34,14 +34,18 @@ function get_record(id) {
     };
     var q = new Query('/vehicle/single', 'POST');
     q.request(params, function(json) {
-        var item = json.rows[0];
-        //显示记录
-        $("#txtID").val(item.ID);
-        $("#txtGPSID").val(item.GPSID);
-        $("#txtVehicleNo").val(item.VehicleNo);
-        $("#txtMobile").val(item.Mobile);
-        $("#txtRemark").val(item.Remark);
-        $("#mod_info").modal({ backdrop: 'static', keyboard: false });
+        if (json.rows.length > 0) {
+            var item = json.rows[0];
+            //显示记录
+            $("#txtID").val(item.ID);
+            $("#txtGPSID").val(item.GPSID);
+            $("#txtVehicleNo").val(item.VehicleNo);
+            $("#txtMobile").val(item.Mobile);
+            $("#txtRemark").val(item.Remark);
+            $("#mod_info").modal({ backdrop: 'static', keyboard: false });
+        } else {
+            bootbox.alert(hint.not_find);
+        }
     });
 }
 
@@ -50,13 +54,12 @@ function set_record() {
     var q = new Query('/vehicle/set', 'POST', $("#record"));
     var params = q.init();
     q.request(params, function(json) {
-        if (!value) {
+        if (!json.ok) {
             bootbox.alert(hint.save_fail);
             return;
         }
         $("#mod_info").modal('hide');
         bootbox.alert(hint.save_success, function() {
-            $("#Pagination").page('destroy');
             get_list(1);
         });
     });
@@ -79,12 +82,12 @@ function delete_record(id) {
             };
             var q = new Query('/vehicle/delete', 'POST');
             q.request(params, function(json) {
-                if (!value) {
+                console.log(json);
+                if (json.ok != 1) {
                     bootbox.alert(hint.delete_fail);
                     return;
                 }
                 bootbox.alert(hint.delete_success, function() {
-                    $("#Pagination").page('destroy');
                     get_list(1);
                 });
             });
