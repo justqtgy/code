@@ -16,12 +16,12 @@ namespace WebMatrixCode
 {
     public partial class FormMain : Form
     {
-        Database db;
         XmlHelper xml = null; 
         string xmlPath = string.Empty;
-        string strNamespace = string.Empty;
+        
         string connectionString = string.Empty;
-        string dbType = "SqlServer";
+        DBHelper.DBType dbType = DBHelper.DBType.SqlServer;
+
 
         public FormMain()
         {
@@ -39,18 +39,14 @@ namespace WebMatrixCode
         {
             try
             {
+                connectionString = txtConnString.Text;
+
                 List<string> lists = null;
-                dbType = cmbDbType.Text;
-                if (dbType == "SqlServer")
-                {
-                    lists = SqlServerHelper.GetDbTables(connectionString);
-                }
-                else
-                {
-                    lists = MysqlHelper.GetDbTables(connectionString);
-                }
+                dbType = (DBHelper.DBType)Enum.Parse(typeof(DBHelper.DBType), cmbDbType.Text);
+                lists = DBHelper.GetDbTables(dbType, connectionString);
+              
                 lvTable.Items.Clear();
-                foreach(var table in lists)
+                foreach (var table in lists)
                 {
                     ListViewItem item = new ListViewItem();
                     item.ImageIndex = 2;
@@ -99,88 +95,13 @@ namespace WebMatrixCode
 
         private void btnBuild_Click(object sender, EventArgs e)
         {
-
+            string strPath = txtTablePath.Text;
+            string strNamespace = txtNamespace.Text;
+            string projType = rdbtnAspNet.Checked ? "AspNet" : "Nodejs";
             
+            CodeHelper.CreateCode(dbType, connectionString, strNamespace, strPath, projType);
         }
 
-        private void CreateAspNetProject()
-        {
-            strNamespace = txtNamespace.Text;
-            string strPath = txtTablePath.Text;
-            try
-            {
-                if (Directory.Exists(strPath)) Directory.Delete(strPath, true);
-
-                string strDataPath = strPath + @"\" + strNamespace + ".Data";
-                if (!Directory.Exists(strDataPath)) Directory.CreateDirectory(strDataPath);
-                AspNet.DbCodeHelper.CreateCSFile(connectionString, strDataPath, strNamespace);
-
-                string strWebPath = strPath + @"\" + strNamespace + ".Web";
-
-                CopyDirectory(Application.StartupPath + "\\Template", strWebPath);
-
-                /*
-                //创建web站点
-                if (!Directory.Exists(strWebPath)) Directory.CreateDirectory(strWebPath);
-                //创建css目录
-                if (!Directory.Exists(strWebPath + @"\Content\")) Directory.CreateDirectory(strWebPath + @"\Content\");
-                //创建script（存放jquery等js的目录）
-                if (!Directory.Exists(strWebPath + @"\Scripts\")) Directory.CreateDirectory(strWebPath + @"\Scripts\");
-                */
-
-                //创建js目录
-                AspNet.JsCodeHelper.CreateJSFile(connectionString, strWebPath, strNamespace);
-                //创建handler目录（ajax调用）
-                AspNet.ControllerCodeHelper.CreateControllerFiles(connectionString, strWebPath, strNamespace);
-                //创建sidebar（cshtml调用）
-                AspNet.SidebarCodeHelper.CreatePageFile(connectionString, strWebPath, strNamespace);
-                //创建view目录（存放页面）
-                AspNet.PageCodeHelper.CreatePageFile(connectionString, strWebPath, strNamespace);
-
-
-                MessageHelper.ShowSuccessMessage("代码生成成功");
-            }
-            catch (Exception ex)
-            {
-                MessageHelper.ShowErrorMessage(ex.Message);
-            }
-        }
-        /*
-        private void CreateNodejsProject()
-        {
-            strNamespace = txtNamespace.Text;
-            string strPath = txtTablePath.Text;
-            try
-            {
-                if (Directory.Exists(strPath)) Directory.Delete(strPath, true);
-
-                string strWebPath = strPath + @"\" + strNamespace + ".Web";
-
-                CopyDirectory(Application.StartupPath + "\\Template", strWebPath);
-
-
-
-                //创建controller文件
-                Nodejs.ControllerCodeHelper.CreateControllerFiles(connectionString, strWebPath);
-                //创建js目录
-                Nodejs.JsCodeHelper.CreateJSFile(connectionString, strWebPath);
-                //创建router目录
-                Nodejs.RoutesCodeHelper.CreateRoutesFiles(connectionString, strWebPath);
-                //创建view/shared目录（存放导航页面）
-                Nodejs.SidebarCodeHelper.CreatePageFile(connectionString, strWebPath);
-                //创建view目录（存放页面）
-                Nodejs.PageCodeHelper.CreatePageFile(connectionString, strWebPath);
-                //创建model目录
-                Nodejs.DbCodeHelper.CreateModelFile(connectionString, strWebPath);
-
-                MessageHelper.ShowSuccessMessage("代码生成成功");
-            }
-            catch (Exception ex)
-            {
-                MessageHelper.ShowErrorMessage(ex.Message);
-            }
-        }
-        */
         /// <summary>
         /// 复制文件夹（及文件夹下所有子文件夹和文件）
         /// </summary>
@@ -206,8 +127,10 @@ namespace WebMatrixCode
 
         private void lvTable_Click(object sender, EventArgs e)
         {
-            string strTable = lvTable.SelectedItems[0].Text;
-            var columns = GetTableColumn(strTable);
+            List<TableDesc> columns = null;
+
+            string strTable = lvTable.SelectedItems[0].Text; 
+            columns = DBHelper.GetTableColumn(dbType,connectionString, strTable);           
             
             int index = 0;
             lvColumn.Items.Clear();

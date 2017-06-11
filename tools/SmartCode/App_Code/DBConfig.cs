@@ -85,8 +85,13 @@ namespace WebMatrixCode
 
     public class TableDesc
     {
-        public string Field { get; set; }
-        public string Type { get; set; }
-        public string Key { get; set; }
+        public string ColumnName { get; set; }
+        public string DataType { get; set; }
+        public bool IsKey { get; set; }
+        public string ColumnDesc { get; set; }
+        //public TableDesc(string columnName, string dataType, string key)
+        //{
+
+        //}
     }
 }

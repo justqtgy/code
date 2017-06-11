@@ -10,36 +10,28 @@ namespace WebMatrixCode.AspNet
 {
     public class ControllerCodeHelper
     {
-        public static void CreateControllerFiles(Database db, DBConfig dbConfig, string strPath, string strNamespace)
+        public static void CreateControllerFiles(string tableName, List<TableDesc> columns, string strPath, string strNamespace)
         {
-            //获取当前数据库的表
-            var list = MatrixDataHelper.GetDbTables(db, dbConfig.DBType);
-            //循环表
-            foreach (var item in list)
-            {
-                string tableName = item.Name;
+            string strUsing = "using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing System.Web;\r\nusing System.Web.Http;\r\nusing WebMatrix.Data;\r\nusing SmartLib.Common;";
 
-                string strUsing = "using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing System.Web;\r\nusing System.Web.Http;\r\nusing WebMatrix.Data;\r\nusing SmartLib.Common;";
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(strUsing);
+            sb.AppendLine();
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(strUsing);
-                sb.AppendLine();
+            sb.AppendLine("namespace " + strNamespace + ".Controllers");
+            sb.AppendLine("{");
+            sb.AppendLine("\tpublic class " + tableName + "Controller : ApiController");
+            sb.AppendLine("\t{");
+            sb.AppendLine("\t\t");
+            sb.AppendLine(CreateGetListFunction(strNamespace, tableName));
+            sb.AppendLine(CreateGetRecordFunction(strNamespace, tableName));
+            sb.AppendLine(CreatePostFunction(strNamespace, tableName));
+            // sb.AppendLine(CreatePutFunction(db, dbConfig, strNamespace, tableName));
+            sb.AppendLine(CreateDeleteFunction(strNamespace, tableName));
+            sb.AppendLine("\t}");
+            sb.AppendLine("}");
 
-                sb.AppendLine("namespace " + strNamespace + ".Controllers");
-                sb.AppendLine("{");
-                sb.AppendLine("\tpublic class " + tableName + "Controller : ApiController");
-                sb.AppendLine("\t{");
-                sb.AppendLine("\t\t");
-                sb.AppendLine(CreateGetListFunction(strNamespace, tableName));
-                sb.AppendLine(CreateGetRecordFunction(strNamespace, tableName));
-                sb.AppendLine(CreatePostFunction(db, dbConfig, strNamespace, tableName));
-                // sb.AppendLine(CreatePutFunction(db, dbConfig, strNamespace, tableName));
-                sb.AppendLine(CreateDeleteFunction(strNamespace, tableName));
-                sb.AppendLine("\t}");
-                sb.AppendLine("}");
-
-                WriteFile(strPath + "\\Controllers", tableName + "Controller", sb.ToString());
-            }
+            WriteFile(strPath + "\\Controllers", tableName + "Controller", sb.ToString());
         }
 
         private static string CreateGetListFunction(string strNamespace, string tableName)
@@ -76,7 +68,7 @@ namespace WebMatrixCode.AspNet
             return sb.ToString();
         }
 
-        private static string CreatePostFunction(Database db, DBConfig dbConfig, string strNamespace, string tableName)
+        private static string CreatePostFunction(string strNamespace, string tableName)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("\t\t/// <summary>");

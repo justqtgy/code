@@ -10,18 +10,18 @@ namespace WebMatrixCode.AspNet
 {
     public class SidebarCodeHelper
     {
-        public static void CreatePageFile(Database db, DBConfig dbConfig, string strPath, string strNamespace)
+        public static void CreatePageFile(DBHelper.DBType dbType,string connectionString, string strPath)
         {
             
             string path = System.Windows.Forms.Application.StartupPath;
             SmartLib.Common.FileHelper f = new SmartLib.Common.FileHelper();
-            string tmpContent = f.ReadFileByTxt(path + "\\config\\sidebar.txt");
+            string tmpContent = f.ReadFileByTxt(path + "\\config\\AspNet\\sidebar.txt");
 
             StringBuilder sb = new StringBuilder();
             //获取当前数据库的表
-            var list = MatrixDataHelper.GetDbTables(db, dbConfig.DBType);
+            var tableLists = DBHelper.GetDbTables(dbType,connectionString);
             //循环表
-            foreach (var item in list)
+            foreach (var item in tableLists)
             {
                 string tableName = item.ToString();
                 sb.AppendLine("<li>");

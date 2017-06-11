@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rdbtnNodejs = new System.Windows.Forms.RadioButton();
+            this.rdbtnAspNet = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtNamespace = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuild = new System.Windows.Forms.Button();
@@ -55,9 +58,6 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label3 = new System.Windows.Forms.Label();
-            this.rdbtnAspNet = new System.Windows.Forms.RadioButton();
-            this.rdbtnNodejs = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -81,6 +81,37 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "生成代码路径";
+            // 
+            // rdbtnNodejs
+            // 
+            this.rdbtnNodejs.AutoSize = true;
+            this.rdbtnNodejs.Checked = true;
+            this.rdbtnNodejs.Location = new System.Drawing.Point(262, 30);
+            this.rdbtnNodejs.Name = "rdbtnNodejs";
+            this.rdbtnNodejs.Size = new System.Drawing.Size(59, 16);
+            this.rdbtnNodejs.TabIndex = 8;
+            this.rdbtnNodejs.TabStop = true;
+            this.rdbtnNodejs.Text = "Nodejs";
+            this.rdbtnNodejs.UseVisualStyleBackColor = true;
+            // 
+            // rdbtnAspNet
+            // 
+            this.rdbtnAspNet.AutoSize = true;
+            this.rdbtnAspNet.Location = new System.Drawing.Point(115, 30);
+            this.rdbtnAspNet.Name = "rdbtnAspNet";
+            this.rdbtnAspNet.Size = new System.Drawing.Size(59, 16);
+            this.rdbtnAspNet.TabIndex = 7;
+            this.rdbtnAspNet.Text = "AspNet";
+            this.rdbtnAspNet.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(27, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "项目类型";
             // 
             // txtNamespace
             // 
@@ -303,37 +334,6 @@
             // 
             this.columnHeader5.Text = "类型";
             this.columnHeader5.Width = 64;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "项目类型";
-            // 
-            // rdbtnAspNet
-            // 
-            this.rdbtnAspNet.AutoSize = true;
-            this.rdbtnAspNet.Location = new System.Drawing.Point(115, 30);
-            this.rdbtnAspNet.Name = "rdbtnAspNet";
-            this.rdbtnAspNet.Size = new System.Drawing.Size(59, 16);
-            this.rdbtnAspNet.TabIndex = 7;
-            this.rdbtnAspNet.TabStop = true;
-            this.rdbtnAspNet.Text = "AspNet";
-            this.rdbtnAspNet.UseVisualStyleBackColor = true;
-            // 
-            // rdbtnNodejs
-            // 
-            this.rdbtnNodejs.AutoSize = true;
-            this.rdbtnNodejs.Location = new System.Drawing.Point(262, 30);
-            this.rdbtnNodejs.Name = "rdbtnNodejs";
-            this.rdbtnNodejs.Size = new System.Drawing.Size(59, 16);
-            this.rdbtnNodejs.TabIndex = 8;
-            this.rdbtnNodejs.TabStop = true;
-            this.rdbtnNodejs.Text = "Nodejs";
-            this.rdbtnNodejs.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 

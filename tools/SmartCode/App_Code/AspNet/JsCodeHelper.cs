@@ -10,29 +10,24 @@ namespace WebMatrixCode.AspNet
 {
     public class JsCodeHelper
     {
-        public static void CreateJSFile(Database db, DBConfig dbConfig, string strPath, string strNamespace)
+        public static void CreateJSFile(string tableName, IEnumerable<dynamic> columnList, string strPath, string strNamespace)
         {
-            //获取当前数据库的表
-            var list = MatrixDataHelper.GetDbTables(db, dbConfig.DBType);
-            //循环表
-            foreach (var item in list)
-            {
-                string tableName = item.Name;
 
                 StringBuilder sb = new StringBuilder();
 
-                sb.AppendLine(CreateGetListFunction(db, dbConfig, tableName));
-                sb.AppendLine(CreateGetRecordFunction(db, dbConfig, tableName));
-                sb.AppendLine(CreateAddFunction(db, dbConfig, tableName));
+
+                sb.AppendLine(CreateGetListFunction(columnList, tableName));
+                sb.AppendLine(CreateGetRecordFunction(columnList, tableName));
+                sb.AppendLine(CreateAddFunction(columnList, tableName));
                 sb.AppendLine(CreateDeleteFunction(tableName));
                 sb.AppendLine(CreateModalFunction());
-                sb.AppendLine(CreateClearFunction(db, dbConfig, tableName));
+                sb.AppendLine(CreateClearFunction(columnList, tableName));
 
-                WriteFile(strPath + "\\JS", tableName, sb.ToString());
-            }
+            WriteFile(strPath + "\\public\\javascripts", tableName, sb.ToString());
+
         }
 
-        private static string CreateGetListFunction(Database db, DBConfig dbConfig, string tableName)
+        private static string CreateGetListFunction(IEnumerable<dynamic> columnList, string tableName)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("var displayNumber = 20;");
@@ -57,8 +52,7 @@ namespace WebMatrixCode.AspNet
             sb.AppendLine("\t\t\t$.each(json.Data, function(i, item) {");
             sb.AppendLine("\t\t\t\t$(\"<tr class='newrow'></tr>\").append(");
 
-            var items = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
-            foreach (var item in items)
+            foreach (var item in columnList)
             {
                 string strColumn = item.ColumnName;
                 sb.AppendLine("\t\t\t\t\t\"<td>\" + item." + strColumn + "+ \"</td>\" + ");
@@ -77,7 +71,7 @@ namespace WebMatrixCode.AspNet
             return sb.ToString();
         }
 
-        private static string CreateGetRecordFunction(Database db, DBConfig dbConfig, string tableName)
+        private static string CreateGetRecordFunction(IEnumerable<dynamic> columnList, string tableName)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("//获取记录信息");
@@ -97,8 +91,7 @@ namespace WebMatrixCode.AspNet
             sb.AppendLine("\t\t\t//显示记录");
 
             string strColumn = string.Empty;
-            var items = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
-            foreach (var item in items)
+            foreach (var item in columnList)
             {
                 strColumn = item.ColumnName;
                 sb.AppendLine("\t\t\t$(\"#txt" + strColumn + "\").val(json." + strColumn + ")");
@@ -111,16 +104,16 @@ namespace WebMatrixCode.AspNet
             return sb.ToString();
         }
 
-        private static string CreateAddFunction(Database db, DBConfig dbConfig, string tableName)
+        private static string CreateAddFunction(IEnumerable<dynamic> columnList, string tableName)
         {         
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("//添加记录信息");
             sb.AppendLine("function set_record(){");
             sb.AppendLine("\tvar data_format = { ");            
-            IEnumerable<dynamic> items = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
+
             int index = 0;
-            int count = items.Count();
-            foreach (var item in items)
+            int count = columnList.Count();
+            foreach (var item in columnList)
             {
                 index++;
                 string strColumn = item.ColumnName;
@@ -207,14 +200,14 @@ namespace WebMatrixCode.AspNet
             return sb.ToString();
         }
 
-        private static string CreateClearFunction(Database db, DBConfig dbConfig, string tableName)
+        private static string CreateClearFunction(IEnumerable<dynamic> columnList, string tableName)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("//获取记录信息");
             sb.AppendLine("function clear_control(){");
             string strColumn = string.Empty;
-            var items = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
-            foreach (var item in items)
+            
+            foreach (var item in columnList)
             {
                 strColumn = item.ColumnName;
                 sb.AppendLine("\t$(\"#txt" + strColumn + "\").val(\"\");");

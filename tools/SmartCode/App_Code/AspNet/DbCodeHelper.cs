@@ -14,26 +14,19 @@ namespace WebMatrixCode.AspNet
         public DbCodeHelper()
         {
             
-        }        
+        }
 
-        public static void CreateCSFile(string connectionString, string strPath, string strNamespace)
+        public static void CreateCSFile(string tableName, List<TableDesc> columns, string strPath, string strNamespace)
         {
             string strDbBase = CreateDbBaseFile();
             WriteFile(strPath + "\\DbBase", "DatabaseHelper", strDbBase);
 
-            //获取当前数据库的表
-            var list = SqlServerHelper.GetDbTables(connectionString);
+            string strDbContext = CreateDbContextFile(strNamespace, tableName, columns);
+            WriteFile(strPath + "\\DbAccess", tableName, strDbContext);
 
-            //循环表
-            foreach (var item in list)
-            {
-                string tableName = item;
-                string strDbContext = CreateDbContextFile(strNamespace, tableName);
-                WriteFile(strPath + "\\DbAccess", tableName, strDbContext);
+            string strEntity = CreateEntityFile(strNamespace, tableName, columns);
+            WriteFile(strPath + "\\Entity", tableName, strEntity);
 
-                string strEntity = CreateEntityFile(strNamespace, tableName);
-                WriteFile(strPath + "\\Entity", tableName, strEntity);
-            }
         }
 
         private static string CreateDbBaseFile()
@@ -54,10 +47,9 @@ namespace WebMatrixCode.AspNet
             return sb.ToString();
         }
 
-        private static string CreateDbContextFile(Database db, DBConfig dbConfig, string strNamespace, string tableName)
+        private static string CreateDbContextFile(string strNamespace, string tableName, List<TableDesc> columns)
         {
-            var lists = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
-            var firstItem = lists.First<dynamic>();
+            var firstItem = columns.First<dynamic>();
             var keyName = firstItem.ColumnName;
             var keyType =  DBConfig.GetSystemType(firstItem.DataType);
 
@@ -77,14 +69,14 @@ namespace WebMatrixCode.AspNet
             //sb.AppendLine(CreateExistsFunction(tableName, keyType, keyName));
             sb.AppendLine(CreateGetListFunction(tableName, keyName));
             sb.AppendLine(CreateGetRecordFunction(tableName, keyType, keyName));
-            sb.AppendLine(CreateAddFunction(db, dbConfig, tableName));
-            sb.AppendLine(CreateUpdateFunction(db, dbConfig, tableName));
+            sb.AppendLine(CreateAddFunction(tableName, columns));
+            sb.AppendLine(CreateUpdateFunction(tableName, columns));
             sb.AppendLine(CreateDeleteFunction(tableName, keyType, keyName));
             sb.AppendLine("\t}");
             sb.AppendLine("}");
             return sb.ToString();
         }
-        private static string CreateEntityFile(Database db, DBConfig dbConfig,string strNamespace, string tableName)
+        private static string CreateEntityFile(string strNamespace, string tableName, List<TableDesc> columns)
         {
             string strUsing = "using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;";
 
@@ -97,8 +89,7 @@ namespace WebMatrixCode.AspNet
             sb.AppendLine("\tpublic class " + tableName);
             sb.AppendLine("\t{");
 
-            var lists = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
-            foreach(var item in lists)
+            foreach(var item in columns)
             {                
                 sb.AppendLine("\t\t/// <summary>");
                 sb.AppendLine("\t\t/// " + item.ColumnName);
@@ -191,7 +182,7 @@ namespace WebMatrixCode.AspNet
             return sb.ToString();
         }
 
-        private static string CreateAddFunction(Database db, DBConfig dbConfig, string tableName)
+        private static string CreateAddFunction(string tableName, List<TableDesc> columns)
         {            
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("\t\t/// <summary>");
@@ -206,8 +197,7 @@ namespace WebMatrixCode.AspNet
             string strItems = string.Empty;
             string strValues = string.Empty;
 
-            IEnumerable<dynamic> lists = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
-            foreach (var item in lists)
+            foreach (var item in columns)
             {
                 if (item.ColumnName.ToLower() == "id")
                 {
@@ -237,7 +227,7 @@ namespace WebMatrixCode.AspNet
         }
 
 
-        private static string CreateUpdateFunction(Database db, DBConfig dbConfig, string tableName)
+        private static string CreateUpdateFunction(string tableName,List<TableDesc> columns)
         {
             
             StringBuilder sb = new StringBuilder();
@@ -252,10 +242,10 @@ namespace WebMatrixCode.AspNet
             int i = 0;
             string strItems = string.Empty;
             string strValues = string.Empty;
-            var lists = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
-            var firstItem = lists.First<dynamic>();
+
+            var firstItem = columns.First<dynamic>();
             var keyName = firstItem.ColumnName;
-            foreach (var item in lists)
+            foreach (var item in columns)
             {
  
                 if (item.ColumnName.ToLower() == keyName.ToLower())

@@ -10,33 +10,23 @@ namespace WebMatrixCode.AspNet
 {
     public class PageCodeHelper
     {
-        public static void CreatePageFile(Database db, DBConfig dbConfig, string strPath, string strNamespace)
+        public static void CreatePageFile(string tableName, List<TableDesc> columns, string strPath)
         {
-            //获取当前数据库的表
-            var list = MatrixDataHelper.GetDbTables(db, dbConfig.DBType);
-            //循环表
-            foreach (var item in list)
-            {
-                string tableName = item.Name;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(CreateViewPage(tableName, columns));
+            //WriteFile(strPath + "\\Views", tableName+"_List", sb.ToString());
+            WriteFile(strPath + "\\Views", tableName, sb.ToString());
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(CreateViewPage(db, dbConfig, tableName));
-                //WriteFile(strPath + "\\Views", tableName+"_List", sb.ToString());
-                WriteFile(strPath + "\\Views", tableName , sb.ToString());
-
-                //sb = new StringBuilder();
-                //sb.AppendLine(CreateEditPage(db, dbConfig, tableName));
-                //WriteFile(strPath + "\\Views", tableName+"_Edit", sb.ToString());
-
-
-            }
+            //sb = new StringBuilder();
+            //sb.AppendLine(CreateEditPage(db, dbConfig, tableName));
+            //WriteFile(strPath + "\\Views", tableName+"_Edit", sb.ToString());
         }
 
-        private static string CreateViewPage(Database db, DBConfig dbConfig, string tableName)
+        private static string CreateViewPage(string tableName, List<TableDesc> columns)
         {
             string path = System.Windows.Forms.Application.StartupPath;
             SmartLib.Common.FileHelper f = new SmartLib.Common.FileHelper();
-            string tmpContent = f.ReadFileByTxt(path + "\\config\\aspx.txt");
+            string tmpContent = f.ReadFileByTxt(path + "\\config\\AspNet\\aspx.txt");
             tmpContent = tmpContent.Replace("<%=TableName%>", tableName.ToString());
 
             StringBuilder sb = new StringBuilder();
@@ -57,11 +47,11 @@ namespace WebMatrixCode.AspNet
             //sb.AppendLine("\t<div style=\"padding:1px;background:#efefef;\" ><a href=\"#\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-add'\" onclick=\"add_record();\">新增</a></div>");
             //sb.AppendLine("\t<table id=\"tt\" cellspacing=\"0\" class=\"table_record\">");
             //sb.AppendLine("\t\t<tr>");
-            var items = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
-            foreach (var item in items)
+            foreach (var item in columns)
             {
-                string strColumn = item.ColumnName;
-                sb.AppendLine("\t\t\t<th>" + strColumn + "</th> ");
+                string strColumnName = item.ColumnName;
+                string strColumnDesc = item.ColumnDesc;
+                sb.AppendLine("\t\t\t<th>" + (!string.IsNullOrEmpty(strColumnDesc) ? strColumnDesc : strColumnName) + "</th> ");
             }
             sb.AppendLine("\t\t\t<th style=\"width:120px;\">操作</th>");
             //sb.AppendLine("\t\t</tr>");
@@ -72,12 +62,13 @@ namespace WebMatrixCode.AspNet
 
             //编辑
             sb = new StringBuilder();
-            foreach (var item in items)
+            foreach (var item in columns)
             {
-                string strColumn = item.ColumnName;
+                string strColumnName = item.ColumnName;
+                string strColumnDesc = (!string.IsNullOrEmpty(item.ColumnDesc) ? item.ColumnDesc : strColumnName);
                 sb.AppendLine("\t<div class=\"form-group\">");
-                sb.AppendLine("\t\t<label for=\"txt" + strColumn + "\">" + strColumn + "</label>");
-                sb.AppendLine("\t\t<input type=\"text\" id=\"txt" + strColumn + "\" name=\"" + strColumn + "\" class=\"form-control\" placeholder=\"请输入" + strColumn + "\"/>");
+                sb.AppendLine("\t\t<label for=\"txt" + strColumnName + "\">" + strColumnDesc + "</label>");
+                sb.AppendLine("\t\t<input type=\"text\" id=\"txt" + strColumnName + "\" name=\"" + strColumnName + "\" class=\"form-control\" placeholder=\"请输入" + strColumnDesc + "\"/>");
                 sb.AppendLine("\t</div>");
             }
 
@@ -86,46 +77,46 @@ namespace WebMatrixCode.AspNet
             //return sb.ToString();
         }
 
-        private static string CreateEditPage(Database db, DBConfig dbConfig, string tableName)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("@{");
-            sb.AppendLine("\tLayout = \"~/_SiteLayout.cshtml\";");
-            sb.AppendLine("\tPage.Title = \"" + tableName + "\";");
-            sb.AppendLine("}");
+        //private static string CreateEditPage(Database db, DBConfig dbConfig, string tableName)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.AppendLine("@{");
+        //    sb.AppendLine("\tLayout = \"~/_SiteLayout.cshtml\";");
+        //    sb.AppendLine("\tPage.Title = \"" + tableName + "\";");
+        //    sb.AppendLine("}");
 
-            sb.AppendLine("<div id=\"loading\" style=\"top: 50%; right: 50%; position: absolute; padding: 0px; margin: 0px; z-index: 999; display: none;\">");
-            sb.AppendLine("\t<img src=\"../Content/images/spinner3-greenie.gif\" alt=\"load_data\" />");
-            sb.AppendLine("</div>");
-            sb.AppendLine("<div class=\"postion\">");
-            sb.AppendLine("\t<span class=\"f_b_blue\">您的当前位置：</span>" + tableName);
-            sb.AppendLine("</div>");
-            sb.AppendLine("<div class=\"cont_f_lb\">");
-            sb.AppendLine("</div>");
+        //    sb.AppendLine("<div id=\"loading\" style=\"top: 50%; right: 50%; position: absolute; padding: 0px; margin: 0px; z-index: 999; display: none;\">");
+        //    sb.AppendLine("\t<img src=\"../Content/images/spinner3-greenie.gif\" alt=\"load_data\" />");
+        //    sb.AppendLine("</div>");
+        //    sb.AppendLine("<div class=\"postion\">");
+        //    sb.AppendLine("\t<span class=\"f_b_blue\">您的当前位置：</span>" + tableName);
+        //    sb.AppendLine("</div>");
+        //    sb.AppendLine("<div class=\"cont_f_lb\">");
+        //    sb.AppendLine("</div>");
 
-            sb.AppendLine("<div id=\"content\">");
+        //    sb.AppendLine("<div id=\"content\">");
             
-            sb.AppendLine("\t<table id=\"tt\" cellspacing=\"0\" class=\"table_record\">");            
-            var items = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
-            foreach (var item in items)
-            {
-                string strColumn = item.ColumnName;
-                sb.AppendLine("\t\t<tr>");
-                sb.AppendLine("\t\t\t<th>" + strColumn + "</th> ");
-                sb.AppendLine("\t\t\t<td><input type=\"text\" id=\"txt"+ strColumn +"\" name=\""+ strColumn +"\" value=\"\" /></td>");
-                sb.AppendLine("\t\t</tr>");
-            }
-            sb.AppendLine("\t\t<tr>");
-            sb.AppendLine("\t\t\t<th colspan=\"2\">");
-            sb.AppendLine("\t\t\t\t<a href=\"javascirpt:void(0);\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-save'\" id=\"btnSave\">保存</a>");
-            sb.AppendLine("\t\t\t\t<a href=\"javascirpt:void(0);\" class=\"easyui-linkbutton\" id=\"btnCancel\">取消</a>");
-            sb.AppendLine("\t\t\t</th>");
-            sb.AppendLine("\t\t</tr>");
-            sb.AppendLine("\t</table>");          
-            sb.AppendLine("</div>");
+        //    sb.AppendLine("\t<table id=\"tt\" cellspacing=\"0\" class=\"table_record\">");            
+        //    var items = MatrixDataHelper.GetTableColumn(db, tableName, dbConfig.DBType);
+        //    foreach (var item in items)
+        //    {
+        //        string strColumn = item.ColumnName;
+        //        sb.AppendLine("\t\t<tr>");
+        //        sb.AppendLine("\t\t\t<th>" + strColumn + "</th> ");
+        //        sb.AppendLine("\t\t\t<td><input type=\"text\" id=\"txt"+ strColumn +"\" name=\""+ strColumn +"\" value=\"\" /></td>");
+        //        sb.AppendLine("\t\t</tr>");
+        //    }
+        //    sb.AppendLine("\t\t<tr>");
+        //    sb.AppendLine("\t\t\t<th colspan=\"2\">");
+        //    sb.AppendLine("\t\t\t\t<a href=\"javascirpt:void(0);\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-save'\" id=\"btnSave\">保存</a>");
+        //    sb.AppendLine("\t\t\t\t<a href=\"javascirpt:void(0);\" class=\"easyui-linkbutton\" id=\"btnCancel\">取消</a>");
+        //    sb.AppendLine("\t\t\t</th>");
+        //    sb.AppendLine("\t\t</tr>");
+        //    sb.AppendLine("\t</table>");          
+        //    sb.AppendLine("</div>");
 
-            return sb.ToString();
-        }
+        //    return sb.ToString();
+        //}
 
         /// <summary>
         /// 将特定文本内容写入特定文件(覆盖写入)

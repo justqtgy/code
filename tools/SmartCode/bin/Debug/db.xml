@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <DBConnections>
   <DBConnection>
-    <SqlServer>Data Source=localhost\sqlexpress;Initial Catalog=Demo;User Id=sa;Password=root;</SqlServer>
-    <SqlExpress>Server = .\SQLExpress;AttachDbFilename = D:\Trancell\Trancell.SmartHome\SQL\SmartHome.mdf;Database = dbname; Trusted_Connection = Yes;</SqlExpress>
-    <SqlExpress_db>Data Source=.\SQLEXPRESS;Initial Catalog=SmartHome;User Id=sa;Password=showme</SqlExpress_db>    
+    <SqlServer>Data Source=120.24.68.95;Initial Catalog=gserver_data;User Id=sa;Password=DSERVER@123;</SqlServer>
+    <SqlExpress>Server = .\SQLExpress;AttachDbFilename = D:\Trancell\Trancell.SmartHome\SQL\SmartHome.mdf;Database = dbname; Trusted_Connection = Yes;</SqlExpress> 
     <SqlCe>Data Source=E:\MyTools\MatrixCode\bin\Debug\SDF\Demo.sdf</SqlCe>
-    <Access></Access>
+    <MySql>Server=127.0.0.1;Database=gps;Uid=root;Pwd=123456;</MySql>
   </DBConnection>
 </DBConnections>

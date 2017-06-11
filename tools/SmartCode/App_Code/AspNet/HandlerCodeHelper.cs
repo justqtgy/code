@@ -11,39 +11,31 @@ namespace WebMatrixCode.AspNet
 {
     public class HandlerCodeHelper
     {
-        public static void CreateHandlerFiles(Database db, DBConfig dbConfig, string strPath, string strNamespace)
+        public static void CreateHandlerFiles(string tableName, List<TableDesc> columns, string strPath, string strNamespace)
         {          
-            //获取当前数据库的表
-            var list = MatrixDataHelper.GetDbTables(db, dbConfig.DBType);
-            //循环表
-            foreach (var item in list)
-            {
-                string tableName = item.Name;
+            string strUsing = "using System;\r\nusing System.Data;\r\nusing System.Web;\r\nusing "+strNamespace+ ".Data;\r\nusing SmartLib.Common;";
 
-                string strUsing = "using System;\r\nusing System.Data;\r\nusing System.Web;\r\nusing "+strNamespace+ ".Data;\r\nusing SmartLib.Common;";
-
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("<%@ WebHandler Language=\"C#\" Class=\""+ tableName +"Handler\" %>");
-                sb.AppendLine(strUsing);
-                sb.AppendLine();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<%@ WebHandler Language=\"C#\" Class=\""+ tableName +"Handler\" %>");
+            sb.AppendLine(strUsing);
+            sb.AppendLine();
 
 
-                sb.AppendLine("public class " + tableName + "Handler : IHttpHandler {");
-                sb.AppendLine(CreateProcessFunction());
-                sb.AppendLine(CreateGetListFunction(strNamespace, tableName));
-                sb.AppendLine(CreateGetRecordFunction(strNamespace, tableName));
-                sb.AppendLine(CreateAddFunction(db, dbConfig, strNamespace, tableName));
-                sb.AppendLine(CreateDeleteFunction(strNamespace, tableName));
+            sb.AppendLine("public class " + tableName + "Handler : IHttpHandler {");
+            sb.AppendLine(CreateProcessFunction());
+            sb.AppendLine(CreateGetListFunction(strNamespace, tableName));
+            sb.AppendLine(CreateGetRecordFunction(strNamespace, tableName));
+            sb.AppendLine(CreateAddFunction(db, dbConfig, strNamespace, tableName));
+            sb.AppendLine(CreateDeleteFunction(strNamespace, tableName));
 
-                sb.AppendLine("\tpublic bool IsReusable {");
-                sb.AppendLine("\t\tget {");
-                sb.AppendLine("\t\t\treturn false;");
-                sb.AppendLine("\t\t}");
-                sb.AppendLine("\t}");
-                sb.AppendLine("}");
+            sb.AppendLine("\tpublic bool IsReusable {");
+            sb.AppendLine("\t\tget {");
+            sb.AppendLine("\t\t\treturn false;");
+            sb.AppendLine("\t\t}");
+            sb.AppendLine("\t}");
+            sb.AppendLine("}");
 
-                WriteFile(strPath + "\\Ajax", tableName + "Handler", sb.ToString());
-            }
+            WriteFile(strPath + "\\Ajax", tableName + "Handler", sb.ToString());            
         }
 
         private static string CreateProcessFunction()

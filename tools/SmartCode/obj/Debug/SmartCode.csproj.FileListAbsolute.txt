@@ -1,0 +1,14 @@
+E:\MyTools\SmartCode\obj\Debug\WebMatrixCode.FormMain.resources
+E:\MyTools\SmartCode\obj\Debug\SmartCode.csproj.GenerateResource.Cache
+E:\MyTools\SmartCode\bin\Debug\MySql.Data.dll
+E:\MyTools\SmartCode\bin\Debug\Newtonsoft.Json.dll
+E:\MyTools\SmartCode\bin\Debug\SmartLib.Common.dll
+E:\MyTools\SmartCode\bin\Debug\WebMatrix.Data.dll
+E:\MyTools\SmartCode\bin\Debug\Newtonsoft.Json.xml
+E:\MyTools\SmartCode\bin\Debug\SmartCode.exe.config
+E:\MyTools\SmartCode\bin\Debug\SmartCode.exe
+E:\MyTools\SmartCode\bin\Debug\SmartCode.pdb
+E:\MyTools\SmartCode\obj\Debug\SmartCode.Properties.Resources.resources
+E:\MyTools\SmartCode\obj\Debug\SmartCode.exe
+E:\MyTools\SmartCode\obj\Debug\SmartCode.pdb
+E:\MyTools\SmartCode\obj\Debug\SmartCode.csprojResolveAssemblyReference.cache
