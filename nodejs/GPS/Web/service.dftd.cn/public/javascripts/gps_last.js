@@ -20,7 +20,9 @@ function get_list(pageIndex) {
 }
 
 function showMap(lat, lng) {
-    $("#mapUrl").attr("src", "/traffic.html?lat=" + lat + "&lng=" + lng);
+    console.log(lat, lng)
+    $("#mapUrl").attr("src", "/location.html?lat=" + lat + "&lng=" + lng);
+    $("#map-modal").modal('show');
     return;
 }
 

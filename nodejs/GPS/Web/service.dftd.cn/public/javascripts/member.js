@@ -25,7 +25,7 @@ function show_list(rows) {
             "<td>" + item.Mobile + "</td>" +
             "<td>" + new Date(item.ExpireTime).toUTCFormat('YYYY-MM-DD') + "</td>" +
             "<td>" + item.WX_OpenID + "</td>" +
-            "<td>" + (item.IsDelete === 0 ? '正常' : '<font color=red>已禁用</font>') + "</td>" +
+            "<td>" + (item.IsDelete == 0 ? '<font color=blue>正常</font>' : '<font color=red>已禁用</font>') + "</td>" +
             "<td><a href='#' onclick='get_record(" + item.ID + ")'><i title='查看' class='fa fa-list'></i>查看</a>" +
             "    <a href='#' onclick='show_pswd_modal(" + item.ID + ")'><i title='修改密码' class='fa fa-lock'></i>修改密码</a>" +
             "    <a href='#' onclick='delete_record(" + item.ID + ")'><i title='删除' class='fa fa-remove'></i>删除</a></td>"

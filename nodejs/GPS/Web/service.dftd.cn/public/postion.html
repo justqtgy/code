@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>基本地图展示</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=e12cc6ed395c712532ee84dabf3467d0"></script>
+    <script type="text/javascript" src="javascripts/include/map.js"></script>
+    <script type="text/javascript" src="javascripts/include/common.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script>
+        var map, marker;
+
+        function showLocation() {
+            //经度
+            var lng = Number(getUrlParam('lng'));
+            var lat = Number(getUrlParam('lat'));
+            var pos = wgs84togcj02(lng, lat);
+            console.log(pos)
+            map = new AMap.Map('container', {
+                resizeEnable: true,
+                zoom: 16,
+                center: pos
+            });
+
+            // 实例化点标记
+            marker = new AMap.Marker({ //添加自定义点标记
+                position: pos, //基点位置
+                //offset: new AMap.Pixel(-10, -12), //相对于基点的偏移位置
+            });
+            marker.setMap(map);
+        }
+
+        showLocation();
+    </script>
+</body>
+
+</html>
