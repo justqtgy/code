@@ -18,6 +18,15 @@ function get_list(pageIndex) {
     });
 }
 
+function showMap(lat, lng) {
+    if (out_of_china(lng, lat)) {
+        bootbox.alert('当前位置错误');
+        return;
+    }
+    $("#mapUrl").attr("src", "postion.html?r=" + Math.random() + "&lat=" + lat + "&lng=" + lng);
+    $("#map-modal").modal('show');
+    return;
+}
 
 var app = new Vue({
     el: '#grid',

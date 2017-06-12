@@ -1,5 +1,5 @@
 
-<%- include ./shared/_header %>
+<%- include ./shared/_header %>     
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link href="../assets/global/plugins/bootstrap-datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
@@ -60,8 +60,8 @@
                                                 <td>{{ item.VehicleNo }}</td> 
                                                 <td>{{ item.GPSID }}</td> 
                                                 <td>{{ item.CurOil }}</td>       
-                                                <td><a  v-bind:href="'postion.html?lng='+item.Lng+'&lat='+item.Lat+'&type=location'" target="_blank">查看</a> </td>
-                                                <!--<td><a href='#' v-bind:click="'showMap('+item.Lng+','+item.Lat+')'">查看</a></td>-->
+                                                <!--<td><a  v-bind:href="'postion.html?lng='+item.Lng+'&lat='+item.Lat+'&type=location'" target="_blank">查看</a> </td>-->
+                                                <td><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看</a></td>
                                                 <td>{{ new Date(item.UpdateTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}</td>  
                                             </tr>
                                         </tbody>
@@ -84,7 +84,7 @@
 
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width:680px; height:480px;">
+        <div class="modal-dialog" style="width:680px">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -95,9 +95,8 @@
                     </h4>
                 </div>
                 <div class="modal-body" style="padding:1px;">
-                    <iframe id="mapUrl" src="" style="width:100%;height:100%;border:0;  overflow:hidden;">
-                     </iframe>
-                    
+                    <iframe id="mapUrl" src="" style="width:100%;height:500px;border:0;  overflow:hidden;">
+                    </iframe>                    
                 </div>
                 
             </div><!-- /.modal-content -->
@@ -118,47 +117,5 @@
     <script src="/javascripts/include/query.js"></script>
     <script src="/javascripts/gps_last.js"></script>
 
-    <!-- BAIDU MAP 
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=MYRG9RF3I1NXCGCwFX8NZ4h3"></script>
-    <script type="text/javascript">
-    //创建和初始化地图函数：
-    function initMap(){
-        createMap();//创建地图
-        setMapEvent();//设置地图事件
-        addMapControl();//向地图添加控件
-    }
-    
-    //创建地图函数：
-    function createMap(){
-        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
-        var point = new BMap.Point(116.395645,39.929986);//定义一个中心点坐标
-        map.centerAndZoom(point,12);//设定地图的中心点和坐标并将地图显示在地图容器中
-        window.map = map;//将map变量存储在全局
-    }
-    
-    //地图事件设置函数：
-    function setMapEvent(){
-        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
-        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
-        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
-        map.enableKeyboard();//启用键盘上下左右键移动地图
-    }
-    
-    //地图控件添加函数：
-    function addMapControl(){
-        //向地图中添加缩放控件
-	var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
-	map.addControl(ctrl_nav);
-        //向地图中添加缩略图控件
-	var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
-	map.addControl(ctrl_ove);
-        //向地图中添加比例尺控件
-	var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
-	map.addControl(ctrl_sca);
-    }
-    
-    
-    initMap();//创建和初始化地图
-</script>-->
 <%- include ./control/_group %> 
 <%- include ./shared/_footer %>
