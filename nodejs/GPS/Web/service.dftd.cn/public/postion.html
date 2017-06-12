@@ -18,26 +18,40 @@
     <div id="container"></div>
 
     <script>
-        var map, marker;
+        var map = new AMap.Map('container', {
+            resizeEnable: true,
+            zoom: 16,
+            //center: pos
+        });
 
         function showLocation() {
             //经度
             var lng = Number(getUrlParam('lng'));
             var lat = Number(getUrlParam('lat'));
             var pos = wgs84togcj02(lng, lat);
-            console.log(pos)
-            map = new AMap.Map('container', {
-                resizeEnable: true,
-                zoom: 16,
-                center: pos
-            });
 
             // 实例化点标记
-            marker = new AMap.Marker({ //添加自定义点标记
+            var marker = new AMap.Marker({ //添加自定义点标记
+                //map: map,
                 position: pos, //基点位置
+
                 //offset: new AMap.Pixel(-10, -12), //相对于基点的偏移位置
             });
+
+            //逆地理编码
+            // geocoder = new AMap.Geocoder({
+            //     radius: 1000,
+            //     extensions: "all"
+            // });
+
+            // geocoder.getAddress(pos, function(status, result) {
+            //     if (status === 'complete' && result.info === 'OK') {
+            //         console.log(result);
+            //     }
+            // });
+
             marker.setMap(map);
+            //map.setFitView();
         }
 
         showLocation();
