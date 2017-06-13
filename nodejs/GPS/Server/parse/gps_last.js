@@ -21,7 +21,7 @@ module.exports.set_lastinfo = function(data) {
         }
         logger.info('Result = ', result);
 
-        if (data.distance < 1000) {
+        if (data.distance < 10) {
             logger.info('Tip = 距离太短不更新坐标：' + data.gpsID + ', ' + data.vehicleID + ', ' + data.vehicleNo + ', ' + data.distance);
         }
         console.log(data);

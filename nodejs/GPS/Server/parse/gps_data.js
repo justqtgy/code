@@ -96,7 +96,9 @@ module.exports.add_data_tianhe = function(data) {
                 logger.info('Result = ', result);
             });
             //定位和轨迹
-            gps_last.set_lastinfo(item);
+            if (item.location.toLowerCase() == 'a') {
+                gps_last.set_lastinfo(item);
+            }
         });
     }
 };

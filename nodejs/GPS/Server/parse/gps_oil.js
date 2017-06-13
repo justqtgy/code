@@ -80,7 +80,9 @@ module.exports.add_realoil_data = function(data) {
 
                 logger.info('Result = ', result);
                 //定位和轨迹
-                gps_last.set_lastinfo(item);
+                if (item.gpsStatus == 1) {
+                    gps_last.set_lastinfo(item);
+                }
             });
         });
     }
@@ -166,7 +168,9 @@ module.exports.add_addoil_data = function(data) {
 
                 logger.info('Result = ', result);
                 //定位和轨迹
-                gps_last.set_lastinfo(item);
+                if (item.gpsStatus == 1) {
+                    gps_last.set_lastinfo(item);
+                }
             });
 
         });
@@ -251,7 +255,9 @@ module.exports.add_leakoil_data = function(data) {
                 logger.info('Result = ', result);
 
                 //定位和轨迹
-                gps_last.set_lastinfo(item);
+                if (item.gpsStatus == 1) {
+                    gps_last.set_lastinfo(item);
+                }
             });
         });
     }
