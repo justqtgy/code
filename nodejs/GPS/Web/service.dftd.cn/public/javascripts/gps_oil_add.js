@@ -23,7 +23,7 @@ function showMap(lat, lng) {
         bootbox.alert('当前位置错误');
         return;
     }
-    $("#mapUrl").attr("src", "postion.html?r=" + Math.random() + "&lat=" + lat + "&lng=" + lng);
+    $("#mapUrl").attr("src", "position.html?r=" + Math.random() + "&lat=" + lat + "&lng=" + lng);
     $("#map-modal").modal('show');
     return;
 }

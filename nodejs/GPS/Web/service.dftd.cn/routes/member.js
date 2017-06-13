@@ -29,7 +29,7 @@ router.post('/list', [get_count], function(req, res, next) {
     member.get_list(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
-            return;
+            return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1, total: req.total, rows: rows });
     });
@@ -40,8 +40,8 @@ router.get('/single', function(req, res, next) {
     var id = req.query.id;
     member.get_single(id, function(err, result) {
         if (err) {
-            res.send({ ok: 0, msg: err });
-            return;
+            log.error('Error = ', err);
+            return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1, rows: result });
     });
@@ -61,16 +61,16 @@ router.post('/set', function(req, res, next) {
     if (args.id) {
         member.update(args, function(err, result) {
             if (err) {
-                res.send({ ok: 0, msg: err });
-                return;
+                log.error('Error = ', err);
+                return res.send({ ok: 0, msg: err });
             }
             res.send({ ok: 1 });
         });
     } else {
         member.add(args, function(err, result) {
             if (err) {
-                res.send({ ok: 0, msg: err });
-                return;
+                log.error('Error = ', err);
+                return res.send({ ok: 0, msg: err });
             }
             res.send({ ok: 1 });
         });
@@ -81,8 +81,8 @@ router.post('/delete', function(req, res, next) {
     var args = req.body;
     member.delete(args, function(err, result) {
         if (err) {
-            res.send({ ok: 0, msg: err });
-            return;
+            log.error('Error = ', err);
+            return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1 });
     });
@@ -108,8 +108,8 @@ router.post('/password', function(req, res, next) {
 
     member.change_password(args, function(err, result) {
         if (err) {
-            res.send({ ok: 0, msg: err });
-            return;
+            log.error('Error = ', err);
+            return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1 });
     });

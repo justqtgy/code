@@ -84,7 +84,7 @@ router.post('/list', [get_count], function(req, res, next) {
     vehicle.get_list(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
-            return;
+            return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1, total: req.total, rows: rows });
     });
@@ -95,7 +95,7 @@ router.post('/single', function(req, res, next) {
     vehicle.get_single(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
-            return;
+            return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1, rows: rows });
     });
@@ -106,16 +106,16 @@ router.post('/set', function(req, res, next) {
     if (args.id) {
         vehicle.update(args, function(err, result) {
             if (err) {
-                res.send({ ok: 0, msg: err });
-                return;
+                log.error('Error = ', err);
+                return res.send({ ok: 0, msg: err });
             }
             res.send({ ok: 1 });
         });
     } else {
         vehicle.add(args, function(err, result) {
             if (err) {
-                res.send({ ok: 0, msg: err });
-                return;
+                log.error('Error = ', err);
+                return res.send({ ok: 0, msg: err });
             }
             res.send({ ok: 1 });
         });
@@ -126,8 +126,8 @@ router.post('/delete', function(req, res, next) {
     var args = req.body;
     vehicle.delete(args, function(err, result) {
         if (err) {
-            res.send({ ok: 0, msg: err });
-            return;
+            log.error('Error = ', err);
+            return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1 });
     });

@@ -15,7 +15,7 @@ var get_count = function(req, res, next) {
     gps_oil.get_count(args, function(err, result) {
         if (err) {
             log.error('Error = ', err);
-            return next();
+            return next(err);
         }
         req.total = result;
         next();
@@ -27,7 +27,7 @@ router.post('/list', [get_count], function(req, res, next) {
     gps_oil.get_list(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
-            return;
+            return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1, total: req.total, rows: rows });
     });

@@ -13,7 +13,7 @@ module.exports = gps_oil_data;
 
 gps_oil_data.get_count = function(params, callback) {
     console.log(params);
-    var sql = " select count(*) as total from GPS_Oil_Data where addtime >='%s' and addtime<dateadd(day, 1, '%s') and vehicleid in (%s)";
+    var sql = " select count(*) as total from GPS_Oil_Data where addtime >='%s' and addtime<dateadd(day, 1, '%s') and vehicleid in (%s) and GPSStatus=1";
     sql = util.format(sql, params.begintime, params.endtime, params.vehicleList);
     db.execSQL(sql, function(err, result) {
         if (err) {
@@ -42,7 +42,7 @@ gps_oil_data.get_list = function(params, callback) {
     //     "select * from t where rid between %s and %s";
     var sql = ";with t as (select t1.*, row_number() over(order by id desc) as rid  from GPS_Oil_Data t1 with(nolock) " +
         "                       inner join [gserver_synth].[dbo].[View_CarList] t2 with(nolock) on t1.vehicleid = t2.vehicleid " +
-        "                   where addtime >='%s' and addtime<dateadd(day, 1, '%s')  and t2.vehicleid in (%s) " +
+        "                   where addtime >='%s' and addtime<dateadd(day, 1, '%s')  and t2.vehicleid in (%s) and GPSStatus=1 " +
         ")" +
         "select * from t where rid between %s and %s";
     sql = util.format(sql, params.begintime, params.endtime, params.vehicleList, start_id, end_id);

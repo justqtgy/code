@@ -15,7 +15,7 @@ var get_count = function(req, res, next) {
     gps_traffic.get_count(args, function(err, result) {
         if (err) {
             log.error('Error = ', err);
-            return next();
+            return next(err);
         }
         req.total = result;
         next();
@@ -27,9 +27,20 @@ router.post('/list', [get_count], function(req, res, next) {
     gps_traffic.get_list(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
-            return;
+            return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1, total: req.total, rows: rows });
+    });
+});
+
+router.post('/single', function(req, res, next) {
+    var id = req.body.id;
+    gps_traffic.get_single(id, function(err, rows) {
+        if (err) {
+            log.error('Error = ', err);
+            return res.send({ ok: 0, msg: err });
+        }
+        res.send({ ok: 1, rows: rows });
     });
 });
 

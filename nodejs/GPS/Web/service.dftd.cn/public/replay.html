@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>轨迹回放</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=e12cc6ed395c712532ee84dabf3467d0&plugin=AMap.Geocoder"></script>
+    <script type="text/javascript" src="javascripts/include/map.js"></script>
+    <script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="javascripts/include/query.js"></script>
+    <script type="text/javascript" src="javascripts/include/common.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script>
+        var map, lineArr = [];
+
+        function getTrafficData() {
+            var id = getUrlParam('id');
+            var params = {
+                id: id
+            }
+            var q = new Query('/gps_traffic/single', 'POST');
+            q.request(params, function(result) {
+                result.rows.forEach(function(item) {
+                    var pos = wgs84togcj02(Number(item.Lng), Number(item.Lat));
+                    lineArr.push(pos);
+                }, this);
+
+                showReplay();
+            });
+        }
+
+        function showReplay() {
+            //经度
+
+            map = new AMap.Map('container', {
+                resizeEnable: true,
+                zoom: 16,
+                //center: pos
+            });
+            // 实例化点标记
+            var marker = new AMap.Marker({ //添加自定义点标记
+                map: map,
+                position: lineArr[0], //基点位置
+                icon: "http://webapi.amap.com/images/car.png",
+                //offset: new AMap.Pixel(-26, -13),
+                autoRotation: true
+            });
+
+            //逆地理编码
+            // geocoder = new AMap.Geocoder({
+            //     radius: 1000,
+            //     extensions: "all"
+            // });
+
+            // geocoder.getAddress(pos, function(status, result) {
+            //     if (status === 'complete' && result.info === 'OK') {
+            //         var address = result.regeocode.formattedAddress; //返回地址描述
+
+            //         infoWindow = new AMap.InfoWindow({
+            //             content: address, //使用默认信息窗体框样式，显示信息内容
+            //             offset: new AMap.Pixel(10, -20),
+            //         });
+            //         infoWindow.open(map, map.getCenter());
+
+            //         map.setFitView();
+            //     }
+            // });
+
+            // 绘制轨迹
+            var polyline = new AMap.Polyline({
+                map: map,
+                path: lineArr,
+                strokeColor: "#00A", //线颜色
+                // strokeOpacity: 1,     //线透明度
+                strokeWeight: 3, //线宽
+                // strokeStyle: "solid"  //线样式
+            });
+            var passedPolyline = new AMap.Polyline({
+                map: map,
+                path: lineArr,
+                strokeColor: "#F00", //线颜色
+                strokeOpacity: 1, //线透明度
+                strokeWeight: 3, //线宽
+                strokeStyle: "solid" //线样式
+            });
+
+            marker.on('moving', function(e) {
+                passedPolyline.setPath(e.passedPath);
+            })
+            map.setFitView();
+        }
+
+        getTrafficData();
+    </script>
+</body>
+
+</html>

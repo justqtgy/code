@@ -47,3 +47,15 @@ gps_traffic.get_list = function(params, callback) {
         callback(err, rows);
     });
 }
+
+
+gps_traffic.get_single = function(id, callback) {
+    var sql = "select * from gps_traffic where ID = %s";
+    sql = util.format(sql, id);
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            return callback(err)
+        }
+        callback(err, rows);
+    });
+}

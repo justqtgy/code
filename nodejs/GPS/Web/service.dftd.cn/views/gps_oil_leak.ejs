@@ -65,7 +65,7 @@
                                                 <td>{{ item.AddOil }}</td>  
                                                 <td>{{ item.CurOil }}</td>                             
                                                 <td>{{ new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}</td>  
-                                                <td><a href="#">查看</a></td>   
+                                                <td><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看</a></td>
                                             </tr>
                                         </tbody>
                                         <tbody v-else>
@@ -84,7 +84,27 @@
         </div>
     </div>
     <!-- END CONTENT -->
-
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:680px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        轨迹地图
+                    </h4>
+                </div>
+                <div class="modal-body" style="padding:1px;">
+                    <iframe id="mapUrl" src="" style="width:100%;height:500px;border:0;  overflow:hidden;">
+                    </iframe>                    
+                </div>
+                
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!-- 结束模态框（Modal） -->
 </div>
 <!-- END CONTAINER -->
     
@@ -98,6 +118,7 @@
     <!-- END PAGE LEVEL PLUGINS -->
     <script src="/javascripts/include/date-utils.min.js"></script>
     <script src="/javascripts/include/query.js"></script>
+    <script src="/javascripts/include/map.js"></script>
     <script src="/javascripts/gps_oil_leak.js"></script>
 <%- include ./control/_group %> 
 <%- include ./shared/_footer %>
