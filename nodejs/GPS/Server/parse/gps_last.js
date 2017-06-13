@@ -21,12 +21,12 @@ module.exports.set_lastinfo = function(data) {
         }
         logger.info('Result = ', result);
 
-        if (data.distance < 10) {
-            logger.info('Tip = 距离太短不更新坐标：' + data.gpsID + ', ' + data.vehicleID + ', ' + data.vehicleNo + ', ' + data.distance);
+        if (data.distance > 0) {
+            //logger.info('Tip = 距离太短不更新坐标：' + data.gpsID + ', ' + data.vehicleID + ', ' + data.vehicleNo + ', ' + data.distance);
+            console.log(data);
+            //设置轨迹
+            gps_traffic.set_traffic(data);
         }
-        console.log(data);
-        //设置轨迹
-        gps_traffic.set_traffic(data);
     });
 };
 
