@@ -48,6 +48,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th> 
+                                                <th>时间</th> 
                                                 <th>车牌号</th> 
                                                 <th>设备号</th> 
                                                 <th>距离</th>                             
@@ -58,6 +59,7 @@
                                         <tbody v-if = "DataList.length > 0">
                                             <tr v-for = "(item,index) in DataList">
                                                 <td>{{ index+1 }}</td> 
+                                                <td>{{ item.CreateDate }}</td> 
                                                 <td>{{ item.VehicleNo }}</td> 
                                                 <td>{{ item.GPSID }}</td> 
                                                 <td>{{ item.Distance.toFixed(2) }}</td>                             
