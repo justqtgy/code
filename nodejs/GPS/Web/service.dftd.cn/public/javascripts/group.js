@@ -1,27 +1,55 @@
 var displayNumber = 10;
 
-function get_list(pageIndex) {
-    var q = new Query('/gps_last/list', 'POST', $("#search"), pageIndex, displayNumber);
-
-    var vehicleList = $(".multiselect").val();
-    if (!vehicleList) {
-        alert('请选择车辆');
-        return;
-    }
-    vehicleList = vehicleList.join(",");
-    var data_foramt = {
-        vehicleList: vehicleList
-    };
-    var params = q.init(data_foramt);
-    q.request(params, function(json) {
-        app.DataList = json.rows;
-        q.showPagination(json.total, get_list);
+function get_list() {
+    var q = new Query('/group/list', 'GET');
+    q.request(null, function(json) {
+        console.log(json.rows);
+        var data = [];
+        json.rows.forEach(function(item) {
+            if (item.ParentID.toString() === "0") {
+                data.push({ "id": item.ID, "parent": "#", "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark });
+            } else {
+                data.push({ "id": item.ID, "parent": item.ParentID, "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark });
+            }
+        });
+        showTreeGroup(data);
     });
 }
 
-function showMap(lat, lng) {
-    $("#mapUrl").attr("src", "/traffic.html?lat=" + lat + "&lng=" + lng);
-    return;
+function searchTreeGroup() {
+    //在文本框中输入值查询
+    $("#tree_group").jstree(true).search($("#q").val());
+}
+
+function showTreeGroup(data) {
+    $('#tree_group').jstree({
+        "core": {
+            "themes": {
+                "responsive": false
+            },
+            "check_callback": true,
+            'data': data
+        },
+        "types": {
+            "default": {
+                "icon": "fa fa-folder icon-state-warning icon-lg"
+            },
+            "file": {
+                "icon": "fa fa-file icon-state-warning icon-lg"
+            }
+        },
+        "plugins": ["types", "search", "state"]
+
+    }).bind("select_node.jstree", function(e, data) {
+        var tempid = data.node.id;
+        console.log(data);
+        if (data.node.children.length == 0) {
+            console.log('末节点');
+        }
+        // $("#txtIndustryArea").val(data.node.text);
+        // $("#txtIndustryAreaID").val(data.node.id);
+        // $("#treeArea").css("display", "none");
+    });
 }
 
 var app = new Vue({
@@ -30,23 +58,11 @@ var app = new Vue({
         DataList: []
     },
     methods: {
-        loadPage: function() {
-            $(".date-picker").datepicker({
-                autoclose: 1,
-                todayHighlight: 1
-            });
-        },
+
         init: function() {
             var that = this;
-            that.loadPage();
-            $("#btnSearch").click(function() {
-                //get_list(1);
-                $("#mod_info").modal('show');
-            });
-        },
-        show_modal: function(id) {
-            $("#mod_info").modal('show');
-        },
+            get_list();
+        }
     }
 });
 

@@ -54,26 +54,7 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div id="tree_group" class="tree-demo">
-                                        <ul>
-                                            <li> Root node 1
-                                                <ul>
-                                                    <li data-jstree='{ "selected" : true }'>
-                                                        <a href="javascript:;"> Initially selected </a>
-                                                    </li>
-                                                    <li data-jstree='{ "icon" : "fa fa-briefcase icon-state-success " }'> custom icon URL </li>
-                                                    <li data-jstree='{ "opened" : true }'> initially open
-                                                        <ul>
-                                                            <li data-jstree='{ "disabled" : true }'> Disabled Node </li>
-                                                            <li data-jstree='{ "type" : "file" }'> Another node </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li data-jstree='{ "icon" : "fa fa-warning icon-state-danger" }'> Custom icon class (bootstrap) </li>
-                                                </ul>
-                                            </li>
-                                            <li data-jstree='{ "type" : "file" }'>
-                                                <a href="http://www.jstree.com"> Clickanle link node </a>
-                                            </li>
-                                        </ul>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -194,31 +175,5 @@
     <script src="/javascripts/include/date-utils.min.js"></script>
     <script src="/javascripts/include/query.js"></script>
     <script src="/javascripts/group.js"></script>
-    <script>
-    $('#tree_group').jstree({
-            "core" : {
-                "themes" : {
-                    "responsive": false
-                },
-                "check_callback" : true,
-                'data' : {
-                    'url' : function (node) {
-                      return '../demo/jstree_ajax_data.php';
-                    },
-                    'data' : function (node) {
-                      return { 'parent' : node.id };
-                    }
-                }     
-            },
-            "types" : {
-                "default" : {
-                    "icon" : "fa fa-folder icon-state-warning icon-lg"
-                },
-                "file" : {
-                    "icon" : "fa fa-file icon-state-warning icon-lg"
-                }
-            },
-            "plugins": ["types"]
-        });
-    </script>
+
 <%- include ./shared/_footer %>
