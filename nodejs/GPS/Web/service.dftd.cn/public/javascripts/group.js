@@ -42,13 +42,23 @@ function showTreeGroup(data) {
 
     }).bind("select_node.jstree", function(e, data) {
         var tempid = data.node.id;
-        console.log(data);
-        if (data.node.children.length == 0) {
-            console.log('末节点');
+        if (data.node.children.length === 0) {
+
         }
-        // $("#txtIndustryArea").val(data.node.text);
-        // $("#txtIndustryAreaID").val(data.node.id);
-        // $("#treeArea").css("display", "none");
+    });
+}
+
+function getGroupVehicle() {
+    var q = new Query('/group_vehicle/list', 'GET');
+    q.request(null, function(json) {
+
+    });
+}
+
+function getGroupMember() {
+    var q = new Query('/group_member/list', 'GET');
+    q.request(null, function(json) {
+
     });
 }
 
