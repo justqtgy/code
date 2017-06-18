@@ -25,7 +25,7 @@ group_member.get_count = function(params, callback) {
 };
 
 group_member.get_list = function(params, callback) {
-    var sql = "SELECT t2.*, t1.GroupID FROM gserver_data.dbo.GroupMember t1 inner join gserver_data.dbo.Member t2 on t1.Memberid=t2.id WHERE GroupID = %s ";
+    var sql = "SELECT t1.ID, t1.GroupID, t2.Account, t2.TrueName, t2.ExpireTime, t2.Mobile FROM gserver_data.dbo.GroupMember t1 inner join gserver_data.dbo.Member t2 on t1.Memberid=t2.id WHERE GroupID = %s ";
     sql = util.format(sql, params.group_id);
     console.log(sql)
     db.execSQL(sql, function(err, rows) {
@@ -42,7 +42,7 @@ group_member.get_except_list = function(params, callback) {
         "select MemberID,[Account] from gserver_data.[dbo].[GroupMember] where GroupID = %s";
 
     sql = util.format(sql, params.group_id);
-    console.log(sql)
+    console.log('==============================', sql)
     db.execSQL(sql, function(err, rows) {
         if (err) {
             return callback(err);
@@ -77,18 +77,7 @@ group_member.add = function(params, callback) {
     });
 };
 
-group_member.update = function(params, callback) {
-    var sql = "update gserver_data.dbo.GroupMember set GroupID='%s', MemberID='%s', Account='%s' where id = '%s'";
-    sql = util.format(sql, params.GroupID, params.MemberID, params.Account, params.ID);
-    db.execSQL(sql, function(err, result) {
-        if (err) {
-            return callback(err);
-        }
-        callback(err, result);
-    });
-};
-
-group_member.delete = function(params, callback) {
+group_member.delete = function(id, callback) {
     var sql = "delete from gserver_data.dbo.GroupMember where ID = '%s'";
     sql = util.format(sql, id);
     db.execSQL(sql, function(err, result) {

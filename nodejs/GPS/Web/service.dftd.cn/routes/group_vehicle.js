@@ -10,7 +10,6 @@ router.get('/list', function(req, res, next) {
             log.error('Error = ', err);
             return res.send({ ok: 0, msg: err });
         }
-        console.log('result================', result)
         res.send({ ok: 1, rows: result });
     });
 });
@@ -43,7 +42,7 @@ router.post('/add', function(req, res, next) {
 
 });
 
-router.delete('/', function(req, res, next) {
+router.post('/delete', function(req, res, next) {
     var id = req.body.id;
     group_vehicle.delete(id, function(err, result) {
         if (err) {

@@ -45,7 +45,9 @@ function showTreeGroup(data) {
         showGroupInfo(item);
         getGroupVehicle(item.id);
         getGroupMember(item.id);
+        $("#vehiclelist").html('');
         getExceptVehicle(item.id);
+        $("#memberlist").html('');
         getExceptMember(item.id);
         //}
     });
@@ -129,13 +131,14 @@ function getExceptVehicle(groupID) {
 
 function getExceptMember(groupID) {
     var text = $("#memberlist").html();
-    if (!text) {
+    if (text.length === 0) {
         var params = {
             group_id: groupID
         };
         var q = new Query('/group_member/except_list', 'GET');
         q.request(params, function(json) {
-            $("#memberlist").html(json.list);
+            console.log(json);
+            $("#memberlist").append(json.list);
             $('#memberlist').multiselect({ nonSelectedText: '请选择', enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });
 
         });
@@ -188,7 +191,7 @@ function deleteGroup() {
 }
 
 
-function saveVehicle() {
+function saveGroupVehicle() {
     var vehicleList = $("#vehiclelist").val();
     if (!vehicleList) {
         alert('请选择车辆');
@@ -212,7 +215,33 @@ function saveVehicle() {
     });
 }
 
-function saveMember() {
+function deleteGroupVehicle(id) {
+    bootbox.setLocale("zh_CN");
+    bootbox.confirm({
+        title: hint.box_title,
+        message: hint.confirm_delete,
+        callback: function(result) {
+            if (!result) return;
+            var params = {
+                id: id
+            };
+            var q = new Query('/group_vehicle/delete', 'POST');
+            q.request(params, function(json) {
+                if (json.ok != 1) {
+                    bootbox.alert(hint.delete_fail);
+                    return;
+                }
+                bootbox.alert(hint.delete_success, function() {
+                    var groupID = $("#hidID").val();
+                    getGroupVehicle(groupID);
+                });
+            });
+        }
+    });
+}
+
+
+function saveGroupMember() {
     var memberList = $("#memberlist").val();
     if (!memberList) {
         alert('请选择人员');
@@ -236,7 +265,30 @@ function saveMember() {
     });
 }
 
-
+function deleteGroupMember(id) {
+    bootbox.setLocale("zh_CN");
+    bootbox.confirm({
+        title: hint.box_title,
+        message: hint.confirm_delete,
+        callback: function(result) {
+            if (!result) return;
+            var params = {
+                id: id
+            };
+            var q = new Query('/group_member/delete', 'POST');
+            q.request(params, function(json) {
+                if (json.ok != 1) {
+                    bootbox.alert(hint.delete_fail);
+                    return;
+                }
+                bootbox.alert(hint.delete_success, function() {
+                    var groupID = $("#hidID").val();
+                    getGroupMember(groupID);
+                });
+            });
+        }
+    });
+}
 
 var app1 = new Vue({
     el: '#grid1',
@@ -280,11 +332,11 @@ var app = new Vue({
             });
 
             $("#saveVehicle").click(function() {
-                saveVehicle();
+                saveGroupVehicle();
             });
 
             $("#saveMember").click(function() {
-                saveMember();
+                saveGroupMember();
             });
 
             get_list();

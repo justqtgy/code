@@ -56,7 +56,7 @@ router.post('/add', function(req, res, next) {
 
 });
 
-router.delete('/', function(req, res, next) {
+router.post('/delete', function(req, res, next) {
     var id = req.body.id;
     group_member.delete(id, function(err, result) {
         if (err) {

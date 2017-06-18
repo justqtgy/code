@@ -176,7 +176,7 @@
                                                                 <td>{{ item.GPSID }}</td> 
                                                                 <td>{{ item.VehicleNo }}</td> 
                                                                 <td>{{ item.VehicleID }}</td>                                            
-                                                                <td><a href='#'>删除</a></td>
+                                                                <td><a href='#' v-on:click="deleteGroupVehicle(item.ID)">删除</a></td>
                                                             </tr>
                                                         </tbody>
                                                         <tbody v-else>
@@ -222,7 +222,7 @@
                                                                 <td>{{ item.TrueName }}</td> 
                                                                 <td>{{ item.Mobile }}</td> 
                                                                 <td>{{ new Date(item.ExpireTime).toUTCFormat('YYYY-MM-DD') }}</td>          
-                                                                <td><a href='#'>删除</a></td>
+                                                                <td><a href='#' v-on:click="deleteGroupMember(item.ID)">删除</a></td>
                                                             </tr>
                                                         </tbody>
                                                         <tbody v-else>
