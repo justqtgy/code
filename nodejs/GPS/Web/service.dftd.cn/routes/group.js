@@ -12,14 +12,23 @@ router.get('/', function(req, res, next) {
 
 router.get('/list', function(req, res, next) {
     var args = req.body;
-    console.log('==================================', args)
     group.get_list(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
             return res.send({ ok: 0, msg: err });
         }
-        console.log(rows)
         res.send({ ok: 1, rows: rows });
+    });
+});
+
+router.post('/delete', function(req, res, next) {
+    var id = req.body.id;
+    group.delete(id, function(err, result) {
+        if (err) {
+            log.error('Error = ', err);
+            return res.send({ ok: 0, msg: err });
+        }
+        res.send({ ok: 1 });
     });
 });
 

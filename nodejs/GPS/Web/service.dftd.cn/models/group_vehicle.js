@@ -1,5 +1,5 @@
 var util = require('util');
-var db = require('./db');
+var db = require('../models/mssql_helper');
 
 function group_vehicle(model) {
     this.id = model.id;
@@ -11,30 +11,14 @@ function group_vehicle(model) {
 
 module.exports = group_vehicle;
 
-group_vehicle.get_count = function(params, callback) {
-    var sql = "select count(*) as total from GroupVehicle";
-    db.execSQL(sql, function(err, result) {
-        if (err) {
-            return callback(err);
-        }
-        var total = 0;
-        if (result.length > 0) {
-            total = result[0].total;
-        }
-        callback(err, total);
-    });
-};
-
 group_vehicle.get_list = function(params, callback) {
-    var iBeginID = (params.pageIndex - 1) * params.pageSize + 1;
-    var iEndID = params.pageIndex * pageSize;
-    var sql = " \
-		;WITH t AS( \
-			SELECT ROW_NUMBER() OVER (ORDER BY ID DESC) AS R_Number,* \
-			FROM GroupVehicle \
-		) \
-		SELECT * FROM t WHERE R_Number BETWEEN %s AND %s ";
-    sql = util.format(sql, iBeginID, iEndID);
+    // var pageIndex = parseInt(params.pageIndex);
+    // var pageSize = parseInt(params.pageSize);
+    // var start_id = (pageIndex - 1) * pageSize + 1;
+    // var end_id = pageIndex * pageSize;
+    var sql = "SELECT * FROM gserver_data.dbo.GroupVehicle WHERE GroupID = %s ";
+    sql = util.format(sql, params.group_id);
+    console.log(sql)
     db.execSQL(sql, function(err, rows) {
         if (err) {
             return callback(err);
@@ -43,19 +27,23 @@ group_vehicle.get_list = function(params, callback) {
     });
 };
 
-group_vehicle.get_single = function(id, callback) {
-    var sql = "select * from GroupVehicle where ID = %s";
-    sql = util.format(sql, id);
+group_vehicle.get_except_list = function(params, callback) {
+    var sql = "select [ID] as VehicleID,[GPSID],[VehicleNo] from gserver_data.[dbo].[Vehicle] " +
+        "except " +
+        "select VehicleID,[GPSID],[VehicleNo] from gserver_data.[dbo].[GroupVehicle] where GroupID = %s";
+
+    sql = util.format(sql, params.group_id);
+    console.log(sql)
     db.execSQL(sql, function(err, rows) {
         if (err) {
-            return callback(err)
+            return callback(err);
         }
         callback(err, rows);
     });
 };
 
 group_vehicle.add = function(params, callback) {
-    var sql = "insert into GroupVehicle(GroupID,GPSID,VehicleID,VehicleNo) values('%s','%s','%s','%s')";
+    var sql = "insert into gserver_data.dbo.GroupVehicle(GroupID,GPSID,VehicleID,VehicleNo) values('%s','%s','%s','%s')";
     sql = util.format(sql, params.GroupID, params.GPSID, params.VehicleID, params.VehicleNo);
     db.execSQL(sql, function(err, result) {
         if (err) {
@@ -65,20 +53,9 @@ group_vehicle.add = function(params, callback) {
     });
 };
 
-group_vehicle.update = function(params, callback) {
-    var sql = "update GroupVehicle set GroupID='%s', GPSID='%s', VehicleID='%s', VehicleNo='%s' where id = '%s'";
-    sql = util.format(sql, params.GroupID, params.GPSID, params.VehicleID, params.VehicleNo, params.ID);
-    db.execSQL(sql, function(err, result) {
-        if (err) {
-            return callback(err);
-        }
-        callback(err, result);
-    });
-};
-
-group_vehicle.delete = function(params, callback) {
-    var sql = "delete from GroupVehicle where ID = '%s'";
-    sql = util.format(sql, params.ID);
+group_vehicle.delete = function(id, callback) {
+    var sql = "delete from gserver_data.dbo.GroupVehicle where ID = '%s'";
+    sql = util.format(sql, id);
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);

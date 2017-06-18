@@ -59,6 +59,7 @@ router.get('/group', function(req, res, next) {
             }
 
             group += "</optgroup>";
+
             req.session[member.userid + "_group"] = group;
 
             res.send({ error: 0, group: group });

@@ -82,9 +82,6 @@ function delete_record(id) {
         message: hint.confirm_delete,
         callback: function(result) {
             if (!result) return;
-            var data_format = {
-                id: id
-            };
 
             var params = {
                 id: id

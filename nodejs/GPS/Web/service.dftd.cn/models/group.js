@@ -30,8 +30,8 @@ group.get_single = function(id, callback) {
 }
 
 group.add = function(params, callback) {
-    var sql = "insert into gserver_data.dbo.[Group](GroupName,Linker,Phone,Address,IsEnabled,Remark,AddTime) values('%s','%s','%s','%s','%s','%s','%s')";
-    sql = util.format(sql, params.GroupName, params.Linker, params.Phone, params.Address, params.IsEnabled, params.Remark, params.AddTime);
+    var sql = "insert into gserver_data.dbo.[Group](GroupName,Linker,Phone,Address,Remark,AddTime) values('%s','%s','%s','%s','%s','%s')";
+    sql = util.format(sql, params.GroupName, params.Linker, params.Phone, params.Address, params.Remark, params.AddTime);
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);
@@ -41,8 +41,8 @@ group.add = function(params, callback) {
 }
 
 group.update = function(params, callback) {
-    var sql = "update gserver_data.dbo.[Group] set GroupName='%s', Linker='%s', Phone='%s', Address='%s', IsEnabled='%s', Remark='%s', AddTime='%s' where id = '%s'";
-    sql = util.format(sql, params.GroupName, params.Linker, params.Phone, params.Address, params.IsEnabled, params.Remark, params.AddTime, params.ID);
+    var sql = "update gserver_data.dbo.[Group] set GroupName='%s', Linker='%s', Phone='%s', Address='%s', Remark='%s', AddTime='%s' where id = '%s'";
+    sql = util.format(sql, params.GroupName, params.Linker, params.Phone, params.Address, params.Remark, params.AddTime, params.ID);
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);

@@ -7,17 +7,6 @@ function vehicle(model) {
 
 module.exports = vehicle;
 
-vehicle.get_single = function(args, callback) {
-    var sql = "select top 1 * from gserver_data.dbo.vehicle where ID='%s'";
-    sql = util.format(sql, args.id);
-    console.log(sql)
-    db.execSQL(sql, function(err, rows, fileds) {
-        if (err) {
-            return callback(err);
-        }
-        callback(err, rows);
-    });
-};
 
 vehicle.get_grouplist = function(userid, user_type, callback) {
     var sql = " select groupid, groupname, vehicleid, carnumber,level from gserver_synth.dbo.View_Group_CarList ";
@@ -74,6 +63,19 @@ vehicle.get_list = function(params, callback) {
             return callback(err);
         }
 
+        callback(err, rows);
+    });
+};
+
+
+vehicle.get_single = function(args, callback) {
+    var sql = "select top 1 * from gserver_data.dbo.vehicle where ID='%s'";
+    sql = util.format(sql, args.id);
+    console.log(sql)
+    db.execSQL(sql, function(err, rows, fileds) {
+        if (err) {
+            return callback(err);
+        }
         callback(err, rows);
     });
 };

@@ -73,16 +73,11 @@ function delete_record(id) {
         message: hint.confirm_delete,
         callback: function(result) {
             if (!result) return;
-            var data_format = {
-                id: id
-            };
-
             var params = {
                 id: id
             };
             var q = new Query('/vehicle/delete', 'POST');
             q.request(params, function(json) {
-                console.log(json);
                 if (json.ok != 1) {
                     bootbox.alert(hint.delete_fail);
                     return;
