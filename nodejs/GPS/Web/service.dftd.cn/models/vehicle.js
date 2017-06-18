@@ -106,6 +106,7 @@ vehicle.update = function(params, callback) {
 vehicle.delete = function(params, callback) {
     var sql = "delete from gserver_data.dbo.Vehicle where ID = '%s'";
     sql = util.format(sql, params.id);
+    console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);

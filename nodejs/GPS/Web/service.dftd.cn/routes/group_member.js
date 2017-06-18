@@ -43,25 +43,17 @@ router.get('/except_list', function(req, res, next) {
     });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/add', function(req, res, next) {
     var args = req.body;
-    if (args.id) {
-        group_member.update(args, function(err, result) {
-            if (err) {
-                log.error('Error = ', err);
-                return res.send({ ok: 0, msg: err });
-            }
-            res.send({ ok: 1 });
-        });
-    } else {
-        group_member.add(args, function(err, result) {
-            if (err) {
-                log.error('Error = ', err);
-                return res.send({ ok: 0, msg: err });
-            }
-            res.send({ ok: 1 });
-        });
-    }
+
+    group_member.add(args, function(err, result) {
+        if (err) {
+            log.error('Error = ', err);
+            return res.send({ ok: 0, msg: err });
+        }
+        res.send({ ok: 1 });
+    });
+
 });
 
 router.delete('/', function(req, res, next) {

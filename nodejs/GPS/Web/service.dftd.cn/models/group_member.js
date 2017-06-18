@@ -25,7 +25,7 @@ group_member.get_count = function(params, callback) {
 };
 
 group_member.get_list = function(params, callback) {
-    var sql = "SELECT * FROM gserver_data.dbo.GroupMember WHERE GroupID = %s ";
+    var sql = "SELECT t2.*, t1.GroupID FROM gserver_data.dbo.GroupMember t1 inner join gserver_data.dbo.Member t2 on t1.Memberid=t2.id WHERE GroupID = %s ";
     sql = util.format(sql, params.group_id);
     console.log(sql)
     db.execSQL(sql, function(err, rows) {
@@ -63,8 +63,12 @@ group_member.get_single = function(id, callback) {
 };
 
 group_member.add = function(params, callback) {
-    var sql = "insert into gserver_data.dbo.GroupMember(GroupID,MemberID,Account) values('%s','%s','%s')";
-    sql = util.format(sql, params.GroupID, params.MemberID, params.Account);
+
+    var sql = "insert into gserver_data.dbo.GroupMember(GroupID,MemberID,Account) " +
+        "select %s, ID as MemberID, Account from  gserver_data.dbo.Member " +
+        "where id in (%s)";
+    sql = util.format(sql, params.groupID, params.memberList);
+    console.log(sql);
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);

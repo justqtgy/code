@@ -6,9 +6,9 @@ function get_list() {
         var data = [];
         json.rows.forEach(function(item) {
             if (item.ParentID.toString() === "0") {
-                data.push({ "id": item.ID, "parent": "#", "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark, "enabled": item.IsEnabled });
+                data.push({ "id": item.ID, "parent": "#", "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark });
             } else {
-                data.push({ "id": item.ID, "parent": item.ParentID, "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark, "enabled": item.IsEnabled });
+                data.push({ "id": item.ID, "parent": item.ParentID, "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark });
             }
         });
         showTreeGroup(data);
@@ -43,8 +43,10 @@ function showTreeGroup(data) {
         //if (data.node.children.length === 0) {
         var item = data.node.original;
         showGroupInfo(item);
-        //getGroupVehicle(item.id);
-        //getGroupMember(item.id);
+        getGroupVehicle(item.id);
+        getGroupMember(item.id);
+        getExceptVehicle(item.id);
+        getExceptMember(item.id);
         //}
     });
 }
@@ -66,10 +68,11 @@ function showGroupInfo(item) {
     $("#chkEnabled").attr('readonly', true);
 }
 
-function clearGroupItem(add) {
+function renderGroupItem(add) {
     if (add) {
+        var pid = $("#hidID").val();
+        $("#hidParentID").val(pid);
         $("#hidID").val('0');
-        //$("#hidParentID").val('0');
         $("#txtGroupName").val('');
         $("#txtLinker").val('');
         $("#txtPhone").val('');
@@ -84,6 +87,8 @@ function clearGroupItem(add) {
     $("#txtAddress").attr('readonly', false);
     $("#txtRemark").attr('readonly', false);
     $("#chkEnabled").attr('readonly', false);
+
+    $(".form-actions").show();
 }
 
 function getGroupVehicle(groupID) {
@@ -92,7 +97,7 @@ function getGroupVehicle(groupID) {
     };
     var q = new Query('/group_vehicle/list', 'GET');
     q.request(params, function(json) {
-        app.VehicleList = json.rows;
+        app1.VehicleList = json.rows;
     });
 }
 
@@ -106,39 +111,50 @@ function getGroupMember(groupID) {
     });
 }
 
-function get_except_vehicle() {
+function getExceptVehicle(groupID) {
     var text = $("#vehiclelist").html();
-    if (text) {
-        $("#mod_vehicle").modal('show');
-    } else {
+    if (!text) {
         var params = {
-            group_id: $("#hidID").val()
+            group_id: groupID
         };
 
         var q = new Query('/group_vehicle/except_list', 'GET');
         q.request(params, function(json) {
             $("#vehiclelist").html(json.list);
             $('#vehiclelist').multiselect({ nonSelectedText: '请选择', enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });
-            $("#mod_vehicle").modal('show');
+
         });
     }
 }
 
-function get_except_member() {
+function getExceptMember(groupID) {
     var text = $("#memberlist").html();
-    if (text) {
-        $("#mod_member").modal('show');
-    } else {
+    if (!text) {
         var params = {
-            group_id: $("#hidID").val()
+            group_id: groupID
         };
         var q = new Query('/group_member/except_list', 'GET');
         q.request(params, function(json) {
             $("#memberlist").html(json.list);
             $('#memberlist').multiselect({ nonSelectedText: '请选择', enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });
-            $("#mod_member").modal('show');
+
         });
     }
+}
+
+function saveGroup() {
+    var q = new Query('/group/set', 'POST', $("#record"));
+    var params = q.init();
+    q.request(params, function(json) {
+        if (!json.ok) {
+            bootbox.alert(hint.save_fail);
+            return;
+        }
+
+        bootbox.alert(hint.save_success, function() {
+            location.reload();
+        });
+    });
 }
 
 function deleteGroup() {
@@ -164,12 +180,63 @@ function deleteGroup() {
                     return;
                 }
                 bootbox.alert(hint.delete_success, function() {
-                    get_list();
+                    location.reload();
                 });
             });
         }
     });
 }
+
+
+function saveVehicle() {
+    var vehicleList = $("#vehiclelist").val();
+    if (!vehicleList) {
+        alert('请选择车辆');
+        return;
+    }
+    var groupID = $("#hidID").val();
+    var params = {
+        groupID: groupID,
+        vehicleList: vehicleList.toString()
+    };
+    var q = new Query('/group_vehicle/add', 'POST');
+    q.request(params, function(json) {
+        if (!json.ok) {
+            bootbox.alert(hint.save_fail);
+            return;
+        }
+
+        bootbox.alert(hint.save_success, function() {
+            getGroupVehicle(groupID);
+        });
+    });
+}
+
+function saveMember() {
+    var memberList = $("#memberlist").val();
+    if (!memberList) {
+        alert('请选择人员');
+        return;
+    }
+    var groupID = $("#hidID").val();
+    var params = {
+        groupID: groupID,
+        memberList: memberList.toString()
+    };
+    var q = new Query('/group_member/add', 'POST');
+    q.request(params, function(json) {
+        if (!json.ok) {
+            bootbox.alert(hint.save_fail);
+            return;
+        }
+
+        bootbox.alert(hint.save_success, function() {
+            getGroupMember(groupID);
+        });
+    });
+}
+
+
 
 var app1 = new Vue({
     el: '#grid1',
@@ -191,35 +258,33 @@ var app = new Vue({
             var that = this;
             //$(".form-actions").hide();
             $(".icon-cloud-upload").parent().click(function() {
-                clearGroupItem(true);
-                $(".form-actions").show();
+                renderGroupItem(true);
             });
             $(".icon-wrench").parent().click(function() {
-                clearGroupItem(false);
-                $(".form-actions").show();
+                renderGroupItem(false);
             });
             $(".icon-trash").parent().click(function() {
                 deleteGroup();
             });
 
             $("#vehicle_new").click(function() {
-                get_except_vehicle();
+                $("#mod_vehicle").modal('show');
             });
 
             $("#member_new").click(function() {
-                get_except_member();
+                $("#mod_member").modal('show');
             });
 
             $("#saveGroup").click(function() {
-
+                saveGroup();
             });
 
             $("#saveVehicle").click(function() {
-
+                saveVehicle();
             });
 
             $("#saveMember").click(function() {
-
+                saveMember();
             });
 
             get_list();

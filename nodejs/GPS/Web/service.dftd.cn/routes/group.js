@@ -21,6 +21,27 @@ router.get('/list', function(req, res, next) {
     });
 });
 
+router.post('/set', function(req, res, next) {
+    var args = req.body;
+    if (args.id > 0) {
+        group.update(args, function(err, result) {
+            if (err) {
+                log.error('Error = ', err);
+                return res.send({ ok: 0, msg: err });
+            }
+            res.send({ ok: 1 });
+        });
+    } else {
+        group.add(args, function(err, result) {
+            if (err) {
+                log.error('Error = ', err);
+                return res.send({ ok: 0, msg: err });
+            }
+            res.send({ ok: 1 });
+        });
+    }
+});
+
 router.post('/delete', function(req, res, next) {
     var id = req.body.id;
     group.delete(id, function(err, result) {

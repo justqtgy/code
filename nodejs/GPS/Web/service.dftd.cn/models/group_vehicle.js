@@ -43,8 +43,11 @@ group_vehicle.get_except_list = function(params, callback) {
 };
 
 group_vehicle.add = function(params, callback) {
-    var sql = "insert into gserver_data.dbo.GroupVehicle(GroupID,GPSID,VehicleID,VehicleNo) values('%s','%s','%s','%s')";
-    sql = util.format(sql, params.GroupID, params.GPSID, params.VehicleID, params.VehicleNo);
+    var sql = "insert into gserver_data.dbo.GroupVehicle(GroupID,GPSID,VehicleID,VehicleNo) " +
+        "select %s, GPSID,ID as VehicleID,VehicleNo from  gserver_data.dbo.Vehicle " +
+        "where id in (%s)";
+    sql = util.format(sql, params.groupID, params.vehicleList);
+    console.log(sql);
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);
