@@ -102,6 +102,8 @@ function delete_record(id) {
 
 function show_pswd_modal(id) {
     $("#txtUserID").val(id);
+    $("#txtPassword").val('');
+    $("#txtConfirmPassword").val('');
     $("#mod_password").modal({ backdrop: 'static', keyboard: false });
 }
 

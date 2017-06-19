@@ -45,9 +45,9 @@ function showTreeGroup(data) {
         showGroupInfo(item);
         getGroupVehicle(item.id);
         getGroupMember(item.id);
-        $("#vehiclelist").html('');
+        $("#vehiclelist").empty();
         getExceptVehicle(item.id);
-        $("#memberlist").html('');
+        $("#memberlist").empty();
         getExceptMember(item.id);
         //}
     });
@@ -120,10 +120,10 @@ function getExceptVehicle(groupID) {
             group_id: groupID
         };
 
-        var q = new Query('/group_vehicle/except_list', 'GET');
+        var q = new Query('/group_vehicle/except_list', 'POST');
         q.request(params, function(json) {
             $("#vehiclelist").html(json.list);
-            $('#vehiclelist').multiselect({ nonSelectedText: '请选择', enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });
+            $('#vehiclelist').multiselect("destroy").multiselect({ nonSelectedText: '请选择', enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });
 
         });
     }
@@ -135,12 +135,10 @@ function getExceptMember(groupID) {
         var params = {
             group_id: groupID
         };
-        var q = new Query('/group_member/except_list', 'GET');
+        var q = new Query('/group_member/except_list', 'POST');
         q.request(params, function(json) {
-            console.log(json);
             $("#memberlist").append(json.list);
-            $('#memberlist').multiselect({ nonSelectedText: '请选择', enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });
-
+            $('#memberlist').multiselect("destroy").multiselect({ nonSelectedText: '请选择', enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });
         });
     }
 }

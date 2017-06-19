@@ -22,13 +22,12 @@ router.get('/list', function(req, res, next) {
             log.error('Error = ', err);
             return res.send({ ok: 0, msg: err });
         }
-        console.log('result================', result)
         res.send({ ok: 1, rows: result });
     });
 });
 
-router.get('/except_list', function(req, res, next) {
-    var args = req.query;
+router.post('/except_list', function(req, res, next) {
+    var args = req.body;
     group_member.get_except_list(args, function(err, result) {
         if (err) {
             log.error('Error = ', err);

@@ -20,7 +20,7 @@
 
     function renderList(vehicleGroup){
         $('.multiselect').html(vehicleGroup);   
-        $('.multiselect').multiselect({ nonSelectedText: '请选择',enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });     
+        $('.multiselect').multiselect("destroy").multiselect({ nonSelectedText: '请选择',enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });     
     }
     
 </script>

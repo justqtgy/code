@@ -14,8 +14,8 @@ router.get('/list', function(req, res, next) {
     });
 });
 
-router.get('/except_list', function(req, res, next) {
-    var args = req.query;
+router.post('/except_list', function(req, res, next) {
+    var args = req.body;
     group_vehicle.get_except_list(args, function(err, result) {
         if (err) {
             log.error('Error = ', err);
