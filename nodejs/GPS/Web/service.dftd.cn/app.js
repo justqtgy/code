@@ -36,7 +36,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ resave: true, saveUninitialized: false, secret: 'dftd' }));
+app.use(session({ resave: false, saveUninitialized: true, secret: 'dftd' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/Views', express.static(__dirname + '/Views'));
@@ -59,6 +59,8 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+    //写入日志
+    log.error('common error :', err);
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
