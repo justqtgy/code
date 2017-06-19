@@ -30,6 +30,38 @@ router.post('/except_list', function(req, res, next) {
     });
 });
 
+router.get('/group', function(req, res, next) {
+    var member = req.cookies.member;
+    var vhc_group = req.session[member.userid + "_group"];
+    if (vhc_group) {
+        res.send({ error: 0, group: vhc_group });
+    } else {
+        group_vehicle.get_groupvehicle(member.userid, member.isadmin, function(err, result) {
+            var group = '';
+            for (var i in result) {
+                var item = result[i];
+                if (item.Level == 0) {
+                    if (!group) {
+                        group = "<optgroup label='" + item.GroupName + "'>";
+                    } else {
+                        group += "</optgroup>";
+                        group += "<optgroup label='" + item.GroupName + "'>";
+                    }
+
+                } else {
+                    group += "<option value=\"" + item.VehicleID + "\" >" + item.VehicleNo + "</option>";
+                }
+            }
+
+            group += "</optgroup>";
+
+            req.session[member.userid + "_group"] = group;
+
+            res.send({ error: 0, group: group });
+        });
+    }
+});
+
 router.post('/add', function(req, res, next) {
     var args = req.body;
     group_vehicle.add(args, function(err, result) {

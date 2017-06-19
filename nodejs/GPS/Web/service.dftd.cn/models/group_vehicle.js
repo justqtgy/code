@@ -11,6 +11,22 @@ function group_vehicle(model) {
 
 module.exports = group_vehicle;
 
+group_vehicle.get_groupvehicle = function(userid, user_type, callback) {
+    var sql = " select t1.* from gserver_data.dbo.View_GroupVehicle t1 ";
+    if (!user_type) {
+        sql += " inner join inner join gserver_data.[dbo].[GroupMember] t3 on t2.ID = t3.GroupID " +
+            " where MemberID = " + userid;
+    }
+    sql += " order by GroupID , [Level]";
+
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            return callback(err);
+        }
+        callback(err, rows);
+    });
+};
+
 group_vehicle.get_list = function(params, callback) {
     // var pageIndex = parseInt(params.pageIndex);
     // var pageSize = parseInt(params.pageSize);
