@@ -73,8 +73,8 @@ member.get_single = function(id, callback) {
 }
 
 member.add = function(params, callback) {
-    var sql = "insert into gserver_data.dbo.Member(Account,Password,TrueName,Email,Mobile,AddTime,ExpireTime,IsDelete,WX_OpenID) values('%s','%s','%s','%s','%s',GETDATE(),'%s','%s','%s')";
-    sql = util.format(sql, params.account, params.password, params.trueName, params.email, params.mobile, params.expireTime, 0, '');
+    var sql = "insert into gserver_data.dbo.Member(Account,Password,TrueName,Email,Mobile,AddTime,ExpireTime,IsDelete,WX_OpenID, IsAdmin) values('%s','%s','%s','%s','%s',GETDATE(),'%s','%s','%s', '%s')";
+    sql = util.format(sql, params.account, params.password, params.trueName, params.email, params.mobile, params.expireTime, 0, '', params.isAdmin);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
@@ -85,8 +85,8 @@ member.add = function(params, callback) {
 }
 
 member.update = function(params, callback) {
-    var sql = "update gserver_data.dbo.Member set TrueName='%s', Email='%s', Mobile='%s', ExpireTime='%s' where id = '%s'";
-    sql = util.format(sql, params.trueName, params.email, params.mobile, params.expireTime, params.id);
+    var sql = "update gserver_data.dbo.Member set TrueName='%s', Email='%s', Mobile='%s', ExpireTime='%s', IsAdmin = '%s' where id = '%s'";
+    sql = util.format(sql, params.trueName, params.email, params.mobile, params.expireTime, params.isAdmin, params.id);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {

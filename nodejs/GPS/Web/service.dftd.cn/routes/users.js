@@ -48,8 +48,9 @@ router.post('/login', function(req, res, next) {
             res.send({ ok: 1, msg: "账号错误" });
             return;
         }
+
         var userid = result[0].ID;
-        // var boss = result[0].boss;
+        var isAdmin = result[0].IsAdmin;
         // var user_type = result[0].user_type;
 
         var password = req.body.password;
@@ -60,7 +61,7 @@ router.post('/login', function(req, res, next) {
         }
 
         //res.clearCookie('member');
-        res.cookie('member', { userid: userid, account: account }, { maxAge: 3600000, httpOnly: true, path: '/' });
+        res.cookie('member', { userid: userid, account: account, isadmin: isAdmin }, { maxAge: 3600000, httpOnly: true, path: '/' });
         res.cookie('userinfo', account, { maxAge: 3600000, httpOnly: true, path: '/' });
 
         res.send({ ok: 1 })

@@ -145,20 +145,75 @@ function getExceptMember(groupID) {
     }
 }
 
-function saveGroup() {
-    var q = new Query('/group/set', 'POST', $("#record"));
-    var params = q.init();
-    q.request(params, function(json) {
-        if (!json.ok) {
-            bootbox.alert(hint.save_fail);
-            return;
-        }
+// validation 
+var handleValidation = function() {
+    var form = $('#record');
+    var error = $('.alert-danger', form);
+    var success = $('.alert-success', form);
 
-        bootbox.alert(hint.save_success, function() {
-            location.reload();
-        });
+    form.validate({
+        errorElement: 'span', //default input error message container
+        errorClass: 'help-block help-block-error', // default input error message class
+        focusInvalid: false, // do not focus the last invalid input
+        ignore: "", // validate all fields including form hidden input
+        rules: {
+            groupName: {
+                maxlength: 50,
+                required: true
+            }
+        },
+
+        invalidHandler: function(event, validator) { //display error alert on form submit              
+            success.hide();
+            error.show();
+        },
+
+        errorPlacement: function(error, element) { // render error placement for each input type
+            var icon = $(element).parent('.input-icon').children('i');
+            icon.removeClass('fa-check').addClass("fa-warning");
+            icon.attr("data-original-title", error.text()).tooltip({ 'container': 'body' });
+        },
+
+        highlight: function(element) { // hightlight error inputs
+            $(element)
+                .closest('.form-group').removeClass("has-success").addClass('has-error'); // set error class to the control group   
+        },
+
+        unhighlight: function(element) { // revert the change done by hightlight
+
+        },
+
+        success: function(label, element) {
+            var icon = $(element).parent('.input-icon').children('i');
+            $(element).closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
+            icon.removeClass("fa-warning").addClass("fa-check");
+        },
+
+        submitHandler: function(form) {
+            success.show();
+            error.hide();
+            form.submit(); // submit the form
+        }
+    });
+
+    $("#saveGroup").click(function() {
+        if ($('#record').validate().form()) {
+            var q = new Query('/group/set', 'POST', $("#record"));
+            var params = q.init();
+            q.request(params, function(json) {
+                if (!json.ok) {
+                    bootbox.alert(hint.save_fail);
+                    return;
+                }
+
+                bootbox.alert(hint.save_success, function() {
+                    location.reload();
+                });
+            });
+        }
     });
 }
+
 
 function deleteGroup() {
     bootbox.setLocale("zh_CN");
@@ -308,6 +363,7 @@ var app = new Vue({
     methods: {
         init: function() {
             var that = this;
+            handleValidation();
             //$(".form-actions").hide();
             $(".icon-cloud-upload").parent().click(function() {
                 renderGroupItem(true);
@@ -325,10 +381,6 @@ var app = new Vue({
 
             $("#member_new").click(function() {
                 $("#mod_member").modal('show');
-            });
-
-            $("#saveGroup").click(function() {
-                saveGroup();
             });
 
             $("#saveVehicle").click(function() {
