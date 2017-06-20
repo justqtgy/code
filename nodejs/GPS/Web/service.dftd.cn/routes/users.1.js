@@ -10,8 +10,8 @@ router.requireAuthentication = function(req, res, next) {
         next();
         return;
     }
-    if (req.session.member) {
-        var member = req.session.member;
+    if (req.cookies.member) {
+        var member = req.cookies.member;
         req.account = member.account;
         next();
     } else {
@@ -61,22 +61,21 @@ router.post('/login', function(req, res, next) {
         }
 
         //res.clearCookie('member');
+        res.cookie('member', { userid: userid, account: account, isadmin: isAdmin }, { maxAge: 3600000, httpOnly: true, path: '/' });
         res.cookie('userinfo', account, { maxAge: 3600000, httpOnly: true, path: '/' });
 
-        var user = { userid: userid, account: account, isadmin: isAdmin };
-        req.session.member = user;
         res.send({ ok: 1 })
     });
 });
 
 router.get('/logout', function(req, res) {
-    req.session.user = null;
+    res.clearCookie("member");
     res.redirect('/users/login');
 });
 
 router.get('/check_login', function(req, res) {
-    if (req.session.member) {
-        var member = req.session.member;
+    if (req.cookies.member) {
+        var member = req.cookies.member;
         res.send({ member: member });
     }
 });

@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //存储cookies
 var session = require('express-session');
+//将session持久化到reids中
+//var redisStore = require('connect-redis')(session); //npm install connect-redis express-session
+//var options = require('./config/settings').redisSession;
 
 var log4js = require('log4js');
 
@@ -36,7 +39,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ resave: false, saveUninitialized: true, secret: 'dftd' }));
+app.use(session({ resave: false, saveUninitialized: true, secret: 'dftd' /*, store: new redisStore(options)*/ }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/Views', express.static(__dirname + '/Views'));
@@ -49,12 +52,25 @@ app.use('/', index);
 app.use('/users', users);
 ctrl.init_route(app);
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+    // var err = new Error('Not Found');
+    // err.status = 404;
+    // next(err);
+
+    // if (!req.session.user) {
+    //     if (req.url == "/login") {
+    //         next(); //如果请求的地址是登录则通过，进行下一个请求
+    //     } else {
+    //         res.redirect('/login');
+    //     }
+    // } else if (req.session.user) {
+    //     next();
+    // }
+
+    req.session._garbage = Date();
+    req.session.touch();
+    next();
 });
 
 // error handler
