@@ -170,6 +170,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th> 
+                                                                <th>组名</th> 
                                                                 <th>GPS</th> 
                                                                 <th>车牌号</th> 
                                                                 <th>设备号</th>                                                                                                       
@@ -179,6 +180,7 @@
                                                         <tbody v-if = "VehicleList.length > 0">
                                                             <tr v-for = "(item, index) in VehicleList">
                                                                 <td>{{ index+1 }}</td> 
+                                                                <td>{{ item.GroupName }}</td> 
                                                                 <td>{{ item.GPSID }}</td> 
                                                                 <td>{{ item.VehicleNo }}</td> 
                                                                 <td>{{ item.VehicleID }}</td>                                            

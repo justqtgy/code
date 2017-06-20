@@ -14,8 +14,8 @@ router.get('/', function(req, res, next) {
 router.get_my_vehicle = function(req, res, cb) {
     var list = new Array();
 
-    if (req.cookies.member) {
-        var member = req.cookies.member;
+    if (req.session.member) {
+        var member = req.session.member;
 
         if (req.session[member.userid + "_vehicle"]) {
             list = req.session[member.userid + "_vehicle"];
@@ -36,7 +36,7 @@ router.get_my_vehicle = function(req, res, cb) {
 };
 
 router.get('/group', function(req, res, next) {
-    var member = req.cookies.member;
+    var member = req.session.member;
     var vhc_group = req.session[member.userid + "_group"];
     if (vhc_group) {
         res.send({ error: 0, group: vhc_group });

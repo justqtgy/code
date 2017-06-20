@@ -22,7 +22,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <form  id='search'>  
-                                            
+                         <select class="multiselect display-none" multiple="multiple" ></select>                     
                         <label class="control-label">车牌号：</label>
                         <input type="text" name="vehicleNo" class="input-control" />
                        
@@ -148,4 +148,5 @@
     <script src="/javascripts/include/date-utils.min.js"></script>
     <script src="/javascripts/include/query.js"></script>
     <script src="/javascripts/vehicle.js"></script>
+    <%- include ./control/_group_vehicle %> 
 <%- include ./shared/_footer %>

@@ -42,7 +42,7 @@ group_member.get_except_list = function(params, callback) {
         "select MemberID,[Account] from gserver_data.[dbo].[GroupMember] where GroupID = %s";
 
     sql = util.format(sql, params.group_id);
-    console.log('==============================', sql)
+
     db.execSQL(sql, function(err, rows) {
         if (err) {
             return callback(err);

@@ -4,7 +4,7 @@ var users = require('../models/member');
 var router = express.Router();
 
 router.requireAuthentication = function(req, res, next) {
-    console.log('check login cookies ...', req.cookies.member);
+    console.log('check login cookies ...', req.session.member);
 
     if (req.path.indexOf("/users/login") >= 0 || req.path.indexOf("/users/reg") >= 0) {
         next();

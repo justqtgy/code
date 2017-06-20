@@ -45,32 +45,34 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/Views', express.static(__dirname + '/Views'));
 
 //总是检查是否登录
-app.all('*', users.requireAuthentication);
+//app.all('*', users.requireAuthentication);
 
-
-app.use('/', index);
-app.use('/users', users);
-ctrl.init_route(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     // var err = new Error('Not Found');
     // err.status = 404;
     // next(err);
+    console.log('check session is exists');
+    if (!req.session.member) {
+        if (req.path.indexOf("/users/login") >= 0) {
+            next(); //如果请求的地址是登录则通过，进行下一个请求
+        } else {
+            var from_url = req.originalUrl;
+            if (from_url != "")
+                res.redirect('/users/login?url=' + from_url);
+            else
+                res.redirect('/users/login');
+        }
+    } else if (req.session.member) {
+        req.session._garbage = Date();
+        req.session.touch();
+        next();
+    }
 
-    // if (!req.session.user) {
-    //     if (req.url == "/login") {
-    //         next(); //如果请求的地址是登录则通过，进行下一个请求
-    //     } else {
-    //         res.redirect('/login');
-    //     }
-    // } else if (req.session.user) {
-    //     next();
-    // }
-
-    req.session._garbage = Date();
-    req.session.touch();
-    next();
+    // req.session._garbage = Date();
+    // req.session.touch();
+    // next();
 });
 
 // error handler
@@ -85,5 +87,9 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+app.use('/', index);
+app.use('/users', users);
+ctrl.init_route(app);
 
 module.exports = app;

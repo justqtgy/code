@@ -31,12 +31,12 @@ router.post('/except_list', function(req, res, next) {
 });
 
 router.get('/group', function(req, res, next) {
-    var member = req.cookies.member;
+    var member = req.session.member;
     var vhc_group = req.session[member.userid + "_group"];
     if (vhc_group) {
         res.send({ error: 0, group: vhc_group });
     } else {
-        group_vehicle.get_groupvehicle(member.userid, member.isadmin, function(err, result) {
+        group_vehicle.get_groupvehicle(member.userid, function(err, result) {
             var group = '';
             for (var i in result) {
                 var item = result[i];

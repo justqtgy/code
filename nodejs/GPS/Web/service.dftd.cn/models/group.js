@@ -62,4 +62,4 @@ group.delete = function(id, callback) {
         }
         callback(err, result);
     });
-}
+};
