@@ -29,7 +29,7 @@
 							<div class="tab-content">
 								<div class="tab-pane active" id="tab_1_1">
 									<div class="scroller" style="height: 500px;" data-always-visible="1" data-rail-visible="0">
-										<ul class="feeds">
+										<ul class="feeds" id="grid">
 											<li v-for = "item in DataList">
 												<div class="col1">
 													<div class="cont">
@@ -40,8 +40,8 @@
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																	{{ item.CarNumber}} + ","+ {{item.createtime}} + "," + {{item.cstate + "," + item.posinfo }}
-																</span>
+																	{{ item.VehicleNo}} 在 {{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')}}  发生漏油 {{item.AddOil }}  升
+																
 															</div>
 														</div>
 													</div>
@@ -68,4 +68,6 @@
     
 <%- include shared/_bottom %>
 <%- include shared/_scripts %>
+ <script src="/javascripts/include/date-utils.min.js"></script>
+ <script src="/javascripts/index.js"></script>
 <%- include shared/_footer %>

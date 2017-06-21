@@ -47,4 +47,18 @@ gps_oil_leak.get_list = function(params, callback) {
 
         callback(err, rows);
     });
-}
+};
+
+gps_oil_leak.get_mylist = function(userid, callback) {
+    var sql = " ;with t as (select GroupID  from  gserver_data.dbo.[GroupMember] where MemberID=" + userid +
+        " union all select g.ID from gserver_data.dbo.[group] g inner join t on g.ParentID = t.GroupID)" +
+        " , t2 as (SELECT distinct GPSID FROM gserver_data.dbo.View_GroupVehicle t1 inner join (select distinct GroupID from t) as t2 on t1.GroupID = t2.GroupID) " +
+        " select top 50 VehicleNo, AddOil, AddTime from t2 inner join gps_oil_leak t0 on t0.GPSID=t2.GPSID where AddTime>=DATEADD(DAY, -10, GETDATE())";
+    console.log(sql);
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            return callback(err);
+        }
+        callback(err, rows);
+    });
+};

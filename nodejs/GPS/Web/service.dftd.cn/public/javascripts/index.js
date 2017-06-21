@@ -1,11 +1,8 @@
 var displayNumber = 10;
 
 function get_list() {
-    $.get('/vehicle/vhc_group', function(result) {
-        var carlist = result.group;
-        $.get('/oil_vhc_dv/detail?carlist=' + carlist, function(result) {
-            app.DataList = result.rows;
-        });
+    $.get('/gps_oil_leak/mylist', function(json) {
+        app.DataList = json.rows;
     });
 }
 
@@ -17,8 +14,7 @@ var app = new Vue({
     },
     methods: {
         init: function() {
-            $('#real_data').addClass(" active open");
-            get_list(1);
+            get_list();
         }
     }
 });

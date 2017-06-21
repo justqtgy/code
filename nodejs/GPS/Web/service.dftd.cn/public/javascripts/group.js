@@ -1,4 +1,5 @@
 var displayNumber = 10;
+var node = null;
 
 function get_list() {
     var q = new Query('/group/list', 'GET');
@@ -41,6 +42,7 @@ function showTreeGroup(data) {
 
     }).bind("select_node.jstree", function(e, data) {
         //if (data.node.children.length === 0) {
+        node = data.node;
         var item = data.node.original;
         showGroupInfo(item);
         getGroupVehicle(item.id);
@@ -220,7 +222,9 @@ function deleteGroup() {
     if (id <= 0) {
         return bootbox.alert('<font color=red>请选择需要删除的工作组</font>');
     }
-
+    if (node.children.length > 0) {
+        return bootbox.alert('<font color=red>无法删除该工作组：该工作组有其他组存在</font>');
+    }
     bootbox.confirm({
         title: hint.box_title,
         message: hint.confirm_delete,
@@ -236,6 +240,7 @@ function deleteGroup() {
                     return;
                 }
                 bootbox.alert(hint.delete_success, function() {
+                    node = null;
                     location.reload();
                 });
             });

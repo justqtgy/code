@@ -58,7 +58,7 @@ router.post('/set', function(req, res, next) {
         expireTime: req.body.expireTime,
         isAdmin: req.body.isAdmin ? 1 : 0
     };
-    console.log(req.body);
+
     if (args.id) {
         member.update(args, function(err, result) {
             if (err) {

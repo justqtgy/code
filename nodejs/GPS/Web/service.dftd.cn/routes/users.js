@@ -45,7 +45,7 @@ router.post('/login', function(req, res, next) {
         }
 
         if (!result || result.length == 0) {
-            res.send({ ok: 1, msg: "账号错误" });
+            res.send({ ok: 0, msg: "账号错误" });
             return;
         }
 
@@ -56,7 +56,7 @@ router.post('/login', function(req, res, next) {
         var password = req.body.password;
         password = utils.md5(result[0].ID + '&' + password);
         if (password != result[0].Password) {
-            res.send({ ok: 1, msg: "密码错误" });
+            res.send({ ok: 0, msg: "密码错误" });
             return;
         }
 

@@ -45,7 +45,7 @@ router.post('/login', function(req, res, next) {
         }
 
         if (!result || result.length == 0) {
-            res.send({ ok: 1, msg: "账号错误" });
+            res.send({ ok: 0, msg: "账号错误" });
             return;
         }
 
@@ -56,15 +56,15 @@ router.post('/login', function(req, res, next) {
         var password = req.body.password;
         password = utils.md5(result[0].ID + '&' + password);
         if (password != result[0].Password) {
-            res.send({ ok: 1, msg: "密码错误" });
+            res.send({ ok: 0, msg: "密码错误" });
             return;
         }
 
         //res.clearCookie('member');
-        res.cookie('member', { userid: userid, account: account, isadmin: isAdmin }, { maxAge: 3600000, httpOnly: true, path: '/' });
+        res.cookie('member', { userid: userid, account: account, isadmin: isAdmin }, { maxAge: 3600000 * 24, httpOnly: true, path: '/' });
         res.cookie('userinfo', account, { maxAge: 3600000, httpOnly: true, path: '/' });
 
-        res.send({ ok: 1 })
+        res.send({ ok: 1 });
     });
 });
 

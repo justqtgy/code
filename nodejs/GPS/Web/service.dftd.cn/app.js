@@ -44,8 +44,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/Views', express.static(__dirname + '/Views'));
 
+
 //总是检查是否登录
 //app.all('*', users.requireAuthentication);
+
 
 
 // catch 404 and forward to error handler
@@ -90,6 +92,7 @@ app.use(function(err, req, res, next) {
 
 app.use('/', index);
 app.use('/users', users);
+
 ctrl.init_route(app);
 
 module.exports = app;

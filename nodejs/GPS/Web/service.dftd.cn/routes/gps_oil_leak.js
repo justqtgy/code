@@ -33,4 +33,16 @@ router.post('/list', [get_count], function(req, res, next) {
     });
 });
 
+
+router.get('/mylist', function(req, res, next) {
+    var member = req.session.member;
+    gps_oil.get_mylist(member.userid, function(err, rows) {
+        if (err) {
+            log.error('Error = ', err);
+            return res.send({ ok: 0, msg: err });
+        }
+        res.send({ ok: 1, rows: rows });
+    });
+});
+
 module.exports = router;
