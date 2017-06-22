@@ -46,7 +46,7 @@ member.get_list = function(params, callback) {
 
     var sql = ";WITH t AS( " +
         "SELECT ROW_NUMBER() OVER (ORDER BY ID DESC) AS R_Number,* " +
-        "FROM gserver_data.dbo.Member ";
+        "FROM gserver_data.dbo.Member where isDelete = 0";
     if (params.account) {
         sql += " WHERE Account like '%" + params.account + "%'";
     }

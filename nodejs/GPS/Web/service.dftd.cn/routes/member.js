@@ -68,7 +68,7 @@ router.post('/set', function(req, res, next) {
             res.send({ ok: 1 });
         });
     } else {
-        args = utils.md5(args.account.toLowerCase() + '&' + args.password).digest("hex");
+        args = utils.md5(args.account.toLowerCase() + '&' + args.password);
         member.add(args, function(err, result) {
             if (err) {
                 log.error('Error = ', err);
@@ -93,9 +93,10 @@ router.post('/delete', function(req, res, next) {
 router.post('/password', function(req, res, next) {
     console.log(req.body)
     var args = {
+        id: req.body.id,
+        account: req.body.account,
         password: req.body.password,
-        confirmPassword: req.body.confirmPassword,
-        account: req.body.account
+        confirmPassword: req.body.confirmPassword
     };
 
     if (!args.password) {
@@ -106,7 +107,7 @@ router.post('/password', function(req, res, next) {
         return res.send({ ok: 0, msg: '密码不一致，请重新输入' });
     }
 
-    args.password = utils.md5(args.account.toLowerCase() + '&' + args.password).digest("hex");
+    args.password = utils.md5(args.account.toLowerCase() + '&' + args.password);
 
     member.change_password(args, function(err, result) {
         if (err) {

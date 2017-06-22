@@ -54,8 +54,8 @@ router.post('/login', function(req, res, next) {
         // var user_type = result[0].user_type;
 
         var password = req.body.password;
-        //account.toLowerCase()
-        password = utils.md5(result[0].ID + '&' + password);
+
+        password = utils.md5(account.toLowerCase() + '&' + password);
         if (password != result[0].Password) {
             res.send({ ok: 0, msg: "密码错误" });
             return;
