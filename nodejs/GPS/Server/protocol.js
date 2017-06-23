@@ -71,9 +71,9 @@ module.exports.parse = function(socket, data) {
             }, 5000)
         }
 
-        // if (list[0].indexOf('*DFTD_YP') >= 0) {
-        //     add_quality_data(list);
-        // }
+        if (list[0].indexOf('*DFTD_YP') >= 0) {
+            add_quality_data(list);
+        }
 
         // if (list[0].indexOf('update') >= 0) {
         //     update_clients(list);
