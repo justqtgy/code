@@ -87,7 +87,7 @@ gps_data.add_data = function(data, cb) {
 
 gps_data.get_carlist = function(gprsid, callback) {
 
-    var sqlText = "select *, CarNumber as VehicleNo from [gserver_synth].[dbo].[View_CarList] with(nolock) where GPRS='" + gprsid + "'";
+    var sqlText = "select * from [gserver_data].[dbo].[Vehicle] with(nolock) where GPSID='" + gprsid + "'";
     db.execSQL(sqlText, function(err, result) {
         if (err) {
             return callback(err, '');

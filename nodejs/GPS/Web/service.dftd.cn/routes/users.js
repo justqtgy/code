@@ -1,5 +1,6 @@
 var express = require('express');
 var utils = require('utility');
+var date = require('date-utils');
 var users = require('../models/member');
 var router = express.Router();
 
@@ -58,6 +59,13 @@ router.post('/login', function(req, res, next) {
         password = utils.md5(account.toLowerCase() + '&' + password);
         if (password != result[0].Password) {
             res.send({ ok: 0, msg: "密码错误" });
+            return;
+        }
+
+        var now = new Date(),
+            expireTime = new Date(result[0].ExpireTime);
+        if (Date.compare(expireTime, now) < 0) {
+            res.send({ ok: 0, msg: "账号已过期" });
             return;
         }
 

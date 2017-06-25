@@ -58,8 +58,8 @@ router.post('/set', function(req, res, next) {
         expireTime: req.body.expireTime,
         isAdmin: req.body.isAdmin ? 1 : 0
     };
-
-    if (args.id) {
+    console.log(args)
+    if (args.id && args.id > 0) {
         member.update(args, function(err, result) {
             if (err) {
                 log.error('Error = ', err);
@@ -68,7 +68,7 @@ router.post('/set', function(req, res, next) {
             res.send({ ok: 1 });
         });
     } else {
-        args = utils.md5(args.account.toLowerCase() + '&' + args.password);
+        args.password = utils.md5(args.account.toLowerCase() + '&' + args.password);
         member.add(args, function(err, result) {
             if (err) {
                 log.error('Error = ', err);

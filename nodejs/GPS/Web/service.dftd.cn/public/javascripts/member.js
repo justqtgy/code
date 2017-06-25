@@ -54,8 +54,21 @@ function get_record(id) {
         $("#txtEmail").val(item.Email);
         $("#txtMobile").val(item.Mobile);
         $("#txtExpireTime").datepicker('setDate', new Date(item.ExpireTime).toUTCFormat('YYYY-MM-DD'));
+        $("#chkIsAdmin").attr("checked", item.IsAdmin);
         $("#mod_info").modal({ backdrop: 'static', keyboard: false });
     });
+}
+
+function add_record() {
+    //显示记录
+    $("#txtID").val(0);
+    $("#txtAccount").val('');
+    $("#txtPassword").val('');
+    $("#txtTrueName").val('');
+    $("#txtEmail").val('');
+    $("#txtMobile").val('');
+    $("#chkIsAdmin").attr("checked", false);
+    $("#mod_info").modal({ backdrop: 'static', keyboard: false });
 }
 
 //添加记录信息
@@ -145,7 +158,7 @@ var app = new Vue({
             $("#btnChange").click(function() { change_password(); });
         },
         show_modal: function(id) {
-            $("#mod_info").modal({ backdrop: 'static', keyboard: false });
+            add_record();
         },
     }
 });
