@@ -3,6 +3,7 @@ var gps_oil = require('./parse/gps_oil');
 var gps_point = require('./parse/gps_point');
 var gps_data = require('./parse/gps_data');
 var gps_online = require('./parse/gps_online');
+var gps_quality = require('./parse/gps_quality');
 
 /**
  * 解析协议
@@ -72,7 +73,7 @@ module.exports.parse = function(socket, data) {
         }
 
         if (list[0].indexOf('*DFTD_YP') >= 0) {
-            add_quality_data(list);
+            gps_quality.add_quality_data(list);
         }
 
         // if (list[0].indexOf('update') >= 0) {

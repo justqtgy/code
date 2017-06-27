@@ -61,8 +61,8 @@ function addQualitytData(args, cb) {
     //写入数据库 
     gps_quality.add_data(args, function(error, result) {
         if (error) {
-            return cb(error)
+            return cb(error);
         }
-        cb(null, result)
+        cb(null, result);
     });
 }

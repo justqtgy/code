@@ -24,7 +24,7 @@ gps_traffic.add_record = function(args, callback) {
     var sql = "INSERT INTO GPS_Traffic " +
         "SELECT TOP 1 '%s' ,[GPSID] ,[VehicleID] ,[VehicleNo] ,[EndDistance], [EndDistance]+%s, [EndOil], [EndOil] + %s , %s as AddOil, '%s' as Traffic, GETDATE() " +
         "FROM (SELECT [GPSID] ,[VehicleID] ,[VehicleNo], [EndDistance], [EndOil], 0 as Rid " +
-        "      FROM [gserver_packet].[dbo].[GPS_Traffic] " +
+        "      FROM [dbo].[GPS_Traffic] " +
         "      WHERE CreateDate = DATEADD(DAY, -1, '%s') and GPSID = '%s'" +
         "      UNION ALL " +
         "      SELECT '%s' as GPSID, '%s' AS VehicleID, '%s' as VehicleNo, 0 as EndDistance, 0 as EndOil,  1 as Rid" +
