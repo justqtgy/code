@@ -1,5 +1,7 @@
 ﻿var express = require('express');
 var router = express.Router();
+var Storage = require('dom-storage'),
+    sessionStorage = new Storage(null, { strict: true });
 
 var group_vehicle = require('../models/group_vehicle');
 
@@ -32,7 +34,9 @@ router.post('/except_list', function(req, res, next) {
 
 router.get('/group', function(req, res, next) {
     var member = req.session.member;
-    var vhc_group = req.session[member.userid + "_group"];
+    var keyGroup = member.userid + "_group";
+    //var vhc_group = req.session[keyGroup];
+    vhc_group = sessionStorage.getItem(keyGroup);
     if (vhc_group) {
         res.send({ error: 0, group: vhc_group });
     } else {
@@ -55,7 +59,8 @@ router.get('/group', function(req, res, next) {
 
             group += "</optgroup>";
 
-            req.session[member.userid + "_group"] = group;
+            //req.session[keyGroup] = group;
+            sessionStorage.setItem(keyGroup, group);
 
             res.send({ error: 0, group: group });
         });
@@ -70,6 +75,8 @@ router.post('/add', function(req, res, next) {
             return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1 });
+
+        removeMemberGroup(req, res);
     });
 
 });
@@ -82,7 +89,17 @@ router.post('/delete', function(req, res, next) {
             return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1 });
+
+        removeMemberGroup(req, res);
     });
 });
+
+function removeMemberGroup(req, res) {
+    var member = req.session.member;
+    if (member) {
+        var keyGroup = member.userid + "_group";
+        sessionStorage.removeItem(keyGroup);
+    }
+}
 
 module.exports = router;

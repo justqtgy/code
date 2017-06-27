@@ -79,7 +79,7 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res) {
-    req.session.user = null;
+    req.session.member = null;
     res.redirect('/users/login');
 });
 
