@@ -8,6 +8,7 @@ var date = require('date-utils');
 var async = require('async');
 var util = require('util');
 var common = require('./../cores/common');
+var gps_data = require('./../models/gps_data');
 var gps_quality = require('./../models/gps_quality');
 
 module.exports.add_quality_data = function(data) {

@@ -110,7 +110,6 @@ gps_data.get_driver_vhc = function(vid, callback) {
 }
 
 gps_data.add_data = function(data, callback) {
-
     var _gpsID = data.gpsID,
         _vehicleID = data.vehicleID,
         _vehicleNo = iconv.encode(data.vehicleNo, 'gbk').toString('binary'),
@@ -130,9 +129,9 @@ gps_data.add_data = function(data, callback) {
         _oil2 = data.oil2.toString();
 
     var params = [
-        { name: 'GPSID', type: sql.VarChar(20), value: _gpsID },
+        { name: 'GPSID', type: sql.VarChar(50), value: _gpsID },
         { name: 'VehicleID', type: sql.VarChar(20), value: _vehicleID },
-        { name: 'VehicleNo', type: sql.VarChar(20), value: _vehicleNo },
+        { name: 'VehicleNo', type: sql.VarChar(50), value: _vehicleNo },
         { name: 'Version', type: sql.VarChar(20), value: _version },
         { name: 'GPSTime', type: sql.VarChar(20), value: _gpsTime },
         { name: 'Location', type: sql.VarChar(20), value: _location },
