@@ -15,6 +15,7 @@ gps_oil_data.get_count = function(params, callback) {
     console.log(params);
     var sql = " select count(*) as total from GPS_Oil_Data where addtime >='%s' and addtime<dateadd(day, 1, '%s') and vehicleid in (%s) and GPSStatus=1";
     sql = util.format(sql, params.begintime, params.endtime, params.vehicleList);
+	console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);
@@ -35,18 +36,12 @@ gps_oil_data.get_list = function(params, callback) {
     var start_id = (pageIndex - 1) * pageSize + 1;
     var end_id = pageIndex * pageSize;
 
-    // var sql = ";with t as (select *, row_number() over(order by addtime desc) as rid  from GPS_Oil_Data t1 with(nolock) " +
-    //     "       where addtime >='%s' and addtime<dateadd(day, 1, '%s')  " +
-    //     "           and exists(select vehicleid from  [gserver_synth].[dbo].[View_CarList] t2 with(nolock) where t1.vehicleid = t2.vehicleid and vehicleid in (%s))" +
-    //     ")" +
-    //     "select * from t where rid between %s and %s";
-    var sql = ";with t as (select t1.*, row_number() over(order by id desc) as rid  from GPS_Oil_Data t1 with(nolock) " +
-        "                       inner join [gserver_synth].[dbo].[View_CarList] t2 with(nolock) on t1.vehicleid = t2.vehicleid " +
-        "                   where addtime >='%s' and addtime<dateadd(day, 1, '%s')  and t2.vehicleid in (%s) and GPSStatus=1 " +
+    var sql = ";with t as (select *, row_number() over(order by id desc) as rid  from GPS_Oil_Data with(nolock) " +
+        "                   where addtime >='%s' and addtime<dateadd(day, 1, '%s')  and Vehicleid in (%s) and GPSStatus=1 " +
         ")" +
         "select * from t where rid between %s and %s";
     sql = util.format(sql, params.begintime, params.endtime, params.vehicleList, start_id, end_id);
-    //console.log(sql)
+    console.log(sql)
     db.execSQL(sql, function(err, rows) {
         if (err) {
             return callback(err);

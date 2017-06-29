@@ -49,6 +49,7 @@ gps_oil_leak.get_list = function(params, callback) {
     });
 };
 
+//漏油报警记录，在首页显示
 gps_oil_leak.get_mylist = function(userid, callback) {
     var sql = " ;with t as (select GroupID  from  gserver_data.dbo.[GroupMember] where MemberID=" + userid +
         " union all select g.ID from gserver_data.dbo.[group] g inner join t on g.ParentID = t.GroupID)" +
