@@ -7,7 +7,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 
 var ctrl = require('./controller');
 
@@ -28,11 +28,11 @@ app.use(session({resave:true, saveUninitialized:false, secret:'dftd'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //总是检查是否登录
-app.all('*', users.requireAuthentication);
+//app.all('*', users.requireAuthentication);
 //app.all('*', users.requireVehicleList);
 
 app.use('/', routes);
-app.use('/users', users);
+//app.use('/users', users);
 ctrl.init_route(app);
 
 
