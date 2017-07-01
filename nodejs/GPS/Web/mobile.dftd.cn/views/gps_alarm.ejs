@@ -1,0 +1,37 @@
+
+<%- include ./shared/_header %>    
+<%- include ./shared/_top %>   
+
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+      <a class="icon icon-left-nav pull-left" href="boss/index"></a>
+      <a class="icon icon-search pull-right"></a>
+      <h1 class="title">短信告警</h1>
+    </header>
+
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
+     <p class="content-padded">显示最近10天的记录:</p>
+      <ul id = "grid" class="table-view" v-if = "DataList.length > 0">
+        <li class="table-view-cell media" v-for = "(item, index) in DataList">
+          <a class="navigate-right">
+            <img class="media-object pull-left" src="http://placehold.it/42x42">
+            <div class="media-body">
+              {{item.VehicleNo}}
+              <p>{{item.CurOil}}<br/>
+              <a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <ul class="table-view" v-else>
+        <li class="table-view-cell">
+          没有数据
+        </li>
+      </ul>
+    </div>
+
+  <%- include ./shared/_scripts %>
+    <script src="/javascripts/gps_last.js"></script>
+
+<%- include ./shared/_footer %>

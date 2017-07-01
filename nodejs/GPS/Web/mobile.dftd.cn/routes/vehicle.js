@@ -35,38 +35,6 @@ router.get_my_vehicle = function(req, res, cb) {
     }
 };
 
-router.get('/group', function(req, res, next) {
-    var member = req.session.member;
-    var vhc_group = req.session[member.userid + "_group"];
-    if (vhc_group) {
-        res.send({ error: 0, group: vhc_group });
-    } else {
-        vehicle.get_grouplist(member.userid, member.user_type, function(err, result) {
-            var group = '';
-            for (var i in result) {
-                var item = result[i];
-                if (item.level == 0) {
-                    if (!group) {
-                        group = "<optgroup label='" + item.groupname + "'>";
-                    } else {
-                        group += "</optgroup>";
-                        group += "<optgroup label='" + item.groupname + "'>";
-                    }
-
-                } else {
-                    group += "<option value=\"" + item.vehicleid + "\" >" + item.carnumber + "</option>";
-                }
-            }
-
-            group += "</optgroup>";
-
-            req.session[member.userid + "_group"] = group;
-
-            res.send({ error: 0, group: group });
-        });
-    }
-});
-
 var get_count = function(req, res, next) {
     var args = req.body;
     vehicle.get_count(args, function(err, result) {
