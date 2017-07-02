@@ -33,7 +33,7 @@ router.post('/except_list', function(req, res, next) {
 });
 
 router.get('/group', function(req, res, next) {
-    var member = req.session.member;
+    var member = req.cookies.member;
     var keyGroup = member.userid + "_group";
     //var vhc_group = req.session[keyGroup];
     vhc_group = sessionStorage.getItem(keyGroup);
@@ -95,7 +95,7 @@ router.post('/delete', function(req, res, next) {
 });
 
 function removeMemberGroup(req, res) {
-    var member = req.session.member;
+    var member = req.cookies.member;
     if (member) {
         var keyGroup = member.userid + "_group";
         sessionStorage.removeItem(keyGroup);

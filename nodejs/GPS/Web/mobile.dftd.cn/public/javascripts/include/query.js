@@ -32,6 +32,8 @@ Query.prototype = {
             type: self.type,
             dataType: "json",
             data: data,
+            beforeSend: function() { $("#loading").show(); },
+            complete: function() { $("#loading").hide(); },
             success: function(json) {
                 cb(json);
             }

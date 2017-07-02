@@ -1,26 +1,25 @@
 
 <%- include ./shared/_header %>  
-<link href="../assets/multiple-select/multiple-select.css" rel="stylesheet" />
-
 <%- include ./shared/_top %>   
 
 <header class="bar bar-nav">
   <a class="icon icon-left-nav pull-left" href="boss"></a>
   <a class="icon icon-search pull-right" href="#searchModal"></a>
-  <h1 class="title">车辆状态</h1>
+  <h1 class="title">行驶轨迹</h1>
 </header>
 
-
-<div class="content">
-  <ul id = "grid" class="table-view" v-if = "DataList.length > 0">
+<div id = "grid" class="content">
+  <ul  class="table-view" v-if = "DataList.length > 0">
     <li class="table-view-cell media" v-for = "(item, index) in DataList">
-      <a >            
+        <img class="media-object pull-left" src="images/arrow_icon.png">   
         <div class="media-body">
           {{item.VehicleNo}}
-          <p>当前油量：{{item.CurOil}}</p>
-          <p><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
+          <p>时间：{{item.CreateDate}}</p>
+          <p>距离：{{item.Distance.toFixed(2)}}</p>
+          <p>油耗：{{item.OilUsed.toFixed(2)}}</p>
+          <p><a href='#' v-on:click="showTraffic(item.ID)">查看轨迹</a></p>
         </div>
-      </a>
+
     </li>
   </ul>
   <ul class="table-view" v-else>
@@ -29,27 +28,12 @@
     </li>
   </ul>
 </div>
-
-<div id="searchModal" class="modal">
-  <header class="bar bar-nav">
-    <a class="icon icon-close pull-right" href="#searchModal"></a>
-    <h1 class="title">查找</h1>
-  </header>
-
-  <div class="content">
-    <form class="input-group">
-      <ul class="table-view">
-        <li class="table-view-cell over-show">选择车辆：<select class="multiselect"  multiple="multiple" ></select> </li>
-        <li class="table-view-cell">开始时间：<input type="date" class="input-width-200"></li>
-        <li class="table-view-cell">结束时间：<input type="date" class="input-width-200"></li>
-        
-      </ul>
-      <button class="btn btn-primary btn-block">查询</button>
-    </form>
-  </div>
-</div>
-	<%- include ./shared/_bottom %>
+<%- include ./shared/_bottom %>
+<%- include ./control/_map %>
+<%- include ./control/_search-page %>
 <%- include ./shared/_scripts %>
-<script src="../assets/multiple-select/multiple-select.js"></script>  
-<script src="/javascripts/gps_last.js"></script>
+<%- include ./control/_search-js %>
+<script src="/javascripts/include/date-utils.min.js"></script>
+<script src="/javascripts/include/query.js"></script>
+<script src="/javascripts/gps_traffic.js"></script>
 <%- include ./shared/_footer %>

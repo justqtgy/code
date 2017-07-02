@@ -36,7 +36,6 @@ router.get('/logout', function(req, res) {
 });
 
 router.post('/login', function(req, res, next) {
-    console.log(req.body)
     var account = req.body.account,
         password = req.body.password;
     password = utils.md5(account + '&' + password);

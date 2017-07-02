@@ -9,16 +9,21 @@
 </header>
 
 
-<div class="content">
-  <ul id = "grid" class="table-view" v-if = "DataList.length > 0">
+<div id = "grid" class="content">
+  <ul  class="table-view" v-if = "DataList.length > 0">
     <li class="table-view-cell media" v-for = "(item, index) in DataList">
-      <img class="media-object pull-left" src="http://placehold.it/42x42">         
+        <img class="media-object pull-left" src="images/arrow_icon.png">      
         <div class="media-body">
           {{item.VehicleNo}}
           <p>当前油量：{{item.CurOil}}</p>
           <p><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
         </div>
 
+    </li>
+  </ul>
+  <ul class="table-view" v-else>
+    <li class="table-view-cell">
+      没有数据
     </li>
   </ul>
 </div>

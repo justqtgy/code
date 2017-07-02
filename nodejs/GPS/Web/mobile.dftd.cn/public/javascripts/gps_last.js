@@ -15,7 +15,7 @@ function get_list(pageIndex) {
     var params = q.init(data_foramt);
     q.request(params, function(json) {
         //console.log(json.rows)
-        app.DataList = json.rows;
+        app.DataList = app.DataList.concat(json.rows);
         $("#searchModal").removeClass('active');
     });
 }
@@ -46,6 +46,7 @@ var app = new Vue({
             });
             $(".btn-primary").click(function() {
                 event.preventDefault();
+                that.DataList.length = 0;
                 get_list(1);
 
                 //close removeClass('active');
