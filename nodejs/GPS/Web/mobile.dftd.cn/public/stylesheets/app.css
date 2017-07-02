@@ -16,7 +16,7 @@
 }
 
 .input-width-200 {
-    width: 200px !important;
+    width: 160px !important;
 }
 
 
@@ -30,4 +30,12 @@
     margin: 0px;
     z-index: 9999;
     display: none;
+}
+
+.top-title {
+    padding-top: 28px !important;
+}
+
+.bottom-title {
+    padding-bottom: 35px !important;
 }

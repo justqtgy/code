@@ -8,7 +8,7 @@
   <h1 class="title">行驶轨迹</h1>
 </header>
 
-<div id = "grid" class="content">
+<div id = "grid" class="content  top-title">
   <ul  class="table-view" v-if = "DataList.length > 0">
     <li class="table-view-cell media" v-for = "(item, index) in DataList">
         <img class="media-object pull-left" src="images/arrow_icon.png">   
@@ -28,7 +28,7 @@
     </li>
   </ul>
 </div>
-<%- include ./shared/_bottom %>
+
 <%- include ./control/_map %>
 <%- include ./control/_search-page %>
 <%- include ./shared/_scripts %>
