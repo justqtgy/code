@@ -1,113 +1,72 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>鼎丰泰达</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
-      
-    <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-     
-    <!-- END GLOBAL MANDATORY STYLES -->
-    <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-    <link href="../assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
-    <!-- END THEME GLOBAL STYLES -->
-    <!-- BEGIN THEME LAYOUT STYLES -->
-    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css"/>
-    <!-- END THEME LAYOUT STYLES -->
-</head>
 
-<body class="page-header-fixed" style="background-color:#ffffff;">
-    <div  class="box-body chart-responsive"> 
-		<div class="tiles">
-			<div class="tile bg-purple">
-			<div class="tile-body">
-				<i class="fa fa-car"></i>
-			</div>
-			<div class="tile-object">
-				<div class="name">
-					车辆状态
-				</div>				
-			</div>
+<%- include ./shared/_header %>    
+<%- include ./shared/_top %>   
+
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+      <h1 class="title">鼎丰泰达-车辆油管家</h1>
+    </header>
+<div class="content">
+	<ul class="table-view">
+	<li class="table-view-cell media">
+		<a class="navigate-right" href = "gps_last"  data-ignore="push">
+		<span class="media-object pull-left icon icon-gear"></span>
+		<div class="media-body">
+			车辆状态
 		</div>
-
-		<div class="tile bg-yellow" >
-			<div class="tile-body">
-				<i class="icon-social-dropbox"></i>
-			</div>
-			<div class="tile-object">
-				<div class="name">
-					油票核对
-				</div>
-			</div>
+		</a>
+	</li>
+	<li class="table-view-cell media">
+		<a class="navigate-right">
+		<span class="media-object pull-left icon icon-compose"></span>
+		<div class="media-body">
+			油票核对
 		</div>
-		<div class="tile bg-blue">
-			<div class="tile-body">
-				<i class="icon-calendar"></i>
-			</div>
-			<div class="tile-object">
-				<div class="name">
-					成本核算
-				</div>	
-			</div>
+		</a>
+	</li>
+	<li class="table-view-cell media">
+		<a class="navigate-right">
+		<span class="media-object pull-left icon icon-pages"></span>
+		<div class="media-body">
+			成本核算
 		</div>
-
-		<div class="tile bg-green">
-			<div class="tile-body">
-				<i class="icon-briefcase"></i>
-			</div>
-			<div class="tile-object">
-				<div class="name">
-					维护保养
-				</div>
-			
-			</div>
+		</a>
+	</li>
+	<li class="table-view-cell media">
+		<a class="navigate-right" href="gps_oil_add"  data-ignore="push">
+		<span class="media-object pull-left icon icon-plus"></span>
+		<div class="media-body">
+			加油记录
 		</div>
+		</a>
+	</li>
+	<li class="table-view-cell media">
+		<a class="navigate-right" href="gps_oil_leak"  data-ignore="push">
+		<span class="media-object pull-left icon icon-trash"></span>
+		<div class="media-body">
+			漏油告警
+		</div>
+		</a>
+	</li>
+	<li class="table-view-cell media">
+		<a class="navigate-right" href="gps_point"  data-ignore="push">
+		<span class="media-object pull-left icon icon-refresh"></span>
+		<div class="media-body">
+			区间轨迹
+		</div>
+		</a>
+	</li>
+	<li class="table-view-cell media">
+		<a class="navigate-right" href="gps_traffic"  data-ignore="push">
+		<span class="media-object pull-left icon icon-list"></span>
+		<div class="media-body">
+			行驶轨迹
+		</div>
+		</a>
+	</li>
+	</ul>
+	</div>
+	<%- include ./shared/_bottom %>
+	<%- include ./shared/_scripts %>
 
-			
-
-			<div class="tile bg-red">
-				<div class="tile-body">
-					<i class="icon-bar-chart"></i>
-				</div>
-				<div class="tile-object">
-					<div class="name">
-						漏油告警
-					</div>						
-				</div>
-			</div>
-			
-			
-
-    </div>
-     
-  </body>
-    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-    <!-- BEGIN CORE PLUGINS -->
-
-    <script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- END CORE PLUGINS -->
-   
-    <!-- END JAVASCRIPTS -->
-  
-</body>
-<!-- END BODY -->
-</html>
-
-<script>
-	$(function(){
-		$(".bg-purple").click(function(){location.href='vehicle_status/m_index';});
-		$(".bg-green").click(function(){location.href='/m_maintenance';});
-		$(".bg-blue").click(function(){location.href='daily_report/m_index';});
-		$(".bg-yellow").click(function(){location.href='oil_ticket/m_check';});		
-		$(".bg-red").click(function(){location.href='oil_vhc_dv/m_index';});
-		
-	})
-</script>
+<%- include ./shared/_footer %>

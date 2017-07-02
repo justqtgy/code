@@ -25,6 +25,7 @@ var get_count = function(req, res, next) {
 
 router.post('/list', [get_count], function(req, res, next) {
     var args = req.body;
+    console.log('args=================', args);
     gps_last.get_list(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);

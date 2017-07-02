@@ -14,14 +14,16 @@ function get_list(pageIndex) {
     };
     var params = q.init(data_foramt);
     q.request(params, function(json) {
+        //console.log(json.rows)
         app.DataList = json.rows;
-        q.showPagination(json.total, get_list);
+        $("#searchModal").removeClass('active');
     });
 }
 
 function showMap(lat, lng) {
+    event.preventDefault();
     $("#mapUrl").attr("src", "position.html?r=" + Math.random() + "&lat=" + lat + "&lng=" + lng);
-    $("#map-modal").modal('show');
+    $("#mapModal").addClass('active');
     return;
 }
 
@@ -32,16 +34,21 @@ var app = new Vue({
     },
     methods: {
         loadPage: function() {
-            // $(".date-picker").datepicker({
-            //     autoclose: 1,
-            //     todayHighlight: 1
-            // });
+            $(".begin-time").hide();
+            $(".end-time").hide();
         },
         init: function() {
             var that = this;
             that.loadPage();
-            $("#btnSearch").click(function() {
+            $(".icon-search").click(function() {
+                event.preventDefault();
+                $("#searchModal").addClass('active');
+            });
+            $(".btn-primary").click(function() {
+                event.preventDefault();
                 get_list(1);
+
+                //close removeClass('active');
             });
         }
     }

@@ -3,7 +3,17 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index');
+    var member = req.cookies.member;
+    console.log('cookies========', member);
+    if (member) {
+        if (member.isBoss) {
+            res.render('boss');
+        } else {
+            res.render('driver');
+        }
+    } else {
+        res.render('/users/login');
+    }
 });
 
 router.get('/boss', function(req, res, next) {

@@ -32,28 +32,9 @@ Query.prototype = {
             type: self.type,
             dataType: "json",
             data: data,
-            beforeSend: function() { App.blockUI({ boxed: true, message: '正在处理，请稍等...' }); },
-            complete: function() { App.unblockUI(); },
             success: function(json) {
                 cb(json);
             }
         });
-    },
-    showPagination: function(total, func) {
-        if (total === 0) {
-            $('.pagination').empty();
-            return;
-        }
-        var options = {
-            bootstrapMajorVersion: 3,
-            currentPage: this.pageIndex,
-            numberOfPages: 15,
-            totalPages: Math.ceil(total / this.pageSize),
-            onPageClicked: function(event, originalEvent, type, page) {
-                this.pageIndex = page;
-                func(page);
-            }
-        };
-        $('.pagination').bootstrapPaginator(options);
     }
 };
