@@ -1,0 +1,40 @@
+
+<%- include ./shared/_header %>  
+<%- include ./shared/_top %>   
+
+<header class="bar bar-nav">
+  <h1 class="title">加油记账</h1>
+</header>
+
+
+<div class="content">
+  
+  <form class="input-group login-form">
+      
+      <ul class="table-view">     
+        <li class="table-view-cell">车辆：
+            <select id='vehicleid' name ="vehicleid">  
+            <!--    
+                <% vehicles.forEach(function(item){ %>
+                    <option value="<%=item.VehicleID%>" ><%=item.VehicleNo%></option>
+                <% }) %> 
+            </select>  -->
+        </li>
+        <li class="table-view-cell">时间：<input type="date" name="fueltime"  value = "<%=today%>"></li>
+        <li class="table-view-cell">总金额：<input type="number" name="amount" ></li>
+        <li class="table-view-cell">升数：<input type="number" name="number" ></li>
+        <li class="table-view-cell">油价：<input type="number" name="price" ></li>
+        <li class="table-view-cell">地点：<input type="text" name="station" ></li>
+        
+      </ul>
+      <button id="login-btn" class="btn btn-primary btn-block">登录</button>
+    </form>
+
+      <div class="content-padded" style="display:none">
+        <p><span class="badge badge-negative">登录失败：账号不存在</span></p>
+      </div>
+</div>
+
+<%- include ./shared/_scripts %>
+<script src="/javascripts/login.js"></script>
+<%- include ./shared/_footer %>

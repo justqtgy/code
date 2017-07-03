@@ -1,10 +1,11 @@
 var express = require('express');
+var date = require('date-utils');
 var router = express.Router();
+var driver_vehicle = require('../models/driver_vehicle');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     var member = req.cookies.member;
-    console.log('cookies========', member);
     if (member) {
         if (member.isBoss) {
             res.render('boss');
@@ -22,6 +23,17 @@ router.get('/boss', function(req, res, next) {
 
 router.get('/driver', function(req, res, next) {
     res.render('driver');
+});
+
+router.get('/fuel_up', function(req, res, next) {
+    var today = new Date().toFormat('YYYY-MM-DD');
+    var member = req.cookies.member;
+    driver_vehicle.get_list(member.userid, function(err, rows) {
+        res.render('fuel_up', {
+            today: today,
+            vehicles: rows
+        });
+    });
 });
 
 router.get('/group', function(req, res, next) {
