@@ -9,8 +9,10 @@ function member(model) {
 module.exports = member;
 
 member.get_info = function(account, callback) {
-    var sql = " select * from gserver_data.dbo.[member] where Account='%s'";
-    sql = util.format(sql, account);
+    var sql = " select ID, [Account], [Password], [ExpireTime], [IsDelete] ,[WX_OpenID], [IsAdmin], 1 as isBoss from gserver_data.dbo.[member] where Account='%s' ";
+    sql += " union all ";
+    sql += " select ID, [Account], [Password], [ExpireTime], [IsDelete] ,[WX_OpenID], 0 as [IsAdmin], 0 as isBoss from Drivers where Account = '%s' ";
+    sql = util.format(sql, account, account);
 
     db.execSQL(sql, function(err, rows) {
         if (err) {

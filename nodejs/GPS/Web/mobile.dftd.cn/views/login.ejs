@@ -1,0 +1,29 @@
+
+<%- include ./shared/_header %>  
+<%- include ./shared/_top %>   
+
+<header class="bar bar-nav">
+  <h1 class="title">登录</h1>
+</header>
+
+
+<div class="content">
+  
+  <form class="input-group login-form">
+      
+      <ul class="table-view">
+        <li class="table-view-cell">账号：<input type="text" name ="account" class="input-width-200"></li>
+        <li class="table-view-cell">密码：<input type="password" name = "password" class="input-width-200"></li>
+        
+      </ul>
+      <button id="login-btn" class="btn btn-primary btn-block">登录</button>
+    </form>
+
+      <div class="content-padded" style="display:none">
+        <p><span class="badge badge-negative">登录失败：账号不存在</span></p>
+      </div>
+</div>
+
+<%- include ./shared/_scripts %>
+<script src="/javascripts/login.js"></script>
+<%- include ./shared/_footer %>

@@ -3,19 +3,37 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+    var member = req.cookies.member;
+    console.log('cookies========', member);
+    if (member) {
+        if (member.isBoss) {
+            res.render('boss');
+        } else {
+            res.render('driver');
+        }
+    } else {
+        res.render('/users/login');
+    }
 });
 
 router.get('/boss', function(req, res, next) {
-  res.render('boss/index');
+    res.render('boss');
 });
 
 router.get('/driver', function(req, res, next) {
-  res.render('driver/index');
+    res.render('driver');
 });
 
 router.get('/group', function(req, res, next) {
-  res.render('control/_group', { title: 'dftd' });
+    res.render('control/_group', { title: 'dftd' });
+});
+
+router.get('/oil_ticket', function(req, res, next) {
+    res.send('开发中....');
+});
+
+router.get('/cost_check', function(req, res, next) {
+    res.send('开发中....');
 });
 
 module.exports = router;

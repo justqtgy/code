@@ -1,56 +1,44 @@
 var displayNumber = 10;
-//获取记录列表
-function get_list(pageIndex){
-	var data_format = {
-		pageindex : pageIndex,
-		pagesize : displayNumber,
-		r:Math.random()
-	};
-     
-	var ctrls = $('#search').serializeArray();        
-	for(var c in ctrls){
-		data_format[ctrls[c].name]=ctrls[c].value;
-	}
-                
-    console.log(data_format);
-	$.ajax({
-		url : "/gps_alarm/list",
-		type : "GET",
-		dataType : "json",
-		data : data_format,
-		beforeSend : function() { $("#loading").show(); },
-		complete : function() { $("#loading").hide(); },
-		success : function(json) {
-			$("#grid tbody").find("tr.newrow").remove();
-			//显示记录
-			$.each(json.rows, function(i, item) {
-				$("<tr class='newrow'></tr>").append(
-					"<td>" + (i+1).toString()+ "</td>" + 
-					"<td>" + item.CarNumber+ "</td>" + 
-					"<td>" + item.GPRSID+ "</td>" + 
-					"<td>" + item.Mobile+ "</td>" +					 
-					"<td>" + new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')+ "</td>"
-				
-				).appendTo($("#grid tbody"));
-			});
-			show_pager(json.total, pageIndex);
-		}
-	});
+
+function get_list(pageIndex) {
+    var q = new Query('/gps_alarm/list', 'POST', $("#search"), pageIndex, displayNumber);
+    var vehicleList = $(".multiselect").val();
+    if (!vehicleList) {
+        alert('请选择车辆');
+        return;
+    }
+    vehicleList = vehicleList.join(",");
+    var data_foramt = {
+        vehicleList: vehicleList
+    };
+    var params = q.init(data_foramt);
+    q.request(params, function(json) {
+        app.DataList = json.rows;
+        q.showPagination(json.total, get_list);
+    });
 }
 
-function show_pager(total, pageIndex){
-	if(total==0){
-		$('.pagination').empty();
-		return;
-	}
-	var options = {
-		bootstrapMajorVersion:3,
-		currentPage: pageIndex,
-		numberOfPages:15,
-		totalPages: Math.ceil(total/displayNumber),
-		onPageClicked:function(event, originalEvent, type, page){
-			get_list(page);
-		}
-	}
-	$('.pagination').bootstrapPaginator(options);
-}
+
+var app = new Vue({
+    el: '#grid',
+    data: {
+        DataList: []
+    },
+    methods: {
+        loadPage: function() {
+            $(".date-picker").datepicker({
+                autoclose: 1,
+                todayHighlight: 1
+            });
+        },
+        init: function() {
+            var that = this;
+            that.loadPage();
+            $("#btnSearch").click(function() {
+                get_list(1);
+            });
+        }
+    }
+});
+
+app.init();
