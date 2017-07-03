@@ -1,8 +1,6 @@
 var displayNumber = 10;
 
 function get_list(pageIndex) {
-    var q = new Query('/gps_last/list', 'POST', $("#search"), pageIndex, displayNumber);
-
     var vehicleList = $(".multiselect").val();
     if (!vehicleList) {
         alert('请选择车辆');
@@ -12,6 +10,7 @@ function get_list(pageIndex) {
     var data_foramt = {
         vehicleList: vehicleList
     };
+    var q = new Query('/gps_last/list', 'POST', $("#search"), pageIndex, displayNumber);
     var params = q.init(data_foramt);
     q.request(params, function(json) {
         //console.log(json.rows)
@@ -33,23 +32,24 @@ var app = new Vue({
         DataList: []
     },
     methods: {
-        loadPage: function() {
-            $(".begin-time").hide();
-            $(".end-time").hide();
+        loadPage: function() {              
+            this.DataList.length = 0;            
+            setTimeout(function(){            
+                get_list(1);    
+            }, 100)
         },
         init: function() {
+            $(".begin-time").hide();
+            $(".end-time").hide();
             var that = this;
-            that.loadPage();
-            $(".icon-search").click(function() {
-                event.preventDefault();
-                $("#searchModal").addClass('active');
-            });
+            that.loadPage();            
+            // $(".icon-search").click(function() {
+            //     event.preventDefault();
+            //     $("#searchModal").addClass('active');
+            // });
             $(".btn-primary").click(function() {
-                event.preventDefault();
-                that.DataList.length = 0;
-                get_list(1);
-
-                //close removeClass('active');
+                event.preventDefault();          
+                that.loadPage();    
             });
         }
     }

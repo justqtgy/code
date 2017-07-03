@@ -1,7 +1,6 @@
 var displayNumber = 10;
 
-function get_list(pageIndex) {
-    var q = new Query('/gps_alarm/list', 'POST', $("#search"), pageIndex, displayNumber);
+function get_list(pageIndex) {    
     var vehicleList = $(".multiselect").val();
     if (!vehicleList) {
         alert('请选择车辆');
@@ -11,10 +10,11 @@ function get_list(pageIndex) {
     var data_foramt = {
         vehicleList: vehicleList
     };
+    var q = new Query('/gps_alarm/list', 'POST', $("#search"), pageIndex, displayNumber);
     var params = q.init(data_foramt);
     q.request(params, function(json) {
-        app.DataList = json.rows;
-        q.showPagination(json.total, get_list);
+        app.DataList = app.DataList.concat(json.rows);
+        $("#searchModal").removeClass('active');
     });
 }
 
@@ -26,15 +26,14 @@ var app = new Vue({
     },
     methods: {
         loadPage: function() {
-            $(".date-picker").datepicker({
-                autoclose: 1,
-                todayHighlight: 1
-            });
+            
         },
         init: function() {
             var that = this;
             that.loadPage();
             $("#btnSearch").click(function() {
+                event.preventDefault();
+                that.DataList.length = 0;
                 get_list(1);
             });
         }

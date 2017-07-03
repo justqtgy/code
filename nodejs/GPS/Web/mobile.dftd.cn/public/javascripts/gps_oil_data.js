@@ -26,16 +26,18 @@ var app = new Vue({
     },
     methods: {
         loadPage: function() {
-            $(".date-picker").datepicker({
-                autoclose: 1,
-                todayHighlight: 1
-            });
+            this.DataList.length = 0;            
+            setTimeout(function(){            
+                get_list(1);    
+            }, 100)
         },
         init: function() {
             var that = this;
-            that.loadPage();
+            that.loadPage();      
+
             $("#btnSearch").click(function() {
-                get_list(1);
+                event.preventDefault();
+                that.loadPage();
             });
         }
     }

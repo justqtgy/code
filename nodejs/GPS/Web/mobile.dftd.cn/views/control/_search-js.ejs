@@ -21,8 +21,10 @@
     // }
 
     function renderList(vehicleList){
+        console.log('aaaaaaaaaaaaaa');
         $('.multiselect').html(vehicleList);   
         $('.multiselect').multipleSelect({ selectAllText: '全部选择',  filter: true, width: 160 });
+        $('#mulVehicle').multipleSelect("checkAll");
         //$('.multiselect').multiselect("destroy").multiselect({ nonSelectedText: '请选择',enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });     
     }
     

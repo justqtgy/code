@@ -40,15 +40,18 @@ var app = new Vue({
     },
     methods: {
         loadPage: function() {
-
+            this.DataList.length = 0;            
+            setTimeout(function(){            
+                get_list(1);    
+            }, 100)
         },
         init: function() {
             var that = this;
-            that.loadPage();
+            that.loadPage();      
+
             $("#btnSearch").click(function() {
                 event.preventDefault();
-                that.DataList.length = 0;
-                get_list(1);
+                that.loadPage();
             });
         }
     }

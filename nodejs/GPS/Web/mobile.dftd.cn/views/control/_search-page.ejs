@@ -7,10 +7,9 @@
   <div class="content">
     <form class="input-group" id="search">
       <ul class="table-view">
-        <li class="table-view-cell over-show">选择车辆：<select class="multiselect"  multiple="multiple" ></select> </li>
+        <li class="table-view-cell over-show">选择车辆：<select id="mulVehicle" class="multiselect"  multiple="multiple" ></select> </li>
         <li class="table-view-cell begin-time">开始时间：<input type="date" name="begintime" value="<%= start_date %>" class="input-width-200"></li>
-        <li class="table-view-cell end-time">结束时间：<input type="date" name = "endtime" value="<%= end_date %>" class="input-width-200"></li>
-        
+        <li class="table-view-cell end-time">结束时间：<input type="date" name = "endtime" value="<%= end_date %>" class="input-width-200"></li>     
       </ul>
       <button id="btnSearch" class="btn btn-primary btn-block">查询</button>
     </form>
