@@ -38,5 +38,25 @@ Query.prototype = {
                 cb(json);
             }
         });
+    },
+    showPagination: function(_totalNumber, _pageIndex) {
+        var result = { totalPages : 0, pageIndex : 0 };
+        if (_totalNumber === 0) {
+            return result;
+        }
+        
+        var totalPages = Math.ceil(_totalNumber / this.pageSize);
+        result.totalPages = totalPages;
+
+        var currentPage = Number(_pageIndex) + 1;
+        if(currentPage>totalPages){
+            result.pageIndex = -1;
+            return result;
+        }
+
+        this.pageIndex = currentPage;
+        result.pageIndex = currentPage;
+        
+        return result;
     }
 };

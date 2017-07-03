@@ -1,4 +1,8 @@
-var displayNumber = 10;
+
+var pageOptions = {
+    displayNumber : 10,
+    pagination : {}
+}
 
 function get_list(pageIndex) {
     var vehicleList = $(".multiselect").val();
@@ -10,7 +14,7 @@ function get_list(pageIndex) {
     var data_foramt = {
         vehicleList: vehicleList
     };
-    var q = new Query('/gps_oil_add/list', 'POST', $("#search"), pageIndex, displayNumber);
+    var q = new Query('/gps_oil_add/list', 'POST', $("#search"), pageIndex, pageOptions.displayNumber);
     var params = q.init(data_foramt);
     if (!params.begintime || !params.endtime) {
         alert('请选择日期');
@@ -19,6 +23,13 @@ function get_list(pageIndex) {
     q.request(params, function(json) {
         app.DataList = app.DataList.concat(json.rows);
         $("#searchModal").removeClass('active');
+
+        $("#more").show();
+        pageOptions.pagination = q.showPagination(json.total, pageIndex);
+        var _p = pageOptions.pagination;
+        if(_p.pageIndex<=0){
+            $("#more").hide();
+        }
     });
 }
 
@@ -52,6 +63,12 @@ var app = new Vue({
             $("#btnSearch").click(function() {
                 event.preventDefault();
                 that.loadPage();
+            });
+
+            $("#more").click(function() {
+                event.preventDefault();          
+                var _p = pageOptions.pagination;
+                get_list(_p.pageIndex);
             });
         }
     }
