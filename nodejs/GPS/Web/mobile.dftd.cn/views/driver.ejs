@@ -1,0 +1,65 @@
+
+<%- include ./shared/_header %>    
+<%- include ./shared/_top %>   
+
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+      <h1 class="title">鼎丰泰达-货车油管家</h1>
+    </header>
+<div class="content top-title">
+	
+	<ul class="table-view">
+	<li class="table-view-cell media">
+		<a class="navigate-right" href = "/oil_ticket"  data-ignore="push">
+		<span class="media-object pull-left icon icon-compose"></span>
+		<div class="media-body">
+			加油记账
+		</div>
+		</a>
+	</li>
+	<li class="table-view-cell media">
+		<a class="navigate-right" href = "/oil_ticket"  data-ignore="push">
+		<span class="media-object pull-left icon icon-pages"></span>
+		<div class="media-body">
+			我的油票
+		</div>
+		</a>
+	</li>	
+	<li class="table-view-cell media">
+		<a class="navigate-right" href = "/cost_check"  data-ignore="push">
+		<span class="media-object pull-left icon icon-pages"></span>
+		<div class="media-body">
+			我的设备
+		</div>
+		</a>
+	</li>	
+	<li class="table-view-cell media">
+		<a class="navigate-right" href="gps_oil_add"  data-ignore="push">
+		<span class="media-object pull-left icon icon-plus"></span>
+		<div class="media-body">
+			加油记录
+		</div>
+		</a>
+	</li>
+	<li class="table-view-cell media">
+		<a class="navigate-right" href="gps_oil_leak"  data-ignore="push">
+		<span class="media-object pull-left icon icon-trash"></span>
+		<div class="media-body">
+			漏油告警
+		</div>
+		</a>
+	</li>
+	<li class="table-view-cell media">
+		<a class="navigate-right" href="gps_traffic"  data-ignore="push">
+		<span class="media-object pull-left icon icon-list"></span>
+		<div class="media-body">
+			行驶轨迹
+		</div>
+		</a>
+	</li>
+	</ul>
+	</div>
+	<%- include ./shared/_bottom %>
+	<%- include ./shared/_scripts %>
+
+<%- include ./shared/_footer %>
