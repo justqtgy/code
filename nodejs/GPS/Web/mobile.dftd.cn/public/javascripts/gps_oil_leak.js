@@ -1,5 +1,5 @@
 var pageOptions = {
-    displayNumber : 2,
+    displayNumber : 20,
     pagination : {}
 }
 
