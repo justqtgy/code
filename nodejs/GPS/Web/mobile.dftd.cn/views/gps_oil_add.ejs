@@ -22,12 +22,17 @@
         </div>
 
     </li>
+     
   </ul>
   <ul class="table-view" v-else>
     <li class="table-view-cell">
        {{MsgInfo}}
     </li>
   </ul>
+  <div class="weui-loadmore">
+    <i class="weui-loading"></i>
+    <span class="weui-loadmore__tips">正在加载</span>
+  </div>
   <!--<table class="table table-striped table-bordered table-hover dataTable">
       <thead>
           <tr>               
@@ -54,12 +59,13 @@
       </tbody>
   </table>  -->      
 </div>
+<!--
 <nav id="page" class="bar bar-tab">
     <a class="tab-item" id="more" href="javascript:void(0)">
       加载更多
   </a>
 </nav>
-
+-->
 <%- include ./control/_map %>
 <%- include ./control/_search-page %>
 <%- include ./shared/_scripts %>

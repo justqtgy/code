@@ -1,3 +1,5 @@
+//var loading = false;
+
 function Query(url, type, form, pageIndex, pageSize) {
     this.url = url;
     this.type = type || "GET";
@@ -27,36 +29,38 @@ Query.prototype = {
     },
     request: function(data, cb) {
         var self = this;
+        //if (loading) cb(null);
         $.ajax({
             url: self.url,
             type: self.type,
             dataType: "json",
             data: data,
-            beforeSend: function() { $("#loading").show(); },
-            complete: function() { $("#loading").hide(); },
+            beforeSend: function() {},
+            complete: function() {},
             success: function(json) {
                 cb(json);
             }
         });
     },
     showPagination: function(_totalNumber, _pageIndex) {
-        var result = { totalPages : 0, pageIndex : 0 };
+        var result = { totalPages: 0, pageIndex: 0, more: false };
         if (_totalNumber === 0) {
             return result;
         }
-        
+
         var totalPages = Math.ceil(_totalNumber / this.pageSize);
         result.totalPages = totalPages;
 
         var currentPage = Number(_pageIndex) + 1;
-        if(currentPage>totalPages){
+        if (currentPage > totalPages) {
             result.pageIndex = -1;
+            result.more = false;
             return result;
         }
 
         this.pageIndex = currentPage;
         result.pageIndex = currentPage;
-        
+        result.more = true;
         return result;
     }
 };

@@ -1,6 +1,6 @@
 var loading = false;
 var pageOptions = {
-    displayNumber: 10,
+    displayNumber: 20,
     pagination: {}
 };
 
@@ -21,18 +21,19 @@ function get_list(pageIndex) {
         return;
     }
     q.request(params, function(json) {
-        app.DataList = app.DataList.concat(json.rows);
+        if (json.rows.length > 0)
+            app.DataList = app.DataList.concat(json.rows);
         $("#searchModal").removeClass('active');
         if (app.DataList.length === 0) {
             app.MsgInfo = "暂无数据";
         }
-        $("#more").show();
+        loading = false;
         pageOptions.pagination = q.showPagination(json.total, pageIndex);
         var _p = pageOptions.pagination;
-        if (_p.pageIndex <= 0) {
-            $("#more").hide();
+        if (!_p.more) {
+            loading = true;
+            $(".weui-loadmore").hide();
         }
-        loading = false;
     });
 }
 
@@ -69,14 +70,14 @@ var app = new Vue({
                 that.loadPage();
             });
 
-            $("#more").click(function() {
-                event.preventDefault();
-                loading = true;
-                var _p = pageOptions.pagination;
-                get_list(_p.pageIndex);
-            });
+            // $("#more").click(function() {
+            //     event.preventDefault();
+            //     loading = true;
+            //     var _p = pageOptions.pagination;
+            //     get_list(_p.pageIndex);
+            // });
 
-            $(document.body).infinite().on("infinite", function() {
+            $("#grid").infinite().on("infinite", function() {
                 if (loading) return;
                 loading = true;
                 var _p = pageOptions.pagination;
