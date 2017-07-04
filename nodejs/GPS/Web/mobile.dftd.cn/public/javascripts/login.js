@@ -11,8 +11,8 @@ var Login = function() {
             $.post('/users/login', data, function(result) {
 
                 if (result.ok != 1) {
-                    $('.content-padded').find('span').text(result.msg);
-                    $(".content-padded").show();
+                    $('#error').text(result.msg);
+                    $("#error").show();
                     return;
                 }
 
