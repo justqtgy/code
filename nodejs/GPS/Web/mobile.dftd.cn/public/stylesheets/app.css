@@ -39,3 +39,10 @@
 .bottom-title {
     padding-bottom: 35px !important;
 }
+
+.weui-bar-title{
+      height: 42px;
+  line-height: 30px;
+  padding: 10px;
+  text-align: center;
+}

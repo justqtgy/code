@@ -3,7 +3,7 @@
 <%- include ./shared/_top %>   
 
 <header class="bar bar-nav">
-  <a class="icon icon-left-nav pull-left" href="boss"></a>
+  <a class="icon icon-left-nav pull-left" href="javascript:history.go(-1)" ></a>
   <a class="icon icon-search pull-right" href="#searchModal"></a>
   <h1 class="title">报警记录</h1>
 </header>
@@ -35,6 +35,7 @@
 <%- include ./control/_map %>
 <%- include ./control/_search-page %>
 <%- include ./shared/_scripts %>
+<%- include ./shared/_popup %>
 <%- include ./control/_search-js %>
 <script src="/javascripts/include/date-utils.min.js"></script>
 <script src="/javascripts/include/query.js"></script>

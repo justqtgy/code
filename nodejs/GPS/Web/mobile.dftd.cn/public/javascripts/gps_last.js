@@ -55,6 +55,7 @@ var app = new Vue({
             var that = this;
             that.loadPage();            
 
+            
             $(".btn-primary").click(function() {
                 event.preventDefault();          
                 that.loadPage();    

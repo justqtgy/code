@@ -3,7 +3,7 @@
 <%- include ./shared/_top %>   
 
 <header class="bar bar-nav">
-  <a class="icon icon-left-nav pull-left" href="boss"></a>
+  <a class="icon icon-left-nav pull-left" href="/" ></a>
   <a class="icon icon-search pull-right" href="#searchModal"></a>
   <h1 class="title">车辆状态</h1>
 </header>
@@ -16,7 +16,7 @@
         <div class="media-body">
           {{item.VehicleNo}}
           <p>当前油量：{{item.CurOil}}</p>
-          <p><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
+          <p><a href='javascript:;' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
         </div>
 
     </li>
@@ -36,6 +36,7 @@
 <%- include ./control/_map %>
 <%- include ./control/_search-page %>
 <%- include ./shared/_scripts %>
+<%- include ./shared/_popup %>
 <%- include ./control/_search-js %>
 <script src="/javascripts/include/date-utils.min.js"></script>
 <script src="/javascripts/include/query.js"></script>
