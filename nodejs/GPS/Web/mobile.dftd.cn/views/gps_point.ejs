@@ -3,7 +3,7 @@
 <%- include ./shared/_top %>   
 
 <header class="bar bar-nav">
-  <a class="icon icon-left-nav pull-left" href="javascript:history.go(-1)" ></a>
+  <a class="icon icon-left-nav pull-left" href="/" ></a>
   <a class="icon icon-search pull-right" href="#searchModal"></a>
   <h1 class="title">区间轨迹</h1>
 </header>
@@ -22,9 +22,10 @@
   </ul>
   <ul class="table-view" v-else>
     <li class="table-view-cell">
-      没有数据
+       {{MsgInfo}} 
     </li>
   </ul>
+   
 </div>
 <nav id="page" class="bar bar-tab">
     <a class="tab-item" id="more" href="javascript:void(0)">

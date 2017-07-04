@@ -1,8 +1,8 @@
-
+var loading = false;
 var pageOptions = {
-    displayNumber : 10,
-    pagination : {}
-}
+    displayNumber: 10,
+    pagination: {}
+};
 
 function get_list(pageIndex) {
     var vehicleList = $(".multiselect").val();
@@ -23,13 +23,16 @@ function get_list(pageIndex) {
     q.request(params, function(json) {
         app.DataList = app.DataList.concat(json.rows);
         $("#searchModal").removeClass('active');
-
+        if (app.DataList.length === 0) {
+            app.MsgInfo = "暂无数据";
+        }
         $("#more").show();
         pageOptions.pagination = q.showPagination(json.total, pageIndex);
         var _p = pageOptions.pagination;
-        if(_p.pageIndex<=0){
+        if (_p.pageIndex <= 0) {
             $("#more").hide();
         }
+        loading = false;
     });
 }
 
@@ -47,18 +50,19 @@ function showMap(lat, lng) {
 var app = new Vue({
     el: '#grid',
     data: {
-        DataList: []
+        DataList: [],
+        MsgInfo: '正在加载......'
     },
     methods: {
         loadPage: function() {
-            this.DataList.length = 0;            
-            setTimeout(function(){            
-                get_list(1);    
+            this.DataList.length = 0;
+            setTimeout(function() {
+                get_list(1);
             }, 100)
         },
         init: function() {
             var that = this;
-            that.loadPage();      
+            that.loadPage();
 
             $("#btnSearch").click(function() {
                 event.preventDefault();
@@ -66,7 +70,15 @@ var app = new Vue({
             });
 
             $("#more").click(function() {
-                event.preventDefault();          
+                event.preventDefault();
+                loading = true;
+                var _p = pageOptions.pagination;
+                get_list(_p.pageIndex);
+            });
+
+            $(document.body).infinite().on("infinite", function() {
+                if (loading) return;
+                loading = true;
                 var _p = pageOptions.pagination;
                 get_list(_p.pageIndex);
             });

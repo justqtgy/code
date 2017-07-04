@@ -1,6 +1,6 @@
 var displayNumber = 10;
 
-function get_list(pageIndex) {    
+function get_list(pageIndex) {
     var vehicleList = $(".multiselect").val();
     if (!vehicleList) {
         alert('请选择车辆');
@@ -15,6 +15,9 @@ function get_list(pageIndex) {
     q.request(params, function(json) {
         app.DataList = app.DataList.concat(json.rows);
         $("#searchModal").removeClass('active');
+        if (app.DataList.length === 0) {
+            app.MsgInfo = "没有数据";
+        }
     });
 }
 
@@ -22,11 +25,12 @@ function get_list(pageIndex) {
 var app = new Vue({
     el: '#grid',
     data: {
-        DataList: []
+        DataList: [],
+        MsgInfo: '正在加载......'
     },
     methods: {
         loadPage: function() {
-            
+
         },
         init: function() {
             var that = this;

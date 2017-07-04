@@ -8,17 +8,16 @@
   <h1 class="title">加油记录</h1>
 </header>
 
-<div id = "grid" class="content  top-title bottom-title">
-  <!--
+<div id = "grid" class="content  top-title bottom-title">  
   <ul  class="table-view" v-if = "DataList.length > 0">
     <li class="table-view-cell media" v-for = "(item, index) in DataList">
         <img class="media-object pull-left" src="images/arrow_icon.png">        
         <div class="media-body">
           {{item.VehicleNo}}
           <p>记录时间：{{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')}}</p>
-          <span>上次油量：{{item.PreOil}}</span>
+          <p><span>上次油量：{{item.PreOil}}</span>
           <span>加油油量：{{item.AddOil}}</span>
-          <span>当前油量：{{item.CurOil}}</span>
+          <span>当前油量：{{item.CurOil}}</span></p>
           <p><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
         </div>
 
@@ -26,10 +25,10 @@
   </ul>
   <ul class="table-view" v-else>
     <li class="table-view-cell">
-      没有数据
+       {{MsgInfo}}
     </li>
-  </ul>-->
-  <table class="table table-striped table-bordered table-hover dataTable">
+  </ul>
+  <!--<table class="table table-striped table-bordered table-hover dataTable">
       <thead>
           <tr>               
               <th>车牌号</th> 
@@ -53,7 +52,7 @@
       <tbody v-else>
           <tr><td colspan="6" style="text-align:center;">没有数据</td></tr>
       </tbody>
-  </table>        
+  </table>  -->      
 </div>
 <nav id="page" class="bar bar-tab">
     <a class="tab-item" id="more" href="javascript:void(0)">

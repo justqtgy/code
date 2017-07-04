@@ -40,9 +40,31 @@
     padding-bottom: 35px !important;
 }
 
-.weui-bar-title{
-      height: 42px;
-  line-height: 30px;
-  padding: 10px;
-  text-align: center;
+.weui-bar-title {
+    height: 42px;
+    line-height: 30px;
+    padding: 10px;
+    text-align: center;
+}
+
+.toolbar .pull-right {
+    position: absolute;
+    right: 0;
+    box-sizing: border-box;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    color: #428bca;
+    z-index: 1;
+    padding: 0 .5rem;
+}
+
+.toolbar .pull-left {
+    position: absolute;
+    left: 0;
+    box-sizing: border-box;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    color: #428bca;
+    z-index: 1;
+    padding: 0 .5rem;
 }
