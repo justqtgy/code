@@ -25,6 +25,15 @@ router.get('/driver', function(req, res, next) {
     res.render('driver');
 });
 
+router.get('/m_b_index', function(req, res, next) {
+    res.render('boss');
+});
+
+router.get('/m_d_index', function(req, res, next) {
+    res.render('driver');
+});
+
+
 router.get('/fuel_up', function(req, res, next) {
     var today = new Date().toFormat('YYYY-MM-DD');
     var member = req.cookies.member;
