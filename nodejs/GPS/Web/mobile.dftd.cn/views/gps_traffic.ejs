@@ -15,8 +15,8 @@
         <div class="media-body">
           {{item.VehicleNo}}
           <p>时间：{{item.CreateDate}}</p>
-          <p>距离：{{item.Distance.toFixed(2)}}</p>
-          <p>油耗：{{item.OilUsed.toFixed(2)}}</p>
+          <p><span>距离：{{item.Distance.toFixed(2)}}</span>
+          <span>油耗：{{item.OilUsed.toFixed(2)}}</span></p>
           <p><a href='#' v-on:click="showTraffic(item.ID)">查看轨迹</a></p>
         </div>
 
