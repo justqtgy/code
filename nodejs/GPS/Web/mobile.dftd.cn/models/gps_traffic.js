@@ -35,8 +35,9 @@ gps_traffic.get_list = function(params, callback) {
     var start_id = (pageIndex - 1) * pageSize + 1;
     var end_id = pageIndex * pageSize;
 
-    var sql = ";with t as (select *, row_number() over(order by id desc) as rid  from gps_traffic  where createdate >='%s' and createdate<dateadd(day, 1, '%s')   and vehicleid in (%s))  " +
-        "select *, (EndDistance-BeginDistance)*0.001 as Distance, (BeginOil+AddOil-EndOil) as OilUsed from t where rid between %s and %s";
+    var sql = ";with t as (select [ID],[CreateDate] ,[GPSID] ,[VehicleID] ,[VehicleNo] ,[BeginDistance] ,[EndDistance] ,[BeginOil] ,[EndOil] ,[AddOil], row_number() over(order by id desc) as rid  " +
+        " from gps_traffic  where createdate >='%s' and createdate<dateadd(day, 1, '%s')   and vehicleid in (%s))  " +
+        " select *, (EndDistance-BeginDistance)*0.001 as Distance, (BeginOil+AddOil-EndOil) as OilUsed from t where rid between %s and %s";
     sql = util.format(sql, params.begintime, params.endtime, params.vehicleList, start_id, end_id);
     console.log(sql)
     db.execSQL(sql, function(err, rows) {
