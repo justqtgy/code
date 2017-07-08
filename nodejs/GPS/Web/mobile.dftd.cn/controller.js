@@ -8,6 +8,7 @@ var gps_traffic = require('./routes/gps_traffic');
 var gps_last = require('./routes/gps_last');
 var group_vehicle = require('./routes/group_vehicle');
 var member = require('./routes/member');
+var news = require('./routes/news');
 
 exports.init_route = function(app) {
     console.log('init_route begin');
@@ -21,6 +22,7 @@ exports.init_route = function(app) {
     app.use('/gps_last', gps_last);
     app.use('/group_vehicle', group_vehicle);
     app.use('/member', member);
+    app.use('/news', news);
 
     console.log('init_route end');
 }
