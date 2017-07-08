@@ -38,11 +38,16 @@ router.get('/fuel_up', function(req, res, next) {
     var today = new Date().toFormat('YYYY-MM-DD');
     var member = req.cookies.member;
     driver_vehicle.get_list(member.userid, function(err, rows) {
+        console.log(rows)
         res.render('fuel_up', {
             today: today,
             vehicles: rows
         });
     });
+});
+
+router.get('/password', function(req, res, next) {
+    res.render('password');
 });
 
 router.get('/group', function(req, res, next) {

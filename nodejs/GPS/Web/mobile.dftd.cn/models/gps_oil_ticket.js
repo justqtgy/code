@@ -50,3 +50,19 @@ gps_oil_ticket.get_list = function(params, callback) {
         callback(err, rows);
     });
 }
+
+//--------------------------------------------------------------------------------------------------------------------------------
+gps_oil_ticket.add = function(params, callback) {
+    var sql = "insert into gps_oil_ticket(VehicleID, VehicleNo,DriverID,Number, Price, Amount,Station,FuelTime,AddTime) " +
+        "values('%s', '%s', %s, %s, %s, %s, '%s', '%s', GETDATE())";
+    sql = util.format(sql, params.vehicleID, params.vehicleNo, params.driverid, params.number, params.price, params.amount, (params.station || ''), (params.fueltime || new Date()));
+
+    console.log(sql);
+
+    db.execSQL(sql, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        callback(err, result);
+    });
+}
