@@ -45,45 +45,4 @@ router.get('/single', function(req, res, next) {
 });
 
 
-router.post('/set', function(req, res, next) {
-    var member = req.session.member;
-    var args = {
-        id: req.body.id || 0,
-        title: req.body.title,
-        content: req.body.content,
-        adminID: member.userid,
-        adminName: member.account,
-    };
-
-    console.log(args)
-    if (args.id && args.id > 0) {
-        news.update(args, function(err, result) {
-            if (err) {
-                log.error('Error = ', err);
-                return res.send({ ok: 0, msg: err });
-            }
-            res.send({ ok: 1 });
-        });
-    } else {
-        news.add(args, function(err, result) {
-            if (err) {
-                log.error('Error = ', err);
-                return res.send({ ok: 0, msg: err });
-            }
-            res.send({ ok: 1 });
-        });
-    }
-});
-
-router.post('/delete', function(req, res, next) {
-    var args = req.body;
-    news.delete(args, function(err, result) {
-        if (err) {
-            log.error('Error = ', err);
-            return res.send({ ok: 0, msg: err });
-        }
-        res.send({ ok: 1 });
-    });
-});
-
 module.exports = router;
