@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body,
+        html,
+        #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=MYRG9RF3I1NXCGCwFX8NZ4h3"></script>
+    <title>当前定位</title>
+</head>
+
+<body>
+    <div id="allmap"></div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    var map = new BMap.Map("allmap"); //在百度地图容器中创建一个地图
+    //创建和初始化地图函数：
+    function initMap() {
+        createMap(); //创建地图
+        setMapEvent(); //设置地图事件
+        addMapControl(); //向地图添加控件
+    }
+
+    //创建地图函数：
+    function createMap() {
+        //经度
+        var lng = getUrlParam('lng');
+        var lat = getUrlParam('lat');
+
+        var point = new BMap.Point(lng, lat); //定义一个中心点坐标
+        map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
+        map.clearOverlays();
+
+        var pointArr = [];
+        pointArr.push(point);
+
+        var convertor = new BMap.Convertor();
+        convertor.translate(pointArr, 1, 5, function(data) {
+            var marker = new BMap.Marker(data.points[0]); // 创建标注
+            map.addOverlay(marker); // 将标注添加到地图中
+            map.setCenter(data.points[0]);
+        })
+    }
+
+    //地图事件设置函数：
+    function setMapEvent() {
+        map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
+        map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard(); //启用键盘上下左右键移动地图
+    }
+
+    //地图控件添加函数：
+    function addMapControl() {
+        //向地图中添加缩放控件
+        var ctrl_nav = new BMap.NavigationControl({
+            anchor: BMAP_ANCHOR_TOP_LEFT,
+            type: BMAP_NAVIGATION_CONTROL_LARGE
+        });
+        map.addControl(ctrl_nav);
+        //向地图中添加缩略图控件
+        var ctrl_ove = new BMap.OverviewMapControl({
+            anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+            isOpen: 1
+        });
+        map.addControl(ctrl_ove);
+        //向地图中添加比例尺控件
+        var ctrl_sca = new BMap.ScaleControl({
+            anchor: BMAP_ANCHOR_BOTTOM_LEFT
+        });
+        map.addControl(ctrl_sca);
+    }
+
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+
+    initMap(); //创建和初始化地图
+</script>
