@@ -151,8 +151,23 @@ var app = new Vue({
         DataList: []
     },
     methods: {
-        init: function() {
-            $("#status").bootstrapSwitch();
+        init: function() {          
+
+            $('[name="status"]').bootstrapSwitch({  
+                onText:"启动",  
+                offText:"停止",  
+                // onColor:"success",  
+                // offColor:"info",  
+                // size:"small",  
+                // onSwitchChange:function(event,state){  
+                //     if(state==true){  
+                //         $(this).val("1");  
+                //     }else{  
+                //         $(this).val("2");  
+                //     }  
+                // }  
+            })  
+
         },
     }
 });
