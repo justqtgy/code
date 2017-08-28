@@ -1,35 +1,45 @@
 var displayNumber = 10;
 
 function get_list(pageIndex) {
-    var q = new Query('/member/list', 'POST', $("#search"), pageIndex, displayNumber);
-    var params = q.init();
-    q.request(params, function(json) {
-        if (!json.ok) {
-            bootbox.alert(json.msg);
-            return;
-        }
-        show_list(json.rows);
-        q.showPagination(json.total, get_list);
+    var q = new Query('/group/list', 'GET');
+    q.request(null, function(json) {
+        var data = [];
+        json.rows.forEach(function(item) {
+            if (item.ParentID.toString() === "0") {
+                data.push({ "id": item.ID, "parent": "#", "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark });
+            } else {
+                data.push({ "id": item.ID, "parent": item.ParentID, "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark });
+            }
+        });
+        showTreeGroup(data);
     });
 }
 
-function show_list(rows) {
-    $("#grid tbody").find("tr.newrow").remove();
-    //显示记录
-    $.each(rows, function(i, item) {
-        $("<tr class='newrow'></tr>").append(
-            "<td>" + (i + 1) + "</td>" +
-            "<td>" + item.Account + "</td>" +
-            "<td>" + item.TrueName + "</td>" +
-            "<td>" + item.Email + "</td>" +
-            "<td>" + item.Mobile + "</td>" +
-            "<td>" + new Date(item.ExpireTime).toUTCFormat('YYYY-MM-DD') + "</td>" +
-            "<td>" + item.WX_OpenID + "</td>" +
-            "<td>" + (item.IsDelete == 0 ? '<font color=blue>正常</font>' : '<font color=red>已禁用</font>') + "</td>" +
-            "<td><a href='#' onclick='get_record(" + item.ID + ")'><i title='查看' class='fa fa-list'></i>查看</a>" +
-            "    <a href='#' onclick='show_pswd_modal(" + item.ID + ", \"" + item.Account + "\")'><i title='修改密码' class='fa fa-lock'></i>修改密码</a>" +
-            "    <a href='#' onclick='delete_record(" + item.ID + ")'><i title='删除' class='fa fa-remove'></i>删除</a></td>"
-        ).appendTo($("#grid tbody"));
+function showTreeGroup(data) {
+    $('#tree_group').jstree({
+        "core": {
+            "themes": {
+                "responsive": false
+            },
+            "check_callback": true,
+            'data': data
+        },
+        "types": {
+            "default": {
+                "icon": "fa fa-folder icon-state-warning icon-lg"
+            },
+            "file": {
+                "icon": "fa fa-file icon-state-warning icon-lg"
+            }
+        },
+        "plugins": ["types", "search", "state"]
+
+    }).bind("select_node.jstree", function(e, data) {
+        //if (data.node.children.length === 0) {
+        node = data.node;
+        var item = data.node.original;
+        get_record(item);
+         
     });
 }
 
@@ -141,24 +151,8 @@ var app = new Vue({
         DataList: []
     },
     methods: {
-        loadPage: function() {
-            $(".date-picker").datepicker({
-                autoclose: 1,
-                todayHighlight: 1
-            });
-            get_list(1);
-        },
         init: function() {
-            var that = this;
-            that.loadPage();
-            $("#btnSearch").click(function() {
-                get_list(1);
-            });
-            $("#btnOK").click(function() { set_record(); });
-            $("#btnChange").click(function() { change_password(); });
-        },
-        show_modal: function(id) {
-            add_record();
+            $("#status").bootstrapSwitch();
         },
     }
 });

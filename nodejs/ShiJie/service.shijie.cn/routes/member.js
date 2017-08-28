@@ -19,7 +19,7 @@ var get_count = function(req, res, next) {
     });
 };
 
-router.get('/list', [get_count], function(req, res, next) {
+router.get('/list', function(req, res, next) {
     var args = req.body;
     member.get_list(args, function(err, result) {
         if (err) {

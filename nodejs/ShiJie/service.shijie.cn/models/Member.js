@@ -31,7 +31,7 @@ Member.get_count = function(params, callback){
 	});
 };
 
-Member.get_list = function(params, callback){
+Member.get_pages = function(params, callback){
 	var pageIndex = parseInt(params.pageIndex);
 	var pageSize = parseInt(params.pageSize);
 	var start_id = (pageIndex - 1) * pageSize + 1;
@@ -43,6 +43,22 @@ Member.get_list = function(params, callback){
 		) \
 		SELECT * FROM t WHERE R_Number BETWEEN %s AND %s ";
 	sql = util.format(sql, iBeginID, iEndID); 
+	
+	db.execSQL(sql, function(err, rows){
+		if(err){
+			return callback(err);
+		}
+		callback(err, rows);
+	});
+};
+
+Member.get_list = function(params, callback){
+	var sql = ";with t as ( \
+					select ID from Member where MemberNo='1' \
+					union all \
+					select ID from Member inner join t on Member.ParentID = t.ID \
+				) \
+				select * from t"
 	db.execSQL(sql, function(err, rows){
 		if(err){
 			return callback(err);
