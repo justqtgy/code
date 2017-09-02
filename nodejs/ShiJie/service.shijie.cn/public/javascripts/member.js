@@ -1,14 +1,12 @@
-var displayNumber = 10;
-
-function get_list(pageIndex) {
-    var q = new Query('/group/list', 'GET');
+function get_list() {
+    var q = new Query('/member/list', 'GET');
     q.request(null, function(json) {
         var data = [];
         json.rows.forEach(function(item) {
             if (item.ParentID.toString() === "0") {
-                data.push({ "id": item.ID, "parent": "#", "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark });
+                data.push({ "id": item.ID, "parent": "#", "text": item.TrueName, "level": item.Level, "no": item.MemberNo });
             } else {
-                data.push({ "id": item.ID, "parent": item.ParentID, "text": item.GroupName, "linker": item.Linker, "phone": item.Phone, "address": item.Address, "remark": item.Remark });
+                data.push({ "id": item.ID, "parent": item.ParentID, "text": item.TrueName, "level": item.Level, "no": item.MemberNo });
             }
         });
         showTreeGroup(data);
@@ -39,7 +37,7 @@ function showTreeGroup(data) {
         node = data.node;
         var item = data.node.original;
         get_record(item);
-         
+
     });
 }
 
@@ -123,51 +121,29 @@ function delete_record(id) {
     });
 }
 
-function show_pswd_modal(id, account) {
-    $("#txtUserID").val(id);
-    $("#txtUserAccount").val(account);
-    $("#txtPassword").val('');
-    $("#txtConfirmPassword").val('');
-    $("#mod_password").modal({ backdrop: 'static', keyboard: false });
-}
-
-function change_password() {
-    var q = new Query('/member/password', 'POST', $("#password"));
-    var params = q.init();
-    q.request(params, function(json) {
-        if (!json.ok) {
-            bootbox.alert(json.msg);
-            return;
-        }
-
-        bootbox.alert(hint.password_success);
-        $("#mod_password").modal('hide');
-    });
-}
-
 var app = new Vue({
-    el: '#grid',
+    el: '#detail',
     data: {
         DataList: []
     },
     methods: {
-        init: function() {          
+        init: function() {
 
-            $('[name="status"]').bootstrapSwitch({  
-                onText:"启动",  
-                offText:"停止",  
-                // onColor:"success",  
-                // offColor:"info",  
-                // size:"small",  
-                // onSwitchChange:function(event,state){  
-                //     if(state==true){  
-                //         $(this).val("1");  
-                //     }else{  
-                //         $(this).val("2");  
-                //     }  
-                // }  
-            })  
-
+            $('[name="status"]').bootstrapSwitch({
+                onText: "启动",
+                offText: "停止",
+                // onColor:"success",
+                // offColor:"info",
+                // size:"small",
+                // onSwitchChange:function(event,state){
+                //     if(state==true){
+                //         $(this).val("1");
+                //     }else{
+                //         $(this).val("2");
+                //     }
+                // }
+            });
+            get_list();
         },
     }
 });

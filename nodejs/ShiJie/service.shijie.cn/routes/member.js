@@ -1,7 +1,7 @@
 ﻿var express = require('express');
 var router = express.Router();
 
-var member = require('../models/Member');
+var member = require('../models/member');
 
 router.get('/', function(req, res, next) {
     var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
@@ -21,6 +21,7 @@ var get_count = function(req, res, next) {
 
 router.get('/list', function(req, res, next) {
     var args = req.body;
+    console.log('get member list : ', args)
     member.get_list(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });

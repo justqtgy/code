@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //存储cookies
 var session = require('express-session');
+var log4js = require('log4js');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -13,6 +14,16 @@ var ctrl = require('./controller');
 
 
 var app = express();
+
+
+// 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
+try {
+    log4js.configure('config/log4js.json', { reloadSecs: 300 });
+    global.log = log4js.getLogger('dateFileLog');
+
+} catch (err) {
+    console.log(err);
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
