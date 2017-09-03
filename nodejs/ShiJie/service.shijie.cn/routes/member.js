@@ -38,7 +38,14 @@ router.get('/single', function(req, res, next) {
             res.send({ ok: 0, msg: err });
             return;
         }
-        res.send({ ok: 1, rows: result });
+        member.get_single(req.query.pid, function(err, parents) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+
+            res.send({ ok: 1, rows: result, parents: parents });
+        });
     });
 });
 

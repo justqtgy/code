@@ -1,14 +1,36 @@
+var icons = {
+    0: "fa fa-folder icon-state-warning icon-lg",
+    1: "fa fa-folder icon-state-warning icon-lg",
+    2: "fa fa-folder icon-state-warning icon-lg",
+    3: "fa fa-folder icon-state-warning icon-lg"
+};
+
 function get_list() {
     var q = new Query('/member/list', 'GET');
     q.request(null, function(json) {
         var data = [];
+        // if (json.rows.length > 0) {
+        //     var item = json.rows[0];
+        //     data.push({ "id": 0, "parent": "#", "text": item.TrueName, "pid": item.Level, "no": item.MemberNo });
+        //     data.push({ "id": -1, "parent": 0, "text": "一级代理" });
+        //     data.push({ "id": -2, "parent": 0, "text": "二级代理" });
+        //     data.push({ "id": -3, "parent": 0, "text": "三级代理" });
+        // }
+
+        // json.rows.forEach(function(item) {
+        //     if (item.Level > 0) {
+        //         data.push({ "id": item.ID, "parent": -item.Level, "text": item.TrueName, "pid": item.ParentID, "no": item.MemberNo });
+        //     }
+        // });
+
         json.rows.forEach(function(item) {
             if (item.ParentID.toString() === "0") {
-                data.push({ "id": item.ID, "parent": "#", "text": item.TrueName, "level": item.Level, "no": item.MemberNo });
+                data.push({ "id": item.ID, "parent": "#", "text": item.TrueName, "level": item.Level, "no": item.MemberNo, "icon": icons[item.Level] });
             } else {
-                data.push({ "id": item.ID, "parent": item.ParentID, "text": item.TrueName, "level": item.Level, "no": item.MemberNo });
+                data.push({ "id": item.ID, "parent": item.ParentID, "text": item.TrueName, "level": item.Level, "no": item.MemberNo, "icon": icons[item.Level] });
             }
         });
+
         showTreeGroup(data);
     });
 }
@@ -22,61 +44,109 @@ function showTreeGroup(data) {
             "check_callback": true,
             'data': data
         },
-        "types": {
-            "default": {
-                "icon": "fa fa-folder icon-state-warning icon-lg"
-            },
-            "file": {
-                "icon": "fa fa-file icon-state-warning icon-lg"
+        // "types": {
+        //     "default": {
+        //         "icon": "fa fa-folder icon-state-warning icon-lg"
+        //     },
+        //     "file": {
+        //         "icon": "fa fa-file icon-state-warning icon-lg"
+        //     }
+        // },
+        "contextmenu": {
+            "items": {
+                "create": null,
+                "rename": null,
+                "remove": null,
+                "ccp": null,
+                "add": {
+                    "label": "添加下级代理",
+                    "action": function(data) {
+                        var inst = jQuery.jstree.reference(data.reference),
+                            obj = inst.get_node(data.reference);
+                        if (obj.original.level == 3) {
+                            return bootbox.alert('已经是第三级代理，无法添加');
+                        }
+                        add_record();
+
+                        $("#txtParentID").val(obj.id);
+                        $("#txtParentName").val(obj.text);
+
+                        $(".form-actions").show();
+                    }
+                },
+                "edit": {
+                    "label": "修改代理信息",
+                    "action": function(data) {
+                        $(".form-actions").show();
+                    }
+                },
+                "delete": {
+                    "label": "删除代理信息",
+                    "action": function(data) {
+                        var inst = jQuery.jstree.reference(data.reference),
+                            obj = inst.get_node(data.reference);
+                        if (obj.children.length > 0) {
+                            return bootbox.alert('该代理有下级代理，不能删除');
+                        }
+
+                    }
+                }
             }
         },
-        "plugins": ["types", "search", "state"]
+        "plugins": ["contextmenu", "dnd", "search", "state"]
 
     }).bind("select_node.jstree", function(e, data) {
-        //if (data.node.children.length === 0) {
-        node = data.node;
-        var item = data.node.original;
-        get_record(item);
-
+        if (data.node.id > 0) {
+            node = data.node;
+            var item = data.node.original;
+            console.log(item);
+            get_record(item);
+            $(".form-actions").hide();
+        }
     });
 }
 
 //获取记录信息
-function get_record(id) {
+function get_record(item) {
+    console.log(item)
     var params = {
-        id: id
+        id: item.id,
+        pid: item.parent
     };
+
+    $("#txtParentID").val(item.parent);
 
     var q = new Query('/member/single', 'GET');
     q.request(params, function(json) {
+        console.log(json)
         if (!json.ok) {
             bootbox.alert(json.msg);
             return;
         }
         var item = json.rows[0];
+        var parent = json.parents[0];
         //显示记录
-        $("#txtID").val(item.ID);
+
+        $("#txtParentID").val(parent.ID);
+        $("#txtParentName").val(parent.TrueName);
+        $("#txtMemberNo").val(item.MemberNo);
         $("#txtAccount").val(item.Account);
-        $("#txtPassword").val(item.Password);
         $("#txtTrueName").val(item.TrueName);
-        $("#txtEmail").val(item.Email);
+        $("#txtIDCard").val(item.IDCard);
         $("#txtMobile").val(item.Mobile);
-        $("#txtExpireTime").datepicker('setDate', new Date(item.ExpireTime).toUTCFormat('YYYY-MM-DD'));
-        $("#chkIsAdmin").attr("checked", item.IsAdmin);
-        $("#mod_info").modal({ backdrop: 'static', keyboard: false });
+        $("#txtJoinTime").datepicker('setDate', new Date(item.JoinTime).toUTCFormat('YYYY-MM-DD'));
+        $("#chkStatus").attr("checked", item.Status);
+        // $("#mod_info").modal({ backdrop: 'static', keyboard: false });
     });
 }
 
 function add_record() {
-    //显示记录
-    $("#txtID").val(0);
+    //显示记录   
+    $("#txtMemberNo").val('');
     $("#txtAccount").val('');
-    $("#txtPassword").val('');
     $("#txtTrueName").val('');
-    $("#txtEmail").val('');
+    $("#txtIDCard").val('');
     $("#txtMobile").val('');
-    $("#chkIsAdmin").attr("checked", false);
-    $("#mod_info").modal({ backdrop: 'static', keyboard: false });
 }
 
 //添加记录信息
@@ -128,21 +198,16 @@ var app = new Vue({
     },
     methods: {
         init: function() {
-
             $('[name="status"]').bootstrapSwitch({
                 onText: "启动",
-                offText: "停止",
-                // onColor:"success",
-                // offColor:"info",
-                // size:"small",
-                // onSwitchChange:function(event,state){
-                //     if(state==true){
-                //         $(this).val("1");
-                //     }else{
-                //         $(this).val("2");
-                //     }
-                // }
+                offText: "停止"
             });
+
+            $(".date-picker").datepicker({
+                autoclose: 1,
+                todayHighlight: 1
+            });
+
             get_list();
         },
     }
