@@ -49,18 +49,30 @@ router.get('/single', function(req, res, next) {
     });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/set', function(req, res, next) {
     var args = req.body
-    member.add(args, function(err, result) {
-        if (err) {
-            res.send({ ok: 0, msg: err });
-            return;
-        }
-        res.send({ ok: 1 });
-    });
+    console.log('args================',args)
+    args.Status = args.Status == 'on' ? 1: 0
+    if(args.ID && args.ID>0){
+        member.update(args, function(err, result) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            res.send({ ok: 1 });
+        });
+    }else{
+        member.add(args, function(err, result) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            res.send({ ok: 1 });
+        });
+    }
 });
 
-router.delete('/', function(req, res, next) {
+router.post('/delete', function(req, res, next) {
     var id = req.body.id;
     member.delete(id, function(err, result) {
         if (err) {

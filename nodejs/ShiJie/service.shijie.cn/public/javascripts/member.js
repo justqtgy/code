@@ -88,7 +88,7 @@ function showTreeGroup(data) {
                         if (obj.children.length > 0) {
                             return bootbox.alert('该代理有下级代理，不能删除');
                         }
-
+                        delete_record(obj.id);
                     }
                 }
             }
@@ -126,7 +126,7 @@ function get_record(item) {
         var item = json.rows[0];
         var parent = json.parents[0];
         //显示记录
-
+        $("#hidID").val(item.ID);
         $("#txtParentID").val(parent.ID);
         $("#txtParentName").val(parent.TrueName);
         $("#txtMemberNo").val(item.MemberNo);
@@ -141,7 +141,8 @@ function get_record(item) {
 }
 
 function add_record() {
-    //显示记录   
+    //显示记录
+    $("#hidID").val(0);
     $("#txtMemberNo").val('');
     $("#txtAccount").val('');
     $("#txtTrueName").val('');
@@ -153,12 +154,13 @@ function add_record() {
 function set_record() {
     var q = new Query('/member/set', 'POST', $("#record"));
     var params = q.init();
+    console.log(params)
     q.request(params, function(json) {
         if (!json.ok) {
             bootbox.alert(hint.save_fail);
             return;
         }
-        $("#mod_info").modal('hide');
+
         bootbox.alert(hint.save_success, function() {
             get_list(1);
         });
@@ -199,7 +201,7 @@ var app = new Vue({
     methods: {
         init: function() {
             $('[name="status"]').bootstrapSwitch({
-                onText: "启动",
+                onText: "启用",
                 offText: "停止"
             });
 
@@ -208,6 +210,9 @@ var app = new Vue({
                 todayHighlight: 1
             });
 
+            $("#btnSave").click(function(){
+                set_record();
+            });
             get_list();
         },
     }

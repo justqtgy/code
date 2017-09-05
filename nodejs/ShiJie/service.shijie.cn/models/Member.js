@@ -84,8 +84,9 @@ member.get_single = function(id, callback) {
 };
 
 member.add = function(params, callback) {
-    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile,ParentID,JoinTime,AddTime,Status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')";
-    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.WeXinID, params.Mobile, params.ParentID, params.JoinTime, params.AddTime, params.Status);
+    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile,ParentID,JoinTime,AddTime,Status) values('%s','%s','%s','%s','', '%s','%s', '%s',GETDATE(),'%s')";
+    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.ParentID, params.JoinTime, params.Status);
+    console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
@@ -96,8 +97,9 @@ member.add = function(params, callback) {
 };
 
 member.update = function(params, callback) {
-    var sql = "update Member set MemberNo='%s', Account='%s', TrueName='%s', IDCard='%s', WeXinID='%s', Mobile='%s', ParentID='%s', JoinTime='%s', AddTime='%s', Status='%s' where id = '%s'";
-    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.WeXinID, params.Mobile, params.ParentID, params.JoinTime, params.AddTime, params.Status, params.ID);
+    var sql = "update Member set MemberNo='%s', Account='%s', TrueName='%s', IDCard='%s', Mobile='%s', ParentID='%s', JoinTime='%s', Status='%s' where id = '%s'";
+    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.ParentID, params.JoinTime,  params.Status, params.ID);
+    console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
