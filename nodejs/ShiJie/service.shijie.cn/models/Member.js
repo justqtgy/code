@@ -111,7 +111,8 @@ member.update = function(params, callback) {
 
 member.delete = function(params, callback) {
     var sql = "delete from Member where ID = '%s'";
-    sql = util.format(sql, params.ID);
+    sql = util.format(sql, params.id);
+    console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);

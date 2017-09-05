@@ -73,8 +73,8 @@ router.post('/set', function(req, res, next) {
 });
 
 router.post('/delete', function(req, res, next) {
-    var id = req.body.id;
-    member.delete(id, function(err, result) {
+    var params = req.body;
+    member.delete(params, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
             return;

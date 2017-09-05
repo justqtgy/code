@@ -30,7 +30,7 @@ function get_list() {
                 data.push({ "id": item.ID, "parent": item.ParentID, "text": item.TrueName, "level": item.Level, "no": item.MemberNo, "icon": icons[item.Level] });
             }
         });
-
+        console.log(data)
         showTreeGroup(data);
     });
 }
@@ -88,6 +88,7 @@ function showTreeGroup(data) {
                         if (obj.children.length > 0) {
                             return bootbox.alert('该代理有下级代理，不能删除');
                         }
+                        console.log(obj)
                         delete_record(obj.id);
                     }
                 }
@@ -162,7 +163,7 @@ function set_record() {
         }
 
         bootbox.alert(hint.save_success, function() {
-            get_list(1);
+             location=location;
         });
     });
 }
@@ -186,7 +187,7 @@ function delete_record(id) {
                     return;
                 }
                 bootbox.alert(hint.delete_success, function() {
-                    get_list(1);
+                    location=location;
                 });
             });
         }
