@@ -1,7 +1,7 @@
 ﻿var util = require('util');
 var db = require('./db');
 
-function OrderLog(model){
+function orders_log(model){
 	this.id = model.id;
 	this.memberid = model.memberid;
 	this.content = model.content;
@@ -9,10 +9,10 @@ function OrderLog(model){
 	this.addtime = model.addtime;
 }
 
-module.exports = OrderLog
+module.exports = orders_log
 
-OrderLog.get_count = function(params, callback){
-	var sql = "select count(*) as total from OrderLog";
+orders_log.get_count = function(params, callback){
+	var sql = "select count(*) as total from OrdersLog";
 	db.execSQL(sql, function(err, result){
 		if(err){
 			return callback(err);
@@ -25,7 +25,7 @@ OrderLog.get_count = function(params, callback){
 	});
 };
 
-OrderLog.get_list = function(params, callback){
+orders_log.get_list = function(params, callback){
 	var pageIndex = parseInt(params.pageIndex);
 	var pageSize = parseInt(params.pageSize);
 	var start_id = (pageIndex - 1) * pageSize + 1;
@@ -33,10 +33,10 @@ OrderLog.get_list = function(params, callback){
 	var sql = " \
 		;WITH t AS( \
 			SELECT ROW_NUMBER() OVER (ORDER BY ID DESC) AS R_Number,* \
-			FROM OrderLog \
+			FROM OrdersLog \
 		) \
 		SELECT * FROM t WHERE R_Number BETWEEN %s AND %s ";
-	sql = util.format(sql, iBeginID, iEndID); 
+	sql = util.format(sql, iBeginID, iEndID);
 	db.execSQL(sql, function(err, rows){
 		if(err){
 			return callback(err);
@@ -45,9 +45,9 @@ OrderLog.get_list = function(params, callback){
 	});
 };
 
-OrderLog.get_single = function(id,callback){
-	var sql = "select * from OrderLog where ID = %s";
-	sql = util.format(sql, id); 
+orders_log.get_single = function(id,callback){
+	var sql = "select * from OrdersLog where ID = %s";
+	sql = util.format(sql, id);
 	db.execSQL(sql, function(err, rows){
 		if(err){
 			return callback(err)
@@ -56,8 +56,8 @@ OrderLog.get_single = function(id,callback){
 	});
 };
 
-OrderLog.add = function(params, callback){
-	var sql = "insert into OrderLog(MemberID,Content,Status,AddTime) values('%s','%s','%s','%s')";
+orders_log.add = function(params, callback){
+	var sql = "insert into OrdersLog(MemberID,Content,Status,AddTime) values('%s','%s','%s','%s')";
 	sql = util.format(sql, params.MemberID,params.Content,params.Status,params.AddTime);
 	db.execSQL(sql, function(err, result){
 		if(err){
@@ -67,8 +67,8 @@ OrderLog.add = function(params, callback){
 	});
 };
 
-OrderLog.update = function(params, callback){
-	var sql = "update OrderLog set MemberID='%s', Content='%s', Status='%s', AddTime='%s' where id = '%s'";
+orders_log.update = function(params, callback){
+	var sql = "update OrdersLog set MemberID='%s', Content='%s', Status='%s', AddTime='%s' where id = '%s'";
 	sql = util.format(sql, params.MemberID, params.Content, params.Status, params.AddTime,params.ID);
 	db.execSQL(sql, function(err, result){
 		if(err){
@@ -78,8 +78,8 @@ OrderLog.update = function(params, callback){
 	});
 };
 
-OrderLog.delete = function(params,callback){
-	var sql = "delete from OrderLog where ID = '%s'";
+orders_log.delete = function(params,callback){
+	var sql = "delete from OrdersLog where ID = '%s'";
 	sql = util.format(sql, params.ID);
 	db.execSQL(sql, function(err, result){
 		if(err){
@@ -88,4 +88,3 @@ OrderLog.delete = function(params,callback){
 		callback(err, result);
 	});
 };
-

@@ -83,4 +83,33 @@ router.post('/delete', function(req, res, next) {
     });
 });
 
+router.post('/password', function(req, res, next) {
+    console.log(req.body)
+    var args = {
+        id: req.body.id,
+        account: req.body.account,
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword
+    };
+
+    if (!args.password) {
+        return res.send({ ok: 0, msg: '密码不能为空，请输入密码' });
+    }
+
+    if (args.password != args.confirmPassword) {
+        return res.send({ ok: 0, msg: '密码不一致，请重新输入' });
+    }
+
+    args.password = utils.md5(args.account.toLowerCase() + '&' + args.password);
+
+    member.change_password(args, function(err, result) {
+        if (err) {
+            log.error('Error = ', err);
+            return res.send({ ok: 0, msg: err });
+        }
+        res.send({ ok: 1 });
+    });
+});
+
+
 module.exports = router;

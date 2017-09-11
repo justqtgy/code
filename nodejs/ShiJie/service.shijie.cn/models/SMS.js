@@ -1,7 +1,7 @@
 ﻿var util = require('util');
 var db = require('./db');
 
-function SMS(model){
+function sms(model){
 	this.id = model.id;
 	this.memberid = model.memberid;
 	this.mobile = model.mobile;
@@ -9,10 +9,10 @@ function SMS(model){
 	this.addtime = model.addtime;
 }
 
-module.exports = SMS
+module.exports = sms
 
-SMS.get_count = function(params, callback){
-	var sql = "select count(*) as total from SMS";
+sms.get_count = function(params, callback){
+	var sql = "select count(*) as total from sms";
 	db.execSQL(sql, function(err, result){
 		if(err){
 			return callback(err);
@@ -25,7 +25,7 @@ SMS.get_count = function(params, callback){
 	});
 };
 
-SMS.get_list = function(params, callback){
+sms.get_list = function(params, callback){
 	var pageIndex = parseInt(params.pageIndex);
 	var pageSize = parseInt(params.pageSize);
 	var start_id = (pageIndex - 1) * pageSize + 1;
@@ -33,10 +33,10 @@ SMS.get_list = function(params, callback){
 	var sql = " \
 		;WITH t AS( \
 			SELECT ROW_NUMBER() OVER (ORDER BY ID DESC) AS R_Number,* \
-			FROM SMS \
+			FROM sms \
 		) \
 		SELECT * FROM t WHERE R_Number BETWEEN %s AND %s ";
-	sql = util.format(sql, iBeginID, iEndID); 
+	sql = util.format(sql, iBeginID, iEndID);
 	db.execSQL(sql, function(err, rows){
 		if(err){
 			return callback(err);
@@ -45,9 +45,9 @@ SMS.get_list = function(params, callback){
 	});
 };
 
-SMS.get_single = function(id,callback){
-	var sql = "select * from SMS where ID = %s";
-	sql = util.format(sql, id); 
+sms.get_single = function(id,callback){
+	var sql = "select * from sms where ID = %s";
+	sql = util.format(sql, id);
 	db.execSQL(sql, function(err, rows){
 		if(err){
 			return callback(err)
@@ -56,8 +56,8 @@ SMS.get_single = function(id,callback){
 	});
 };
 
-SMS.add = function(params, callback){
-	var sql = "insert into SMS(MemberID,Mobile,Content,AddTime) values('%s','%s','%s','%s')";
+sms.add = function(params, callback){
+	var sql = "insert into sms(MemberID,Mobile,Content,AddTime) values('%s','%s','%s','%s')";
 	sql = util.format(sql, params.MemberID,params.Mobile,params.Content,params.AddTime);
 	db.execSQL(sql, function(err, result){
 		if(err){
@@ -67,8 +67,8 @@ SMS.add = function(params, callback){
 	});
 };
 
-SMS.update = function(params, callback){
-	var sql = "update SMS set MemberID='%s', Mobile='%s', Content='%s', AddTime='%s' where id = '%s'";
+sms.update = function(params, callback){
+	var sql = "update sms set MemberID='%s', Mobile='%s', Content='%s', AddTime='%s' where id = '%s'";
 	sql = util.format(sql, params.MemberID, params.Mobile, params.Content, params.AddTime,params.ID);
 	db.execSQL(sql, function(err, result){
 		if(err){
@@ -78,8 +78,8 @@ SMS.update = function(params, callback){
 	});
 };
 
-SMS.delete = function(params,callback){
-	var sql = "delete from SMS where ID = '%s'";
+sms.delete = function(params,callback){
+	var sql = "delete from sms where ID = '%s'";
 	sql = util.format(sql, params.ID);
 	db.execSQL(sql, function(err, result){
 		if(err){
@@ -88,4 +88,3 @@ SMS.delete = function(params,callback){
 		callback(err, result);
 	});
 };
-

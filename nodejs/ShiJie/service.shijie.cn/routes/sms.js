@@ -1,7 +1,7 @@
 ﻿var express = require('express');
 var router = express.Router();
 
-var sms = require('../models/SMS');
+var sms = require('../models/sms');
 
 router.get('/', function(req, res, next) {
 	res.render('sms');

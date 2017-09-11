@@ -2,17 +2,7 @@
 var db = require('./db');
 
 function member(model) {
-    this.id = model.id;
-    this.memberno = model.memberno;
-    this.account = model.account;
-    this.truename = model.truename;
-    this.idcard = model.idcard;
-    this.wexinid = model.wexinid;
-    this.mobile = model.mobile;
-    this.parentid = model.parentid;
-    this.jointime = model.jointime;
-    this.addtime = model.addtime;
-    this.status = model.status;
+
 }
 
 module.exports = member;
@@ -56,9 +46,9 @@ member.get_pages = function(params, callback) {
 
 member.get_list = function(params, callback) {
     var sql = ";with t as ( \
-					select *, 0 as Level from Member where MemberNo='0' \
+					select *, 0 as Level from View_Member where MemberNo='0' \
 					union all \
-					select Member.*, Level+1 from Member inner join t on Member.ParentID = t.ID \
+					select Member.*, Level+1 from View_Member inner join t on Member.ParentID = t.ID \
 				) \
 				select * from t where Level<=3";
     console.log(sql)
@@ -84,8 +74,10 @@ member.get_single = function(id, callback) {
 };
 
 member.add = function(params, callback) {
-    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile,ParentID,JoinTime,AddTime,Status) values('%s','%s','%s','%s','', '%s','%s', '%s',GETDATE(),'%s')";
-    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.ParentID, params.JoinTime, params.Status);
+    params.Password = utils.md5(args.account.toLowerCase() + '&123456');
+
+    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile, Password, JoinTime,AddTime,Status) values('%s','%s','%s','%s','', '%s', '%s', '%s',GETDATE(),'%s')";
+    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.Password, params.JoinTime, params.Status);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
@@ -97,8 +89,8 @@ member.add = function(params, callback) {
 };
 
 member.update = function(params, callback) {
-    var sql = "update Member set MemberNo='%s', Account='%s', TrueName='%s', IDCard='%s', Mobile='%s', ParentID='%s', JoinTime='%s', Status='%s' where id = '%s'";
-    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.ParentID, params.JoinTime,  params.Status, params.ID);
+    var sql = "update Member set MemberNo='%s', Account='%s', TrueName='%s', IDCard='%s', Mobile='%s', JoinTime='%s', Status='%s' where id = '%s'";
+    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.JoinTime,  params.Status, params.ID);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
@@ -121,3 +113,15 @@ member.delete = function(params, callback) {
         callback(err, result);
     });
 };
+
+member.change_password = function(params, callback) {
+    var sql = "Update dbo.Member set Password = '%s' where ID = '%s'";
+    sql = util.format(sql, params.Password, params.ID);
+    console.log(sql)
+    db.execSQL(sql, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        callback(err, result);
+    });
+}

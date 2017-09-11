@@ -1,14 +1,14 @@
-﻿var express = require('express');
+orders_log﻿var express = require('express');
 var router = express.Router();
 
-var orderlog = require('../models/OrderLog');
+var orders_log = require('../models/orders_log');
 
 router.get('/', function(req, res, next) {
-	res.render('orderlog');
+	res.render('orders_log');
 });
 
 var get_count = function(req, res, next) {
-	orderlog.get_count(function(err, result){
+	orders_log.get_count(function(err, result){
 		if(err){
 			return next(err);
 		}
@@ -19,7 +19,7 @@ var get_count = function(req, res, next) {
 
 router.get('/list', [get_count], function(req, res, next) {
 	var args = req.body;
-	orderlog.get_list(args, function(err, result){
+	orders_log.get_list(args, function(err, result){
 		if(err){
 			res.send({ ok : 0, msg : err });
 			return;
@@ -30,7 +30,7 @@ router.get('/list', [get_count], function(req, res, next) {
 
 router.get('/single', function(req, res, next) {
 	var id = req.query.id;
-	orderlog.get_single(id, function(err, result){
+	orders_log.get_single(id, function(err, result){
 		if(err){
 			res.send({ ok : 0, msg : err });
 			return;
@@ -41,7 +41,7 @@ router.get('/single', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 	var args = req.body
-	orderlog.add(args, function(err, result){
+	orders_log.add(args, function(err, result){
 		if(err){
 			res.send({ ok : 0, msg : err });
 			return;
@@ -52,7 +52,7 @@ router.post('/', function(req, res, next) {
 
 router.delete('/', function(req, res, next) {
 	var id = req.body.id;
-	orderlog.delete(id, function(err, result){
+	orders_log.delete(id, function(err, result){
 		if(err){
 			res.send({ ok : 0, msg : err });
 			return;
