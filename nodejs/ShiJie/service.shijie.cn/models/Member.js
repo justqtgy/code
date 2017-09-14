@@ -48,7 +48,7 @@ member.get_list = function(params, callback) {
     var sql = ";with t as ( \
 					select *, 0 as Level from View_Member where MemberNo='0' \
 					union all \
-					select Member.*, Level+1 from View_Member inner join t on Member.ParentID = t.ID \
+					select m.*, Level+1 from View_Member m inner join t on m.ParentID = t.ID \
 				) \
 				select * from t where Level<=3";
     console.log(sql)
