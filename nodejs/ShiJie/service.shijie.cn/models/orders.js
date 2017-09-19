@@ -9,6 +9,7 @@ module.exports = orders
 
 orders.get_count = function(params, callback) {
     var sql = "select count(*) as total from Orders";
+    console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
@@ -33,7 +34,8 @@ orders.get_pages = function(params, callback) {
 			FROM Orders \
 		) \
 		SELECT * FROM t WHERE R_Number BETWEEN %s AND %s ";
-    sql = util.format(sql, iBeginID, iEndID);
+    sql = util.format(sql, start_id, end_id);
+    console.log(sql)
     db.execSQL(sql, function(err, rows) {
         if (err) {
             log.error('Error = ', err);

@@ -1,6 +1,6 @@
 ﻿var express = require('express');
 var router = express.Router();
-
+var async = require('async');
 var orders = require('../models/orders');
 
 router.get('/', function(req, res, next) {
@@ -10,7 +10,9 @@ router.get('/', function(req, res, next) {
 });
 
 var get_count = function(req, res, next) {
-    orders.get_count(function(err, result) {
+    var args = req.query;
+    console.log(args);
+    orders.get_count(args, function(err, result) {
         if (err) {
             return next(err);
         }
@@ -19,9 +21,9 @@ var get_count = function(req, res, next) {
     });
 };
 
-router.get('/list', [get_count], function(req, res, next) {
-    var args = req.body;
-    orders.get_list(args, function(err, result) {
+router.get('/pages', [get_count], function(req, res, next) {
+    var args = req.query;
+    orders.get_pages(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
             return;
@@ -41,8 +43,8 @@ router.get('/single', function(req, res, next) {
     });
 });
 
-router.post('/set', function(req, res, next) {
-    var args = req.body
+router.post('/save', function(req, res, next) {
+    var args = req.body;
     orders.add(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
