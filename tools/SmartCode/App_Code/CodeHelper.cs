@@ -35,13 +35,13 @@ namespace WebMatrixCode
                         List<TableDesc> columnList = DBHelper.GetTableColumn(dbType, connectionString, tableName);
 
                         //创建js目录
-                        Nodejs.JsCodeHelper.CreateJSFile(tableName, columnList, strWebPath);
+                        Nodejs.JsCodeHelper.CreateJSFile(tableName.ToLower(), columnList, strWebPath);
                         ////创建router目录
-                        Nodejs.RoutesCodeHelper.CreateRoutesFiles(tableName, strWebPath);
+                        Nodejs.RoutesCodeHelper.CreateRoutesFiles(tableName.ToLower(), strWebPath);
                         ////创建view目录（存放页面）
-                        Nodejs.PageCodeHelper.CreatePageFile(tableName, columnList, strWebPath);
+                        Nodejs.PageCodeHelper.CreatePageFile(tableName.ToLower(), columnList, strWebPath);
                         ////创建model目录
-                        Nodejs.DbCodeHelper.CreateModelFile(tableName, columnList, strWebPath);
+                        Nodejs.DbCodeHelper.CreateModelFile(tableName.ToLower(), columnList, strWebPath);
 
                     }
                 }

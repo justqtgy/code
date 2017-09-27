@@ -9,6 +9,25 @@ router.get('/', function(req, res, next) {
     res.render('orders', { start_date: start_date, end_date: end_date });
 });
 
+router.get('/list', function(req, res, next) {
+    var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
+        end_date = new Date().toFormat('YYYY-MM-DD');
+    res.render('orders', { start_date: start_date, end_date: end_date });
+});
+
+router.get('/my', function(req, res, next) {
+    var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
+        end_date = new Date().toFormat('YYYY-MM-DD');
+    res.render('myorders', { start_date: start_date, end_date: end_date });
+});
+
+router.get('/pricing', function(req, res, next) {
+    var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
+        end_date = new Date().toFormat('YYYY-MM-DD');
+    res.render('pricing', { start_date: start_date, end_date: end_date });
+});
+
+
 var get_count = function(req, res, next) {
     var args = req.query;
     console.log(args);
