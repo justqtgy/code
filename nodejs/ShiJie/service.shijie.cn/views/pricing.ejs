@@ -2,6 +2,7 @@
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="../assets/global/plugins/bootstrap-datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 <link href="../stylesheets/pricing.css" rel="stylesheet" type="text/css" />
+<link href="../stylesheets/profile-2.css" rel="stylesheet" type="text/css" />
 <!-- END PAGE LEVEL PLUGINS -->
 <%- include ./shared/_top %>
 <%- include ./shared/_sidebar %>
@@ -11,7 +12,7 @@
 	 <div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h1 class="page-title">
-		进货下单 <small>全国统一零售价158元/盒</small>
+		进货下单 <small>下单进货统计</small>
 		</h1>
 		<!-- END PAGE HEADER-->
 		
@@ -20,7 +21,7 @@
 			<div class="portlet-title">
 				<div class="caption">
 					<i class="icon-share font-green"></i>
-					<span class="caption-subject font-green bold uppercase">代理信息</span>
+					<span class="caption-subject font-green bold uppercase">我要下单</span>
 				</div>
 				 
 			</div>
@@ -29,10 +30,10 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="price-column-container border-active">
-								<div class="price-table-head bg-green">
+								<div class="price-table-head bg-blue">
 									<h2 class="no-margin">探花代理</h2>
 								</div>
-								<div class="arrow-down border-top-green"></div>
+								<div class="arrow-down border-top-blue"></div>
 								<div class="price-table-pricing">
 									<h3>
 										<sup class="price-sign">¥</sup>2200</h3>
@@ -45,12 +46,7 @@
 										</div>
 										<div class="col-xs-9 text-left mobile-padding">单价：¥110</div>
 									</div>
-									<div class="row mobile-padding">
-										<div class="col-xs-3 text-right mobile-padding">
-											<i class="icon-drawer"></i>
-										</div>
-										<div class="col-xs-9 text-left mobile-padding">首批提货量：20(支)</div>
-									</div>
+									 
 									<div class="row mobile-padding">
 										<div class="col-xs-3 text-right mobile-padding">
 											<i class="icon-screen-smartphone"></i>
@@ -63,97 +59,82 @@
 										</div>
 										<div class="col-xs-9 text-left mobile-padding">补货量：20(支)</div>
 									</div>
+									<div class="row mobile-padding">
+										<div class="col-xs-3 text-right mobile-padding">
+											<i class="icon-refresh"></i>
+										</div>
+										<div class="col-xs-9 text-left mobile-padding">数量：20(支)</div>
+									</div>
 								</div>
+								
 								<div class="arrow-down arrow-grey"></div>
 								<div class="price-table-footer">
 									<button type="button" class="btn green price-button sbold uppercase">快速下单</button>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-3">
-							<div class="price-column-container border-active">
-								<div class="price-table-head bg-red">
-									<h2 class="no-margin">榜眼代理</h2>
+						
+						<div class="col-md-4">
+							<div class="portlet sale-summary">
+								<div class="portlet-title">
+									<div class="caption font-red sbold">个人汇总 </div>
+									 
 								</div>
-								<div class="arrow-down border-top-red"></div>
-								<div class="price-table-pricing">
-									<h3>
-										<sup class="price-sign">¥</sup>7200</h3>
-									<p>&nbsp</p>
-									<div class="price-ribbon">热销</div>
+								<div class="portlet-body">
+									<ul class="list-unstyled">
+										<li>
+											<span class="sale-info"> 进货总量
+												<i class="fa fa-img-up"></i>
+											</span>
+											<span class="sale-num"> 23 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 总金额
+												<i class="fa fa-img-down"></i>
+											</span>
+											<span class="sale-num"> ¥4000.50 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 最后一次进货时间 </span>
+											<span class="sale-num"> 2017-09-01 10:32:25 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 最后一次进货量 </span>
+											<span class="sale-num"> 60 </span>
+										</li>
+									</ul>
 								</div>
-								<div class="price-table-content">
-									<div class="row mobile-padding">
-										<div class="col-xs-3 text-right mobile-padding">
-											<i class="icon-feed"></i>
-										</div>
-										<div class="col-xs-9 text-left mobile-padding">单价：¥90</div>
-									</div>
-									<div class="row mobile-padding">
-										<div class="col-xs-3 text-right mobile-padding">
-											<i class="icon-drawer"></i>
-										</div>
-										<div class="col-xs-9 text-left mobile-padding">首批提货量：80(支)</div>
-									</div>
-									<div class="row mobile-padding">
-										<div class="col-xs-3 text-right mobile-padding">
-											<i class="icon-screen-smartphone"></i>
-										</div>
-										<div class="col-xs-9 text-left mobile-padding">金额：¥7200</div>
-									</div>
-									<div class="row mobile-padding">
-										<div class="col-xs-3 text-right mobile-padding">
-											<i class="icon-refresh"></i>
-										</div>
-										<div class="col-xs-9 text-left mobile-padding">补货量：40(支)</div>
-									</div>
-								</div>
-								<div class="arrow-down arrow-grey"></div>
-								<div class="price-table-footer">
-									<button type="button" class="btn green price-button sbold uppercase">快速下单</button>
-								</div>
+
 							</div>
 						</div>
-						<div class="col-md-3">
-							<div class="price-column-container border-active">
-								<div class="price-table-head bg-purple">
-									<h2 class="no-margin">状元代理</h2>
+						<div class="col-md-4">
+							<div class="portlet sale-summary">
+								<div class="portlet-title">
+									<div class="caption font-purple sbold"> 团队汇总 </div>
 								</div>
-								<div class="arrow-down border-top-purple"></div>
-								<div class="price-table-pricing">
-									<h3>
-										<sup class="price-sign">¥</sup>24000</h3>
-									<p>&nbsp</p>
-								</div>
-								<div class="price-table-content">
-									<div class="row mobile-padding">
-										<div class="col-xs-3 text-right mobile-padding">
-											<i class="icon-feed"></i>
-										</div>
-										<div class="col-xs-9 text-left mobile-padding">单价：¥75</div>
-									</div>
-									<div class="row mobile-padding">
-										<div class="col-xs-3 text-right mobile-padding">
-											<i class="icon-drawer"></i>
-										</div>
-										<div class="col-xs-9 text-left mobile-padding">首批提货量：320(支)</div>
-									</div>
-									<div class="row mobile-padding">
-										<div class="col-xs-3 text-right mobile-padding">
-											<i class="icon-screen-smartphone"></i>
-										</div>
-										<div class="col-xs-9 text-left mobile-padding">金额：¥24000</div>
-									</div>
-									<div class="row mobile-padding">
-										<div class="col-xs-3 text-right mobile-padding">
-											<i class="icon-refresh"></i>
-										</div>
-										<div class="col-xs-9 text-left mobile-padding">补货量：160(支)</div>
-									</div>
-								</div>
-								<div class="arrow-down arrow-grey"></div>
-								<div class="price-table-footer">
-									<button type="button" class="btn green price-button sbold uppercase">快速下单</button>
+								<div class="portlet-body">
+									<ul class="list-unstyled">
+										<li>
+											<span class="sale-info"> 进货总量
+												<i class="fa fa-img-up"></i>
+											</span>
+											<span class="sale-num"> 23 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 总金额
+												<i class="fa fa-img-down"></i>
+											</span>
+											<span class="sale-num"> ¥40.50 </span>
+										</li>
+										<!-- <li>
+											<span class="sale-info"> 最后一次进货时间 </span>
+											<span class="sale-num"> 2017-09-01 10:32:25 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 最后一次进货量 </span>
+											<span class="sale-num"> 60 </span>
+										</li> -->
+									</ul>
 								</div>
 							</div>
 						</div>

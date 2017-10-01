@@ -18,3 +18,24 @@ module.exports.redisSession = {
     "port": "6379",
     "ttl": 60 * 60 * 24 * 30, //session的有效期为30天(秒)
 }
+
+module.exports.pricing = {
+    "tanhua":{
+        "price":110,
+        "first":20,
+        "amount":2200,
+        "number":20
+    },
+    "bangyan":{
+        "price":90,
+        "first":80,
+        "amount":7200,
+        "number":40
+    },
+    "zhuangyuan":{
+        "price":75,
+        "first":320,
+        "amount":24000,
+        "number":160
+    }
+}
