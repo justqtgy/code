@@ -64,6 +64,7 @@ router.get('/single', function(req, res, next) {
 
 router.post('/save', function(req, res, next) {
     var args = req.body;
+    console.log('orders save args =============> ',args)
     orders.add(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });

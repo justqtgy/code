@@ -51,7 +51,7 @@ router.post('/login', function(req, res, next) {
         }
 
         var userid = result[0].ID;
-        var isAdmin = result[0].IsAdmin;
+        //var isAdmin = result[0].IsAdmin;
         // var user_type = result[0].user_type;
 
         var password = req.body.password;

@@ -7,6 +7,18 @@ function member(model) {
 
 module.exports = member;
 
+member.get_info = function(account, callback) {
+    var sql = " select * from Member where Account='%s'";
+    sql = util.format(sql, account);
+
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            return callback(err);
+        }
+        callback(err, rows);
+    });
+};
+
 member.get_count = function(params, callback) {
     var sql = "select count(*) as total from Member";
     db.execSQL(sql, function(err, result) {

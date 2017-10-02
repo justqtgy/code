@@ -1,0 +1,23 @@
+{
+    "tanhua":{
+        "title":"探花代理",
+        "price":110,
+        "first":20,
+        "amount":2200,
+        "number":20
+    },
+    "bangyan":{
+        "title":"榜眼代理",
+        "price":90,
+        "first":80,
+        "amount":7200,
+        "number":40
+    },
+    "zhuangyuan":{
+        "title":"状元代理",
+        "price":75,
+        "first":320,
+        "amount":24000,
+        "number":160
+    }
+}

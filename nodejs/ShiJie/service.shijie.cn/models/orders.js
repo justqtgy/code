@@ -56,10 +56,13 @@ orders.get_single = function(id, callback) {
         callback(err, rows);
     });
 };
-
+/**
+ * Status:0，下单，1确认，-1取消
+ */
 orders.add = function(params, callback) {
-    var sql = "insert into Orders(OrderNo,MemberID,Number,Price,AddTime,Status) values('%s','%s','%s','%s','%s','%s')";
-    sql = util.format(sql, params.OrderNo, params.MemberID, params.Number, params.Price, params.AddTime, params.Status);
+    var sql = "insert into Orders(OrderNo,MemberID,Number,Price,AddTime,Status) values('%s','%s','%s','%s',GETDATE(), 0)";
+    sql = util.format(sql, params.OrderNo, params.MemberID, params.Number, params.Price);
+    console.log('insert orders sql = ', sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
@@ -70,8 +73,8 @@ orders.add = function(params, callback) {
 };
 
 orders.update = function(params, callback) {
-    var sql = "update Orders set OrderNo='%s', MemberID='%s', Number='%s', Price='%s', AddTime='%s', Status='%s' where id = '%s'";
-    sql = util.format(sql, params.OrderNo, params.MemberID, params.Number, params.Price, params.AddTime, params.Status, params.ID);
+    var sql = "update Orders set OrderNo='%s', MemberID='%s', Number='%s', Price='%s', Status='%s' where id = '%s'";
+    sql = util.format(sql, params.OrderNo, params.MemberID, params.Number, params.Price, params.Status, params.ID);
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
