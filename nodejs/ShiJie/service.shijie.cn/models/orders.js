@@ -56,6 +56,22 @@ orders.get_single = function(id, callback) {
         callback(err, rows);
     });
 };
+
+orders.isExists = function(userID, callback) {
+    var sql = "select count(*) as number from Orders where MemberID = " + userID;
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            log.error('Error = ', err);
+            return callback(err);
+        }
+        var counts = 0;
+        if (rows.length > 0) {
+            counts = rows[0].number;
+        }
+        callback(err, counts);
+    });
+};
+
 /**
  * Status:0，下单，1确认，-1取消
  */

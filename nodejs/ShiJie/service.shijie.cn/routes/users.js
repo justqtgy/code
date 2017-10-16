@@ -11,13 +11,11 @@ router.requireAuthentication = function(req, res, next) {
         next();
         return;
     }
-    if (req.session.member) {
-        var member = req.session.member;
+    if (req.cookies.member) {
+        var member = req.cookies.member;
         req.account = member.account;
         next();
     } else {
-        req.session.vehicle_group = '';
-
         var from_url = req.originalUrl;
         if (from_url != "")
             res.redirect('/users/login?url=' + from_url);
@@ -29,8 +27,8 @@ router.requireAuthentication = function(req, res, next) {
 
 router.get('/login', function(req, res, next) {
     var account = '';
-    if (req.cookies.userinfo) {
-        account = req.cookies.userinfo;
+    if (req.cookies.member) {
+        account = req.cookies.member;
     }
     res.render('login', { account: account });
 });
@@ -70,22 +68,23 @@ router.post('/login', function(req, res, next) {
         }
 
         //res.clearCookie('member');
-        res.cookie('userinfo', account, { maxAge: 3600000, httpOnly: true, path: '/' });
+        //res.cookie('userinfo', account, { maxAge: 3600000, httpOnly: true, path: '/' });
 
         var user = { userid: userid, account: account, isadmin: isAdmin };
-        req.session.member = user;
+        res.cookie('member', user, { maxAge: 3600000, httpOnly: true, path: '/' });
+        //req.session.member = user;
         res.send({ ok: 1 })
     });
 });
 
 router.get('/logout', function(req, res) {
-    req.session.member = null;
+    req.clearCookie("member");
     res.redirect('/users/login');
 });
 
 router.get('/check_login', function(req, res) {
-    if (req.session.member) {
-        var member = req.session.member;
+    if (req.cookies.member) {
+        var member = req.cookies.member;
         res.send({ member: member });
     }
 });

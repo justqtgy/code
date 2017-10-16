@@ -30,7 +30,6 @@ function get_list() {
                 data.push({ "id": item.ID, "parent": item.ParentID, "text": item.TrueName, "level": item.Level, "no": item.MemberNo, "icon": icons[item.Level] });
             }
         });
-        console.log(data)
         showTreeGroup(data);
     });
 }
@@ -109,7 +108,6 @@ function showTreeGroup(data) {
 
 //获取记录信息
 function get_record(item) {
-    console.log(item)
     var params = {
         id: item.id,
         pid: item.parent
@@ -119,7 +117,7 @@ function get_record(item) {
 
     var q = new Query('/member/single', 'GET');
     q.request(params, function(json) {
-        console.log(json)
+        console.log('json==========>', json)
         if (!json.ok) {
             bootbox.alert(json.msg);
             return;
@@ -155,7 +153,6 @@ function add_record() {
 function set_record() {
     var q = new Query('/member/set', 'POST', $("#record"));
     var params = q.init();
-    console.log(params)
     q.request(params, function(json) {
         if (!json.ok) {
             bootbox.alert(hint.save_fail);
@@ -163,7 +160,7 @@ function set_record() {
         }
 
         bootbox.alert(hint.save_success, function() {
-             location=location;
+            location = location;
         });
     });
 }
@@ -187,7 +184,7 @@ function delete_record(id) {
                     return;
                 }
                 bootbox.alert(hint.delete_success, function() {
-                    location=location;
+                    location = location;
                 });
             });
         }
@@ -211,7 +208,7 @@ var app = new Vue({
                 todayHighlight: 1
             });
 
-            $("#btnSave").click(function(){
+            $("#btnSave").click(function() {
                 set_record();
             });
             get_list();

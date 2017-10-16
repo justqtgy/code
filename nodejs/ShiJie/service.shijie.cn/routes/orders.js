@@ -18,6 +18,7 @@ router.get('/list', function(req, res, next) {
 router.get('/join', function(req, res, next) {
     var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
         end_date = new Date().toFormat('YYYY-MM-DD');
+    orders.isExists()
     res.render('join', { start_date: start_date, end_date: end_date });
 });
 
@@ -64,7 +65,7 @@ router.get('/single', function(req, res, next) {
 
 router.post('/save', function(req, res, next) {
     var args = req.body;
-    console.log('orders save args =============> ',args)
+    console.log('orders save args =============> ', args)
     orders.add(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
