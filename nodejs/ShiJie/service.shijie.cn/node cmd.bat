@@ -2,6 +2,6 @@
 
 cd %cd%
  
- supervisor  ./bin/www
- 
+SET DEBUG=service.shijie.cn:* & npm start
+
 cmd

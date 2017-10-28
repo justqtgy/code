@@ -5,7 +5,7 @@ var users = require('../models/member');
 var router = express.Router();
 
 router.requireAuthentication = function(req, res, next) {
-    console.log('check login cookies ...', req.session.member);
+    console.log('check login cookies ...', req.cookies.member);
 
     if (req.path.indexOf("/users/login") >= 0 || req.path.indexOf("/users/reg") >= 0) {
         next();
@@ -49,8 +49,7 @@ router.post('/login', function(req, res, next) {
         }
 
         var userid = result[0].ID;
-        //var isAdmin = result[0].IsAdmin;
-        // var user_type = result[0].user_type;
+        var isAdmin = result[0].IsAdmin ? 1 : 0;
 
         var password = req.body.password;
 
@@ -60,25 +59,15 @@ router.post('/login', function(req, res, next) {
             return;
         }
 
-        var now = new Date(),
-            expireTime = new Date(result[0].ExpireTime);
-        if (Date.compare(expireTime, now) < 0) {
-            res.send({ ok: 0, msg: "账号已过期" });
-            return;
-        }
-
-        //res.clearCookie('member');
-        //res.cookie('userinfo', account, { maxAge: 3600000, httpOnly: true, path: '/' });
-
         var user = { userid: userid, account: account, isadmin: isAdmin };
         res.cookie('member', user, { maxAge: 3600000, httpOnly: true, path: '/' });
-        //req.session.member = user;
-        res.send({ ok: 1 })
+
+        res.send({ ok: 1 });
     });
 });
 
 router.get('/logout', function(req, res) {
-    req.clearCookie("member");
+    res.clearCookie("member");
     res.redirect('/users/login');
 });
 

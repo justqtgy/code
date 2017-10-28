@@ -70,9 +70,42 @@ router.get('/single', function(req, res, next) {
 });
 
 router.post('/save', function(req, res, next) {
-    var args = req.body;
-    console.log('orders save args =============> ', args)
-    orders.add(args, function(err, result) {
+    var args = req.body,
+        member = req.cookies.member;
+    args.memberid = member.userid;
+
+    async.waterfall([
+        function(cb) {
+            orders.add(args, function(err, result) {
+                if (err) {
+                    return cb(err);
+                }
+                var ret = result[0].ID;
+                cb(null, ret);
+            });
+        },
+        function(ret, cb) {
+            args.ID = ret;
+            args.OrderNo = 'SJ-' + PrefixInteger(ret, 8);
+
+            orders.createOrderNo(args, function(err, result) {
+                if (err) {
+                    return cb(err);
+                }
+                cb(null);
+            });
+        }
+    ], function(err) {
+        if (err) {
+            return res.send({ ok: 0, msg: err });
+        }
+        res.send({ ok: 1 });
+    });
+});
+
+router.post('/delete', function(req, res, next) {
+    var id = req.body.id;
+    orders.changeStatus(id, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
             return;
@@ -81,15 +114,8 @@ router.post('/save', function(req, res, next) {
     });
 });
 
-router.post('/delete', function(req, res, next) {
-    var id = req.body.id;
-    orders.delete(id, function(err, result) {
-        if (err) {
-            res.send({ ok: 0, msg: err });
-            return;
-        }
-        res.send({ ok: 1 });
-    });
-});
+function PrefixInteger(num, n) {
+    return (Array(n).join(0) + num).slice(-n);
+}
 
 module.exports = router;

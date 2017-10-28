@@ -88,8 +88,8 @@ member.get_single = function(id, callback) {
 member.add = function(params, callback) {
     params.Password = utils.md5(args.account.toLowerCase() + '&123456');
 
-    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile, Password, JoinTime,AddTime,Status) values('%s','%s','%s','%s','', '%s', '%s', '%s',GETDATE(),'%s')";
-    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.Password, params.JoinTime, params.Status);
+    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile, Password, JoinTime,AddTime,Status, Level) values('%s','%s','%s','%s','', '%s', '%s', '%s',GETDATE(),'%s', %s)";
+    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.Password, params.JoinTime, params.Status, params.Level);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
@@ -102,7 +102,7 @@ member.add = function(params, callback) {
 
 member.update = function(params, callback) {
     var sql = "update Member set MemberNo='%s', Account='%s', TrueName='%s', IDCard='%s', Mobile='%s', JoinTime='%s', Status='%s' where id = '%s'";
-    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.JoinTime,  params.Status, params.ID);
+    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.JoinTime, params.Status, params.ID);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
@@ -136,4 +136,4 @@ member.change_password = function(params, callback) {
         }
         callback(err, result);
     });
-}
+};
