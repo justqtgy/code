@@ -21,7 +21,8 @@ router.get('/join', function(req, res, next) {
     var member = req.cookies.member;
     orders.isExists(member.userid, function(err, counts) {
         if (counts > 0) {
-            res.render('pricing', { start_date: start_date, end_date: end_date });
+            //res.render('pricing', { start_date: start_date, end_date: end_date });
+            res.redirect('pricing');
         } else {
             res.render('join', { start_date: start_date, end_date: end_date });
         }

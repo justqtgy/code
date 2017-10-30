@@ -1,4 +1,9 @@
 var displayNumber = 10;
+var OrderStatus = {
+    '0': '下单',
+    '1': '确认订单',
+    '-1': '订单已取消'
+};
 
 function get_list(pageIndex) {
     var q = new Query('/orders/pages', 'GET', $("#search"), pageIndex, displayNumber);
@@ -20,49 +25,10 @@ function get_list(pageIndex) {
 
 
 //获取记录信息
-function get_record(id) {
-    var params = {
-        id: id
-    };
-
-    var q = new Query('/orders/single', 'GET');
-    q.request(params, function(json) {
-        if (!json.ok) {
-            bootbox.alert(json.msg);
-            return;
-        }
-
-        var item = json.rows[0];
-        //显示记录
-
-    });
-}
-
-//添加记录信息
-function set_record() {
-
-    var q = new Query('/news/set', 'POST', $("#record"));
-    var params = q.init();
-    var editor = CKEDITOR.instances.txtContent;
-    params.content = editor.getData();
-    if (!params.title) {
-        return bootbox.alert('<font color=red>请输入标题</font>');
-    }
-    if (!params.content) {
-        return bootbox.alert('<font color=red>请填写内容</font>');
-    }
-    q.request(params, function(json) {
-        if (!json.ok) {
-            bootbox.alert(hint.save_fail);
-            return;
-        }
-        $("#mod_info").modal('hide');
-        bootbox.alert(hint.save_success, function() {
-            get_list(1);
-        });
-    });
+function do_status(status) {
 
 }
+
 
 //删除记录信息
 function delete_record(id) {
@@ -120,6 +86,18 @@ var app = new Vue({
                 var _p = pageOptions.pagination;
                 get_list(_p.pageIndex);
             });
+        },
+        get_status: function(status) {
+            return OrderStatus[status];
+        },
+        get_do: function(id, status) {
+            var _do = '';
+            switch (status) {
+                case 0:
+                    _do = "<a href='#' onclick='delete_record(" + id + ")'>取消订单</a>";
+
+            }
+            return _do;
         }
     }
 });

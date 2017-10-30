@@ -88,8 +88,8 @@ member.get_single = function(id, callback) {
 member.add = function(params, callback) {
     params.Password = utils.md5(args.account.toLowerCase() + '&123456');
 
-    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile, Password, JoinTime,AddTime,Status, Level) values('%s','%s','%s','%s','', '%s', '%s', '%s',GETDATE(),'%s', %s)";
-    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.Password, params.JoinTime, params.Status, params.Level);
+    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile, Password, JoinTime,AddTime,Status) values('%s','%s','%s','%s','', '%s', '%s', '%s',GETDATE(),'%s')";
+    sql = util.format(sql, params.MemberNo, params.Account, params.TrueName, params.IDCard, params.Mobile, params.Password, params.JoinTime, params.Status);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
