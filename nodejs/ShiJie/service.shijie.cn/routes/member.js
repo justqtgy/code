@@ -51,9 +51,9 @@ router.get('/single', function(req, res, next) {
 
 router.post('/set', function(req, res, next) {
     var args = req.body
-    console.log('args================',args)
-    args.Status = args.Status == 'on' ? 1: 0
-    if(args.ID && args.ID>0){
+    console.log('args================', args)
+    args.Status = args.Status == 'on' ? 1 : 0
+    if (args.ID && args.ID > 0) {
         member.update(args, function(err, result) {
             if (err) {
                 res.send({ ok: 0, msg: err });
@@ -61,13 +61,21 @@ router.post('/set', function(req, res, next) {
             }
             res.send({ ok: 1 });
         });
-    }else{
+    } else {
         member.add(args, function(err, result) {
             if (err) {
                 res.send({ ok: 0, msg: err });
                 return;
             }
-            res.send({ ok: 1 });
+            var memberid = result[0].ID;
+            member_stat.init(memberid, function(err, result) {
+                if (err) {
+                    res.send({ ok: 0, msg: err });
+                    return;
+                }
+
+                res.send({ ok: 1 });
+            });
         });
     }
 });
