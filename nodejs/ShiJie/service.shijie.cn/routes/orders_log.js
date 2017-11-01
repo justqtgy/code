@@ -1,4 +1,4 @@
-orders_log﻿var express = require('express');
+var express = require('express');
 var router = express.Router();
 
 var orders_log = require('../models/orders_log');
