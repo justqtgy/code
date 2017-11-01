@@ -2,6 +2,7 @@
 var router = express.Router();
 
 var member = require('../models/member');
+var agent = require('../models/agent');
 
 router.get('/', function(req, res, next) {
     var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
@@ -51,7 +52,7 @@ router.get('/single', function(req, res, next) {
 
 router.post('/set', function(req, res, next) {
     var args = req.body
-    console.log('args================',args)
+    console.log('member set args = ',args)
     args.Status = args.Status == 'on' ? 1: 0
     if(args.ID && args.ID>0){
         member.update(args, function(err, result) {
@@ -61,19 +62,29 @@ router.post('/set', function(req, res, next) {
             }
             res.send({ ok: 1 });
         });
-    }else{
-        member.add(args, function(err, result) {
+    }else{    
+        member.add(args, function(err, rows) {
             if (err) {
                 res.send({ ok: 0, msg: err });
                 return;
             }
-            res.send({ ok: 1 });
+            args.MemberID = rows[0].rid;
+            agent.add(args, function(err, result){
+                if (err) {
+                    res.send({ ok: 0, msg: err });
+                    return;
+                }
+
+                res.send({ ok: 1 });
+            })
+            
         });
     }
 });
 
 router.post('/delete', function(req, res, next) {
     var params = req.body;
+    console.log('member delete args = ', params)
     member.delete(params, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
