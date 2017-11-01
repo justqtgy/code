@@ -3,6 +3,10 @@
  * --------------
  */
 
+body {
+    font-family: 微软雅黑;
+}
+
 .input-control {
     border: 1px solid #c2cad8;
     height: 30px;

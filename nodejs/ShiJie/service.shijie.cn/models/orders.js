@@ -56,12 +56,28 @@ orders.get_single = function(id, callback) {
         callback(err, rows);
     });
 };
+
+orders.isExists = function(userID, callback) {
+    var sql = "select count(*) as number from Orders where MemberID = " + userID;
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            log.error('Error = ', err);
+            return callback(err);
+        }
+        var counts = 0;
+        if (rows.length > 0) {
+            counts = rows[0].number;
+        }
+        callback(err, counts);
+    });
+};
+
 /**
  * Status:0，下单，1确认，-1取消
  */
 orders.add = function(params, callback) {
-    var sql = "insert into Orders(OrderNo,MemberID,Number,Price,AddTime,Status) values('%s','%s','%s','%s',GETDATE(), 0)";
-    sql = util.format(sql, params.OrderNo, params.MemberID, params.Number, params.Price);
+    var sql = "insert into Orders(OrderNo,MemberID,Number,Price,AddTime,Status) values('0','%s','%s','%s',GETDATE(), 0); SELECT @@IDENTITY as ID;";
+    sql = util.format(sql, params.memberid, params.number, params.price);
     console.log('insert orders sql = ', sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
@@ -72,9 +88,9 @@ orders.add = function(params, callback) {
     });
 };
 
-orders.update = function(params, callback) {
-    var sql = "update Orders set OrderNo='%s', MemberID='%s', Number='%s', Price='%s', Status='%s' where id = '%s'";
-    sql = util.format(sql, params.OrderNo, params.MemberID, params.Number, params.Price, params.Status, params.ID);
+orders.changeStatus = function(params, callback) {
+    var sql = "update Orders set Status='%s' where id = '%s'";
+    sql = util.format(sql, params.OrderNo, params.ID);
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
@@ -84,9 +100,21 @@ orders.update = function(params, callback) {
     });
 };
 
-orders.delete = function(params, callback) {
-    var sql = "delete from Orders where ID = '%s'";
-    sql = util.format(sql, params.ID);
+orders.createOrderNo = function(params, callback) {
+    var sql = "update Orders set OrderNo='%s' where id = '%s'";
+    sql = util.format(sql, params.OrderNo, params.ID);
+    db.execSQL(sql, function(err, result) {
+        if (err) {
+            log.error('Error = ', err);
+            return callback(err);
+        }
+        callback(err, result);
+    });
+};
+
+orders.delete = function(id, callback) {
+    var sql = "update Orders set Status=-1 where id = '%s'";
+    sql = util.format(sql, id);
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);

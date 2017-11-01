@@ -1,4 +1,9 @@
 var displayNumber = 10;
+var OrderStatus = {
+    '0': '下单',
+    '1': '确认订单',
+    '-1': '订单已取消'
+};
 
 function get_list(pageIndex) {
     var q = new Query('/orders/pages', 'GET', $("#search"), pageIndex, displayNumber);
@@ -15,6 +20,39 @@ function get_list(pageIndex) {
         //show_list(json.rows);
         app.DataList = json.rows;
         q.showPagination(json.total, get_list);
+    });
+}
+
+
+//获取记录信息
+function do_status(status) {
+
+}
+
+
+//删除记录信息
+function delete_record(id) {
+    bootbox.setLocale("zh_CN");
+    bootbox.confirm({
+        title: hint.box_title,
+        message: hint.confirm_delete,
+        callback: function(result) {
+            if (!result) return;
+
+            var params = {
+                id: id
+            };
+            var q = new Query('/orders/delete', 'POST');
+            q.request(params, function(json) {
+                if (json.ok != 1) {
+                    bootbox.alert(hint.delete_fail);
+                    return;
+                }
+                bootbox.alert(hint.delete_success, function() {
+                    get_list(1);
+                });
+            });
+        }
     });
 }
 
@@ -48,6 +86,18 @@ var app = new Vue({
                 var _p = pageOptions.pagination;
                 get_list(_p.pageIndex);
             });
+        },
+        get_status: function(status) {
+            return OrderStatus[status];
+        },
+        get_do: function(id, status) {
+            var _do = '';
+            switch (status) {
+                case 0:
+                    _do = "<a href='#' onclick='delete_record(" + id + ")'>取消订单</a>";
+
+            }
+            return _do;
         }
     }
 });
