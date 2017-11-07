@@ -94,11 +94,11 @@ var app = new Vue({
             var _do = '';
             switch (status) {
                 case 0:
-                    _do = "<a href='#' onclick='delete_record(" + id + ")'>取消订单</a>";
+                    _do = "<a href='javascript:void(" + id + ")' onclick='delete_record(" + id + ")'>取消订单</a>";
 
             }
             return _do;
-        }
+        },
     }
 });
 
