@@ -41,8 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/Views', express.static(__dirname + '/Views'));
 
 //总是检查是否登录
-app.all('*', users.requireAuthentication);
-
+//app.all('*', users.requireAuthentication);
 
 app.use('/', index);
 app.use('/users', users);

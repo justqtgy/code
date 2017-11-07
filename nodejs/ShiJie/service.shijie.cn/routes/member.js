@@ -2,6 +2,7 @@
 var router = express.Router();
 
 var member = require('../models/member');
+var agent = require('../models/agent');
 
 router.get('/', function(req, res, next) {
     var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
@@ -51,9 +52,15 @@ router.get('/single', function(req, res, next) {
 
 router.post('/set', function(req, res, next) {
     var args = req.body
+<<<<<<< HEAD
+    console.log('member set args = ',args)
+    args.Status = args.Status == 'on' ? 1: 0
+    if(args.ID && args.ID>0){
+=======
     console.log('args================', args)
     args.Status = args.Status == 'on' ? 1 : 0
     if (args.ID && args.ID > 0) {
+>>>>>>> bd0a3bf76f333b507b4402e4bbbe28dc77f4eb23
         member.update(args, function(err, result) {
             if (err) {
                 res.send({ ok: 0, msg: err });
@@ -61,27 +68,43 @@ router.post('/set', function(req, res, next) {
             }
             res.send({ ok: 1 });
         });
+<<<<<<< HEAD
+    }else{    
+        member.add(args, function(err, rows) {
+=======
     } else {
         member.add(args, function(err, result) {
+>>>>>>> bd0a3bf76f333b507b4402e4bbbe28dc77f4eb23
             if (err) {
                 res.send({ ok: 0, msg: err });
                 return;
             }
+<<<<<<< HEAD
+            args.MemberID = rows[0].rid;
+            agent.add(args, function(err, result){
+=======
             var memberid = result[0].ID;
             member_stat.init(memberid, function(err, result) {
+>>>>>>> bd0a3bf76f333b507b4402e4bbbe28dc77f4eb23
                 if (err) {
                     res.send({ ok: 0, msg: err });
                     return;
                 }
 
                 res.send({ ok: 1 });
+<<<<<<< HEAD
+            })
+            
+=======
             });
+>>>>>>> bd0a3bf76f333b507b4402e4bbbe28dc77f4eb23
         });
     }
 });
 
 router.post('/delete', function(req, res, next) {
     var params = req.body;
+    console.log('member delete args = ', params)
     member.delete(params, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });

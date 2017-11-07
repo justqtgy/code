@@ -119,7 +119,7 @@ function get_record(item) {
     q.request(params, function(json) {
         console.log('json==========>', json)
         if (!json.ok) {
-            bootbox.alert(json.msg);
+            //bootbox.alert(json.msg);
             return;
         }
         var item = json.rows[0];
