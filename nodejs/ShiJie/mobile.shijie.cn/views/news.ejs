@@ -1,0 +1,71 @@
+
+<%- include ./shared/_header %>  
+<%- include ./shared/_top %>   
+
+<header class="bar bar-nav">
+  <a class="icon icon-left-nav pull-left" href="/" ></a>
+  <a class="icon icon-search pull-right" href="#searchModal"></a>
+  <h1 class="title">配货信息</h1>
+</header>
+
+<div id = "grid" class="content  top-title bottom-title">  
+  <ul  class="table-view" v-if = "DataList.length > 0">
+    <li class="table-view-cell media" v-for = "(item, index) in DataList">
+        <img class="media-object pull-left" src="images/arrow_icon.png">        
+        <div class="media-body">
+          {{item.Title}}
+          <p>时间：{{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')}}</p>
+          <p><a href='#' v-on:click="showDetail(item.ID)">详情</a></p>
+        </div>
+    </li>     
+  </ul>
+  <ul class="table-view" v-else>
+    <li class="table-view-cell">
+       {{MsgInfo}}
+    </li>
+  </ul>
+  <div class="weui-loadmore">
+    <i class="weui-loading"></i>
+    <span class="weui-loadmore__tips">正在加载</span>
+  </div>
+</div>
+<div id="loading">
+  <img src="/images/loading.gif" alt="loading" />
+</div>
+
+ <!--查询-->
+<div id="searchModal" class="modal">
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#searchModal"></a>
+        <h1 class="title">查找</h1>
+    </header>
+   
+    <div class="content">
+        <form class="input-group" id="search">
+        <ul class="table-view">       
+            <li class="table-view-cell begin-time">开始时间：<input type="date" name="begintime" value="<%= start_date %>" class="input-width-200"></li>
+            <li class="table-view-cell end-time">结束时间：<input type="date" name = "endtime" value="<%= end_date %>" class="input-width-200"></li>     
+        </ul>
+        <button id="btnSearch" class="btn btn-primary btn-block">查询</button>
+        </form>
+    </div>
+</div>
+
+<!--详情-->
+<div id="mapModal" class="modal">
+  <header class="bar bar-nav">
+    <a class="icon icon-close pull-right"  href="#mapModal"></a>
+    <h1 class="title">公告详情</h1>
+  </header>
+
+  <div class="content">                          
+    
+  </div>
+</div>
+<%- include ./shared/_scripts %>
+<%- include ./shared/_popup %>
+
+<script src="/javascripts/include/date-utils.min.js"></script>
+<script src="/javascripts/include/query.js"></script>
+<script src="/javascripts/news.js"></script>
+<%- include ./shared/_footer %>
