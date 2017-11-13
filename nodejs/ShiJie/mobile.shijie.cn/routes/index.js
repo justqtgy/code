@@ -6,7 +6,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     var member = req.cookies.member;
     if (member) {
-        res.render('/index');
+        res.render('index');
     } else {
         res.render('/users/login');
     }

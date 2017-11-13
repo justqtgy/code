@@ -15,7 +15,7 @@ ul, ol { list-style: none outside none; }
 .w-3{width:33.33%;  float:left; padding:.6rem .4rem; box-sizing: border-box; position: relative;}
 
 .category-top{border-bottom:1px solid #e8e8e8;position:fixed; left:0; top:0; right:0; z-index: 1; background:#F6F6F9}
-.menu-left,.menu-right{position:fixed; left:0;top:88px; bottom:0; overflow-y: scroll;}
+.menu-left,.menu-right{position:fixed; left:0;top:93px; bottom:0; overflow-y: scroll;}
 .menu-right #loading{left:11px; top:44px;}
 
 .menu-left{background:#F6F6F9;}
