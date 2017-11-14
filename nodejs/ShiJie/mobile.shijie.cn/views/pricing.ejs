@@ -1,0 +1,83 @@
+
+<%- include ./shared/_header %>  
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN THEME GLOBAL STYLES -->
+<link href="../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+<!-- END THEME GLOBAL STYLES -->
+<link href="/stylesheets/pricing.css" rel="stylesheet" type="text/css" />
+
+<%- include ./shared/_top %>   
+
+<header class="bar bar-nav">
+  <h1 class="title">补货下单</h1>
+  <a href="javascript:;" onclick="javascript:history.back(-1);" class="icon pull-left"><i class="sstfont sst-xiangzuo"></i></a>
+</header>
+
+<!--顶部搜索-->
+<!--主体-->
+<div class="content">
+
+  <div class="portlet light portlet-fit">     
+    <div class="portlet-body">
+      <div class="pricing-content-2">
+          <div class="pricing-table-container">
+            <div class="row" id = "grid">
+              <div class="price-column-container">                 
+                <div class="price-table-head price-1">
+                    <h2 class="uppercase bg-green-jungle font-grey-cararra opt-pricing-5">{{myPricing.title}}</h2>
+                </div>
+                
+                <div class="price-table-pricing">
+                  <h3>
+                    <sup class="price-sign">¥</sup>{{myPricing.amount}}</h3>
+                  <p>&nbsp</p>
+                </div>
+                <div class="price-table-content">
+                  <div class="row no-margin">
+                    <div class="col-xs-3 text-right mobile-padding">
+                      <i class="icon-feed"></i>
+                    </div>
+                    <div class="col-xs-9 text-left mobile-padding">单价：¥{{myPricing.price}}</div>
+                  </div>
+                  
+                  <div class="row no-margin">
+                    <div class="col-xs-3 text-right mobile-padding">
+                      <i class="icon-screen-smartphone"></i>
+                    </div>
+                    <div class="col-xs-9 text-left mobile-padding">金额：¥{{myPricing.price}}</div>
+                  </div>
+                  <div class="row no-margin">
+                    <div class="col-xs-3 text-right mobile-padding">
+                      <i class="icon-refresh"></i>
+                    </div>
+                    <div class="col-xs-9 text-left mobile-padding">补货量：{{myPricing.number}}(支)</div>
+                  </div>
+                  <div class="row no-margin">
+                    <div class="col-xs-3 text-right mobile-padding">
+                      <i class="icon-refresh"></i>
+                    </div>
+                    <div class="col-xs-9 text-left mobile-padding">数量：{{myPricing.number}}(支)</div>
+                  </div>
+                </div>
+                
+                
+                <div class="price-table-footer">
+                  <button type="button" class="btn green price-button sbold uppercase">快速下单</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<%- include ./shared/_scripts %>
+<script src="/javascripts/include/query.js"></script>
+<script src="/javascripts/pricing.js"></script>
+<%- include ./shared/_footer %>
+

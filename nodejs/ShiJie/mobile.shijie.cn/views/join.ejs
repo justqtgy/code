@@ -1,0 +1,226 @@
+<%- include ./shared/_header %>
+  <!-- BEGIN GLOBAL MANDATORY STYLES -->
+  <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <!-- END GLOBAL MANDATORY STYLES -->
+  <!-- BEGIN THEME GLOBAL STYLES -->
+  <link href="../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+  <!-- END THEME GLOBAL STYLES -->
+  <link href="/stylesheets/pricing.css" rel="stylesheet" type="text/css" />
+
+  <%- include ./shared/_top %>
+    <div class="weui-tab">
+      <header class="bar bar-nav">
+        <h1 class="title">我要代理</h1>
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="icon pull-left">
+          <i class="sstfont sst-xiangzuo"></i>
+        </a>
+      </header>
+
+      <!--主体-->
+      <div id="grid">
+      <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+          <div class="content">
+            <div class="portlet light portlet-fit">
+              <div class="portlet-body">
+                <div class="pricing-content-2">
+                  <div class="pricing-table-container">
+                    <div class="row">
+                      <div class="price-column-container ">
+                        <div class="price-table-head price-1">
+                          <h2 class="uppercase bg-green-jungle font-grey-cararra opt-pricing-5">{{thPricing.title}}</h2>
+                        </div>
+
+                        <div class="price-table-pricing">
+                          <h3>
+                            <sup class="price-sign">¥</sup>{{thPricing.amount}}</h3>
+                          <p>&nbsp</p>
+                        </div>
+                        <div class="price-table-content">
+                          <div class="row no-margin">
+                            <div class="col-xs-3 text-right mobile-padding">
+                              <i class="icon-feed"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">单价：¥{{thPricing.price}}</div>
+                          </div>
+
+                          <div class="row no-margin">
+                            <div class="col-xs-3 text-right mobile-padding">
+                              <i class="icon-screen-smartphone"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">金额：¥{{thPricing.price}}</div>
+                          </div>
+                          <div class="row no-margin">
+                            <div class="col-xs-3 text-right mobile-padding">
+                              <i class="icon-refresh"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">补货量：{{thPricing.number}}(支)</div>
+                          </div>
+                          <div class="row no-margin">
+                            <div class="col-xs-3 text-right mobile-padding">
+                              <i class="icon-refresh"></i>
+                            </div>
+                            <div class="col-xs-9 text-left mobile-padding">数量：{{thPricing.number}}(支)</div>
+                          </div>
+                        </div>
+
+
+                        <div class="price-table-footer">
+                          <button type="button" class="btn green price-button sbold uppercase">快速下单</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+            <div class="content">
+                <div class="portlet light portlet-fit">
+                  <div class="portlet-body">
+                    <div class="pricing-content-2">
+                      <div class="pricing-table-container">
+                        <div class="row" id="tanhua">
+                          <div class="price-column-container ">
+                            <div class="price-table-head price-1">
+                              <h2 class="uppercase bg-green-jungle font-grey-cararra opt-pricing-5">{{byPricing.title}}</h2>
+                            </div>
+    
+                            <div class="price-table-pricing">
+                              <h3>
+                                <sup class="price-sign">¥</sup>{{byPricing.amount}}</h3>
+                              <p>&nbsp</p>
+                            </div>
+                            <div class="price-table-content">
+                              <div class="row no-margin">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                  <i class="icon-feed"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">单价：¥{{byPricing.price}}</div>
+                              </div>
+    
+                              <div class="row no-margin">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                  <i class="icon-screen-smartphone"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">金额：¥{{byPricing.price}}</div>
+                              </div>
+                              <div class="row no-margin">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                  <i class="icon-refresh"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">补货量：{{byPricing.number}}(支)</div>
+                              </div>
+                              <div class="row no-margin">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                  <i class="icon-refresh"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">数量：{{byPricing.number}}(支)</div>
+                              </div>
+                            </div>
+    
+    
+                            <div class="price-table-footer">
+                              <button type="button" class="btn green price-button sbold uppercase">快速下单</button>
+                            </div>
+                          </div>
+    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+              </div>
+        </div>
+        <div id="tab3" class="weui-tab__bd-item">
+            <div class="content">
+                <div class="portlet light portlet-fit">
+                  <div class="portlet-body">
+                    <div class="pricing-content-2">
+                      <div class="pricing-table-container">
+                        <div class="row">
+                          <div class="price-column-container ">
+                            <div class="price-table-head price-1">
+                              <h2 class="uppercase bg-green-jungle font-grey-cararra opt-pricing-5">{{zyPricing.title}}</h2>
+                            </div>
+    
+                            <div class="price-table-pricing">
+                              <h3>
+                                <sup class="price-sign">¥</sup>{{zyPricing.amount}}</h3>
+                              <p>&nbsp</p>
+                            </div>
+                            <div class="price-table-content">
+                              <div class="row no-margin">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                  <i class="icon-feed"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">单价：¥{{zyPricing.price}}</div>
+                              </div>
+    
+                              <div class="row no-margin">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                  <i class="icon-screen-smartphone"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">金额：¥{{zyPricing.price}}</div>
+                              </div>
+                              <div class="row no-margin">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                  <i class="icon-refresh"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">补货量：{{zyPricing.number}}(支)</div>
+                              </div>
+                              <div class="row no-margin">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                  <i class="icon-refresh"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">数量：{{zyPricing.number}}(支)</div>
+                              </div>
+                            </div>
+    
+    
+                            <div class="price-table-footer">
+                              <button type="button" class="btn green price-button sbold uppercase">快速下单</button>
+                            </div>
+                          </div>
+    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+              </div>
+        </div>
+      </div>
+    </div>
+      <div class="weui-tabbar">
+        <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+          <div class="weui-tabbar__icon">
+            <img src="./images/icon_nav_article.png" alt="">
+          </div>
+          <p style="margin:0px" class="weui-tabbar__label">探花代理</p>
+        </a>
+        <a href="#tab2" class="weui-tabbar__item">
+          <div class="weui-tabbar__icon">
+            <img src="./images/icon_nav_cell.png" alt="">
+          </div>
+          <p style="margin:0px" class="weui-tabbar__label">榜眼代理</p>
+        </a>
+        <a href="#tab3" class="weui-tabbar__item">
+          <div class="weui-tabbar__icon">
+            <img src="./images/icon_nav_cell.png" alt="">
+          </div>
+          <p style="margin:0px" class="weui-tabbar__label">状元代理</p>
+        </a>
+      </div>
+    </div>
+    <%- include ./shared/_scripts %>
+      <script src="/javascripts/include/query.js"></script>
+      <script src="/javascripts/join.js"></script>
+      <%- include ./shared/_footer %>

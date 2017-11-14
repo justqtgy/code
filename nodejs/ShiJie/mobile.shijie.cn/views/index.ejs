@@ -1,19 +1,18 @@
+<%- include ./shared/_header %>
+	<%- include ./shared/_top %>
 
-<%- include ./shared/_header %>    
-<%- include ./shared/_top %>   
-
-    <!-- Make sure all your bars are the first things in your <body> -->
-    
+		<!-- Make sure all your bars are the first things in your <body> -->
 
 
-	<div class="weui-tab">
+
+		<div class="weui-tab">
 			<header class="demos-header">
-      <h1 class="demos-title">广视明宇-视界5.0</h1>
-    </header>
-		<div class="weui-tab__bd">
-			<div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+				<h1 class="demos-title">广视明宇-视界5.0</h1>
+			</header>
+			<div class="weui-tab__bd">
+				<div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
 					<div class="weui-grids">
-						<a href="gps_last" class="weui-grid js_grid">
+						<a href="member" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img src="images/icon_nav_article.png" alt="">
 							</div>
@@ -21,7 +20,7 @@
 								代理信息
 							</p>
 						</a>
-						<a href="gps_oil_add" class="weui-grid js_grid">
+						<a href="join" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img src="images/icon_nav_button.png" alt="">
 							</div>
@@ -29,7 +28,7 @@
 								我要代理
 							</p>
 						</a>
-						<a href="gps_section" class="weui-grid js_grid">
+						<a href="pricing" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img src="images/icon_nav_dialog.png" alt="">
 							</div>
@@ -37,7 +36,7 @@
 								补货下单
 							</p>
 						</a>
-						<a href="/cost_check" class="weui-grid js_grid">
+						<a href="orders" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img src="images/icon_nav_select.png" alt="">
 							</div>
@@ -45,18 +44,18 @@
 								订单信息
 							</p>
 						</a>
-		 
-						<a href="gps_traffic" class="weui-grid js_grid">
+
+						<a href="yeji" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
 								<img src="images/icon_nav_city.png" alt="">
 							</div>
 							<p class="weui-grid__label">
 								业绩查询
 							</p>
-						</a>			
+						</a>
 					</div>
-			</div>
-			<div id="tab2" class="weui-tab__bd-item">
+				</div>
+				<div id="tab2" class="weui-tab__bd-item">
 					<div class="weui-grids">
 						<a href="password" class="weui-grid js_grid">
 							<div class="weui-grid__icon">
@@ -83,10 +82,10 @@
 							</p>
 						</a>
 					</div>
+				</div>
+
 			</div>
-			
-		</div>
-		<div class="weui-tabbar">						
+			<div class="weui-tabbar">
 				<a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
 					<div class="weui-tabbar__icon">
 						<img src="./images/icon_nav_article.png" alt="">
@@ -99,9 +98,8 @@
 					</div>
 					<p class="weui-tabbar__label">设置</p>
 				</a>
+			</div>
 		</div>
-  </div>
-	
-	<%- include ./shared/_scripts %>
-<%- include ./shared/_footer %>
 
+		<%- include ./shared/_scripts %>
+			<%- include ./shared/_footer %>

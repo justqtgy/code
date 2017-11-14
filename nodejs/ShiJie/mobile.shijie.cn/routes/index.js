@@ -16,8 +16,20 @@ router.get('/password', function(req, res, next) {
     res.render('password');
 });
 
-router.get('/group', function(req, res, next) {
-    res.render('control/_group', { title: 'dftd' });
+router.get('/join', function(req, res, next) {
+    res.render('join', { title: 'dftd' });
+});
+
+router.get('/pricing', function(req, res, next) {
+    res.render('pricing', { title: 'dftd' });
+});
+
+router.get('/orders', function(req, res, next) {
+    res.render('orders', { title: 'dftd' });
+});
+
+router.get('/yeji', function(req, res, next) {
+    res.render('yeji', { title: 'dftd' });
 });
 
 router.get('/oil_ticket', function(req, res, next) {
