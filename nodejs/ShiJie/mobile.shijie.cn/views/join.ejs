@@ -1,13 +1,4 @@
 <%- include ./shared/_header %>
-  <!-- BEGIN GLOBAL MANDATORY STYLES -->
-  <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-  <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <!-- END GLOBAL MANDATORY STYLES -->
-  <!-- BEGIN THEME GLOBAL STYLES -->
-  <link href="../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-  <!-- END THEME GLOBAL STYLES -->
-  <link href="/stylesheets/pricing.css" rel="stylesheet" type="text/css" />
-
   <%- include ./shared/_top %>
     <div class="weui-tab">
       <header class="bar bar-nav">
@@ -22,180 +13,111 @@
       <div class="weui-tab__bd">
         <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
           <div class="content">
-            <div class="portlet light portlet-fit">
-              <div class="portlet-body">
-                <div class="pricing-content-2">
-                  <div class="pricing-table-container">
-                    <div class="row">
-                      <div class="price-column-container ">
-                        <div class="price-table-head price-1">
-                          <h2 class="uppercase bg-green-jungle font-grey-cararra opt-pricing-5">{{thPricing.title}}</h2>
-                        </div>
-
-                        <div class="price-table-pricing">
-                          <h3>
-                            <sup class="price-sign">¥</sup>{{thPricing.amount}}</h3>
-                          <p>&nbsp</p>
-                        </div>
-                        <div class="price-table-content">
-                          <div class="row no-margin">
-                            <div class="col-xs-3 text-right mobile-padding">
-                              <i class="icon-feed"></i>
-                            </div>
-                            <div class="col-xs-9 text-left mobile-padding">单价：¥{{thPricing.price}}</div>
-                          </div>
-
-                          <div class="row no-margin">
-                            <div class="col-xs-3 text-right mobile-padding">
-                              <i class="icon-screen-smartphone"></i>
-                            </div>
-                            <div class="col-xs-9 text-left mobile-padding">金额：¥{{thPricing.price}}</div>
-                          </div>
-                          <div class="row no-margin">
-                            <div class="col-xs-3 text-right mobile-padding">
-                              <i class="icon-refresh"></i>
-                            </div>
-                            <div class="col-xs-9 text-left mobile-padding">补货量：{{thPricing.number}}(支)</div>
-                          </div>
-                          <div class="row no-margin">
-                            <div class="col-xs-3 text-right mobile-padding">
-                              <i class="icon-refresh"></i>
-                            </div>
-                            <div class="col-xs-9 text-left mobile-padding">数量：{{thPricing.number}}(支)</div>
-                          </div>
-                        </div>
-
-
-                        <div class="price-table-footer">
-                          <button type="button" class="btn green price-button sbold uppercase">快速下单</button>
-                        </div>
-                      </div>
-
-                    </div>
+            <header class='demos-header'>
+                <h1 class="demos-title">{{thPricing.title}}</h1>
+              </header>
+            <div class="weui-form-preview" >
+                <div class="weui-form-preview__hd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">付款金额</label>
+                    <em class="weui-form-preview__value">¥{{thPricing.amount}}</em>
                   </div>
                 </div>
+                <div class="weui-form-preview__bd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">商品</label>
+                    <span class="weui-form-preview__value">视界5.0</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">单价</label>
+                    <span class="weui-form-preview__value">¥{{thPricing.price}}</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">数量</label>
+                    <span class="weui-form-preview__value">{{thPricing.number}}(支)</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">补货量</label>
+                    <span class="weui-form-preview__value">{{thPricing.number}}(支)</span>
+                  </div>
+                </div>
+                <div class="weui-form-preview__ft">
+                  <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">下单</a>
+                </div>
               </div>
-            </div>
-
           </div>
         </div>
         <div id="tab2" class="weui-tab__bd-item">
-            <div class="content">
-                <div class="portlet light portlet-fit">
-                  <div class="portlet-body">
-                    <div class="pricing-content-2">
-                      <div class="pricing-table-container">
-                        <div class="row" id="tanhua">
-                          <div class="price-column-container ">
-                            <div class="price-table-head price-1">
-                              <h2 class="uppercase bg-green-jungle font-grey-cararra opt-pricing-5">{{byPricing.title}}</h2>
-                            </div>
-    
-                            <div class="price-table-pricing">
-                              <h3>
-                                <sup class="price-sign">¥</sup>{{byPricing.amount}}</h3>
-                              <p>&nbsp</p>
-                            </div>
-                            <div class="price-table-content">
-                              <div class="row no-margin">
-                                <div class="col-xs-3 text-right mobile-padding">
-                                  <i class="icon-feed"></i>
-                                </div>
-                                <div class="col-xs-9 text-left mobile-padding">单价：¥{{byPricing.price}}</div>
-                              </div>
-    
-                              <div class="row no-margin">
-                                <div class="col-xs-3 text-right mobile-padding">
-                                  <i class="icon-screen-smartphone"></i>
-                                </div>
-                                <div class="col-xs-9 text-left mobile-padding">金额：¥{{byPricing.price}}</div>
-                              </div>
-                              <div class="row no-margin">
-                                <div class="col-xs-3 text-right mobile-padding">
-                                  <i class="icon-refresh"></i>
-                                </div>
-                                <div class="col-xs-9 text-left mobile-padding">补货量：{{byPricing.number}}(支)</div>
-                              </div>
-                              <div class="row no-margin">
-                                <div class="col-xs-3 text-right mobile-padding">
-                                  <i class="icon-refresh"></i>
-                                </div>
-                                <div class="col-xs-9 text-left mobile-padding">数量：{{byPricing.number}}(支)</div>
-                              </div>
-                            </div>
-    
-    
-                            <div class="price-table-footer">
-                              <button type="button" class="btn green price-button sbold uppercase">快速下单</button>
-                            </div>
-                          </div>
-    
-                        </div>
-                      </div>
-                    </div>
+          <div class="content">
+            <header class='demos-header'>
+                <h1 class="demos-title">{{byPricing.title}}</h1>
+              </header>
+            <div class="weui-form-preview" >
+                <div class="weui-form-preview__hd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">付款金额</label>
+                    <em class="weui-form-preview__value">¥{{byPricing.amount}}</em>
                   </div>
                 </div>
-    
+                <div class="weui-form-preview__bd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">商品</label>
+                    <span class="weui-form-preview__value">视界5.0</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">单价</label>
+                    <span class="weui-form-preview__value">¥{{byPricing.price}}</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">数量</label>
+                    <span class="weui-form-preview__value">{{byPricing.number}}(支)</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">补货量</label>
+                    <span class="weui-form-preview__value">{{byPricing.number}}(支)</span>
+                  </div>
+                </div>
+                <div class="weui-form-preview__ft">
+                  <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">下单</a>
+                </div>
               </div>
+          </div>
         </div>
         <div id="tab3" class="weui-tab__bd-item">
-            <div class="content">
-                <div class="portlet light portlet-fit">
-                  <div class="portlet-body">
-                    <div class="pricing-content-2">
-                      <div class="pricing-table-container">
-                        <div class="row">
-                          <div class="price-column-container ">
-                            <div class="price-table-head price-1">
-                              <h2 class="uppercase bg-green-jungle font-grey-cararra opt-pricing-5">{{zyPricing.title}}</h2>
-                            </div>
-    
-                            <div class="price-table-pricing">
-                              <h3>
-                                <sup class="price-sign">¥</sup>{{zyPricing.amount}}</h3>
-                              <p>&nbsp</p>
-                            </div>
-                            <div class="price-table-content">
-                              <div class="row no-margin">
-                                <div class="col-xs-3 text-right mobile-padding">
-                                  <i class="icon-feed"></i>
-                                </div>
-                                <div class="col-xs-9 text-left mobile-padding">单价：¥{{zyPricing.price}}</div>
-                              </div>
-    
-                              <div class="row no-margin">
-                                <div class="col-xs-3 text-right mobile-padding">
-                                  <i class="icon-screen-smartphone"></i>
-                                </div>
-                                <div class="col-xs-9 text-left mobile-padding">金额：¥{{zyPricing.price}}</div>
-                              </div>
-                              <div class="row no-margin">
-                                <div class="col-xs-3 text-right mobile-padding">
-                                  <i class="icon-refresh"></i>
-                                </div>
-                                <div class="col-xs-9 text-left mobile-padding">补货量：{{zyPricing.number}}(支)</div>
-                              </div>
-                              <div class="row no-margin">
-                                <div class="col-xs-3 text-right mobile-padding">
-                                  <i class="icon-refresh"></i>
-                                </div>
-                                <div class="col-xs-9 text-left mobile-padding">数量：{{zyPricing.number}}(支)</div>
-                              </div>
-                            </div>
-    
-    
-                            <div class="price-table-footer">
-                              <button type="button" class="btn green price-button sbold uppercase">快速下单</button>
-                            </div>
-                          </div>
-    
-                        </div>
-                      </div>
-                    </div>
+          <div class="content">
+            <header class='demos-header'>
+                <h1 class="demos-title">{{zyPricing.title}}</h1>
+              </header>
+            <div class="weui-form-preview" >
+                <div class="weui-form-preview__hd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">付款金额</label>
+                    <em class="weui-form-preview__value">¥{{zyPricing.amount}}</em>
                   </div>
                 </div>
-    
+                <div class="weui-form-preview__bd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">商品</label>
+                    <span class="weui-form-preview__value">视界5.0</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">单价</label>
+                    <span class="weui-form-preview__value">¥{{zyPricing.price}}</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">数量</label>
+                    <span class="weui-form-preview__value">{{zyPricing.number}}(支)</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">补货量</label>
+                    <span class="weui-form-preview__value">{{zyPricing.number}}(支)</span>
+                  </div>
+                </div>
+                <div class="weui-form-preview__ft">
+                  <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">下单</a>
+                </div>
               </div>
+          </div>
         </div>
       </div>
     </div>
