@@ -1,8 +1,8 @@
 var express = require('express');
-var router = express.Router();
 var utils = require('utility');
 var date = require('date-utils');
 var users = require('../models/member');
+var router = express.Router();
 
 router.requireAuthentication = function(req, res, next) {
     console.log('check login cookies ...', req.cookies.member);
@@ -13,46 +13,43 @@ router.requireAuthentication = function(req, res, next) {
     }
     if (req.cookies.member) {
         var member = req.cookies.member;
+        req.account = member.account;
         next();
     } else {
-        //req.session.vehicle_group = '';
-        res.redirect('/users/login');
+        var from_url = req.originalUrl;
+        if (from_url != "")
+            res.redirect('/users/login?url=' + from_url);
+        else
+            res.redirect('/users/login');
     }
 };
 
+
 router.get('/login', function(req, res, next) {
-    var member = req.cookies.member,
-        account = '';
-    if (member) {
-        account = member.account;
+    var account = '';
+    if (req.cookies.member) {
+        account = req.cookies.member;
     }
     res.render('login', { account: account });
 });
 
-router.get('/logout', function(req, res) {
-    console.log('logout.....');
-    res.clearCookie("member");
-    res.redirect('/users/login');
-});
-
 router.post('/login', function(req, res, next) {
-    var account = req.body.account,
-        password = req.body.password;
-    password = utils.md5(account + '&' + password);
+    var url = req.body.url || '';
+    var account = req.body.account;
+    console.log('post login body => ', req.body)
     users.get_info(account, function(err, result) {
         if (err) {
             console.log(err);
             return;
         }
 
-        if (!result || result.length === 0) {
+        if (!result || result.length == 0) {
             res.send({ ok: 0, msg: "账号错误" });
             return;
         }
 
         var userid = result[0].ID;
-        var isAdmin = result[0].IsAdmin;
-        var isBoss = result[0].isBoss;
+        var isAdmin = result[0].IsAdmin ? 1 : 0;
 
         var password = req.body.password;
 
@@ -62,44 +59,23 @@ router.post('/login', function(req, res, next) {
             return;
         }
 
-        var now = new Date(),
-            expireTime = new Date(result[0].ExpireTime);
-        if (Date.compare(expireTime, now) < 0) {
-            res.send({ ok: 0, msg: "账号已过期" });
-            return;
-        }
+        var user = { userid: userid, account: account, isadmin: isAdmin };
+        res.cookie('member', user, { maxAge: 3600000, httpOnly: true, path: '/' });
 
-        //res.clearCookie('member');
-        var user = { userid: userid, account: account, isBoss: isBoss };
-        res.cookie('member', user, { maxAge: 3600000 * 24, httpOnly: true, path: '/' });
         res.send({ ok: 1 });
     });
 });
 
-router.post('/reg', function(req, res, next) {
-    var account = req.body.username,
-        password = utils.md5(account + '&' + req.body.password);
+router.get('/logout', function(req, res) {
+    res.clearCookie("member");
+    res.redirect('/users/login');
+});
 
-    var msg = {
-        "-1": "该车牌号不存在",
-        "-2": "该车牌号已经被注册",
-        "0": "写入数据库失败",
-    };
-    /*
-    driver.add(account, password, function(err, result) {
-        if (err) {
-            console.log(err);
-            throw err;
-        }
-
-        if (result < 1) {
-            res.send({ ok: 1, msg: msg[result] });
-            return;
-        }
-
-        res.send({ ok: 0, url: '/users/login' });
-    });
-    */
+router.get('/check_login', function(req, res) {
+    if (req.cookies.member) {
+        var member = req.cookies.member;
+        res.send({ member: member });
+    }
 });
 
 module.exports = router;

@@ -1,61 +1,123 @@
-var express = require('express');
+﻿var express = require('express');
 var router = express.Router();
-var utils = require('utility');
-var date = require('date-utils');
-var member = require('../models/member');
 
-/* GET member home page. */
+var member = require('../models/member');
+var agent = require('../models/agent');
+
 router.get('/', function(req, res, next) {
     var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
         end_date = new Date().toFormat('YYYY-MM-DD');
     res.render('member', { start_date: start_date, end_date: end_date });
 });
 
-router.post('/delete', function(req, res, next) {
-    var args = req.body;
-    member.delete(args, function(err, result) {
+var get_count = function(req, res, next) {
+    member.get_count(function(err, result) {
         if (err) {
-            log.error('Error = ', err);
-            return res.send({ ok: 0, msg: err });
+            return next(err);
+        }
+        req.total = result;
+        next();
+    });
+};
+
+router.get('/list', function(req, res, next) {
+    var args = req.body;
+    console.log('get member list : ', args);
+    member.get_list(args, function(err, result) {
+        if (err) {
+            res.send({ ok: 0, msg: err });
+            return;
+        }
+        res.send({ ok: 1, total: req.total, rows: result });
+    });
+});
+
+router.get('/single', function(req, res, next) {
+    var id = req.query.id;
+    member.get_single(id, function(err, result) {
+        if (err) {
+            res.send({ ok: 0, msg: err });
+            return;
+        }
+        member.get_single(req.query.pid, function(err, parents) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+
+            res.send({ ok: 1, rows: result, parents: parents });
+        });
+    });
+});
+
+router.post('/set', function(req, res, next) {
+    var args = req.body;
+    console.log('args================', args)
+    args.status = args.Status == 'on' ? 1 : 0
+    if (args.id && args.id > 0) {
+        member.update(args, function(err, result) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            res.send({ ok: 1 });
+        });
+    } else {
+        member.add(args, function(err, result) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            var memberid = result[0].ID;
+            member_stat.init(memberid, function(err, result) {
+                if (err) {
+                    res.send({ ok: 0, msg: err });
+                    return;
+                }
+
+                res.send({ ok: 1 });
+            });
+        });
+    }
+});
+
+router.post('/delete', function(req, res, next) {
+    var params = req.body;
+    console.log('member delete args = ', params)
+    member.delete(params, function(err, result) {
+        if (err) {
+            res.send({ ok: 0, msg: err });
+            return;
         }
         res.send({ ok: 1 });
     });
 });
 
 router.post('/password', function(req, res, next) {
-    var userinfo = req.cookies.member;
-    var args = req.body;
+    console.log(req.body)
+    var args = {
+        id: req.body.id,
+        account: req.body.account,
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword
+    };
 
-    if (!args.old_password) {
+    if (!args.password) {
         return res.send({ ok: 0, msg: '密码不能为空，请输入密码' });
     }
 
-    if (args.new_password != args.confirm_password) {
+    if (args.password != args.confirmPassword) {
         return res.send({ ok: 0, msg: '密码不一致，请重新输入' });
     }
 
-    args.id = userinfo.userid;
-    var oldPasssword = utils.md5(userinfo.account + '&' + args.old_password);
-    member.get_single(args.id, function(err, result) {
+    args.password = utils.md5(args.account.toLowerCase() + '&' + args.password);
+
+    member.change_password(args, function(err, result) {
         if (err) {
             log.error('Error = ', err);
             return res.send({ ok: 0, msg: err });
         }
-
-        args.account = result[0].Account;
-        args.password = utils.md5(args.account.toLowerCase() + '&' + args.new_password);
-
-        if (oldPasssword != result[0].Password) {
-            return res.send({ ok: 0, msg: '旧密码错误，请重新输入' });
-        }
-
-        member.change_password(args, function(err, result) {
-            if (err) {
-                log.error('Error = ', err);
-                return res.send({ ok: 0, msg: err });
-            }
-            res.send({ ok: 1 });
-        });
+        res.send({ ok: 1 });
     });
 });
 
