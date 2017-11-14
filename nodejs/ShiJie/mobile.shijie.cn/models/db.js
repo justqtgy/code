@@ -2,6 +2,7 @@ var sql = require('mssql');
 var config = require('./../config/settings').dbconfig;
 
 module.exports.execSQL = function(sqlText, cb) {
+    console.log('exec sql => ', sqlText);
     var connection = new sql.Connection(config, function(err) {
         if (err) {
             log.error('error => ', err);
@@ -35,6 +36,7 @@ module.exports.execSQL = function(sqlText, cb) {
 };
 
 module.exports.execSP = function(spName, params, cb) {
+    console.log('exec spName => ', sqlText);
     var connection = new sql.Connection(config, function(err) {
         // ... error checks 
         if (err) {

@@ -1,6 +1,6 @@
-var db = require('../models/mssql_helper');
-
-var util = require('util');
+﻿var util = require('util');
+var utils = require('utility');
+var db = require('./db');
 
 function member(model) {
 
@@ -9,10 +9,8 @@ function member(model) {
 module.exports = member;
 
 member.get_info = function(account, callback) {
-    var sql = " select ID, [Account], [Password], [ExpireTime], [IsDelete] ,[WX_OpenID], [IsAdmin], 1 as isBoss from gserver_data.dbo.[member] where Account='%s' ";
-    sql += " union all ";
-    sql += " select ID, [Account], [Password], [ExpireTime], [IsDelete] ,[WX_OpenID], 0 as [IsAdmin], 0 as isBoss from Drivers where Account = '%s' ";
-    sql = util.format(sql, account, account);
+    var sql = " select * from Member where Account='%s'";
+    sql = util.format(sql, account);
 
     db.execSQL(sql, function(err, rows) {
         if (err) {
@@ -23,13 +21,10 @@ member.get_info = function(account, callback) {
 };
 
 member.get_count = function(params, callback) {
-    var sql = "select count(*) as total from gserver_data.dbo.Member ";
-    if (params.account) {
-        sql += " WHERE Account like '%" + params.account + "%'";
-    }
-
+    var sql = "select count(*) as total from Member";
     db.execSQL(sql, function(err, result) {
         if (err) {
+            log.error('Error = ', err);
             return callback(err);
         }
         var total = 0;
@@ -38,72 +33,90 @@ member.get_count = function(params, callback) {
         }
         callback(err, total);
     });
-}
+};
 
-member.get_list = function(params, callback) {
+member.get_pages = function(params, callback) {
     var pageIndex = parseInt(params.pageIndex);
     var pageSize = parseInt(params.pageSize);
-    var beginID = (pageIndex - 1) * pageSize + 1;
-    var endID = pageIndex * pageSize;
-
-    var sql = ";WITH t AS( " +
-        "SELECT ROW_NUMBER() OVER (ORDER BY ID DESC) AS R_Number,* " +
-        "FROM gserver_data.dbo.Member where isDelete = 0";
-    if (params.account) {
-        sql += " WHERE Account like '%" + params.account + "%'";
-    }
-    sql += ") SELECT * FROM t WHERE R_Number BETWEEN %s AND %s ";
-    sql = util.format(sql, beginID, endID);
+    var start_id = (pageIndex - 1) * pageSize + 1;
+    var end_id = pageIndex * pageSize;
+    var sql = " \
+		;WITH t AS( \
+			SELECT ROW_NUMBER() OVER (ORDER BY ID DESC) AS R_Number,* \
+			FROM Member \
+		) \
+		SELECT * FROM t WHERE R_Number BETWEEN %s AND %s ";
+    sql = util.format(sql, start_id, end_id);
 
     db.execSQL(sql, function(err, rows) {
         if (err) {
+            log.error('Error = ', err);
             return callback(err);
         }
         callback(err, rows);
     });
-}
+};
+
+member.get_list = function(params, callback) {
+    var sql = ";with t as ( \
+					select *, 0 as Level from View_Member where MemberNo='0' \
+					union all \
+					select m.*, Level+1 from View_Member m inner join t on m.ParentID = t.ID \
+				) \
+				select * from t where Level<=3";
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            log.error('Error = ', err);
+            return callback(err);
+        }
+        callback(err, rows);
+    });
+};
 
 member.get_single = function(id, callback) {
-    var sql = "select * from gserver_data.dbo.Member where ID = %s";
+    var sql = "select * from Member where ID = %s";
     sql = util.format(sql, id);
     db.execSQL(sql, function(err, rows) {
         if (err) {
-            return callback(err)
+            log.error('Error = ', err);
+            return callback(err);
         }
         callback(err, rows);
     });
-}
+};
 
 member.add = function(params, callback) {
-    var sql = "insert into gserver_data.dbo.Member(Account,Password,TrueName,Email,Mobile,AddTime,ExpireTime,IsDelete,WX_OpenID, IsAdmin) values('%s','%s','%s','%s','%s',GETDATE(),'%s','%s','%s', '%s')";
-    sql = util.format(sql, params.account, params.password, params.trueName, params.email, params.mobile, params.expireTime, 0, '', params.isAdmin);
-    console.log(sql)
+    params.Password = utils.md5(args.account.toLowerCase() + '&123456');
+
+    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile, Password, JoinTime,AddTime,Status) values('%s','%s','%s','%s','', '%s', '%s', '%s',GETDATE(),'%s');select @@identity as ID;";
+    sql = util.format(sql, params.member_no, params.account, params.true_name, params.idcard, params.mobile, params.password, params.join_time, params.status);
     db.execSQL(sql, function(err, result) {
         if (err) {
+            log.error('Error = ', err);
             return callback(err);
         }
         callback(err, result);
     });
-}
+};
 
 member.update = function(params, callback) {
-    var sql = "update gserver_data.dbo.Member set TrueName='%s', Email='%s', Mobile='%s', ExpireTime='%s', IsAdmin = '%s' where id = '%s'";
-    sql = util.format(sql, params.trueName, params.email, params.mobile, params.expireTime, params.isAdmin, params.id);
-    console.log(sql)
+    var sql = "update Member set MemberNo='%s', Account='%s', TrueName='%s', IDCard='%s', Mobile='%s', JoinTime='%s', Status='%s' where id = '%s'";
+    sql = util.format(sql, params.member_no, params.account, params.true_name, params.idcard, params.mobile, params.password, params.join_time, params.status, params.id);
     db.execSQL(sql, function(err, result) {
         if (err) {
+            log.error('Error = ', err);
             return callback(err);
         }
         callback(err, result);
     });
-}
+};
 
 member.delete = function(params, callback) {
-    var sql = "Update gserver_data.dbo.Member set IsDelete = 1 where ID = '%s'";
+    var sql = "delete from Member where ID = '%s'";
     sql = util.format(sql, params.id);
-    console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
+            log.error('Error = ', err);
             return callback(err);
         }
         callback(err, result);
@@ -111,13 +124,12 @@ member.delete = function(params, callback) {
 };
 
 member.change_password = function(params, callback) {
-    var sql = "Update gserver_data.dbo.Member set Password = '%s' where ID = '%s'";
+    var sql = "Update dbo.Member set Password = '%s' where ID = '%s'";
     sql = util.format(sql, params.password, params.id);
-    console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);
         }
         callback(err, result);
     });
-}
+};
