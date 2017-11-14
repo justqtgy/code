@@ -2,7 +2,7 @@
  *  发布消息
  */
 var util = require('util');
-var db = require('../models/mssql_helper');
+var db = require('./db');
 
 function news() {
 
