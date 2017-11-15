@@ -7,9 +7,10 @@
   <a href="javascript:;" onclick="javascript:history.back(-1);" class="icon pull-left"><i class="sstfont sst-xiangzuo"></i></a>
 </header>
 
-<!--顶部搜索-->
+
 <!--主体-->
 <div class="content" id="grid">
+  <!--顶部搜索-->
 <div class="weui-search-bar" id="searchBar">
           <form class="weui-search-bar__form"  action="/zhougongjiemeng/index/search.html" method="get">
               <div class="weui-search-bar__box">
@@ -37,84 +38,38 @@
 <section class="menu-right padding-all j-content">
   <h5>一级代理</h5>
   <ul>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
+    <li  v-for = "(item, index) in LevelList1" class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>{{item.text}}</span></li>
+    <!-- <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li> -->
+
   </ul>
   <h5>二级代理</h5>
-  <ul>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
+  <ul >
+    <li v-for = "(item, index) in LevelList2" class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>{{item.text}}</span></li>   
   </ul>
   <h5>三级代理</h5>
   <ul>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
+    <li v-for = "(item, index) in LevelList3" class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>{{item.text}}</span></li>
   </ul>
  
 </section>
 <section class="menu-right padding-all j-content" style="display:none">
   <h5>一级代理</h5>
   <ul>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
+    <li  v-for = "(item, index) in LevelList1" class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>{{item.text}}</span></li>
   </ul>
   
 </section>
 <section class="menu-right padding-all j-content" style="display:none">
   <h5>二级代理</h5>
   <ul>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
+    <li v-for = "(item, index) in LevelList2" class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>{{item.text}}</span></li>
   </ul>
   
 </section>
 <section class="menu-right padding-all j-content" style="display:none">
   <h5>三级代理</h5>
   <ul>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
-    <li class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>老崔</span></li>
+    <li v-for = "(item, index) in LevelList3" class="w-3"><a href="pro_list.html"></a> <img src="upload/avatar.jpg"><span>{{item.text}}</span></li>
   </ul>
  
 </section>
@@ -124,16 +79,4 @@
 <script src="/javascripts/include/query.js"></script>
 <script src="/javascripts/member.js"></script>
 <%- include ./shared/_footer %>
-<script type="text/javascript">
-	$(function($){
-		$('#sidebar ul li').click(function(){
-			$(this).addClass('active').siblings('li').removeClass('active');
-			var index = $(this).index();
-			$('.j-content').eq(index).show().siblings('.j-content').hide();
-		})
-	})
-
-	function about(){
-			$.alert("视界5.0");
-	}
-</script>
+ 
