@@ -22,13 +22,13 @@ var get_count = function(req, res, next) {
 
 router.get('/list', function(req, res, next) {
     var args = req.body;
-    console.log('get member list : ', args);
+    console.log('get /member/list args => ', args);
     member.get_list(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
             return;
         }
-        res.send({ ok: 1, total: req.total, rows: result });
+        res.send({ ok: 1, rows: result });
     });
 });
 
@@ -50,9 +50,9 @@ router.get('/single', function(req, res, next) {
     });
 });
 
-router.post('/set', function(req, res, next) {
+router.post('/save', function(req, res, next) {
     var args = req.body;
-    console.log('args================', args)
+    console.log('post /member/save => ', args);
     args.status = args.Status == 'on' ? 1 : 0
     if (args.id && args.id > 0) {
         member.update(args, function(err, result) {
@@ -83,7 +83,7 @@ router.post('/set', function(req, res, next) {
 
 router.post('/delete', function(req, res, next) {
     var params = req.body;
-    console.log('member delete args = ', params)
+    console.log('post /member/elete args => ', params)
     member.delete(params, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
@@ -94,7 +94,7 @@ router.post('/delete', function(req, res, next) {
 });
 
 router.post('/password', function(req, res, next) {
-    console.log(req.body)
+    console.log('post /member/password args => ', req.body)
     var args = {
         id: req.body.id,
         account: req.body.account,

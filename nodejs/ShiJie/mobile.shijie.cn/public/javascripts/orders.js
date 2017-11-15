@@ -8,13 +8,13 @@ var OrderStatus = {
 function get_list(pageIndex) {
     var q = new Query('/orders/pages', 'GET', $("#search"), pageIndex, displayNumber);
     var params = q.init();
-    if (!params.begintime || !params.endtime) {
-        alert('请选择日期');
-        return;
-    }
+    // if (!params.begintime || !params.endtime) {
+    //     alert('请选择日期');
+    //     return;
+    // }
     q.request(params, function(json) {
         if (!json.ok) {
-            bootbox.alert(json.msg);
+            $.alert(json.msg);
             return;
         }
         //show_list(json.rows);
@@ -24,19 +24,12 @@ function get_list(pageIndex) {
 }
 
 
-//获取记录信息
-function do_status(status) {
-
-}
-
-
 //删除记录信息
 function delete_record(id) {
-    bootbox.setLocale("zh_CN");
-    bootbox.confirm({
+    $.confirm({
         title: hint.box_title,
-        message: hint.confirm_delete,
-        callback: function(result) {
+        text: hint.confirm_delete,
+        onOK: function(result) {
             if (!result) return;
 
             var params = {
@@ -45,10 +38,10 @@ function delete_record(id) {
             var q = new Query('/orders/delete', 'POST');
             q.request(params, function(json) {
                 if (json.ok != 1) {
-                    bootbox.alert(hint.delete_fail);
+                    $.alert(hint.delete_fail);
                     return;
                 }
-                bootbox.alert(hint.delete_success, function() {
+                $.alert(hint.delete_success, function() {
                     get_list(1);
                 });
             });
@@ -70,11 +63,6 @@ var app = new Vue({
             }, 100);
         },
         init: function() {
-            $(".date-picker").datepicker({
-                autoclose: 1,
-                todayHighlight: 1
-            });
-
             var that = this;
             that.loadPage();
 

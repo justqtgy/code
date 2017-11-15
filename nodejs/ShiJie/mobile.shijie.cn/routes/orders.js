@@ -51,6 +51,7 @@ var get_count = function(req, res, next) {
 
 router.get('/pages', [get_count], function(req, res, next) {
     var args = req.query;
+    console.log('get /orders/pages args => ', args)
     orders.get_pages(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });

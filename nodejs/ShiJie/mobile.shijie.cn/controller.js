@@ -6,6 +6,7 @@ exports.init_route = function(app) {
     
     app.use('/member', member);
     app.use('/news', news);
+    app.use('/orders', require('./routes/orders'));
 
     console.log('init_route end');
 }
