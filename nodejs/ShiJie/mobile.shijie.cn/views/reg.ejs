@@ -1,0 +1,47 @@
+
+<%- include ./shared/_header %>  
+<%- include ./shared/_top %>   
+
+<header class="bar bar-nav">
+  <h1 class="title">注册信息</h1>
+  <a href="javascript:;" onclick="javascript:history.back(-1);" class="icon pull-left"><i class="sstfont sst-xiangzuo"></i></a>
+</header>
+<div  class="content top-title">
+    <form id="pswd-form" class="input-group">
+        <div class="weui-cells weui-cells_form">
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">登录账号：</label></div>
+            <div class="weui-cell__bd">
+             <input class="weui-input" name ="account"  type="text" placeholder="可以是手机、邮箱等">
+            </div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">姓名：</label></div>
+            <div class="weui-cell__bd">
+              <input class="weui-input" name = "true_name"  type="text" placeholder="请输入真实姓名">
+            </div>
+          </div>
+          <div class="weui-cell">
+              <div class="weui-cell__hd"><label class="weui-label">身份证：</label></div>
+              <div class="weui-cell__bd">
+                <input class="weui-input" name = "idcard"  type="text" placeholder="请输入身份证号">
+              </div>
+            </div>
+          <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">推荐人：</label></div>
+            <div class="weui-cell__bd">
+              <input class="weui-input" name = "parent_id"  type="text" readonly placeholder="推荐人">
+            </div>
+          </div>
+           
+        </div>
+        <div class="weui-btn-area">
+              <a class="weui-btn weui-btn_primary" href="javascript:" id="btnOK">注册</a>
+            </div>
+    </div>
+    </form>
+</div>
+<%- include ./shared/_scripts %>
+<script src="/javascripts/include/query.js"></script>
+<script src="/javascripts/userpswd.js"></script>
+<%- include ./shared/_footer %>

@@ -32,8 +32,9 @@ router.get('/yeji', function(req, res, next) {
     res.render('yeji', { title: 'dftd' });
 });
 
-router.get('/oil_ticket', function(req, res, next) {
-    res.send('开发中....');
+router.get('/invite', function(req, res, next) {
+    var member = req.cookies.member;
+    res.send('invite', { member : member });
 });
 
 module.exports = router;
