@@ -30,7 +30,8 @@
           <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">推荐人：</label></div>
             <div class="weui-cell__bd">
-              <input class="weui-input" name = "parent_id"  type="text" readonly placeholder="推荐人">
+              <input class="weui-input" type="hidden" name="parent_id" value="<%=userid%>" />
+              <input class="weui-input" name = "parent_account" value="<%= account %>"  type="text" readonly placeholder="推荐人">
             </div>
           </div>
            

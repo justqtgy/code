@@ -7,7 +7,7 @@ var router = express.Router();
 router.requireAuthentication = function(req, res, next) {
     console.log('check login cookies ...', req.cookies.member);
 
-    if (req.path.indexOf("/users/login") >= 0 || req.path.indexOf("/users/reg") >= 0) {
+    if (req.path.indexOf("/users/login") >= 0 || req.path.indexOf("/reg") >= 0) {
         next();
         return;
     }
