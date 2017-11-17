@@ -31,15 +31,11 @@ var app = new Vue({
             var that = this;
             loadPricing();
         },
-        join: function(type) {
-            bootbox.confirm({
+        pricing: function(type) {
+            $.confirm({
                 title: '提示',
-                message: '确定要下单吗？',
-                buttons: {
-                    cancel: { label: "取消" },
-                    confirm: { label: '确定' }
-                },
-                callback: function(result) {
+                text: '确定要下单吗？',
+                onOK: function(result) {
                     if (result) {
                         postOrders(type);
                     }

@@ -10,48 +10,62 @@
 
     <!--顶部搜索-->
     <!--主体-->
-    
-      
-      <div class="content">
-          <div class="weui-search-bar" id="searchBar">
-              <form class="weui-search-bar__form" action="/orders/search" method="get">
-                <div class="weui-search-bar__box">
-                  <i class="weui-icon-search"></i>
-                  <input type="text" class="weui-search-bar__input" id="searchInput" name="keywords" placeholder="请输入需要查找的代理商" value="" data-descriptions="jiemeng"
-                    data-validate="jiemeng" required="">
-                  <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
-                </div>
-                <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
-                  <i class="weui-icon-search"></i>
-                  <span>请输入需要查找的代理商</span>
-                </label>
-              </form>
-              <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
-            </div>
-      <div class="weui-panel weui-panel_access" id="grid">
-          <!-- <div class="weui-panel__hd">订单信息</div> -->
-          <div class="weui-panel__bd" v-for = "(item, index) in DataList">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">              
-              <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title">时间：{{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD')}}</h4>
-                <p class="weui-media-box__title">数量：{{item.Number}}</p>
-                <p class="weui-media-box__title">单价：¥{{item.Price}}</p>
-                <p class="weui-media-box__title">状态：{{get_status(item.Status)}}</p>
-                <!-- <p class="weui-media-box__desc">状态：{{get_status(item.Status)}}</p> -->
-              </div>
-            </a>             
+
+
+    <div class="content" id="grid">
+      <div class="weui-search-bar" id="searchBar">
+        <form class="weui-search-bar__form" action="/orders/search" method="get">
+          <div class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input type="text" class="weui-search-bar__input" id="searchInput" name="keywords" placeholder="请输入需要查找的代理商" value="" data-descriptions="jiemeng"
+              data-validate="jiemeng" required="">
+            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
           </div>
-          <!-- <div class="weui-panel__ft">
-            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
-              <div class="weui-cell__bd">查看更多</div>
-              <span class="weui-cell__ft"></span>
-            </a>    
-          </div> -->
+          <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+            <i class="weui-icon-search"></i>
+            <span>请输入需要查找的代理商</span>
+          </label>
+        </form>
+        <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+      </div>
+
+      <div class="weui-cells__title">订单明细</div>
+      <div class="weui-cells weui-cells_form" v-for="(item, index) in DataList" style="margin-top:0px;">
+        <div class="weui-cell">
+          <div class="weui-cell__hd">
+            <label class="weui-label">时间：</label>
+          </div>
+          <div class="weui-cell__bd">
+            <label>{{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')}}</label>
+          </div>
         </div>
-    </div>
-    <%- include ./shared/_scripts %>
-    <script src="/javascripts/include/date-utils.min.js"></script>
-      <script src="/javascripts/include/query.js"></script>
-      <script src="/javascripts/orders.js"></script>
-      <%- include ./shared/_footer %>
- 
+        <div class="weui-cell">
+          <div class="weui-cell__hd">
+            <label class="weui-label">数量：</label>
+          </div>
+          <div class="weui-cell__bd">
+            <label class="weui-label">{{item.Number}}</label>
+          </div>
+        </div>
+        <div class="weui-cell">
+          <div class="weui-cell__hd">
+            <label class="weui-label">单价：</label>
+          </div>
+          <div class="weui-cell__bd">
+            <label class="weui-label">¥{{item.Price}}</label>
+          </div>
+        </div>
+        <div class="weui-cell">
+          <div class="weui-cell__hd">
+            <label class="weui-label">状态：</label>
+          </div>
+          <div class="weui-cell__bd">
+            <label class="weui-label">{{get_status(item.Status)}}</label>
+          </div>
+        </div>
+      </div>
+      <%- include ./shared/_scripts %>
+        <script src="/javascripts/include/date-utils.min.js"></script>
+        <script src="/javascripts/include/query.js"></script>
+        <script src="/javascripts/orders.js"></script>
+        <%- include ./shared/_footer %>
