@@ -34,9 +34,10 @@
             <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">              
               <div class="weui-media-box__bd">
                 <h4 class="weui-media-box__title">时间：{{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD')}}</h4>
-                <p class="weui-media-box__desc">数量：{{item.Number}}</p>
-                <p class="weui-media-box__desc">单价：¥{{item.Price}}</p>
-                <p class="weui-media-box__desc">状态：{{get_status(item.Status)}}</p>
+                <p class="weui-media-box__title">数量：{{item.Number}}</p>
+                <p class="weui-media-box__title">单价：¥{{item.Price}}</p>
+                <p class="weui-media-box__title">状态：{{get_status(item.Status)}}</p>
+                <!-- <p class="weui-media-box__desc">状态：{{get_status(item.Status)}}</p> -->
               </div>
             </a>             
           </div>
