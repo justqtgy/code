@@ -13,8 +13,8 @@ function checkInfo() {
     });
 }
 
-function regist(type) {
-    var q = new Query('/member/save', 'POST');
+function regist() {
+    var q = new Query('/member/save', 'POST', 'reg-form');
     var params = q.init();
     q.request(params, function(json) {
         if (!json.ok) {
@@ -30,14 +30,14 @@ function regist(type) {
 
 var app = new Vue({
     el: '#grid',
-    data: {
-        myPricing: {},
-        objPricing: {}
-    },
+    data: {},
     methods: {
         init: function() {
             var that = this;
             checkInfo();
+        },
+        regUser: function() {
+            regist();
         }
     }
 });
