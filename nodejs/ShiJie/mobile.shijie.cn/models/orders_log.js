@@ -50,7 +50,7 @@ orders_log.get_single = function(id, callback) {
     sql = util.format(sql, id);
     db.execSQL(sql, function(err, rows) {
         if (err) {
-            return callback(err)
+            return callback(err);
         }
         callback(err, rows);
     });
@@ -70,17 +70,6 @@ orders_log.add = function(params, callback) {
 orders_log.update = function(params, callback) {
     var sql = "update OrdersLog set MemberID='%s', Content='%s', Status='%s', AddTime='%s' where id = '%s'";
     sql = util.format(sql, params.memberid, params.content, params.status, params.add_time, params.id);
-    db.execSQL(sql, function(err, result) {
-        if (err) {
-            return callback(err);
-        }
-        callback(err, result);
-    });
-};
-
-orders_log.delete = function(params, callback) {
-    var sql = "delete from OrdersLog where ID = '%s'";
-    sql = util.format(sql, params.id);
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);

@@ -2,6 +2,7 @@ var express = require('express');
 var date = require('date-utils');
 var qr = require('qr-image');
 var orders = require('../models/orders');
+var member_stat = require('../models/member_stat');
 var router = express.Router();
 
 /* GET home page. */
@@ -31,7 +32,14 @@ router.get('/join', function(req, res, next) {
 });
 
 router.get('/pricing', function(req, res, next) {
-    res.render('pricing', { title: 'dftd' });
+    var member = req.cookies.member;
+    orders.isExists(member.userid, function(err, counts) {
+        if (counts > 0) {
+            res.redirect('pricing');
+        } else {
+            res.render('join');
+        }
+    });
 });
 
 router.get('/orders', function(req, res, next) {

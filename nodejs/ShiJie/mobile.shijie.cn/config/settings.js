@@ -24,18 +24,24 @@ module.exports.pricing = {
         "price": 110,
         "first": 20,
         "amount": 2200,
-        "number": 20
+        "number": 20,
+        "min_value": 0,
+        "max_value": 7200
     },
     "bangyan": {
         "price": 90,
         "first": 80,
         "amount": 7200,
-        "number": 40
+        "number": 40,
+        "min_value": 7200,
+        "max_value": 24000
     },
     "zhuangyuan": {
         "price": 75,
         "first": 320,
         "amount": 24000,
-        "number": 160
+        "number": 160,
+        "min_value": 24000,
+        "max_value": 999999999
     }
 };
