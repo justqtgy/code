@@ -1,10 +1,9 @@
-
-function loadPricing(){
-    $.getJSON("/config/pricing.json", function(result) { 
+function loadPricing() {
+    $.getJSON("/config/pricing.json", function(result) {
         app.thPricing = result["tanhua"]
         app.byPricing = result["bangyan"]
         app.zyPricing = result["zhuangyuan"]
-        app.objPricing = result; 
+        app.objPricing = result;
     });
 }
 
@@ -16,7 +15,9 @@ function postOrders(type) {
             bootbox.alert(json.msg);
             return;
         }
-        $.alert('下单成功');
+        $.alert('下单成功', function() {
+            location.href = '/orders';
+        });
     });
 }
 
@@ -26,18 +27,18 @@ var app = new Vue({
         thPricing: {},
         byPricing: {},
         zyPricing: {},
-        objPricing:{}
+        objPricing: {}
     },
     methods: {
         init: function() {
             var that = this;
             loadPricing();
         },
-        join:function(type){
+        join: function(type) {
             $.confirm({
-                title:'提示',
-                text:'确定要下单吗？', 
-                onOK: function(result){
+                title: '提示',
+                text: '确定要下单吗？',
+                onOK: function(result) {
                     postOrders(type);
                 }
             })

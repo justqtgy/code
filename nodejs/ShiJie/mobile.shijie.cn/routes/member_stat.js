@@ -5,7 +5,7 @@ var member_stat = require('../models/member_stat');
 
 
 router.get('/stat', function(req, res, next) {
-    var id = req.query.id;
+    var member = req.cookies.member;
     member_stat.get_single(member.userid, function(err, rows) {
         if (err) {
             log.error('Error = ', err);

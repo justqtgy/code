@@ -1,6 +1,7 @@
-function loadPricing(type) {
+function loadPricing() {
     $.getJSON("/config/pricing.json", function(result) {
         app.objPricing = result;
+        initData();
     });
 }
 
@@ -16,27 +17,29 @@ function initData() {
         //     $.alert('系统异常，请稍后重试');
         //     return;
         // }
-
+        console.log(json);
         var item = json.rows[0],
             total = item.TotalMoney;
         for (var obj in app.objPricing) {
-            if (total >= obj.min_value && total < obj.max_value) {
-                app.myPricing = obj;
+            var _pricing = app.objPricing[obj];
+            if (total >= _pricing.min_value && total < _pricing.max_value) {
+                app.myPricing = _pricing;
             }
         }
     });
 }
 
-function postOrders(type) {
+function postOrders() {
     var q = new Query('/orders/save', 'POST');
-    var params = app.objPricing[type];
+    var params = app.myPricing;
+    console.log(params);
     q.request(params, function(json) {
         if (!json.ok) {
             $.alert(json.msg);
             return;
         }
         $.alert('下单成功', function() {
-
+            location.href = '/orders';
         });
     });
 }
@@ -52,14 +55,12 @@ var app = new Vue({
             var that = this;
             loadPricing();
         },
-        pricing: function(type) {
+        pricing: function() {
             $.confirm({
                 title: '提示',
                 text: '确定要下单吗？',
                 onOK: function(result) {
-                    if (result) {
-                        postOrders(type);
-                    }
+                    postOrders();
                 }
             });
         }

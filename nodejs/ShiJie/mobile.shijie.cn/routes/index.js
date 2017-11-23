@@ -35,9 +35,9 @@ router.get('/pricing', function(req, res, next) {
     var member = req.cookies.member;
     orders.isExists(member.userid, function(err, counts) {
         if (counts > 0) {
-            res.redirect('pricing');
+            res.render('pricing');
         } else {
-            res.render('join');
+            res.redirect('join');
         }
     });
 });
