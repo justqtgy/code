@@ -10,7 +10,7 @@ module.exports = member_stat;
 
 member_stat.get_single = function(memberid, callback) {
     var sql = "select * from MemberStat where MemberID = %s";
-    sql = util.format(sql, memberid);
+    sql = util.format(sql, member_id);
     db.execSQL(sql, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
@@ -21,8 +21,8 @@ member_stat.get_single = function(memberid, callback) {
 };
 
 member_stat.init = function(params, callback) {
-    var sql = "insert into MemberStat(MemberID, TotalMomey, LastMoney, LastTime) values(%s, 0, 0, GETDATE())";
-    sql = util.format(sql, params.memberid);
+    var sql = "insert into MemberStat(MemberID, TotalMoney, LastMoney, LastTime) values(%s, 0, 0, GETDATE())";
+    sql = util.format(sql, params.member_id);
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
@@ -34,7 +34,7 @@ member_stat.init = function(params, callback) {
 
 member_stat.update = function(params, callback) {
     var sql = "update MemberStat set  TotalMoney=TotalMoney+%s, LastMoney=%s where Memberid = %s";
-    sql = util.format(sql, params.last_money, params.last_money, params.memberid);
+    sql = util.format(sql, params.last_money, params.last_money, params.member_id);
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);

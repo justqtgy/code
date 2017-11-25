@@ -50,9 +50,9 @@ router.get('/yeji', function(req, res, next) {
     res.render('yeji', { title: 'dftd' });
 });
 
-router.get('/reg', function(req, res, next) {
+router.get('/member/reg', function(req, res, next) {
     var args = req.query;
-    res.render('reg', { userid: args.userid, account: args.account });
+    res.render('reg', { userid: args.userid || 0, account: args.account });
 });
 
 router.get('/qrcode', function(req, res, next) {
@@ -61,7 +61,7 @@ router.get('/qrcode', function(req, res, next) {
 
 router.get('/my_qrcode', function(req, res, next) {
     var member = req.cookies.member;
-    var url = '/reg?userid=' + member.userid + '&account=' + member.account;
+    var url = '/member/reg?userid=' + member.userid + '&account=' + member.account;
     var code = qr.image(url, { type: 'png' });
     res.setHeader('Content-type', 'image/png'); //sent qr image to client side
     code.pipe(res);
