@@ -32,7 +32,7 @@ function regist() {
         }
 
         $.alert('恭喜您，账号注册成功', function() {
-            location = '/user/login';
+            location = '/users/login';
         });
     });
 }
