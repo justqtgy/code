@@ -7,8 +7,9 @@ var agent = require('../models/agent');
 
 router.get('/', function(req, res, next) {
     var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
-        end_date = new Date().toFormat('YYYY-MM-DD');
-    res.render('member', { start_date: start_date, end_date: end_date });
+        end_date = new Date().toFormat('YYYY-MM-DD'),
+        keywords = req.query.keywords;
+    res.render('member', { keywords : keywords });
 });
 
 var get_count = function(req, res, next) {
@@ -22,8 +23,9 @@ var get_count = function(req, res, next) {
 };
 
 router.get('/list', function(req, res, next) {
-    var args = req.body;
+    var args = req.query;
     console.log('get /member/list args => ', args);
+    args.member_id = req.cookies.member.userid;
     member.get_list(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
