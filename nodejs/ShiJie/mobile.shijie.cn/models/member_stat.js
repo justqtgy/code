@@ -10,7 +10,7 @@ module.exports = member_stat;
 
 member_stat.get_single = function(memberid, callback) {
     var sql = "select * from MemberStat where MemberID = %s";
-    sql = util.format(sql, member_id);
+    sql = util.format(sql, memberid);
     db.execSQL(sql, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
