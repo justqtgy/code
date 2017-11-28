@@ -6,8 +6,9 @@ var icons = {
 };
 
 function get_list() {
-    var q = new Query('/member/list', 'GET');
-    q.request(null, function(json) {
+    var q = new Query('/member/list', 'GET', $("#search"));
+    var params = q.init();
+    q.request(params, function(json) {
         json.rows.forEach(function(item) {
             switch(item.Level){
                 case 1:

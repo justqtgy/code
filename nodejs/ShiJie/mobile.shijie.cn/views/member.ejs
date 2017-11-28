@@ -11,21 +11,21 @@
 <!--主体-->
 <div class="content" id="grid">
   <!--顶部搜索-->
-<div class="weui-search-bar" id="searchBar">
-          <form class="weui-search-bar__form"  action="/zhougongjiemeng/index/search.html" method="get">
-              <div class="weui-search-bar__box">
-                  <i class="weui-icon-search"></i>
-                  <input type="text" class="weui-search-bar__input" id="searchInput" name="keywords" placeholder="请输入需要查找的代理商" value="" data-descriptions="jiemeng" data-validate="jiemeng" required="">
-                  <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
-              </div>
-              <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
-                  <i class="weui-icon-search"></i>
-                  <span>请输入需要查找的代理商</span>
-              </label>
-          </form>
-          <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
-      </div>
-<aside>
+  <div class="weui-search-bar" id="searchBar">
+    <form class="weui-search-bar__form"  action="/member" id="search" method="get">
+        <div class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input type="text" class="weui-search-bar__input" id="searchInput" name="keywords" value="<%=keywords%>" placeholder="请输入需要查找的代理商"   >
+            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+        </div>
+        <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+            <i class="weui-icon-search"></i>
+            <span>请输入需要查找的代理商</span>
+        </label>
+    </form>
+    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+  </div>
+  <aside>
   <div class="menu-left scrollbar-none" id="sidebar">
     <ul>
       <li class="active">所有代理</li>

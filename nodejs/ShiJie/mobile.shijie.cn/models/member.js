@@ -59,11 +59,16 @@ member.get_pages = function(params, callback) {
 
 member.get_list = function(params, callback) {
     var sql = ";with t as ( \
-					select *, 0 as Level from View_Member where MemberNo='0' \
+					select *, 0 as Level from View_Member where ID=%s \
 					union all \
 					select m.*, Level+1 from View_Member m inner join t on m.ParentID = t.ID \
 				) \
-				select * from t where Level<=3";
+                select * from t where Level<=3";
+    if(params.keywords){
+        sql += " and TrueName= '"+params.keywords+"'";
+    }
+    sql = util.format(sql, params.member_id);
+    
     db.execSQL(sql, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
@@ -86,10 +91,10 @@ member.get_single = function(id, callback) {
 };
 
 member.add = function(params, callback) {
-    params.Password = utils.md5(args.account.toLowerCase() + '&123456');
-
-    var sql = "insert into Member(MemberNo,Account,TrueName,IDCard,WeXinID,Mobile, Password, JoinTime,AddTime,Status) values('%s','%s','%s','%s','', '%s', '%s', '%s',GETDATE(),'%s');select @@identity as ID;";
-    sql = util.format(sql, params.member_no, params.account, params.true_name, params.idcard, params.mobile, params.password, params.join_time, params.status);
+    params.password = utils.md5(params.account.toLowerCase() + '&123456');    
+    params.weixin = '';
+    var sql = "insert into Member(Account,TrueName,IDCard,WeChatID, Mobile, Password, AddTime,Status) values('%s','%s','%s','%s','%s', '%s', GETDATE(),'%s');select @@identity as ID;";
+    sql = util.format(sql, params.account, params.true_name, params.idcard, params.weixin, params.mobile, params.password, params.status);
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
@@ -100,8 +105,8 @@ member.add = function(params, callback) {
 };
 
 member.update = function(params, callback) {
-    var sql = "update Member set MemberNo='%s', Account='%s', TrueName='%s', IDCard='%s', Mobile='%s', JoinTime='%s', Status='%s' where id = '%s'";
-    sql = util.format(sql, params.member_no, params.account, params.true_name, params.idcard, params.mobile, params.password, params.join_time, params.status, params.id);
+    var sql = "update Member set Account='%s', TrueName='%s', IDCard='%s', WeChatID = '%s', Mobile='%s', Status='%s' where id = '%s'";
+    sql = util.format(sql, params.account, params.true_name, params.idcard, params.weixin, params.mobile, params.status, params.id);
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
