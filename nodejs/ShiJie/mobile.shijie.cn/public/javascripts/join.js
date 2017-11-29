@@ -8,7 +8,7 @@ function loadPricing() {
 }
 
 function postOrders(type) {
-    var q = new Query('/orders/save', 'POST');
+    var q = new Query('/orders/join', 'POST');
     var params = app.objPricing[type]
     q.request(params, function(json) {
         if (!json.ok) {

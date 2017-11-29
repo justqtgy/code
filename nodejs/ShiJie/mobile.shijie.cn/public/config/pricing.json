@@ -7,8 +7,7 @@
         "first": 20,
         "amount": 2200,
         "number": 20,
-        "min_value": 0,
-        "max_value": 2200
+        "min_value": 0
     },
     "bangyan": {
         "code": "bangyan",
@@ -18,8 +17,7 @@
         "first": 80,
         "amount": 7200,
         "number": 40,
-        "min_value": 2200,
-        "max_value": 7200
+        "min_value": 7200
     },
     "zhuangyuan": {
         "code": "zhuangyuan",
@@ -28,8 +26,7 @@
         "price": 75,
         "first": 320,
         "amount": 24000,
-        "number": 160,
-        "min_value": 7200,
-        "max_value": 24000
+        "number": 160,      
+        "min_value": 24000
     }
 }

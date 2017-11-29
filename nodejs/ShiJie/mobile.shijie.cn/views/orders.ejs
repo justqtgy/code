@@ -3,7 +3,7 @@
 
     <header class="bar bar-nav">
       <h1 class="title">订单信息</h1>
-      <a href="javascript:;" onclick="javascript:history.back(-1);" class="icon pull-left">
+      <a href="/"  class="icon pull-left">
         <i class="sstfont sst-xiangzuo"></i>
       </a>
     </header>
@@ -13,7 +13,7 @@
 
 
     <div class="content" id="grid">
-      <div class="weui-search-bar" id="searchBar">
+      <!-- <div class="weui-search-bar" id="searchBar">
         <form class="weui-search-bar__form" action="/orders/search" method="get">
           <div class="weui-search-bar__box">
             <i class="weui-icon-search"></i>
@@ -27,40 +27,40 @@
           </label>
         </form>
         <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
-      </div>
+      </div> -->
 
       <div class="weui-cells__title">订单明细</div>
-      <div class="weui-cells weui-cells_form" v-for="(item, index) in DataList" style="margin-top:0px;">
+      <div class="weui-cells " v-for="(item, index) in DataList" style="margin-top:0px;">
         <div class="weui-cell">
           <div class="weui-cell__hd">
-            <label class="weui-label">时间：</label>
+            <label class="weui-label">时间</label>
           </div>
-          <div class="weui-cell__bd">
+          <div class="weui-cell__ft">
             <label>{{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')}}</label>
           </div>
         </div>
         <div class="weui-cell">
           <div class="weui-cell__hd">
-            <label class="weui-label">数量：</label>
+            <label class="weui-label">数量</label>
           </div>
-          <div class="weui-cell__bd">
-            <label class="weui-label">{{item.Number}}</label>
-          </div>
-        </div>
-        <div class="weui-cell">
-          <div class="weui-cell__hd">
-            <label class="weui-label">单价：</label>
-          </div>
-          <div class="weui-cell__bd">
-            <label class="weui-label">¥{{item.Price}}</label>
+          <div class="weui-cell__ft">
+            {{item.Number}}
           </div>
         </div>
         <div class="weui-cell">
           <div class="weui-cell__hd">
-            <label class="weui-label">状态：</label>
+            <label class="weui-label">单价</label>
           </div>
-          <div class="weui-cell__bd">
-            <label class="weui-label">{{get_status(item.Status)}}</label>
+          <div class="weui-cell__ft">
+            ¥{{item.Price}}
+          </div>
+        </div>
+        <div class="weui-cell">
+          <div class="weui-cell__hd">
+            <label class="weui-label">状态</label>
+          </div>
+          <div class="weui-cell__ft">
+            {{get_status(item.Status)}}
           </div>
         </div>
       </div>

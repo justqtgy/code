@@ -4,109 +4,90 @@
 
 <header class="bar bar-nav">
   <h1 class="title">业绩查询</h1>
-  <a href="javascript:;" onclick="javascript:history.back(-1);" class="icon pull-left"><i class="sstfont sst-xiangzuo"></i></a>
-  <a href="javascript:;" onclick="javascript:;" class="icon pull-right"><i class="sstfont sst-sousuo"></i></a>
+  <a href="/" class="icon pull-left"><i class="sstfont sst-xiangzuo"></i></a>
+  <!-- <a href="javascript:;" data-target="#half" class="icon pull-right open-popup"><i class="sstfont sst-sousuo"></i></a> -->
 </header>
 
 <!--顶部搜索-->
 <!--主体-->
 <div class="content"  id="grid">
-    <div class="weui-search-bar" id="searchBar">
-          <form class="weui-search-bar__form"  action="/zhougongjiemeng/index/search.html" method="get">
-              <div class="weui-search-bar__box">
-                  <i class="weui-icon-search"></i>
-                  <input type="text" class="weui-search-bar__input" id="searchInput" name="keywords" placeholder="请输入需要查找的代理商" value="" data-descriptions="jiemeng" data-validate="jiemeng" required="">
-                  <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
-              </div>
-              <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
-                  <i class="weui-icon-search"></i>
-                  <span>请输入需要查找的代理商</span>
-              </label>
-          </form>
-          <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
-        </div>
-        <div class="weui-cells__title">总计</div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">进货总量</label></div>
-                <div class="weui-cell__bd">
-                    <label class="weui-label">10000</label>
-                </div>
-                <div class="weui-cell__hd"><label class="weui-label">总金额</label></div>
-                <div class="weui-cell__bd">
-                    <label class="weui-label">¥200000</label>
-                </div>
+    <div class="weui-cells__title">团队总计</div>
+    <div class="weui-cells ">
+        <div class="weui-cell">
+            <div class="weui-cell__bd"><label class="weui-label">总人数</label></div>
+            <div class="weui-cell__ft">
+                <label class="weui-label">{{Team_Yeji.Number}}</label>
+            </div>
+        </div>  
+        <div class="weui-cell">                     
+            <div class="weui-cell__bd"><label class="weui-label">总金额</label></div>
+            <div class="weui-cell__ft">
+                <label class="weui-label">¥{{Team_Yeji.TotalMoney}}</label>
             </div>
         </div>
-        <div class="weui-cells__title">明细</div>
-        <div class="weui-cells weui-cells_form" style="margin-top:1px;"> 
-                <div class="weui-cell" >
-                <div class="weui-cell__hd"><label class="weui-label">下单时间</label></div>
-                <div class="weui-cell__bd">
-                    <label>2017-10-11 10:30:50</label>
-                </div>    
-                </div>
-            
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">下单数量</label></div>
-                <div class="weui-cell__bd">
-                    <label class="weui-label">10000</label>
-                </div>                 
-                
-                    <div class="weui-cell__hd"><label class="weui-label">单价</label></div>
-                    <div class="weui-cell__bd">
-                        <label class="weui-label">10000</label>
-                    </div>             
-                </div>
-            
-            <div class="weui-cell">
-                    <div class="weui-cell__hd"><label class="weui-label">总金额</label></div>
-                    <div class="weui-cell__bd">
-                        <label class="weui-label">10000</label>
-                    </div>             
-                </div>         
-        </div>
-        <div class="weui-cells weui-cells_form" style="margin-top:0px;"> 
-          <div class="weui-cell">
-            <div class="weui-cell__hd"><label class="weui-label">下单时间</label></div>
-            <div class="weui-cell__bd">
-                <label class="weui-label">10000</label>
-            </div>    
-        </div>
-          
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label class="weui-label">下单数量</label></div>
-        <div class="weui-cell__bd">
-            <label class="weui-label">10000</label>
-        </div>             
-        <div class="weui-cell__hd"><label class="weui-label">单价</label></div>
-        <div class="weui-cell__bd">
-            <label class="weui-label">10000</label>
-        </div>             
     </div>
-    
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label class="weui-label">总金额</label></div>
-        <div class="weui-cell__bd">
-            <label class="weui-label">10000</label>
-        </div>             
-    </div>         
+    <div class="weui-cells__title">个人总计</div>
+    <div class="weui-cells ">       
+        <div class="weui-cell">                     
+            <div class="weui-cell__bd">总金额</div>
+            <div class="weui-cell__ft">
+                ¥{{My_Yeji.TotalMoney}}
+            </div>
+        </div>
+        <div class="weui-cell">                     
+            <div class="weui-cell__bd"><label class="weui-label">最后代理金额</label></label></div>
+            <div class="weui-cell__ft">
+                ¥{{My_Yeji.LastMoney}}
+            </div>
+        </div>
+        <div class="weui-cell">                     
+            <div class="weui-cell__bd"><label class="weui-label">最后代理时间</label></div>
+            <div class="weui-cell__ft">
+                {{ new Date(My_Yeji.LastTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}
+            </div>
+        </div>
+    </div> 
 </div>
       
-<div id="full" class='weui-popup__container'>
+<div id="half" class='weui-popup__container popup-bottom'>
     <div class="weui-popup__overlay"></div>
     <div class="weui-popup__modal">
-    <header class='demos-header'>
-        <h2 class="demos-second-title">关于 jQuery WeUI</h2>
-        <p class="demos-sub-title">By 言川 @2016/03/30</p>
-    </header>
-
-    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+      <div class="toolbar">
+        <div class="toolbar-inner">
+          <a href="javascript:;" class="picker-button close-popup">关闭</a>
+          <h1 class="title">查询</h1>
+        </div>
+      </div>
+      <div class="modal-content">
+        <div class="weui-grids">            
+            <form id="search" name="search" role="form" >
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">开始时间</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="date" value="">
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">结束时间</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="date" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-btn-area">
+                    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+                </div>
+            </form>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+
 
 
 <%- include ./shared/_scripts %>
+<script src="/javascripts/include/date-utils.min.js"></script>
 <script src="/javascripts/include/query.js"></script>
 <script src="/javascripts/yeji.js"></script>
 <%- include ./shared/_footer %>

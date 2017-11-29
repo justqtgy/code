@@ -72,11 +72,26 @@ router.get('/single', function(req, res, next) {
     });
 });
 
-router.post('/save', function(req, res, next) {
+router.post('/join', function(req, res, next) {
     var args = req.body,
         member = req.cookies.member;
-    args.memberid = member.userid;
+    args.member_id = member.userid;
+    args.number = args.first;
+    console.log('post /orders/join args => ', args);
+    addData(args, req, res)
+});
 
+router.post('/pricing', function(req, res, next) {
+    var args = req.body,
+        member = req.cookies.member;
+    args.member_id = member.userid;
+    args.amount = Number(args.price)*Number(args.number);
+    console.log('post /orders/pricing args => ', args);
+    addData(args, req, res)
+});
+
+function addData(args, req, res){   
+    
     async.waterfall([
         function(cb) {
             orders.add(args, function(err, result) {
@@ -97,6 +112,15 @@ router.post('/save', function(req, res, next) {
                 }
                 cb(null);
             });
+        },
+        function(cb){
+            args.last_money = args.amount
+            member_stat.update(args, function(err, result) {
+                if (err) {
+                    return cb(err);
+                }
+                cb(null);
+            });
         }
     ], function(err) {
         if (err) {
@@ -104,7 +128,7 @@ router.post('/save', function(req, res, next) {
         }
         res.send({ ok: 1 });
     });
-});
+}
 
 router.post('/delete', function(req, res, next) {
     var id = req.body.id;
@@ -118,53 +142,53 @@ router.post('/delete', function(req, res, next) {
 });
 
 
-router.post('confirm', function(req, res, next) {
-    var params = req.body;
-    console.log('orders confirm req body :', params);
-    async.waterfall([
-            function(cb) {
-                orders.changeStatus(params.id, function(err, result) {
-                    if (err) {
-                        return cb(err);
-                    }
-                    cb(null);
-                });
-            },
-            function(cb) {
-                member_stat.get_single(params.memberid, function(err, result) {
-                    if (err) {
-                        return cb(err);
-                    }
-
-                    cb(null, result[0].length);
-                });
-            },
-            function(exist, cb) {
-                if (exists > 0) {
-                    member_stat.init(params, function(err, result) {
-                        if (err) {
-                            return cb(err);
-                        }
-                        cb(null);
-                    });
-                } else {
-                    member_stat.update(params, function(err, result) {
-                        if (err) {
-                            return cb(err);
-                        }
-                        cb(null);
-                    });
-                }
-            }
-        ],
-        function(err) {
-            if (err) {
-                return res.send({ ok: 0, msg: err });
-            }
-            res.send({ ok: 1 });
-        }
-    );
-});
+// router.post('confirm', function(req, res, next) {
+//     var params = req.body;
+//     console.log('orders confirm req body :', params);
+//     async.waterfall([
+//             function(cb) {
+//                 orders.changeStatus(params.id, function(err, result) {
+//                     if (err) {
+//                         return cb(err);
+//                     }
+//                     cb(null);
+//                 });
+//             },
+//             function(cb) {
+//                 member_stat.get_single(params.memberid, function(err, result) {
+//                     if (err) {
+//                         return cb(err);
+//                     }
+   
+//                     cb(null, result.length);
+//                 });
+//             },
+//             function(exist, cb) {
+//                 if (exists > 0) {
+//                     member_stat.init(params, function(err, result) {
+//                         if (err) {
+//                             return cb(err);
+//                         }
+//                         cb(null);
+//                     });
+//                 } else {
+//                     member_stat.update(params, function(err, result) {
+//                         if (err) {
+//                             return cb(err);
+//                         }
+//                         cb(null);
+//                     });
+//                 }
+//             }
+//         ],
+//         function(err) {
+//             if (err) {
+//                 return res.send({ ok: 0, msg: err });
+//             }
+//             res.send({ ok: 1 });
+//         }
+//     );
+// });
 
 function PrefixInteger(num, n) {
     return (Array(n).join(0) + num).slice(-n);

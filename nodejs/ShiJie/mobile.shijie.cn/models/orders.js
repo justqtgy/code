@@ -75,7 +75,7 @@ orders.isExists = function(userID, callback) {
  */
 orders.add = function(params, callback) {
     var sql = "insert into Orders(OrderNo,MemberID,Number,Price,AddTime,Status) values('0','%s','%s','%s',GETDATE(), 0); SELECT @@IDENTITY as ID;";
-    sql = util.format(sql, params.memberid, params.number, params.price);
+    sql = util.format(sql, params.member_id, params.number, params.price);
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);

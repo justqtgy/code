@@ -22,7 +22,7 @@ function initData() {
             total = item.TotalMoney;
         for (var obj in app.objPricing) {
             var _pricing = app.objPricing[obj];
-            if (total >= _pricing.min_value && total < _pricing.max_value) {
+            if (total >= _pricing.min_value) {
                 app.myPricing = _pricing;
             }
         }
@@ -30,7 +30,7 @@ function initData() {
 }
 
 function postOrders() {
-    var q = new Query('/orders/save', 'POST');
+    var q = new Query('/orders/pricing', 'POST');
     var params = app.myPricing;
     console.log(params);
     q.request(params, function(json) {
