@@ -19,7 +19,7 @@ router.get('/list', function(req, res, next) {
 router.get('/join', function(req, res, next) {
     var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
         end_date = new Date().toFormat('YYYY-MM-DD');
-    var member = req.cookies.member;
+    var member = req.cookies.sj_member;
     orders.isExists(member.userid, function(err, counts) {
         if (counts > 0) {
             //res.render('pricing', { start_date: start_date, end_date: end_date });
@@ -74,7 +74,7 @@ router.get('/single', function(req, res, next) {
 
 router.post('/join', function(req, res, next) {
     var args = req.body,
-        member = req.cookies.member;
+        member = req.cookies.sj_member;
     args.member_id = member.userid;
     args.number = args.first;
     console.log('post /orders/join args => ', args);
@@ -83,15 +83,15 @@ router.post('/join', function(req, res, next) {
 
 router.post('/pricing', function(req, res, next) {
     var args = req.body,
-        member = req.cookies.member;
+        member = req.cookies.sj_member;
     args.member_id = member.userid;
-    args.amount = Number(args.price)*Number(args.number);
+    args.amount = Number(args.price) * Number(args.number);
     console.log('post /orders/pricing args => ', args);
     addData(args, req, res)
 });
 
-function addData(args, req, res){   
-    
+function addData(args, req, res) {
+
     async.waterfall([
         function(cb) {
             orders.add(args, function(err, result) {
@@ -113,7 +113,7 @@ function addData(args, req, res){
                 cb(null);
             });
         },
-        function(cb){
+        function(cb) {
             args.last_money = args.amount
             member_stat.update(args, function(err, result) {
                 if (err) {
@@ -159,7 +159,7 @@ router.post('/delete', function(req, res, next) {
 //                     if (err) {
 //                         return cb(err);
 //                     }
-   
+
 //                     cb(null, result.length);
 //                 });
 //             },

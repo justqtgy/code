@@ -7,7 +7,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    var member = req.cookies.member;
+    var member = req.cookies.sj_member;
     if (member) {
         res.render('index');
     } else {
@@ -20,7 +20,7 @@ router.get('/password', function(req, res, next) {
 });
 
 router.get('/join', function(req, res, next) {
-    var member = req.cookies.member;
+    var member = req.cookies.sj_member;
     orders.isExists(member.userid, function(err, counts) {
         if (counts > 0) {
             //res.render('pricing', { start_date: start_date, end_date: end_date });
@@ -32,7 +32,7 @@ router.get('/join', function(req, res, next) {
 });
 
 router.get('/pricing', function(req, res, next) {
-    var member = req.cookies.member;
+    var member = req.cookies.sj_member;
     orders.isExists(member.userid, function(err, counts) {
         if (counts > 0) {
             res.render('pricing');
@@ -60,7 +60,7 @@ router.get('/qrcode', function(req, res, next) {
 });
 
 router.get('/my_qrcode', function(req, res, next) {
-    var member = req.cookies.member;
+    var member = req.cookies.sj_member;
     var url = '/member/reg?userid=' + member.userid + '&account=' + member.account;
     var code = qr.image(url, { type: 'png' });
     res.setHeader('Content-type', 'image/png'); //sent qr image to client side

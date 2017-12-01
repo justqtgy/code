@@ -5,14 +5,14 @@ var users = require('../models/member');
 var router = express.Router();
 
 router.requireAuthentication = function(req, res, next) {
-    console.log('check login cookies ...', req.cookies.member);
+    console.log('check login cookies ...', req.cookies.sj_member);
     console.log(req.path)
     if (req.path.indexOf("/users/login") >= 0 || req.path.indexOf("/member/reg") >= 0) {
         next();
         return;
     }
-    if (req.cookies.member) {
-        var member = req.cookies.member;
+    if (req.cookies.sj_member) {
+        var member = req.cookies.sj_member;
         req.account = member.account;
         next();
     } else {
@@ -27,8 +27,8 @@ router.requireAuthentication = function(req, res, next) {
 
 router.get('/login', function(req, res, next) {
     var account = '';
-    if (req.cookies.member) {
-        account = req.cookies.member;
+    if (req.cookies.sj_member) {
+        account = req.cookies.sj_member;
     }
     res.render('login', { account: account });
 });
@@ -60,20 +60,20 @@ router.post('/login', function(req, res, next) {
         }
 
         var user = { userid: userid, account: account, isadmin: isAdmin };
-        res.cookie('member', user, { maxAge: 3600000, httpOnly: true, path: '/' });
+        res.cookie('sj_member', user, { maxAge: 3600000, httpOnly: true, path: '/' });
 
         res.send({ ok: 1 });
     });
 });
 
 router.get('/logout', function(req, res) {
-    res.clearCookie("member");
+    res.clearCookie("sj_ember");
     res.redirect('/users/login');
 });
 
 router.get('/check_login', function(req, res) {
-    if (req.cookies.member) {
-        var member = req.cookies.member;
+    if (req.cookies.sj_member) {
+        var member = req.cookies.sj_member;
         res.send({ member: member });
     }
 });

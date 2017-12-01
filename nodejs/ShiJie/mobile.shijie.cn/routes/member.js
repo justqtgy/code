@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
         end_date = new Date().toFormat('YYYY-MM-DD'),
         keywords = req.query.keywords;
-    res.render('member', { keywords : keywords });
+    res.render('member', { keywords: keywords });
 });
 
 var get_count = function(req, res, next) {
@@ -25,7 +25,7 @@ var get_count = function(req, res, next) {
 router.get('/list', function(req, res, next) {
     var args = req.query;
     console.log('get /member/list args => ', args);
-    args.member_id = req.cookies.member.userid;
+    args.member_id = req.cookies.sj_member.userid;
     member.get_list(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
@@ -54,44 +54,44 @@ router.get('/single', function(req, res, next) {
 });
 
 router.post('/reg', function(req, res, next) {
-    var args = req.body;    
+    var args = req.body;
     args.status = 1
     console.log('post /member/reg => ', args);
     async.waterfall([
-        function(cb){
+        function(cb) {
             member.add(args, function(err, result) {
                 if (err) {
-                    return cb(err);                    
+                    return cb(err);
                 }
                 console.log('add member result =>', result);
                 args.member_id = result[0].ID;
-                args.member_no = 'GSMY'+PrefixInteger(args.member_id, 8);
+                args.member_no = 'GSMY' + PrefixInteger(args.member_id, 8);
                 cb(null)
             });
         },
-        function(cb){
+        function(cb) {
             member_stat.init(args, function(err, result) {
                 if (err) {
                     return cb(err);
-                }    
+                }
                 cb(null)
             });
         },
-        function(cb){            
-            agent.add(args, function(err, result){
+        function(cb) {
+            agent.add(args, function(err, result) {
                 if (err) {
                     return cb(err);
                 }
-    
+
                 cb(null)
             });
         }
-    ],function(err){
+    ], function(err) {
         if (err) {
             return res.send({ ok: 0, msg: err });
         }
         res.send({ ok: 1 });
-    });    
+    });
 });
 
 router.post('/save', function(req, res, next) {
@@ -105,7 +105,7 @@ router.post('/save', function(req, res, next) {
             }
             res.send({ ok: 1 });
         });
-    }  
+    }
 });
 
 router.post('/delete', function(req, res, next) {
