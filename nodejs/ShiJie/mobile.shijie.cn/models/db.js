@@ -36,7 +36,7 @@ module.exports.execSQL = function(sqlText, cb) {
 };
 
 module.exports.execSP = function(spName, params, cb) {
-    console.log('exec spName => ', sqlText);
+    console.log('exec spName => ', spName);
     var connection = new sql.Connection(config, function(err) {
         // ... error checks 
         if (err) {
@@ -47,9 +47,10 @@ module.exports.execSP = function(spName, params, cb) {
         var request = new sql.Request(connection); // or: var request = connection.request(); 
         request.verbose = true;
         for (var p in params) {
-            request.input(params[p].name, params[p].type, params[p].value);
+            request.input(params[p].name,  params[p].value); //params[p].type,
         }
         request.execute(spName, function(err, result) {
+            //console.log('call sp result => ', result)
             /*
             console.log(result.recordsets.length) // count of recordsets returned by the procedure 
             console.log(result.recordsets[0].length) // count of rows contained in first recordset 
