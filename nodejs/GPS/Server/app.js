@@ -2,8 +2,9 @@ var net = require('net');
 var log4js = require('log4js');
 var protocol = require('./protocol');
 
-var HOST = '127.0.0.1';
-var PORT = 6666,
+var HOST = '127.0.0.1',
+    PORT = 6666,
+    HTTP_HOST = '127.0.0.1',
     HTTP_PORT = 7777;
 
 // 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
@@ -65,23 +66,43 @@ net.createServer(function(socket) {
 logger.info('Server listening on ' + HOST + ':' + PORT);
 
 /**创建Http服务器 */
-var http = require('http').createServer(function(req, res) {
+var http_server = require('http').createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('OK\n');
-}).listen(HTTP_PORT, HOST);
+}).listen(HTTP_PORT, HTTP_HOST);
 
-var io = require('socket.io').listen(http);
+var io = require('socket.io').listen(http_server);
 io.sockets.on('connection', function(socket) {
     socket.on("data", function(data) {
-        //socket.send('OK');
-        socket.emit('push message', { result: 'ok' });
-        console.log('http server receive:', socket, data);
+        //socket.send('OK');       
         //console.log(data.content);
         // var client = net.connect({ server: HOST, port: PORT }, function() {
         //     client.write('socket.io' + data.content);
         // });
+
+        var _data;
+        if (Buffer.isBuffer(data)) {
+            _data = JSON.parse(data);
+        } else {
+            _data = data;
+        }
+        logger.info('[web socket] Date = ' + _data);
         //处理命令
         protocol.parse(socket, 'socket.io' + data);
     });
 });
-logger.info('HTTP Server listening on ' + HOST + ':' + HTTP_PORT);
+
+/*
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({ port: 7777 });
+
+wss.on('connection', function connection(ws) {
+    console.log('connection:', ws)
+    ws.on('data', function incoming(message) {
+        console.log('received: %s', message);
+    });
+
+    ws.send('something');
+});
+*/
+logger.info('HTTP Server listening on ' + HTTP_HOST + ':' + HTTP_PORT);
