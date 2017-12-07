@@ -177,5 +177,47 @@ gps_oil.add_oilleak_data = function(data, callback) {
         callback(err, result);
     });
 };
+gps_oil.add_oilUrgentAdd_data = function(data, callback) {
+    var sqlText = "INSERT INTO GPS_Oil_Urgent_Add (GPSID, VehicleID, VehicleNo, UrgentAddOil, UrgentAddTime, AddTime) " +
+        "VALUES('" + data.gpsID + "'," +
+        "'" + data.vehicleID + "'," +
+        "'" + data.vehicleNo + "'," +
+        "'" + data.urgentAddOil + "'," +
+        "'" + data.urgentAddTime + "'," +
+        "'" + data.addTime + "'" +
+        ");SELECT @@IDENTITY as ID;";
+    console.log(sqlText);
+    db.execSQL(sqlText, function(err, result) {
+        if (err) {
+            return callback(err, '');
+        }
+
+        callback(err, result);
+
+    });
+
+};
+
+gps_oil.add_oilUrgentLeak_data = function(data, callback) {
+    var sqlText = "INSERT INTO GPS_Oil_Urgent_Leak (gpsID, VehicleID, VehicleNo, UrgentLeakOil, UrgentLeakTime, AddTime) " +
+        "VALUES('" + data.gpsID + "'," +
+        "'" + data.vehicleID + "'," +
+        "'" + data.vehicleNo + "'," +
+        "'" + data.urgentLeakOil + "'," +
+        "'" + data.urgentLeakTime + "'," +
+        "'" + data.addTime + "'" +
+        ");SELECT @@IDENTITY as ID;";
+        //     "VALUES(1,'2000000576',3,'粤BT4022',52.30,'2017-06-27 10:25:18.000')"
+    console.log(sqlText);
+    db.execSQL(sqlText, function(err, result) {
+        if (err) {
+            return callback(err, '');
+        }
+
+        callback(err, result);
+
+    });
+
+};
 
 module.exports = gps_oil;

@@ -19,14 +19,17 @@ module.exports.set_lastinfo = function(data) {
         if (err) {
             return logger.error('Error = ', err);
         }
-        logger.info('Result = ', result);
-        console.log(data);
-        //if (data.distance > 0) {
-        //设置轨迹
-        gps_traffic.set_traffic(data);
-        // } else {
-        //     logger.info('Tip = 距离太短不更新坐标：' + data.gpsID + ', ' + data.vehicleID + ', ' + data.vehicleNo + ', ' + data.distance);
-        // }
+        logger.info('Result = ', result);        
+		gps_traffic.set_traffic(data);
+					
+		/*
+        if (data.distance > 0) {
+            //设置轨迹
+            gps_traffic.set_traffic(data);
+        } else {
+            logger.info('Tip = 距离太短不更新坐标：' + data.gpsID + ', ' + data.vehicleID + ', ' + data.vehicleNo + ', ' + data.distance);
+        }
+		*/
     });
 };
 
@@ -50,6 +53,7 @@ function getLastInfo(args, cb) {
 }
 
 function setLastInfo(args, cb) {
+	logger.info('LastInfo args = ', args);
     if (args.lastID === 0) {
         gps_last.add_record(args, function(error, result) {
             if (error) {

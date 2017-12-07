@@ -8,10 +8,15 @@ var gps_data = require('./../models/gps_data');
 var gps_traffic = require('./../models/gps_traffic');
 
 module.exports.set_traffic = function(data) {
-    data.distance = data.distance || 0;
-    data.curOil = data.curOil || 0;
-    data.addOil = data.addOil || 0;
-    data.traffic = util.format('{"time":"%s", "lng":"%s", "lat":"%s"}', data.time, data.lng, data.lat);
+	//如果定位有效则更改经纬度
+	if(data.gpsStatus != 1){
+		return logger.error('Error = 经纬度无效:', data)
+	}
+	data.distance = data.distance || 0;
+	data.curOil = data.curOil || 0;
+	data.addOil = data.addOil || 0;
+	data.traffic = util.format('{"time":"%s", "lng":"%s", "lat":"%s"}', data.time, data.lng, data.lat);
+
     async.waterfall([
         async.apply(getTraffic, data),
         setTraffic

@@ -23,9 +23,9 @@ gps_traffic.get_info = function(args, callback) {
 gps_traffic.add_record = function(args, callback) {
     var sql = "INSERT INTO GPS_Traffic " +
         "SELECT TOP 1 '%s' ,[GPSID] ,[VehicleID] ,[VehicleNo] ,[EndDistance], [EndDistance]+%s, [EndOil], [EndOil] + %s , %s as AddOil, '%s' as Traffic, GETDATE() " +
-        "FROM (SELECT [GPSID] ,[VehicleID] ,[VehicleNo], [EndDistance], [EndOil], 0 as Rid " +
+        "FROM (SELECT TOP 1 [GPSID] ,[VehicleID] ,[VehicleNo], [EndDistance], [EndOil], 0 as Rid " +
         "      FROM [dbo].[GPS_Traffic] " +
-        "      WHERE CreateDate = DATEADD(DAY, -1, '%s') and GPSID = '%s'" +
+        "      WHERE CreateDate < '%s' AND GPSID = '%s' ORDER BY CreateDate DESC " +
         "      UNION ALL " +
         "      SELECT '%s' as GPSID, '%s' AS VehicleID, '%s' as VehicleNo, 0 as EndDistance, 0 as EndOil,  1 as Rid" +
         "    ) T ORDER BY Rid " +
@@ -50,7 +50,7 @@ gps_traffic.update_record = function(args, callback) {
     if (args.curOil) {
         sql += " ,EndOil = " + args.curOil;
     }
-    if (args.addOil) {
+    if (args.addOil > 0) {
         sql += " ,AddOil = AddOil + " + args.addOil;
     }
     sql += "  where ID=%s; select @@rowcount as ret;";

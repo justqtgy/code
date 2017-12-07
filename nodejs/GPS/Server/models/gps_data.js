@@ -110,6 +110,7 @@ gps_data.get_driver_vhc = function(vid, callback) {
 }
 
 gps_data.add_data = function(data, callback) {
+
     var _gpsID = data.gpsID,
         _vehicleID = data.vehicleID,
         _vehicleNo = iconv.encode(data.vehicleNo, 'gbk').toString('binary'),

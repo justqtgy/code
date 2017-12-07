@@ -80,9 +80,9 @@ module.exports.add_realoil_data = function(data) {
 
                 logger.info('Result = ', result);
                 //定位和轨迹
-                if (item.gpsStatus == 1) {
+                //if (item.gpsStatus == 1) {
                     gps_last.set_lastinfo(item);
-                }
+                //}
             });
         });
     }
@@ -168,9 +168,9 @@ module.exports.add_addoil_data = function(data) {
 
                 logger.info('Result = ', result);
                 //定位和轨迹
-                if (item.gpsStatus == 1) {
+                //if (item.gpsStatus == 1) {
                     gps_last.set_lastinfo(item);
-                }
+                //}
             });
 
         });
@@ -255,9 +255,9 @@ module.exports.add_leakoil_data = function(data) {
                 logger.info('Result = ', result);
 
                 //定位和轨迹
-                if (item.gpsStatus == 1) {
-                    gps_last.set_lastinfo(item);
-                }
+                
+                gps_last.set_lastinfo(item);
+                
             });
         });
     }
@@ -296,3 +296,78 @@ module.exports.add_leakoil_data = function(data) {
 //         }
 //     }
 // }
+// 4.紧急加油
+// 所谓紧急加油是指，车辆已经加油了，因为设备的原因没有发送加油数据，此时人为控制设备发送一条紧急加油数据给平台，紧急加油不需要平台握手信号
+// *DFTD_URGENT_ADD_OIL,2000000560,25L ,20170518171000#
+// DFTD_URGENT_ADD_OIL 紧急加油
+// 25L 加油值
+// 20170518171000#  北京时间 2017年5月18日17点10分0秒
+
+module.exports.add_oilUrgentAdd_data = function(data) {
+    var item = {};
+    var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
+    if (data[0].indexOf('*DFTD_URGENT_ADD_OIL') >= 0 && data.length >= 3) {
+        item.gpsID = data[1];
+        item.urgentAddOil = parseFloat(data[2].replace('L', '')).toFixed(2);
+        item.urgentAddTime = data[3].substring(0,4)+"-"+data[3].substring(4,6)+"-"+data[3].substring(6,8)+' '+data[3].substring(8,10)+":"+ data[3].substring(10,12) +":"+ data[3].substring(12,14);
+        item.addTime = now;
+        gps_data.get_carlist(item.gpsID, function(error, rows) {
+            if (error) {
+                return logger.error('Error = ', error);
+            }
+
+            if (rows.length === 0) {
+                logger.error('获取车辆信息失败：该车不存在', item.gpsID);
+                return;
+            }
+            item.vehicleID = rows[0].VehicleID;
+            item.vehicleNo = rows[0].VehicleNo;
+
+            //写入数据库
+            gps_oil.add_oilUrgentAdd_data(item, function(error, result) {
+                if (error) {
+                    return logger.error('Error = ', error);
+                }
+                logger.info('Result = ', result);
+            });
+
+        });
+    }
+};
+
+// 5.紧急漏油
+// 紧急漏油不需要平台握手信号
+// *DFTD_URGENT_ADD_OIL, 2000000560,-25L,20170518171000#
+// -25L  漏油25升
+
+module.exports.add_oilUrgentLeak_data = function(data) {
+    var item = {};
+    var now = new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
+    if (data[0].indexOf('*DFTD_URGENT_LEAK_OIL') >= 0 && data.length >= 3) {
+        item.gpsID = data[1];
+        item.urgentLeakOil = parseFloat(data[2].replace('L', '')).toFixed(2);
+        item.urgentLeakTime = data[3].substring(0,4)+"-"+data[3].substring(4,6)+"-"+data[3].substring(6,8)+' '+data[3].substring(8,10)+":"+ data[3].substring(10,12) +":"+ data[3].substring(12,14);
+        item.addTime = now;
+        gps_data.get_carlist(item.gpsID, function(error, rows) {
+            if (error) {
+                return logger.error('Error = ', error);
+            }
+
+            if (rows.length === 0) {
+                logger.error('获取车辆信息失败：该车不存在', item.gpsID);
+                return;
+            }
+            item.vehicleID = rows[0].VehicleID;
+            item.vehicleNo = rows[0].VehicleNo;
+
+            //写入数据库
+            gps_oil.add_oilUrgentLeak_data(item, function(error, result) {
+                if (error) {
+                    return logger.error('Error = ', error);
+                }
+                logger.info('Result = ', result);
+            });
+
+        });
+    }
+};

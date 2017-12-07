@@ -3,7 +3,8 @@ var log4js = require('log4js');
 var protocol = require('./protocol');
 
 var HOST = '127.0.0.1';
-var PORT = 6666;
+var PORT = 6666,
+    HTTP_PORT = 7777;
 
 // 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
 try {
@@ -37,6 +38,9 @@ net.createServer(function(socket) {
     // 为这个socketet实例添加一个"data"事件处理函数
     socket.on('data', function(data) {
         // 回发该数据，客户端将收到来自服务端的数据
+        if (data[0] == 126 && data[data.length - 1] == 126) {
+            data = data.toString('hex');
+        }
         logger.info('[' + socket.remoteAddress + '] Date = ' + data);
         //logger.info(socketList);
         //处理命令
@@ -46,7 +50,7 @@ net.createServer(function(socket) {
     // 为这个socketet实例添加一个"close"事件处理函数
     socket.on('close', function(data) {
         socketList[ipAddress].splice(socketList[ipAddress].indexOf(socket), 1);
-        logger.error('CLOSED: ' + socket.remoteAddress + ' ' + socket.remotePort);
+        logger.error('CLOSED: ' + socket.remoteAddress + ' ' + socket.remotePort + ' ' + data);
     });
 
     socket.on('error', function(data) {
@@ -59,3 +63,23 @@ net.createServer(function(socket) {
 
 
 logger.info('Server listening on ' + HOST + ':' + PORT);
+
+/**创建Http服务器 */
+var http = require('http').createServer(function(req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('OK\n');
+}).listen(HTTP_PORT, HOST);
+
+var io = require('socket.io').listen(http);
+io.sockets.on('connection', function(socket) {
+    socket.on("data", function(data) {
+        //socket.send('OK');
+        socket.emit('push message', { result: 'ok' });
+        console.log('http server receive:', data);
+        //console.log(data.content);
+        // var client = net.connect({ server: HOST, port: PORT }, function() {
+        //     client.write('socket.io' + data.content)
+        // });
+    });
+});
+logger.info('HTTP Server listening on ' + HOST + ':' + HTTP_PORT);
