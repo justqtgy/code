@@ -75,11 +75,13 @@ io.sockets.on('connection', function(socket) {
     socket.on("data", function(data) {
         //socket.send('OK');
         socket.emit('push message', { result: 'ok' });
-        console.log('http server receive:', data);
+        console.log('http server receive:', socket, data);
         //console.log(data.content);
         // var client = net.connect({ server: HOST, port: PORT }, function() {
-        //     client.write('socket.io' + data.content)
+        //     client.write('socket.io' + data.content);
         // });
+        //处理命令
+        protocol.parse(socket, 'socket.io' + data);
     });
 });
 logger.info('HTTP Server listening on ' + HOST + ':' + HTTP_PORT);
