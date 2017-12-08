@@ -9,6 +9,11 @@ var gps_last = require('./routes/gps_last');
 var group_vehicle = require('./routes/group_vehicle');
 var member = require('./routes/member');
 var news = require('./routes/news');
+var cost_check=require('./routes/cost_check');
+var gps_quality=require('./routes/gps_quality');
+var gps_section=require('./routes/gps_section');
+var charge=require('./routes/charge');
+var gps_rubbish=require('./routes/gps_rubbish');
 
 exports.init_route = function(app) {
     console.log('init_route begin');
@@ -23,6 +28,11 @@ exports.init_route = function(app) {
     app.use('/group_vehicle', group_vehicle);
     app.use('/member', member);
     app.use('/news', news);
+    app.use('/cost_check',cost_check);
+    app.use('/gps_quality',gps_quality);
+    app.use('/gps_section',gps_section);
+	app.use('/charge',charge);
+	app.use('/gps_rubbish',gps_rubbish);
 
     console.log('init_route end');
 }

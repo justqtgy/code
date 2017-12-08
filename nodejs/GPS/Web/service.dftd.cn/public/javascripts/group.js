@@ -269,8 +269,11 @@ function saveGroupVehicle() {
 
         bootbox.alert(hint.save_success, function() {
             getGroupVehicle(groupID);
+            setTimeout("window.location.reload()",500)
         });
     });
+    $("#mod_vehicle").modal('hide');
+
 }
 
 function deleteGroupVehicle(id) {
@@ -292,6 +295,7 @@ function deleteGroupVehicle(id) {
                 bootbox.alert(hint.delete_success, function() {
                     var groupID = $("#hidID").val();
                     getGroupVehicle(groupID);
+                    setTimeout("window.location.reload()",500)
                 });
             });
         }

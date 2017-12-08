@@ -64,7 +64,7 @@
                                             </tr>
                                         </thead>
                                         <tbody v-if = "DataList.length > 0">
-                                            <tr v-for = "(item, index) in DataList">
+                                            <tr v-for = "(item, index) in DataList" v-cloak>
                                                 <td>{{ index+1 }}</td> 
                                                 <td>{{ item.Title }}</td> 
                                                 <td>{{ new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}</td>            

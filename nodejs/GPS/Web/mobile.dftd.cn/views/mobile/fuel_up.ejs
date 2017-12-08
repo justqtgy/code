@@ -1,0 +1,64 @@
+<%- include ../shared/_header %>
+</head>
+
+<body style="background-color:#ffffff;">
+    <div  class="box-body chart-responsive"> 
+        <form  id='fuel'>          
+            <div class="form-group">
+            <label class="col-md-4 control-label" >时间：</label>
+            <input type="text" name="fueltime" class="form_datetime" value="<%=today%>" />
+            <label class="control-label" ><span class="required" aria-required="true">*</span></label>
+            </div>
+            <div class="form-group">
+            <label class="col-md-4 control-label" >油价：</label>
+            <input type="text" name="price" />
+            <label class="control-label" ><span class="required" aria-required="true">*</span></label>
+            </div>
+            <div class="form-group">
+            <label class="col-md-4 control-label" >油升：</label>
+            <input type="text" name="number" />
+            <label class="control-label" ><span class="required" aria-required="true">*</span></label>
+            </div>
+            <div class="form-group">
+            <label class="col-md-4 control-label" >价钱：</label>
+            <input type="text" name="amount" />
+            <label class="control-label" ><span class="required" aria-required="true">*</span></label>
+            </div>
+            <div class="form-group">
+            <label class="col-md-4 control-label" >地点：</label>
+            <input type="text" name="station" />
+           
+            </div>                            
+        </form>
+    </div>
+    <div class="box-footer">
+        <div class="col-md-offset-4 col-md-8">
+        <button type="button" id="btnAdd" class="btn btn-success"> 加油记账 </button>
+        </div>
+    </div>
+  </body>
+<%- include ../shared/_scripts %>
+	<script src="/javascripts/include/date-utils.min.js"></script>    
+	<script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+	
+	
+    <script>
+        $(function(){
+			$(".form_datetime").datepicker({ format: 'yyyy-mm-dd' });
+			$("#btnAdd").click(function(){
+                var data ={}        
+                var ctrls = $('#fuel').serializeArray();        
+                for(var c in ctrls){
+                    data[ctrls[c].name]=ctrls[c].value;
+                }
+
+                $.post('/oil_ticket/add', data, function(result){
+                    if(result.ok==1);{
+                        alert('加油记账成功');                        
+                    }
+                })
+            });
+		});
+    </script>
+<%- include ../shared/_footer %>

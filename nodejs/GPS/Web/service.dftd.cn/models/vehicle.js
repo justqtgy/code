@@ -93,8 +93,8 @@ vehicle.add = function(params, callback) {
 };
 
 vehicle.update = function(params, callback) {
-    var sql = "update gserver_data.dbo.Vehicle set GPSID='%s', VehicleNo='%s', Mobile='%s', Remark='%s' where id = '%s'";
-    sql = util.format(sql, params.gpsID, params.vehicleNo, params.mobile, params.remark, params.id);
+    var sql = "update gserver_data.dbo.Vehicle set GPSID='%s', VehicleNo='%s', Mobile='%s', Remark='%s' where id = '%s';update gserver_data.dbo.GroupVehicle set GPSID='%s',VehicleNo='%s' WHERE vehicleID='%s'";
+    sql = util.format(sql, params.gpsID, params.vehicleNo, params.mobile, params.remark, params.id, params.gpsID,params.vehicleNo,params.id);
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);
@@ -104,8 +104,8 @@ vehicle.update = function(params, callback) {
 };
 
 vehicle.delete = function(params, callback) {
-    var sql = "delete from gserver_data.dbo.Vehicle where ID = '%s'";
-    sql = util.format(sql, params.id);
+    var sql = "delete from gserver_data.dbo.Vehicle where ID = '%s';delete from gserver_data.dbo.GroupVehicle where vehicleID = '%s'";
+    sql = util.format(sql, params.id,params.id);
     console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {

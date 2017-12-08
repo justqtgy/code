@@ -36,6 +36,7 @@ function showDetail(id) {
 
     var q = new Query('/news/single', 'GET');
     q.request(params, function(json) {
+        console.log(json)
         if (json.rows.length === 0) {
             $("#mapModal .content").html("暂无数据");
         } else {

@@ -1,7 +1,7 @@
 ﻿var express = require('express');
 var router = express.Router();
-var Storage = require('dom-storage'),
-    sessionStorage = new Storage(null, { strict: true });
+// var Storage = require('dom-storage'),
+//     sessionStorage = new Storage(null, { strict: true });
 
 var group_vehicle = require('../models/group_vehicle');
 
@@ -34,12 +34,11 @@ router.post('/except_list', function(req, res, next) {
 
 router.get('/group', function(req, res, next) {
     var member = req.cookies.member;
-    var keyGroup = member.userid + "_group";
-    //var vhc_group = req.session[keyGroup];
-    vhc_group = sessionStorage.getItem(keyGroup);
-    if (vhc_group) {
-        res.send({ error: 0, group: vhc_group });
-    } else {
+    // var keyGroup = member.userid + "_group";
+    // vhc_group = sessionStorage.getItem(keyGroup);
+    // if (vhc_group) {
+    //     res.send({ error: 0, group: vhc_group });
+    // } else {
         group_vehicle.get_groupvehicle(member.userid, function(err, result) {
             var group = '';
             for (var i in result) {
@@ -56,16 +55,12 @@ router.get('/group', function(req, res, next) {
                     group += "<option value=\"" + item.VehicleID + "\" >" + item.VehicleNo + "</option>";
                 }
             }
-
             group += "</optgroup>";
-
-            //req.session[keyGroup] = group;
-            sessionStorage.setItem(keyGroup, group);
-
+            // sessionStorage.setItem(keyGroup, group);
             res.send({ error: 0, group: group });
         });
-    }
-});
+    // }
+})
 
 router.post('/add', function(req, res, next) {
     var args = req.body;
@@ -76,7 +71,7 @@ router.post('/add', function(req, res, next) {
         }
         res.send({ ok: 1 });
 
-        removeMemberGroup(req, res);
+        // removeMemberGroup(req, res);
     });
 
 });
@@ -90,16 +85,16 @@ router.post('/delete', function(req, res, next) {
         }
         res.send({ ok: 1 });
 
-        removeMemberGroup(req, res);
+        // removeMemberGroup(req, res);
     });
-});
+})
 
-function removeMemberGroup(req, res) {
-    var member = req.cookies.member;
-    if (member) {
-        var keyGroup = member.userid + "_group";
-        sessionStorage.removeItem(keyGroup);
-    }
-}
+// function removeMemberGroup(req, res) {
+//     var member = req.session.member;
+//     if (member) {
+//         var keyGroup = member.userid + "_group";
+//         sessionStorage.removeItem(keyGroup);
+//     }
+// }
 
-module.exports = router;
+module.exports = router

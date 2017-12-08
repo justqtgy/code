@@ -1,0 +1,63 @@
+<%- include shared/_header %>
+<%- include shared/_top %>
+<%- include shared/_sidebar %>
+
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEADER-->
+        <h3 class="page-title">
+            数据下发 <small></small>
+        </h3>
+        <!-- END PAGE HEADER-->
+
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row">
+            <div class="col-md-9 col-sm-6" style="width:100%; ">
+                <!-- BEGIN PORTLET-->
+                <div class="portlet light">
+                    <div class="portlet-title tabbable-line">
+                        <div class="caption">
+                            <i class="glyphicon glyphicon-flash"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">发送数据</span>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body" style="min-height:500px; height:100%;">
+                        <!--BEGIN TABS-->
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="scroller" style="height: 500px;" data-always-visible="1" data-rail-visible="0">
+                                    <label for="GPSID">GPSID：</label>
+                                    <input type="text" id="GPSID" style="height:30px" />
+                                    <label for="data" >数据：</label>
+                                    <input type="text" id="data" style="width:500px;height:30px" />
+                                    <button id="send">发送</button>
+									<button id="reply" style="margin-left: 10px;">查看</button>
+                                    <div id="result" style="width:900px;height:250px;border:2px solid gray;margin-top:30px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--END TABS-->
+                    </div>
+                </div>
+                <!-- END PORTLET-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+
+<%- include shared/_bottom %>
+<%- include shared/_scripts %>
+<script src="/javascripts/include/date-utils.min.js"></script>
+<script src="/javascripts/include/date_now.js"></script>
+<script src="/javascripts/include/socket.js"></script>
+<script src="/javascripts/include/query-sending.js"></script>
+<script src="/javascripts/gps_sending.js"></script>
+<%- include shared/_footer %>

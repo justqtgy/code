@@ -12,20 +12,19 @@
   <ul  class="table-view" v-if = "DataList.length > 0">
     <li class="table-view-cell media" v-for = "(item, index) in DataList">
         <img class="media-object pull-left" src="images/arrow_icon.png">        
-        <div class="media-body">
+        <div class="media-body" v-cloak>
           {{item.VehicleNo}}
           <p>记录时间：{{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')}}</p>
-          <p><span>上次油量：{{item.PreOil}}</span>
-          <span>加油油量：{{item.AddOil}}</span>
-          <span>当前油量：{{item.CurOil}}</span></p>
-          <p><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
+          <p><span>加油油量：{{item.AddOil}}L</span></p>
+          <p v-if="item.GPSStatus==1"><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
+          <p v-else>{{"尚未更新"}}</p>
         </div>
 
     </li>
      
   </ul>
   <ul class="table-view" v-else>
-    <li class="table-view-cell">
+    <li class="table-view-cell" v-cloak>
        {{MsgInfo}}
     </li>
   </ul>

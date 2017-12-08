@@ -416,3 +416,7 @@
     font-weight: 400;
     font-size: 12px;
 }
+
+[v-cloak] {
+    display: none;
+}

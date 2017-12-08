@@ -54,12 +54,12 @@ router.get('/group', function(req, res, next) {
     res.render('control/_group', { title: 'dftd' });
 });
 
-router.get('/oil_ticket', function(req, res, next) {
-    res.send('开发中....');
-});
+// router.get('/oil_ticket', function(req, res, next) {
+//     res.send('开发中....');
+// });
 
-router.get('/cost_check', function(req, res, next) {
-    res.send('开发中....');
-});
+// router.get('/cost_check', function(req, res, next) {
+//     res.send('开发中....');
+// });
 
 module.exports = router;

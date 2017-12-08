@@ -1,0 +1,28 @@
+<link href="../assets/global/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+<script src="../assets/global/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+<script >
+    var groupVehicle=null;    
+    
+    if(window.sessionStorage){
+        groupVehicle = sessionStorage.getItem("group_vehicle");
+        if(groupVehicle){
+            renderList(groupVehicle);
+        }
+    }
+    if(!groupVehicle){
+        $.get('/group_vehicle/group',function(result){ 
+            console.log('result', result)
+            if(window.sessionStorage){
+                sessionStorage.setItem("group_vehicle",result.group);
+            }
+            renderList(result.group);
+        })
+    }
+
+    function renderList(vehicleList){
+        console.log(vehicleList);
+        $('.multiselect').html(vehicleList);   
+        $('.multiselect').multiselect("destroy").multiselect({ nonSelectedText: '请选择',enableFiltering: true, includeSelectAllOption: true, selectAllText: '全部选择', enableClickableOptGroups: true, buttonWidth: 150, maxHeight: 300 });     
+    }
+    
+</script>

@@ -10,11 +10,11 @@ function gps_alarm() {
 
 module.exports = gps_alarm;
 
-
 gps_alarm.get_count = function(params, callback) {
     console.log(params);
-    var sql = " select count(*) as total from gps_alarm where addtime >='%s' and addtime<dateadd(day, 1, '%s')   and vehicleid in (%s)";
+    var sql = " select count(*) as total from gps_alarm where addtime >='%s' and addtime<dateadd(day, 1, '%s') and vehicleid in (%s)";
     sql = util.format(sql, params.begintime, params.endtime, params.vehicleList);
+    console.log(sql)
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);

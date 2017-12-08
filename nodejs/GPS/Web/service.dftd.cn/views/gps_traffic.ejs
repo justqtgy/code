@@ -57,13 +57,13 @@
                                             </tr>
                                         </thead>
                                         <tbody v-if = "DataList.length > 0">
-                                            <tr v-for = "(item,index) in DataList">
+                                            <tr v-for = "(item,index) in DataList" v-cloak>
                                                 <td>{{ index+1 }}</td> 
                                                 <td>{{ item.CreateDate }}</td> 
                                                 <td>{{ item.VehicleNo }}</td> 
                                                 <td>{{ item.GPSID }}</td> 
-                                                <td>{{ item.Distance.toFixed(2) }}</td>                             
-                                                <td>{{ item.OilUsed.toFixed(2) }}</td>  
+                                                <td>{{ item.Distance.toFixed(2) }}</td>
+                                                <td>{{ item.OilUsed.toFixed(2) }}</td>
                                                 <td><a v-bind:href="'replay.html?id='+item.ID" target="_blank">查看</a></td>
                                             </tr>
                                         </tbody>

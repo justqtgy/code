@@ -12,7 +12,7 @@
   <ul  class="table-view" v-if = "DataList.length > 0">
     <li class="table-view-cell media" v-for = "(item, index) in DataList">
         <img class="media-object pull-left" src="images/arrow_icon.png">        
-        <div class="media-body">
+        <div class="media-body" v-cloak>
           {{item.Title}}
           <p>时间：{{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')}}</p>
           <p><a href='#' v-on:click="showDetail(item.ID)">详情</a></p>
@@ -20,7 +20,7 @@
     </li>     
   </ul>
   <ul class="table-view" v-else>
-    <li class="table-view-cell">
+    <li class="table-view-cell" v-cloak>
        {{MsgInfo}}
     </li>
   </ul>
