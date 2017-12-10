@@ -55,7 +55,7 @@ module.exports.add_data_tianhe = function(data) {
         item.version = data[2];
         item.gpsTime = common.format_time(data[11], data[3]);
         item.location = data[4];
-		item.gpsStatus = data[4] == 'A' ? 1 : 0;
+        item.gpsStatus = data[4] == 'A' ? 1 : 0;
         // item.lat = parseFloat(data[5]) * 0.01; //纬度
         // item.lng = parseFloat(data[7]) * 0.01; //经度 
         item.speed = data[9];
@@ -98,7 +98,7 @@ module.exports.add_data_tianhe = function(data) {
             });
             //定位和轨迹
             //if (item.location.toLowerCase() == 'a') {
-                gps_last.set_lastinfo(item);
+            gps_last.set_lastinfo(item);
             //}
         });
     }

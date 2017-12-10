@@ -15,7 +15,8 @@ var cost_check = require('./routes/cost_check');
 var gps_quality_history = require('./routes/gps_quality_history');
 var gps_rubbish = require('./routes/gps_rubbish');
 var gps_sending = require('./routes/gps_sending');
-var driver_card = require('./routes/driver_card')
+var driver_card = require('./routes/driver_card');
+var gps_level = require('./routes/gps_level');
 
 exports.init_route = function(app) {
     console.log('init_route begin');
@@ -34,10 +35,11 @@ exports.init_route = function(app) {
     app.use('/group_vehicle', group_vehicle);
     app.use('/group_member', group_member);
     app.use('/cost_check', cost_check);
-    app.use('/gps_quality_history',gps_quality_history);
-    app.use('/gps_rubbish',gps_rubbish);
-	app.use('/gps_sending',gps_sending);
-	app.use('/driver_card',driver_card);
+    app.use('/gps_quality_history', gps_quality_history);
+    app.use('/gps_rubbish', gps_rubbish);
+    app.use('/gps_sending', gps_sending);
+    app.use('/driver_card', driver_card);
+    app.use('/gps_level', gps_level);
 
     console.log('init_route end');
 };
