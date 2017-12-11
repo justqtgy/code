@@ -63,14 +63,10 @@ net.createServer(function(socket) {
 
 logger.info('Server listening on ' + HOST + ':' + PORT);
 
-<<<<<<< HEAD
 /**
  * 创建Http服务器 
  * http服务器的端口号是7777
  * */
-=======
-/**创建Http服务器 */
->>>>>>> 108c9c439a9d8bede91e330eb87078a94fe5eba0
 var HTTP_HOST = '127.0.0.1',
     HTTP_PORT = 7777;
 
