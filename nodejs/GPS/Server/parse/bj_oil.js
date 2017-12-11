@@ -10,7 +10,7 @@ function revise(data){
     for( var i = 0; i < data[0].length/2; i++ ){
         arr.push( data[0].charAt(i*2)+ data[0].charAt(i*2+1) );
     }
-    logger.info(arr);
+    //logger.info(arr);
     for(var i=0;i<arr.length;i++){
         if( arr[i]=='7d'&&arr[i+1]=='01' ){
             arr[i]='7d';
@@ -22,7 +22,7 @@ function revise(data){
         }
     }
     data=arr.join('');
-    logger.info(data);
+    //logger.info(data);
     return data
 }
 
