@@ -3,9 +3,7 @@ var log4js = require('log4js');
 var protocol = require('./protocol');
 
 var HOST = '127.0.0.1',
-    PORT = 6666,
-    HTTP_HOST = '127.0.0.1',
-    HTTP_PORT = 7777;
+    PORT = 6666;
 
 // 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
 try {
@@ -65,7 +63,13 @@ net.createServer(function(socket) {
 
 logger.info('Server listening on ' + HOST + ':' + PORT);
 
-/**创建Http服务器 */
+/**
+ * 创建Http服务器 
+ * http服务器的端口号是7777
+ * */
+var HTTP_HOST = '127.0.0.1',
+    HTTP_PORT = 7777;
+
 var http_server = require('http').createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('OK\n');
