@@ -5,18 +5,18 @@ function gps_level() {
 
 }
 
-gps_level.add_gps_level = function(data, callback) {
-    var sqlText = "INSERT INTO GPS_Level (GPSID, VehicleID, VehicleNo, Level1, Level2, Position, Status, Lng, Lat, High, Speed, Direct, GPSTime, MsgID, Distance, AddTime) " +
+gps_level.add_data = function(data, callback) {
+    var sqlText = "INSERT INTO GPS_Level (GPSID, VehicleID, VehicleNo, Level1, Level2, Alarm, Status, Lng, Lat, High, Speed, Direct, GPSTime, MsgID, Distance, AddTime) " +
         "VALUES('" + data.gpsID + "'," +
         "'" + data.vehicleID + "'," +
         "'" + data.vehicleNo + "'," +
         "'" + data.level1 + "'," +
         "'" + data.level2 + "'," +
-        "'" + data.position + "'," +
+        "'" + data.alarm + "'," +
         "'" + data.status + "'," +
         "'" + data.lng + "'," +
         "'" + data.lat + "'," +
-        "'" + data.higt + "'," +
+        "'" + data.high + "'," +
         "'" + data.speed + "'," +
         "'" + data.direct + "'," +
         "'" + data.datetime + "'," +

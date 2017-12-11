@@ -19,6 +19,7 @@ var db = require('./models/mssql_helper');
 var util = require('util');
 var response = require('./parse/response');
 var gps_response = require('./parse/gps_response');
+var gps_level = require('./parse/gps_level');
 
 /**
  * 解析协议
@@ -406,14 +407,14 @@ module.exports.parse = function(socket, data) {
         }
 
     } else {
-        _data = _data.toLowerCase();
+        _data = _data.toUpperCase();
 
         // if (_data.substring(0, 2) == '59') {
         //     add_capacity_data(_data);
         // }
 
         if (_data.substring(0, 2) == '7E' && _data.indexOf('2A444654445F595948') > 0) {
-            //gps_data.add_data_bubiao(data);
+            gps_level.add_level_data(_data);
         }
     }
 };
