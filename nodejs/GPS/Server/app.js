@@ -63,10 +63,14 @@ net.createServer(function(socket) {
 
 logger.info('Server listening on ' + HOST + ':' + PORT);
 
+<<<<<<< HEAD
 /**
  * 创建Http服务器 
  * http服务器的端口号是7777
  * */
+=======
+/**创建Http服务器 */
+>>>>>>> 108c9c439a9d8bede91e330eb87078a94fe5eba0
 var HTTP_HOST = '127.0.0.1',
     HTTP_PORT = 7777;
 
@@ -78,35 +82,28 @@ var http_server = require('http').createServer(function(req, res) {
 var io = require('socket.io').listen(http_server);
 io.sockets.on('connection', function(socket) {
     socket.on("data", function(data) {
-        //socket.send('OK');       
-        //console.log(data.content);
-        // var client = net.connect({ server: HOST, port: PORT }, function() {
-        //     client.write('socket.io' + data.content);
-        // });
+        socket.send('OK');
+        console.log(data.content);
+        var client = net.connect({ server: HOST, port: PORT }, function() {
+            client.write('socket.io' + data.content);
+        });
 
-        var _data;
-        if (Buffer.isBuffer(data)) {
-            _data = JSON.parse(data);
-        } else {
-            _data = data;
-        }
-        logger.info('[web socket] Date = ' + _data);
-        //处理命令
-        protocol.parse(socket, 'socket.io' + data);
+        // var _data;
+        // if (Buffer.isBuffer(data)) {
+        //     _data = JSON.parse(data);
+        // } else {
+        //     _data = data;
+        // }
+        // logger.info('[web socket] Date = ' + _data);
+        // //处理命令
+        // protocol.parse(socket, 'socket.io' + data);
+    });
+
+    socket.on('error', function(data) {
+        //console.log('CLOSED: ' +
+        //    socket.remoteAddress + ' ' + socket.remotePort);
+        logger.error('Error:' + data);
     });
 });
 
-/*
-var WebSocketServer = require('ws').Server;
-var wss = new WebSocketServer({ port: 7777 });
-
-wss.on('connection', function connection(ws) {
-    console.log('connection:', ws)
-    ws.on('data', function incoming(message) {
-        console.log('received: %s', message);
-    });
-
-    ws.send('something');
-});
-*/
 logger.info('HTTP Server listening on ' + HTTP_HOST + ':' + HTTP_PORT);

@@ -12,7 +12,6 @@ module.exports = gps_last;
 
 
 gps_last.get_count = function(params, callback) {
-    console.log(params);
     var sql = " select count(*) as total from gps_lastinfo where vehicleid in (%s) ";
     sql = util.format(sql, params.vehicleList);
     db.execSQL(sql, function(err, result) {
@@ -38,7 +37,7 @@ gps_last.get_list = function(params, callback) {
     var sql = ";with t as (select *, row_number() over(order by UpdateTime desc) as rid  from gps_lastinfo where vehicleid in (%s)) " +
         "select * from t where rid between %s and %s";
     sql = util.format(sql, params.vehicleList, start_id, end_id);
-    console.log(sql)
+
     db.execSQL(sql, function(err, rows) {
         if (err) {
             return callback(err);
@@ -46,4 +45,4 @@ gps_last.get_list = function(params, callback) {
 
         callback(err, rows);
     });
-}
+};

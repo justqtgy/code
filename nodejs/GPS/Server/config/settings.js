@@ -37,3 +37,7 @@ module.exports.smsResult = {
     "-21": "提交速度超限",
     "-99": "系统异常"
 };
+
+// 服务器地址120.24.68.95
+// 用户名Administrator
+// 密码：73c9df84
