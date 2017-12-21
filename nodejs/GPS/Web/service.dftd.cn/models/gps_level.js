@@ -13,8 +13,8 @@ module.exports = gps_level;
 
 gps_level.get_count = function(params, callback) {
     console.log(params);
-    var sql = " select count(*) as total from gps_level where vehicleid in (%s) ";
-    sql = util.format(sql, params.vehicleList);
+    var sql = " select count(*) as total from gps_level where AddTime >='%s' and AddTime<dateadd(day, 1, '%s') and vehicleid in (%s) ";
+    sql = util.format(sql, params.begintime, params.endtime, params.vehicleList);
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);
@@ -35,9 +35,10 @@ gps_level.get_list = function(params, callback) {
     var start_id = (pageIndex - 1) * pageSize + 1;
     var end_id = pageIndex * pageSize;
 
-    var sql = ";with t as (select *, row_number() over(order by AddTime desc) as rid  from gps_level where vehicleid in (%s)) " +
-        "select * from t where rid between %s and %s";
-    sql = util.format(sql, params.vehicleList, start_id, end_id);
+    var sql = ";with t as (select *, row_number() over(order by AddTime desc) as rid  "
+            + "     from gps_level where AddTime >='%s' and AddTime<dateadd(day, 1, '%s') and vehicleid in (%s)) " 
+            + "select * from t where rid between %s and %s";
+    sql = util.format(sql, params.begintime, params.endtime, params.vehicleList, start_id, end_id);
 
     db.execSQL(sql, function(err, rows) {
         if (err) {
