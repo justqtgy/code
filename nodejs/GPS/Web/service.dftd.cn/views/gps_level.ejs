@@ -62,7 +62,7 @@
                                                 <td>{{ new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}</td> 
                                                 <td>{{ item.VehicleNo }}</td> 
                                                 <td>{{ item.GPSID }}</td> 
-                                                <td>{{ item.Distance.toFixed(2) }}</td>
+                                                <td>{{ (item.Distance*0.1).toFixed(2) }}</td>
                                                 <td>{{ item.Level1 }}</td>
                                                 <td>{{ item.Level2 }}</td>                                                
                                             </tr>

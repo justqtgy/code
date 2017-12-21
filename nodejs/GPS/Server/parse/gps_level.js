@@ -50,7 +50,7 @@ function parseParams(data, cb) {
     item.datetime = '20' + _datetime.slice(0, 2) + "-" + _datetime.slice(2, 4) + "-" + _datetime.slice(4, 6) + " " +
         _datetime.slice(6, 8) + ":" + _datetime.slice(8, 10) + ":" + _datetime.slice(10, 12);
     item.msgid = data.slice(114, 118);
-    item.distance = (parseInt(data.slice(118, 126), 16)*0.1).toFixed(2);
+    item.distance = parseInt(data.slice(118, 126), 16);
     item.addTime = now;
     console.log(item);
     return cb(null, item);
