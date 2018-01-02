@@ -1,0 +1,3 @@
+server:120.79.76.22
+user:administrator
+password:Gsmy50shijie
