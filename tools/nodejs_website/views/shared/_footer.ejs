@@ -1,5 +1,12 @@
-  <script>
-      $.get('/users/check_login', function(result){ $("#loginAccount").html(result.member.account); });
+  <script>      
+      $.get('/users/check_login', function(result){ 
+          var member = result.member; 
+          $("#loginAccount").html(member.account); 
+          if(!member.isadmin){            
+            $("#sys_setting").hide();
+			$("#mintpass_rubbish").hide();
+          }        
+      });
   </script>
 </body>
 <!-- END BODY -->
