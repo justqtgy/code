@@ -2,9 +2,9 @@
 *mysql代码
 *
 */
---外部用户
+/*外部用户*/
 create table member(
-	id int auto_increment not null, --从2000001开始
+	id int auto_increment not null, /*从2000001开始*/
 	weixin_id varchar(50) not null,
 	user_name varchar(50) not null,
 	mobile varchar(50) not null,
@@ -14,10 +14,10 @@ create table member(
     key ix_weixin_id(weixin_id),
     key ix_mobile(mobile)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
---系统管理员及权限
+/*系统管理员及权限*/
 create table admin_user
 (
-	id int auto_increment not null, --从1000001开始
+	id int auto_increment not null, /*从1000001开始*/
 	account varchar(20) not null,
 	`password` varchar(50) not null,
 	user_name varchar(20) not null,
@@ -35,7 +35,7 @@ create table `role`
 	role_name varchar(50) not null,
 	remark varchar(50) not null,
     primary key (id)
-)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 create table `action`
 (
