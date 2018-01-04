@@ -53,6 +53,7 @@ role.add = async function(args, callback){
 		var sql = `insert into role(role_name, remark) 
 			   values('${args.role_name}','${args.remark}')`;
 		let result = await db.execSQL(sql);	
+		return result;
 	}
 	catch(error){
 		throw error

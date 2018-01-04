@@ -1,14 +1,14 @@
 var db = require('./mysql_helper');
 
-function user(model){
+function users(model){
 
 }
 
-module.exports = user
+module.exports = users
 
-user.get_count = async function(args){
+users.get_count = async function(args){
 	try{
-		let sql = "select count(*) as total from user";
+		let sql = "select count(*) as total from users";
 		let result = await db.execSQL(sql);
 		let total = 0;
 		if(result.length>0){
@@ -21,14 +21,14 @@ user.get_count = async function(args){
 	}	
 };
 
-user.get_list = async function(args, callback){
+users.get_list = async function(args, callback){
 	try{
 		let pageIndex = parseInt(args.pageIndex);
 		let pageSize = parseInt(args.pageSize);
 		let beginID = (pageIndex - 1) * pageSize + 1;
 		let endID = pageIndex * pageSize;
 
-		let sql = `select * from user limit ${beginID}, ${endID}`
+		let sql = `select * from users limit ${beginID}, ${endID}`
 		let result = await db.execSQL(sql);
 		return result;
 	}
@@ -37,9 +37,9 @@ user.get_list = async function(args, callback){
 	}
 };
 
-user.get_single = async function(id){
+users.get_single = async function(id){
 	try{
-		let sql = `select * from user where id = ${id}`;
+		let sql = `select * from users where id = ${id}`;
 		let rows = await db.execSQL(sql);
 		return rows;
 	}
@@ -48,9 +48,9 @@ user.get_single = async function(id){
 	}	
 };
 
-user.add = async function(args, callback){
+users.add = async function(args, callback){
 	try{
-		var sql = `insert into user(account, password, user_name, weixin_id, mobile, add_time, status) 
+		var sql = `insert into users(account, password, user_name, weixin_id, mobile, add_time, status) 
 			   values('${args.account}','${args.password}','${args.user_name}', '${args.weixin_id}', '${args.mobile}', now(), ${args.status})`;
 		let result = await db.execSQL(sql);	
 	}
@@ -59,9 +59,9 @@ user.add = async function(args, callback){
 	}
 };
 
-user.update = async function(args, callback){
+users.update = async function(args, callback){
 	try{
-		let sql = `update user set user_name='${args.user_name}', weixin_id='${args.weixin_id}', mobile=${args.mobile}, status=${args.status} where id = ${args.id}`;
+		let sql = `update users set user_name='${args.user_name}', weixin_id='${args.weixin_id}', mobile=${args.mobile}, status=${args.status} where id = ${args.id}`;
 		let result = await db.execSQL(sql);
 		return result;
 	}
@@ -70,9 +70,9 @@ user.update = async function(args, callback){
 	}
 };
 
-user.delete = async function(args){
+users.delete = async function(args){
 	try{
-		let sql = `delete from user where id = ${args.id}`;	 
+		let sql = `delete from users where id = ${args.id}`;	 
 		let result = await db.execSQL(sql);
 		return result;
 	}
@@ -81,9 +81,9 @@ user.delete = async function(args){
 	}	
 };
 
-user.change_password = async function(args){
+users.change_password = async function(args){
 	try{
-		let sql = `update user set password=${args.password} where id = ${args.id}`;	 
+		let sql = `update users set password=${args.password} where id = ${args.id}`;	 
 		let result = await db.execSQL(sql);
 		return result;
 	}

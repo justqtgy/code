@@ -33,21 +33,25 @@ module.exports.execSQL_Pool = function(sql, params, callback) {
 }
 
 
-module.exports.execSQL = function(sql, params) {
+module.exports.execSQL = function(sql) {
+    console.log('sql = ', sql);
     return new Promise(function(resolve, reject) {
         var pool = mysql.createPool(settings);
         pool.getConnection(function(err, connection) {
             if (err) {
+                console.log('error = ', err);
                 connection.end();
                 return reject(err);
             }
 
-            connection.query(sql, params, function(err, results) {
+            connection.query(sql, function(err, results) {
                 connection.release();
                 if (err) {
+                    console.log('error = ', err);
                     return reject(err);
                 }
-                resolve(result);
+                console.log('result = ', results);
+                resolve(results);
             });
         });
     });
