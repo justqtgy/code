@@ -20,7 +20,7 @@ users.get_count = async function(args) {
     }
 };
 
-users.get_list = async function(args, callback) {
+users.get_pages = async function(args, callback) {
     try {
         let pageIndex = parseInt(args.pageIndex);
         let pageSize = parseInt(args.pageSize);
@@ -35,9 +35,9 @@ users.get_list = async function(args, callback) {
     }
 };
 
-users.get_single = async function(id) {
+users.get_single = async function(account) {
     try {
-        let sql = `select * from users where id = ${id}`;
+        let sql = `select * from users where account = '${account}'`;
         let rows = await db.exec(sql);
         return rows;
     } catch (error) {
@@ -47,8 +47,8 @@ users.get_single = async function(id) {
 
 users.add = async function(args, callback) {
     try {
-        var sql = `insert into users(account, password, user_name, weixin_id, mobile, add_time, status) 
-			   values('${args.account}','${args.password}','${args.user_name}', '${args.weixin_id}', '${args.mobile}', now(), ${args.status})`;
+        var sql = `insert into users(account, password, user_name, weixin_id, mobile, add_time, status, is_admin)
+			   values('${args.account}','${args.password}','${args.user_name}', '${args.weixin_id}', '${args.mobile}', now(), ${args.status}, ${args.is_admin})`;
         let result = await db.exec(sql);
     } catch (error) {
         throw error

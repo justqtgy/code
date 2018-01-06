@@ -20,7 +20,7 @@ role.get_count = async function(args) {
     }
 };
 
-role.get_list = async function(args, callback) {
+role.get_pages = async function(args, callback) {
     try {
         let pageIndex = parseInt(args.pageIndex);
         let pageSize = parseInt(args.pageSize);

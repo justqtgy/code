@@ -20,7 +20,7 @@ logs.get_count = async function(args) {
     }
 };
 
-logs.get_list = async function(args, callback) {
+logs.get_pages = async function(args, callback) {
     try {
         let pageIndex = parseInt(args.pageIndex);
         let pageSize = parseInt(args.pageSize);
