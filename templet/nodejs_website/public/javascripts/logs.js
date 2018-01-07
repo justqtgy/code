@@ -1,7 +1,7 @@
 var displayNumber = 20;
 
 function get_list(pageIndex) {
-    var q = new Query('/orders/pages', 'GET', $("#search"), pageIndex, displayNumber);
+    var q = new Query('/logs/pages', 'GET', $("#search"), pageIndex, displayNumber);
     var params = q.init();
     if (!params.begin_time || !params.end_time) {
         alert('请选择日期');
