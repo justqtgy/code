@@ -20,7 +20,7 @@ sms.get_count = async function(args) {
     }
 };
 
-sms.get_list = async function(args, callback) {
+sms.get_pages = async function(args, callback) {
     try {
         let pageIndex = parseInt(args.pageIndex);
         let pageSize = parseInt(args.pageSize);

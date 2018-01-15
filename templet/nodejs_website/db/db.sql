@@ -2,28 +2,33 @@
 *mysql代码
 *
 */
-/*外部用户*/
-create table member(
-	id int auto_increment not null, /*从2000001开始*/
-	weixin_id varchar(50) not null,
-	user_name varchar(50) not null,
-	mobile varchar(50) not null,
-	add_time datetime not null,
-	`status` bit not null,
-    primary key (id),
-    key ix_weixin_id(weixin_id),
-    key ix_mobile(mobile)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- /*外部用户*/
+-- create table member(
+-- 	id int auto_increment not null, /*从2000001开始*/
+--     account varchar(20) not null,
+-- 	`password` varchar(50) not null,
+-- 	user_name varchar(20) not null,
+-- 	weixin_id varchar(50) not null,
+-- 	mobile varchar(50) not null,
+-- 	add_time datetime not null,
+-- 	`status` bit not null,
+--     primary key (id),
+--     key ix_weixin_id(weixin_id),
+--     key ix_mobile(mobile)
+-- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*系统管理员及权限*/
-create table admin_user
+create table users
 (
 	id int auto_increment not null, /*从1000001开始*/
 	account varchar(20) not null,
 	`password` varchar(50) not null,
 	user_name varchar(20) not null,
+    weixin_id varchar(50) not null,
 	mobile varchar(50) not null,
 	add_time datetime not null,
-    `status` int not null,
+    `status` tinyint not null, /*1正常-1删除*/
+    is_admin bit not null,
     primary key (id),
     key ix_account(account),
     key ix_mobile(mobile)
@@ -67,7 +72,7 @@ create table sms
     mobile varchar(20) not null,
     captch varchar(10) not null,
     content varchar(200) not null,
-    type_id int not null,
+    type_id tinyint not null,
     add_time datetime not null,
     primary key (id),
     key ix_mobile(mobile),
@@ -79,7 +84,12 @@ create table logs
     id int auto_increment not null,
     admin_id int not null,
     content text not null,
+    type_id tinyint not null,
     add_time datetime not null,
     primary key (id),
     key ix_add_time(add_time)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*初始化数据*/
+insert into users(account, password, user_name, weixin_id, mobile, add_time, status, is_admin)  
+values('admin','c475eeaec2d16f750c21e53a61884b35','admin','','',now(), 1, 1);

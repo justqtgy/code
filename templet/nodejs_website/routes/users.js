@@ -4,10 +4,17 @@ var utils = require('utility');
 var MSG = require('../config/tips');
 var users = require('../models/users');
 
+//用户管理首页
 router.get('/', async function(req, res, next) {
-    res.send('users');
+    res.render('users');
 });
 
+//登录
+router.get('/login', async function(req, res, next) {
+    res.render('login');
+});
+
+//获取用户信息
 router.get('/single', async function(req, res, next) {
     logHeper.info('req param =>', req.param);
 
@@ -21,6 +28,7 @@ router.get('/single', async function(req, res, next) {
     }
 });
 
+//获取用户列表
 router.get('/list', async function(req, res, next) {
     let args = req.param;
     logHeper.info('req param =>', args);
@@ -35,6 +43,7 @@ router.get('/list', async function(req, res, next) {
     }
 });
 
+//添加用户
 router.post('/add', async function(req, res, next) {
     let args = req.param;
     logHeper.info('req param =>', args);
@@ -47,6 +56,7 @@ router.post('/add', async function(req, res, next) {
     }
 });
 
+//修改用户信息
 router.post('/set', async function(req, res, next) {
     let args = req.param;
     logHeper.info('req param =>', args);
@@ -59,6 +69,7 @@ router.post('/set', async function(req, res, next) {
     }
 });
 
+//删除用户信息
 router.post('/delete', async function(req, res, next) {
     let args = req.param;
     logHeper.info('req param =>', args);
@@ -71,6 +82,7 @@ router.post('/delete', async function(req, res, next) {
     }
 });
 
+//修改密码
 router.post('/password', async function(req, res, next){
     let args = req.param;
     logHeper.info('req param = >', args);
@@ -85,11 +97,12 @@ router.post('/password', async function(req, res, next){
     }
 });
 
+//登录
 router.post('/login', async function(req, res, next){
-    let args = req.param;
+    let args = req.body;
     logHeper.info('req param = >', args);
     try{
-        let result = await users.get_single(args.accout);
+        let result = await users.get_single(args.username);
         if(!result){
             res.send({ok:0, msg:MSG.EMPTY_ACCOUNT})
             return;
@@ -116,13 +129,15 @@ router.post('/login', async function(req, res, next){
     }
 });
 
-router.post('/logout', async function(req, res, next){
+//登出
+router.get('/logout', async function(req, res, next){
     let args = req.param;
     logHeper.info('req param = >', args);
     res.clearCookie("__user");
     res.redirect('/users/login');      
 });
 
+//检查用户是否登录
 router.get('/check_login', function(req, res) {
     if (req.cookies.__user) {
         var member = req.cookies.__user;
