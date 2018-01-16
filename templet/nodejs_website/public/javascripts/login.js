@@ -72,6 +72,7 @@ var Login = function() {
                 }
 
                 $.post('/users/login', data, function(result) {
+                    
                     if (result.ok != 1) {
                         $('.alert-danger').find('span').text(result.msg);
                         $('.alert-danger', $('.login-form')).show();
