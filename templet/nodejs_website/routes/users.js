@@ -82,6 +82,11 @@ router.post('/delete', async function(req, res, next) {
     }
 });
 
+//修改密码页面
+router.get('/password', (req, res, next)=>{
+    res.render('/password');
+});
+
 //修改密码
 router.post('/password', async function(req, res, next){
     let args = req.param;
