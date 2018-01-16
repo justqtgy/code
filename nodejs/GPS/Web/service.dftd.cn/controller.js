@@ -5,6 +5,7 @@ var gps_oil_add = require('./routes/gps_oil_add');
 var gps_oil_leak = require('./routes/gps_oil_leak');
 var gps_traffic = require('./routes/gps_traffic');
 var gps_last = require('./routes/gps_last');
+var gps_location = require('./routes/gps_location');
 var group = require('./routes/group');
 var vehicle = require('./routes/vehicle');
 var member = require('./routes/member');
@@ -40,6 +41,7 @@ exports.init_route = function(app) {
     app.use('/gps_sending', gps_sending);
     app.use('/driver_card', driver_card);
     app.use('/gps_level', gps_level);
+    app.use('/gps_location', gps_location);
 
     console.log('init_route end');
 };
