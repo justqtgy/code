@@ -67,6 +67,23 @@ router.get('/group', function(req, res, next) {
     }
 });
 
+router.get('/tree_group', function(req, res, next) {
+    var member = req.session.member;
+    var keyGroup = member.userid + "_tree_group";
+    //var vhc_group = req.session[keyGroup];
+    vhc_group = sessionStorage.getItem(keyGroup);
+    if (vhc_group) {
+        res.send({ error: 0, group: vhc_group });
+    } else {
+        group_vehicle.get_groupvehicle(member.userid, function(err, result) {
+            //req.session[keyGroup] = group;
+            sessionStorage.setItem(keyGroup, group);
+
+            res.send({ error: 0, result: result });
+        });
+    }
+});
+
 router.post('/add', function(req, res, next) {
     var args = req.body;
     group_vehicle.add(args, function(err, result) {
