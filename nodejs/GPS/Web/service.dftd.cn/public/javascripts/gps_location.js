@@ -6,56 +6,63 @@ var icons = {
 };
 
 function load_tree(){
-    var groupVehicle=null;    
+    // var groupVehicle=null;    
     
-    if(window.sessionStorage){
-        groupVehicle = sessionStorage.getItem("tree_group_vehicle");
-        if(groupVehicle){
-            showTreeGroup(groupVehicle);
-        }
-    }
-    if(!groupVehicle){
+    // if(window.sessionStorage){
+    //     groupVehicle = sessionStorage.getItem("tree_group_vehicle");
+    //     if(groupVehicle){
+    //         showTreeGroup(groupVehicle);
+    //     }
+    // }
+    // if(!groupVehicle){
+        
         $.get('/group_vehicle/tree_group',function(result){ 
-            console.log('result', result)
-                   
-            
-            var data = [];
-            result.group.forEach(function(item) {
-                if (item.Level.toString() === "0") {
-                    data.push({ "id": item.GroupID, "parent": "#", "text": item.GroupName, "level": item.Level, "no": "", "icon": icons[item.Level] });
+            var data = []    
+            result.rows.forEach(function(item) {
+                if (item.Level.toString() === "0") {                    
+                    data.push({ "vid": item.GroupID, "text": item.GroupName, "children" : [] });
                 } else {
-                    data.push({ "id": item.VehicleID, "parent": item.GroupID, "text": item.VehicleNo, "level": item.Level, "no": item.VehicleID, "icon": icons[item.Level] });
+                    var index = data.length-1;
+                    data[index]["children"].push({"vid" : item.VehicleID, "text" : item.VehicleNo})
                 }
             });
 
-            if(window.sessionStorage){
-                sessionStorage.setItem("tree_group_vehicle", data);
-            }     
-            
-            showTreeGroup(data);
+            var _treeData = [{
+                "id": 0, 
+                "text": "车辆信息", 
+                "state": {  
+                    "opened": true,          //展示第一个层级下面的node  
+                },  
+                "children" : data
+            }]  
+
+            showTreeGroup(_treeData);
         })
-    }
+    // }
 }
 
 function showTreeGroup(data) {
+    console.log(data)
     $('#tree_group').jstree({
         "core": {
             "themes": {
-                "responsive": false
+                "theme": "classic",  
+                "dots": true,  
             },
+
             "check_callback": true,
             'data': data
         },
-        "plugins": ["contextmenu", "dnd", "search", "state"]
+        "plugins": ["dnd","json_data", "checkbox"]
 
     }).bind("select_node.jstree", function(e, data) {
-        if (data.node.id > 0) {
-            node = data.node;
-            var item = data.node.original;
-            console.log(item);
-            get_record(item);
-            $(".form-actions").hide();
-        }
+        // if (data.node.id > 0) {
+        //     node = data.node;
+        //     var item = data.node.original;
+        //     console.log(item);
+        //     get_record(item);
+        //     $(".form-actions").hide();
+        // }
     });
 }
 
