@@ -53,7 +53,7 @@ function showTreeGroup(data) {
             "check_callback": true,
             'data': data
         },
-        "plugins": ["dnd","json_data", "checkbox"]
+        "plugins": ["types","state", "checkbox"]
 
     }).bind("select_node.jstree", function(e, data) {
         // if (data.node.id > 0) {
