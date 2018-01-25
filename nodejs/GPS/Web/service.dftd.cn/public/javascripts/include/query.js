@@ -1,7 +1,7 @@
 function Query(url, type, form, pageIndex, pageSize) {
     this.url = url;
     this.type = type || "GET";
-    this.form = form || "search";
+    this.form = form ;
     this.pageIndex = pageIndex || 1;
     this.pageSize = pageSize || 20;
 }
@@ -17,10 +17,11 @@ Query.prototype = {
         data_format.pageIndex = this.pageIndex;
         data_format.pageSize = this.pageSize;
         data_format.r = Math.random();
-
-        var ctrls = this.form.serializeArray();
-        for (var c in ctrls) {
-            data_format[ctrls[c].name] = ctrls[c].value;
+        if(this.form){
+            var ctrls = this.form.serializeArray();
+            for (var c in ctrls) {
+                data_format[ctrls[c].name] = ctrls[c].value;
+            }
         }
 
         return data_format;

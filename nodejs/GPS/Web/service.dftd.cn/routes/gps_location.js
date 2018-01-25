@@ -10,14 +10,15 @@ router.get('/', function(req, res, next) {
     res.render('gps_location', { start_date: start_date, end_date: end_date });
 });
 
-router.post('/list', function(req, res, next) {
+router.post('/position', function(req, res, next) {
     var args = req.body;
-    gps_last.get_list(args, function(err, rows) {
+    console.log(args)
+    gps_last.get_position(args, function(err, rows) {
         if (err) {
             log.error('Error = ', err);
             return;
         }
-        res.send({ ok: 1, total: req.total, rows: rows });
+        res.send({ ok: 1, rows: rows });
     });
 });
 

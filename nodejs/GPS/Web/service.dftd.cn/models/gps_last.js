@@ -46,3 +46,16 @@ gps_last.get_list = function(params, callback) {
         callback(err, rows);
     });
 };
+
+
+gps_last.get_position = function(params, callback) {
+    var sql = "select * from gps_lastinfo where VehicleID in ("+params.vids+")";
+    console.log(sql);
+    db.execSQL(sql, function(err, rows) {
+        if (err) {
+            return callback(err);
+        }
+
+        callback(err, rows);
+    });
+};
