@@ -63,44 +63,47 @@ function get_position() {
             ids.push(item.original.vid)
         }
     }); 
-
+    if(ids.length==0) {
+        return showLocation(null);
+    }
     var q = new Query('/gps_location/position', 'POST');
     var data_foramt = {
         vids: ids.toString()
     };
     
     var params = q.init(data_foramt);
-    q.request(params, function(json) {
-       
-        $.each(json.rows, function(i, item){
-            showLocation(item);
-        });
-        
+    q.request(params, function(json) {       
+        showLocation(json.rows);
     });
 }
 
-function showMap(pos) {
-    $("#mapUrl").attr("src", "position.html?r=" + Math.random() + "&pos=" + pos);
-}
+// function showMap(pos) {
+//     $("#mapUrl").attr("src", "position.html?r=" + Math.random() + "&pos=" + pos);
+// }
 
 function showLocation(data) {
-    console.log(data)
-    //经度
-    var lng = Number(data.Lng);
-    var lat = Number(data.Lat);
-    var pos = wgs84togcj02(lng, lat);
-
+    var lnglats = []
+    $.each(data, function(i, item){
+        //经度
+        var lng = Number(item.Lng);
+        var lat = Number(item.Lat);
+        var pos = wgs84togcj02(lng, lat);
+        lnglats.push(pos);
+    });
+    console.log(lnglats)
     map = new AMap.Map('container', {
         resizeEnable: true,
-        zoom: 16,
-        center: pos
     });
-    // 实例化点标记
-    var marker = new AMap.Marker({ //添加自定义点标记
-        map: map,
-        position: pos, //基点位置
-        //offset: new AMap.Pixel(-10, -12), //相对于基点的偏移位置
-    });
+
+    for(var i=0;i<lnglats.length;i++){
+        // 实例化点标记
+        var marker = new AMap.Marker({ //添加自定义点标记
+            map: map,
+            position: lnglats[i], //基点位置
+            //offset: new AMap.Pixel(-10, -12), //相对于基点的偏移位置
+        });
+    }
+    
 
     //鼠标点击marker弹出自定义的信息窗体
     AMap.event.addListener(marker, 'click', function() {
@@ -113,7 +116,7 @@ function showLocation(data) {
         extensions: "all"
     });
 
-    geocoder.getAddress(pos, function(status, result) {
+    geocoder.getAddress(lnglats, function(status, result) {
         if (status === 'complete' && result.info === 'OK') {
             var address = result.regeocode.formattedAddress; //返回地址描述
 
