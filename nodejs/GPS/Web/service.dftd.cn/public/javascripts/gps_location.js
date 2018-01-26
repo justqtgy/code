@@ -72,24 +72,22 @@ function get_position() {
     var params = q.init(data_foramt);
     q.request(params, function(json) {
        
-        // $.each(json.rows, function(i, item){
-        //     console.log(item);
-        //     showLocation(item);
-        // });
+        $.each(json.rows, function(i, item){
+            showLocation(item);
+        });
         
     });
 }
 
-function showMap(lat, lng) {
-    $("#mapUrl").attr("src", "position.html?r=" + Math.random() + "&lat=" + lat + "&lng=" + lng);
-    $("#map-modal").modal('show');
-    return;
+function showMap(pos) {
+    $("#mapUrl").attr("src", "position.html?r=" + Math.random() + "&pos=" + pos);
 }
 
 function showLocation(data) {
+    console.log(data)
     //经度
-    var lng = Number(data.lng);
-    var lat = Number(data.lat);
+    var lng = Number(data.Lng);
+    var lat = Number(data.Lat);
     var pos = wgs84togcj02(lng, lat);
 
     map = new AMap.Map('container', {
