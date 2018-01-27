@@ -83,7 +83,7 @@ var geocoder = new AMap.Geocoder({
     extensions: "all"
 });
 
-function showLocation(data) {
+function showLocation(data) {console.log(data);
     var lnglats = []
     $.each(data, function(i, item){
         //经度
@@ -106,8 +106,13 @@ function showLocation(data) {
 
             geocoder.getAddress(lnglats[i], function(status, result) {
                 if (status === 'complete' && result.info === 'OK') {
-                    var address = result.regeocode.formattedAddress; //返回地址描述         
-                    marker.content = address + '<br/>当前油量：'+ data[i].CurOil;
+                    var address = result.regeocode.formattedAddress; //返回地址描述  
+                    address = '当前车辆：' + data[i].VehicleNo
+                            + '<br/>当前油量：' + data[i].CurOil
+                            + '<br/>当前位置：' + address
+                            + '<br/>更新时间：' + new Date(data[i].UpdateTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')
+                            
+                    marker.content = address;
                     marker.on('click', markerClick);
                     marker.emit('click', {target: marker});
                 }
