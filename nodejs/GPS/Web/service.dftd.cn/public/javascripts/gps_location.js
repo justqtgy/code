@@ -5,8 +5,6 @@ var icons = {
     3: "fa fa-folder icon-state-warning icon-lg"
 };
 
-var map;
-
 function load_tree(){
     $.get('/group_vehicle/tree_group',function(result){ 
         var data = []    
@@ -77,9 +75,13 @@ function get_position() {
     });
 }
 
-// function showMap(pos) {
-//     $("#mapUrl").attr("src", "position.html?r=" + Math.random() + "&pos=" + pos);
-// }
+var map = new AMap.Map("container", {resizeEnable: true,   zoom: 9});
+var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
+//逆地理编码
+var geocoder = new AMap.Geocoder({
+    radius: 1000,
+    extensions: "all"
+});
 
 function showLocation(data) {
     var lnglats = []
@@ -90,45 +92,34 @@ function showLocation(data) {
         var pos = wgs84togcj02(lng, lat);
         lnglats.push(pos);
     });
-    console.log(lnglats)
-    map = new AMap.Map('container', {
-        resizeEnable: true,
-    });
 
-    for(var i=0;i<lnglats.length;i++){
-        // 实例化点标记
-        var marker = new AMap.Marker({ //添加自定义点标记
-            map: map,
-            position: lnglats[i], //基点位置
-            //offset: new AMap.Pixel(-10, -12), //相对于基点的偏移位置
-        });
-    }
-    
-
-    //鼠标点击marker弹出自定义的信息窗体
-    AMap.event.addListener(marker, 'click', function() {
-        infoWindow.open(map, marker.getPosition());
-    });
-
-    //逆地理编码
-    geocoder = new AMap.Geocoder({
-        radius: 1000,
-        extensions: "all"
-    });
-
-    geocoder.getAddress(lnglats, function(status, result) {
-        if (status === 'complete' && result.info === 'OK') {
-            var address = result.regeocode.formattedAddress; //返回地址描述
-
-            infoWindow = new AMap.InfoWindow({
-                content: address, //使用默认信息窗体框样式，显示信息内容
-                offset: new AMap.Pixel(10, -20),
+    map.clearMap();
+    for(var i=0, marker;i<lnglats.length;i++){
+        (function(i){
+            // 实例化点标记
+            var marker = new AMap.Marker({ //添加自定义点标记
+                map: map,
+                position: lnglats[i], //基点位置
+                icon: "http://webapi.amap.com/images/car.png",
+                //offset: new AMap.Pixel(-10, -12), //相对于基点的偏移位置
             });
-            infoWindow.open(map, map.getCenter());
 
-            map.setFitView();
-        }
-    });
+            geocoder.getAddress(lnglats[i], function(status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                    var address = result.regeocode.formattedAddress; //返回地址描述         
+                    marker.content = address + '<br/>当前油量：'+ data[i].CurOil;
+                    marker.on('click', markerClick);
+                    marker.emit('click', {target: marker});
+                }
+            });
+        })(i);
+    }
+    map.setFitView();
+}
+
+function markerClick(e) {
+    infoWindow.setContent(e.target.content);
+    infoWindow.open(map, e.target.getPosition());
 }
 
 var app = new Vue({
@@ -138,7 +129,8 @@ var app = new Vue({
     },
     methods: {
         init: function() {
-            var that = this;
+            var _h = $(document.body).height();
+            $(".map").css("height", _h-160);
             load_tree();          
         }
     }
