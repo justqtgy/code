@@ -75,7 +75,7 @@ function get_position() {
     });
 }
 
-var map = new AMap.Map("container", {resizeEnable: true,   zoom: 9});
+var map = new AMap.Map("container", {resizeEnable: true});
 var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
 //逆地理编码
 var geocoder = new AMap.Geocoder({
