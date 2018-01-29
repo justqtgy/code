@@ -61,7 +61,7 @@ router.get('/qrcode', function(req, res, next) {
 
 router.get('/my_qrcode', function(req, res, next) {
     var member = req.cookies.sj_member;
-    var url = '/member/reg?userid=' + member.userid + '&account=' + member.account;
+    var url = 'http://www.guangshimingyu.cn:5001/member/reg?userid=' + member.userid + '&account=' + member.account;
     var code = qr.image(url, { type: 'png' });
     res.setHeader('Content-type', 'image/png'); //sent qr image to client side
     code.pipe(res);
