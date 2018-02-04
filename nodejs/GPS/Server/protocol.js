@@ -216,11 +216,14 @@ module.exports.parse = function(socket, data) {
         if (list[0].substring(0, 10) == '7e02000028' && list[0].substr(list[0].length - 2) == '7e') {
             JT808.add_JT808_data(list)
         }
-
+        //发送心跳数据
         if (list[0].substring(0, 10) == '7e00020000' && list[0].substr(list[0].length - 2) == '7e') {
+            var _Heart = util.format('7E80010005%s000200357E',list[0].substring(10, 26));
+            socket.write(_Heart);
+            
             var remote = list[0].substring(10, 22) + ',' + socket.remoteAddress + ',' + socket.remotePort;
             var arr = remote.split(',');
-            gps_remote.add_remote_data(arr)
+            gps_remote.add_remote_data(arr);
         }
 
 
