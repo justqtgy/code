@@ -219,10 +219,11 @@ module.exports.parse = function(socket, data) {
         //发送心跳数据:7E000200000120000004228888057E
         if (list[0].substring(0, 10).toLowerCase() == '7e00020000' && list[0].substr(list[0].length - 2).toLowerCase() == '7e') {
             var _Heart = util.format('7E80010005%s1234%s000200357E',list[0].substring(10, 22).toUpperCase(),list[0].substring(22, 26).toUpperCase());
-            _Heart = new Buffer(_Heart);
-            socket.write(_Heart);
-            logger.info('HEART = ', _Heart);
+            //_Heart = new Buffer(_Heart, 'hex');
+            socket.write(new Buffer(_Heart, 'hex'));
 
+            logger.info('HEART =', _Heart);
+            return;
             var remote = list[0].substring(10, 22) + ',' + socket.remoteAddress + ',' + socket.remotePort;
             var arr = remote.split(',');
             gps_remote.add_remote_data(arr);
