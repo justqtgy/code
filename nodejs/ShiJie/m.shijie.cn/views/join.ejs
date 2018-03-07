@@ -1,0 +1,148 @@
+<%- include ./shared/_header %>
+  <%- include ./shared/_top %>
+    <div class="weui-tab">
+      <header class="bar bar-nav">
+        <h1 class="title">我要代理</h1>
+        <a href="/" class="icon pull-left">
+          <i class="sstfont sst-xiangzuo"></i>
+        </a>
+      </header>
+
+      <!--主体-->
+      <div id="grid">
+      <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+          <div class="content">
+            <header class='demos-header'>
+                <h1 class="demos-title">{{thPricing.title}}</h1>
+              </header>
+            <div class="weui-form-preview" >
+                <div class="weui-form-preview__hd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">付款金额</label>
+                    <em class="weui-form-preview__value">¥{{thPricing.amount}}</em>
+                  </div>
+                </div>
+                <div class="weui-form-preview__bd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">商品</label>
+                    <span class="weui-form-preview__value">视界5.0</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">单价</label>
+                    <span class="weui-form-preview__value">¥{{thPricing.price}}</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">数量</label>
+                    <span class="weui-form-preview__value">{{thPricing.first}}(支)</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">补货量</label>
+                    <span class="weui-form-preview__value">{{thPricing.number}}(支)</span>
+                  </div>
+                </div>
+                <div class="weui-form-preview__ft">
+                  <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:" @click="join('tanhua')">我要代理</a>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+          <div class="content">
+            <header class='demos-header'>
+                <h1 class="demos-title">{{byPricing.title}}</h1>
+              </header>
+            <div class="weui-form-preview" >
+                <div class="weui-form-preview__hd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">付款金额</label>
+                    <em class="weui-form-preview__value">¥{{byPricing.amount}}</em>
+                  </div>
+                </div>
+                <div class="weui-form-preview__bd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">商品</label>
+                    <span class="weui-form-preview__value">视界5.0</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">单价</label>
+                    <span class="weui-form-preview__value">¥{{byPricing.price}}</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">数量</label>
+                    <span class="weui-form-preview__value">{{byPricing.first}}(支)</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">补货量</label>
+                    <span class="weui-form-preview__value">{{byPricing.number}}(支)</span>
+                  </div>
+                </div>
+                <div class="weui-form-preview__ft">
+                  <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:" @click="join('bangyan')">我要代理</a>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div id="tab3" class="weui-tab__bd-item">
+          <div class="content">
+            <header class='demos-header'>
+                <h1 class="demos-title">{{zyPricing.title}}</h1>
+              </header>
+            <div class="weui-form-preview" >
+                <div class="weui-form-preview__hd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">付款金额</label>
+                    <em class="weui-form-preview__value">¥{{zyPricing.amount}}</em>
+                  </div>
+                </div>
+                <div class="weui-form-preview__bd">
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">商品</label>
+                    <span class="weui-form-preview__value">视界5.0</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">单价</label>
+                    <span class="weui-form-preview__value">¥{{zyPricing.price}}</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">数量</label>
+                    <span class="weui-form-preview__value">{{zyPricing.first}}(支)</span>
+                  </div>
+                  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">补货量</label>
+                    <span class="weui-form-preview__value">{{zyPricing.number}}(支)</span>
+                  </div>
+                </div>
+                <div class="weui-form-preview__ft">
+                  <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:" @click="join('zhuangyuan')">我要代理</a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="weui-tabbar">
+        <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+          <div class="weui-tabbar__icon">
+            <img src="./images/icon_nav_article.png" alt="">
+          </div>
+          <p style="margin:0px" class="weui-tabbar__label">探花代理</p>
+        </a>
+        <a href="#tab2" class="weui-tabbar__item">
+          <div class="weui-tabbar__icon">
+            <img src="./images/icon_nav_cell.png" alt="">
+          </div>
+          <p style="margin:0px" class="weui-tabbar__label">榜眼代理</p>
+        </a>
+        <a href="#tab3" class="weui-tabbar__item">
+          <div class="weui-tabbar__icon">
+            <img src="./images/icon_nav_cell.png" alt="">
+          </div>
+          <p style="margin:0px" class="weui-tabbar__label">状元代理</p>
+        </a>
+      </div>
+    </div>
+    <%- include ./shared/_scripts %>
+      <script src="/javascripts/include/query.js"></script>
+      <script src="/javascripts/join.js"></script>
+      <%- include ./shared/_footer %>

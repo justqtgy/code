@@ -1,0 +1,93 @@
+
+<%- include ./shared/_header %>  
+<%- include ./shared/_top %>   
+
+<header class="bar bar-nav">
+  <h1 class="title">业绩查询</h1>
+  <a href="/" class="icon pull-left"><i class="sstfont sst-xiangzuo"></i></a>
+  <!-- <a href="javascript:;" data-target="#half" class="icon pull-right open-popup"><i class="sstfont sst-sousuo"></i></a> -->
+</header>
+
+<!--顶部搜索-->
+<!--主体-->
+<div class="content"  id="grid">
+    <div class="weui-cells__title">团队总计</div>
+    <div class="weui-cells ">
+        <div class="weui-cell">
+            <div class="weui-cell__bd"><label class="weui-label">总人数</label></div>
+            <div class="weui-cell__ft">
+                <label class="weui-label">{{Team_Yeji.Number}}</label>
+            </div>
+        </div>  
+        <div class="weui-cell">                     
+            <div class="weui-cell__bd"><label class="weui-label">总金额</label></div>
+            <div class="weui-cell__ft">
+                <label class="weui-label">¥{{Team_Yeji.TotalMoney}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">个人总计</div>
+    <div class="weui-cells ">       
+        <div class="weui-cell">                     
+            <div class="weui-cell__bd">总金额</div>
+            <div class="weui-cell__ft">
+                ¥{{My_Yeji.TotalMoney}}
+            </div>
+        </div>
+        <div class="weui-cell">                     
+            <div class="weui-cell__bd"><label class="weui-label">最后代理金额</label></label></div>
+            <div class="weui-cell__ft">
+                ¥{{My_Yeji.LastMoney}}
+            </div>
+        </div>
+        <div class="weui-cell">                     
+            <div class="weui-cell__bd"><label class="weui-label">最后代理时间</label></div>
+            <div class="weui-cell__ft">
+                {{ new Date(My_Yeji.LastTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}
+            </div>
+        </div>
+    </div> 
+</div>
+      
+<div id="half" class='weui-popup__container popup-bottom'>
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal">
+      <div class="toolbar">
+        <div class="toolbar-inner">
+          <a href="javascript:;" class="picker-button close-popup">关闭</a>
+          <h1 class="title">查询</h1>
+        </div>
+      </div>
+      <div class="modal-content">
+        <div class="weui-grids">            
+            <form id="search" name="search" role="form" >
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">开始时间</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="date" value="">
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">结束时间</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="date" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-btn-area">
+                    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<%- include ./shared/_scripts %>
+<script src="/javascripts/include/date-utils.min.js"></script>
+<script src="/javascripts/include/query.js"></script>
+<script src="/javascripts/yeji.js"></script>
+<%- include ./shared/_footer %>
