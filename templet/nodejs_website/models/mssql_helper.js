@@ -67,3 +67,34 @@ module.exports.execSP = function(spName, params, cb) {
         cb(err);
     });
 }
+
+
+/**
+ * 异步执行,使用线程池
+ * @param {*} sql 
+ */
+module.exports.exec_sql = async function(sqlText, params) {
+    logHeper.info('sql =>', sql);
+    try{
+        let pool = await sql.connect(config);
+        //let result = await pool.request().query(sqlText);
+        let request = await pool.request();
+        request.verbose = true;
+        for (var p in params) {
+            request.input(params[p].name, params[p].type, params[p].value);
+        }
+        let result = await request.query(sqlText);
+        return result;
+    }
+    catch(error){
+        throw err
+    }
+
+    // new sql.ConnectionPool(config).connect().then(pool=>{
+    //     return pool.query(sqlText);
+    // }).then(result=>{
+    //     return result;
+    // }).catch(error=>{
+    //     throw error;
+    // })
+};

@@ -21,7 +21,7 @@ member.get_info = function(account, callback) {
 };
 
 member.get_count = function(params, callback) {
-    var sql = "select count(*) as total from Member";
+    var sql = "select count(*) as total from member";
     db.execSQL(sql, function(err, result) {
         if (err) {
             log.error('Error = ', err);
@@ -79,7 +79,7 @@ member.get_list = function(params, callback) {
 };
 
 member.get_single = function(id, callback) {
-    var sql = "select * from Member where ID = %s";
+    var sql = `select * from member where id = ${id}`;
     sql = util.format(sql, id);
     db.execSQL(sql, function(err, rows) {
         if (err) {
