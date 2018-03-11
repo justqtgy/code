@@ -4,7 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var logUtil = require('./utils/logUtil');
+var logUtil = require('./framework/logUtil');
+var dbs = require('./framework/dbs');
+var dbconfigs = require('./config/dbconfigs');
 var controller = require('./controller');
 
 var app = express();
@@ -22,6 +24,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //加载日志中间件
 app.use(logUtil);
+global.dbs = dbs;
+global.dbconfigs = dbconfigs;
 //加载路由
 controller(app);
 

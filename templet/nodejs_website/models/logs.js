@@ -1,11 +1,11 @@
-var db = require('./mysql_helper');
+var db = dbs.mssql(dbconfigs.shijie);
 
 function logs(model) {
-
+    
 }
 
 module.exports = logs
-
+/*
 logs.get_count = async function(args) {
     try {
         let sql = "select count(*) as total from logs";
@@ -19,22 +19,22 @@ logs.get_count = async function(args) {
         throw error
     }
 };
-
-logs.get_pages = async function(args, callback) {
+*/
+logs.get_pages = async function(args) {
     try {
         let pageIndex = parseInt(args.pageIndex);
         let pageSize = parseInt(args.pageSize);
         let beginID = (pageIndex - 1) * pageSize + 1;
         let endID = pageIndex * pageSize;
 
-        let sql = `select * from logs limit ${beginID}, ${endID}`
-        let result = await db.exec(sql);
+        let sql = "select * from member";//`select * from logs limit ${beginID}, ${endID}`
+        let result = await db.exec(sql, null);
         return result;
     } catch (error) {
         throw error
     }
 };
-
+/*
 logs.get_single = async function(id) {
     try {
         let sql = `select * from logs where id = ${id}`;
@@ -74,3 +74,4 @@ logs.delete = async function(args) {
         throw error
     }
 };
+*/

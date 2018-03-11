@@ -1,7 +1,14 @@
 var sql = require('mssql');
-var config = require('./../config/settings').dbconfig;
+var config = null;//require('./../config/settings').dbconfig;
 
-module.exports.execSQL = function(sqlText, cb) {
+module.exports = mssql_helper;
+
+var mssql_helper = function(dbconfig){
+    config = dbconfig;
+    return mssql_helper;
+};
+
+mssql_helper.prototype.execSQL = function(sqlText, cb) {
     var connection = new sql.Connection(config, function(err) {
         if (err) {
             logger.error('error => ', err);
@@ -34,7 +41,7 @@ module.exports.execSQL = function(sqlText, cb) {
     // });
 };
 
-module.exports.execSP = function(spName, params, cb) {
+mssql_helper.execSP = function(spName, params, cb) {
     var connection = new sql.Connection(config, function(err) {
         // ... error checks 
         if (err) {
@@ -66,4 +73,23 @@ module.exports.execSP = function(spName, params, cb) {
         logger.error('error => ', err);
         cb(err);
     });
+};
+
+
+mssql_helper.exec = async function(sqlText){
+    logHeper.info('sql =>', sqlText);
+    try{
+        let pool = await mssql.connect(config);
+        let result = await pool.request().query(sqlText);
+        // let request = await pool.request();
+        // request.verbose = true;
+        // for (var p in params) {
+        //     request.input(params[p].name, params[p].type, params[p].value);
+        // }
+        // let result = await request.query(sql);
+        return result;
+    }
+    catch(error){
+        throw error;
+    }    
 }
