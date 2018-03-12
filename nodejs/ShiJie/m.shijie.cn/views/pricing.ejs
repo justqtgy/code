@@ -1,0 +1,51 @@
+
+<%- include ./shared/_header %>  
+
+<%- include ./shared/_top %>   
+
+<header class="bar bar-nav">
+  <h1 class="title">补货下单</h1>
+  <a href="/"  class="icon pull-left"><i class="sstfont sst-xiangzuo"></i></a>
+</header>
+
+<!--顶部搜索-->
+<!--主体-->
+<div class="content" id="grid">
+  <header class='demos-header'>
+      <h1 class="demos-title">{{myPricing.title}}</h1>
+    </header>
+  <div class="weui-form-preview" >
+      <div class="weui-form-preview__hd">
+        <div class="weui-form-preview__item">
+          <label class="weui-form-preview__label">付款金额</label>
+          <em class="weui-form-preview__value">¥{{myPricing.price*myPricing.number}}</em>
+        </div>
+      </div>
+      <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+          <label class="weui-form-preview__label">商品</label>
+          <span class="weui-form-preview__value">视界5.0</span>
+        </div>
+        <div class="weui-form-preview__item">
+          <label class="weui-form-preview__label">单价</label>
+          <span class="weui-form-preview__value">¥{{myPricing.price}}</span>
+        </div>
+        <div class="weui-form-preview__item">
+          <label class="weui-form-preview__label">数量</label>
+          <span class="weui-form-preview__value">{{myPricing.number}}(支)</span>
+        </div>
+        <div class="weui-form-preview__item">
+          <label class="weui-form-preview__label">补货量</label>
+          <span class="weui-form-preview__value">{{myPricing.number}}(支)</span>
+        </div>
+      </div>
+      <div class="weui-form-preview__ft">
+        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:" @click="pricing">下单</a>
+      </div>
+    </div>
+</div>
+<%- include ./shared/_scripts %>
+<script src="/javascripts/include/query.js"></script>
+<script src="/javascripts/pricing.js"></script>
+<%- include ./shared/_footer %>
+

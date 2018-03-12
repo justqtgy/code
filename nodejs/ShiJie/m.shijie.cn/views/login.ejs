@@ -1,0 +1,35 @@
+
+<%- include ./shared/_header %>  
+<%- include ./shared/_top %>   
+
+<div class="toolbar">
+	<div class="toolbar-inner">
+		<h1 class="title">登录</h1>
+	</div>
+</div>
+<div class="weui-cells__title">请输入账号密码 <span id="error" style="display:none" class="badge badge-negative badge-inverted">登录失败：账号不存在</span></div>
+<form class="input-group login-form">
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">账号：</label></div>
+        <div class="weui-cell__bd">
+         <input class="weui-input" name ="account"  type="text" placeholder="请输入账号">
+        </div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">密码：</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" name = "password"  type="password" placeholder="请输入密码">
+        </div>
+      </div>
+      
+       
+    </div>
+    <div class="weui-btn-area">
+          <a class="weui-btn weui-btn_primary" href="javascript:" id="login-btn">登录</a>
+        </div>
+</div>
+</form>
+<%- include ./shared/_scripts %>
+<script src="/javascripts/login.js"></script>
+<%- include ./shared/_footer %>
