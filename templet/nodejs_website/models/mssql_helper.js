@@ -1,14 +1,15 @@
-var sql = require('mssql');
-var config = null;//require('./../config/settings').dbconfig;
+var mssql = require('mssql');
+//var config = null;//require('./../config/settings').dbconfig;
 
 module.exports = mssql_helper;
 
-var mssql_helper = function(dbconfig){
-    config = dbconfig;
-    return mssql_helper;
-};
+function mssql_helper(dbconfig){
+    this.config = dbconfig;
+}
 
-mssql_helper.prototype.execSQL = function(sqlText, cb) {
+/*
+
+mssql_helper.execSQL = function(sqlText, cb) {
     var connection = new sql.Connection(config, function(err) {
         if (err) {
             logger.error('error => ', err);
@@ -54,15 +55,13 @@ mssql_helper.execSP = function(spName, params, cb) {
         for (var p in params) {
             request.input(params[p].name, params[p].type, params[p].value);
         }
-        request.execute(spName, function(err, result) {
-            /*
-            console.log(result.recordsets.length) // count of recordsets returned by the procedure 
-            console.log(result.recordsets[0].length) // count of rows contained in first recordset 
-            console.log(result.recordset) // first recordset from result.recordsets 
-            console.log(result.returnValue) // procedure return value 
-            console.log(result.output) // key/value collection of output values 
-            console.log(result.rowsAffected) // array of numbers, each number represents the number of rows affected by executed statemens 
-            */
+        request.execute(spName, function(err, result) {            
+            // console.log(result.recordsets.length) // count of recordsets returned by the procedure 
+            // console.log(result.recordsets[0].length) // count of rows contained in first recordset 
+            // console.log(result.recordset) // first recordset from result.recordsets 
+            // console.log(result.returnValue) // procedure return value 
+            // console.log(result.output) // key/value collection of output values 
+            // console.log(result.rowsAffected) // array of numbers, each number represents the number of rows affected by executed statemens 
 
             cb(err, result);
         });
@@ -75,18 +74,19 @@ mssql_helper.execSP = function(spName, params, cb) {
     });
 };
 
-
-mssql_helper.exec = async function(sqlText){
-    logHeper.info('sql =>', sqlText);
+*/
+mssql_helper.prototype.exec = async function(sql, params){
+    logHeper.info('sql =>', sql);
     try{
-        let pool = await mssql.connect(config);
-        let result = await pool.request().query(sqlText);
-        // let request = await pool.request();
-        // request.verbose = true;
-        // for (var p in params) {
-        //     request.input(params[p].name, params[p].type, params[p].value);
-        // }
-        // let result = await request.query(sql);
+        let pool = await mssql.connect(this.config);
+        //let result = await pool.request().query(sql);
+        let request = await pool.request();
+        request.verbose = true;
+        for (var p in params) {
+            request.input(params[p].name, params[p].type, params[p].value);
+        }
+        let result = await request.query(sql);
+        mssql.close();
         return result;
     }
     catch(error){

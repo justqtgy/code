@@ -1,15 +1,16 @@
-var db = dbs.mssql(dbconfigs.shijie);
+var dbs = require('./_dbs');
+var db = dbs.mysql(dbconfigs.mydb);
 
 function logs(model) {
     
 }
 
 module.exports = logs
-/*
+
 logs.get_count = async function(args) {
     try {
         let sql = "select count(*) as total from logs";
-        let result = await db.exec(sql);
+        let result = await db.exec(sql, null);
         let total = 0;
         if (result.length > 0) {
             total = result[0].total;
@@ -19,7 +20,7 @@ logs.get_count = async function(args) {
         throw error
     }
 };
-*/
+
 logs.get_pages = async function(args) {
     try {
         let pageIndex = parseInt(args.pageIndex);
@@ -27,7 +28,7 @@ logs.get_pages = async function(args) {
         let beginID = (pageIndex - 1) * pageSize + 1;
         let endID = pageIndex * pageSize;
 
-        let sql = "select * from member";//`select * from logs limit ${beginID}, ${endID}`
+        let sql = "select * from logs";//`select * from logs limit ${beginID}, ${endID}`
         let result = await db.exec(sql, null);
         return result;
     } catch (error) {

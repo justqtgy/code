@@ -1,6 +1,20 @@
 var mysql = require("mysql");
-var settings = require('../config/settings');
+//var settings = require('../config/settings');
+module.exports = mysql_helper;
 
+var config = {
+    _dbconfig : ''
+};
+
+function mysql_helper(){
+
+}
+
+mysql_helper.init = function(dbconfig){
+    config._dbconfig = dbconfig;
+};
+
+/*
 module.exports.execSQL = function(sql, params, callback) {
     logHeper.info('sql =>', sql, params);
     var connection = mysql.createConnection(settings);
@@ -16,13 +30,14 @@ module.exports.execSQL = function(sql, params, callback) {
         });
     });
 };
-
+*/
 /**
  * 使用线程池
  * @param {*} sql 
  * @param {*} params 
  * @param {*} callback 
  */
+/*
 module.exports.execSQL_Pool = function(sql, params, callback) {
     logHeper.info('sql =>', sql, params);
     var pool = mysql.createPool(settings);
@@ -38,15 +53,15 @@ module.exports.execSQL_Pool = function(sql, params, callback) {
         });
     });
 };
-
+*/
 /**
  * 异步执行,使用线程池
  * @param {*} sql 
  */
-module.exports.exec = function(sql) {
+mysql_helper.exec = function(sql, params) {
     logHeper.info('sql =>', sql);
     return new Promise(function(resolve, reject) {
-        var pool = mysql.createPool(settings);
+        var pool = mysql.createPool(config._dbconfig);
         pool.getConnection(function(err, connection) {
             if (err) {
                 console.log('error => ', err);
@@ -54,7 +69,7 @@ module.exports.exec = function(sql) {
                 return reject(err);
             }
 
-            connection.query(sql, function(err, results) {
+            connection.query(sql, params, function(err, results) {
                 connection.release();
                 if (err) {
                     console.log('error => ', err);

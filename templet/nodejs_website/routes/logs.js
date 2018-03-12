@@ -14,7 +14,7 @@ router.get('/pages', async function(req, res, next){
     logHeper.info('req param =>', args);
 
     try {
-        let count = 100//await logs.get_count(args);
+        let count = await logs.get_count(args);
         let result = await logs.get_pages(args);
         console.log('result=============>', result);
         res.send({ ok: 1, result: result, count : count });
