@@ -2,17 +2,13 @@ var mysql = require("mysql");
 //var settings = require('../config/settings');
 module.exports = mysql_helper;
 
-var config = {
-    _dbconfig : ''
-};
-
-function mysql_helper(){
-
+function mysql_helper(config){
+    this.config = config;
 }
 
-mysql_helper.init = function(dbconfig){
-    config._dbconfig = dbconfig;
-};
+// mysql_helper.init = function(dbconfig){
+//     config._dbconfig = dbconfig;
+// };
 
 /*
 module.exports.execSQL = function(sql, params, callback) {
@@ -80,4 +76,18 @@ mysql_helper.exec = function(sql, params) {
             });
         });
     });
+};
+
+mysql_helper.exec = async function(sql, params) {
+    logHeper.info('sql =>', sql);
+    try{
+        var pool = await mysql.createPool(dbconfig); 
+        var conn = await pool.getConnection();    
+        var result = await pool.query(sql, params)
+        conn.release();
+        return result;        
+    }
+    catch(error){
+        throw error;
+    }
 };
