@@ -1,5 +1,5 @@
 var dbs = require('./_dbs');
-var db = dbs.mysql(dbconfigs.mydb);
+var db = dbs.mssql(dbconfigs.shijie);
 
 function logs(model) {
     
@@ -9,7 +9,7 @@ module.exports = logs
 
 logs.get_count = async function(args) {
     try {
-        let sql = "select count(*) as total from logs";
+        let sql = "select count(*) as total from member";
         let result = await db.exec(sql, null);
         let total = 0;
         if (result.length > 0) {
@@ -28,7 +28,7 @@ logs.get_pages = async function(args) {
         let beginID = (pageIndex - 1) * pageSize + 1;
         let endID = pageIndex * pageSize;
 
-        let sql = "select * from logs";//`select * from logs limit ${beginID}, ${endID}`
+        let sql = "select * from member";//`select * from logs limit ${beginID}, ${endID}`
         let result = await db.exec(sql, null);
         return result;
     } catch (error) {

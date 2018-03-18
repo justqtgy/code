@@ -1,6 +1,6 @@
 var _mssql = require('./mssql_helper');
 var _mysql = require('./mysql_helper');
-var _pgsql = require('./pgsql_helper');
+// var _pgsql = require('./pgsql_helper');
 
 var _dbs = {
     mssql : function(config){
@@ -11,9 +11,9 @@ var _dbs = {
         // return _mysql;
         return new _mysql(config);
     },
-    pgsql : function(config){
-        return new _pgsql(config);
-    }
+    // pgsql : function(config){
+    //     return new _pgsql(config);
+    // }
     
 };
 

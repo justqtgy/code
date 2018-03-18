@@ -1,5 +1,4 @@
 var db = require('./mysql_helper');
-var escape = require('./utils/sql_escape');
 
 function users(model) {
     
@@ -48,7 +47,7 @@ users.get_single = async function(account) {
 
 users.add = async function(args, callback) {
     try {
-        args = escape.escape(args);
+
         var sql = `insert into users(account, password, user_name, weixin_id, mobile, add_time, status, is_admin)
 			   values('${args.account}','${args.password}','${args.user_name}', '${args.weixin_id}', '${args.mobile}', now(), ${args.status}, ${args.is_admin})`;
         let result = await db.exec(sql);
@@ -59,7 +58,7 @@ users.add = async function(args, callback) {
 
 users.update = async function(args, callback) {
     try {
-        args = escape.escape(args);
+
         let sql = `update users set user_name='${args.user_name}', weixin_id='${args.weixin_id}', mobile=${args.mobile}, status=${args.status} where id = ${args.id}`;
         let result = await db.exec(sql);
         return result;
@@ -70,7 +69,7 @@ users.update = async function(args, callback) {
 
 users.delete = async function(args) {
     try {
-        args = escape.escape(args);
+
         let sql = `delete from users where id = ${args.id}`;
         let result = await db.exec(sql);
         return result;
@@ -81,7 +80,7 @@ users.delete = async function(args) {
 
 users.change_password = async function(args) {
     try {
-        args = escape.escape(args);
+
         let sql = `update users set password=${args.password} where id = ${args.id}`;
         let result = await db.exec(sql);
         return result;

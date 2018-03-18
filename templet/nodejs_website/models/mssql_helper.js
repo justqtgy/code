@@ -1,13 +1,14 @@
 var mssql = require('mssql');
 //var config = null;//require('./../config/settings').dbconfig;
 
-module.exports = mssql_helper;
+// module.exports = mssql_helper;
 
-function mssql_helper(dbconfig){
-    this.config = dbconfig;
-}
+// function mssql_helper(dbconfig){
+//     this.config = dbconfig;
+// }
 
 /*
+
 
 mssql_helper.execSQL = function(sqlText, cb) {
     var connection = new sql.Connection(config, function(err) {
@@ -75,21 +76,27 @@ mssql_helper.execSP = function(spName, params, cb) {
 };
 
 */
-mssql_helper.prototype.exec = async function(sql, params){
-    logHeper.info('sql =>', sql);
-    try{
-        let pool = await mssql.connect(this.config);
-        //let result = await pool.request().query(sql);
-        let request = await pool.request();
-        request.verbose = true;
-        for (var p in params) {
-            request.input(params[p].name, params[p].type, params[p].value);
-        }
-        let result = await request.query(sql);
-        mssql.close();
-        return result;
+//mssql_helper.prototype.exec = async function(sql, params){
+module.exports = class mssql_helper{
+    constructor(dbconfig){
+        this.config = dbconfig;
     }
-    catch(error){
-        throw error;
-    }    
+    async exec(sql, params){
+        logHeper.info('sql =>', sql);
+        try{
+            let pool = await mssql.connect(this.config);
+            //let result = await pool.request().query(sql);
+            let request = await pool.request();
+            request.verbose = true;
+            for (var p in params) {
+                request.input(params[p].name, params[p].type, params[p].value);
+            }
+            let result = await request.query(sql);
+            mssql.close();
+            return result;
+        }
+        catch(error){
+            throw error;
+        }    
+    }
 }
