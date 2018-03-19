@@ -1,0 +1,15 @@
+<link href="../assets/multiple-select/multiple-select.css" rel="stylesheet" />
+<script src="../assets/multiple-select/multiple-select.js"></script>
+<script >
+
+    $.get('/gps_rubbish/GPSIDList',function(result){
+        renderList(result.group);
+    })
+
+    function renderList(GPSIDList){
+    $('.multiselect').html(GPSIDList);
+    $('.multiselect').multipleSelect({ selectAllText: '全部选择',  filter: true, width: 160 });
+    $('#mulVehicle').multipleSelect("checkAll");
+}
+
+</script>

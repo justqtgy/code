@@ -1,0 +1,77 @@
+
+<%- include ./shared/_header %>  
+<%- include ./shared/_top %>   
+
+<header class="bar bar-nav">
+  <a class="icon icon-left-nav pull-left" href="/" ></a>
+  <a class="icon icon-search pull-right" href="#searchModal"></a>
+  <h1 class="title">加油记录</h1>
+</header>
+
+<div id = "grid" class="content  top-title bottom-title">  
+  <ul  class="table-view" v-if = "DataList.length > 0">
+    <li class="table-view-cell media" v-for = "(item, index) in DataList">
+        <img class="media-object pull-left" src="images/arrow_icon.png">        
+        <div class="media-body" v-cloak>
+          {{item.VehicleNo}}
+          <p>记录时间：{{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')}}</p>
+          <p><span>加油油量：{{item.AddOil}}L</span></p>
+          <p v-if="item.GPSStatus==1"><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
+          <p v-else>{{"尚未更新"}}</p>
+        </div>
+
+    </li>
+     
+  </ul>
+  <ul class="table-view" v-else>
+    <li class="table-view-cell" v-cloak>
+       {{MsgInfo}}
+    </li>
+  </ul>
+  <div class="weui-loadmore">
+    <i class="weui-loading"></i>
+    <span class="weui-loadmore__tips">正在加载</span>
+  </div>
+  <!--<table class="table table-striped table-bordered table-hover dataTable">
+      <thead>
+          <tr>               
+              <th>车牌号</th> 
+              <th>上次油量</th>                             
+              <th>加油量</th>
+              <th>当前油量</th>
+              <th>记录时间</th>                            
+              <th>位置</th>
+          </tr>
+      </thead>
+      <tbody v-if = "DataList.length > 0">
+          <tr v-for = "(item, index) in DataList">          
+              <td>{{ item.VehicleNo }}</td>           
+              <td>{{ item.PreOil }}</td>  
+              <td>{{ item.AddOil }}</td>  
+              <td>{{ item.CurOil }}</td>   
+              <td>{{ new Date(item.AddTime).toUTCFormat('MM-DD HH24:MI:SS') }}</td>   
+              <td><a href='#' v-on:click="showMap(item.Lat,item.Lng)">查看</a></td>
+          </tr>
+      </tbody>
+      <tbody v-else>
+          <tr><td colspan="6" style="text-align:center;">没有数据</td></tr>
+      </tbody>
+  </table>  -->      
+</div>
+<!--
+<nav id="page" class="bar bar-tab">
+    <a class="tab-item" id="more" href="javascript:void(0)">
+      加载更多
+  </a>
+</nav>
+-->
+<%- include ./control/_map %>
+<%- include ./control/_search-page %>
+<%- include ./shared/_scripts %>
+<%- include ./shared/_popup %>
+<%- include ./control/_search-js %>
+<script src="/javascripts/include/map.js"></script>
+<script src="/javascripts/include/date-utils.min.js"></script>
+<script src="/javascripts/include/query.js"></script>
+<script src="/javascripts/gps_oil_add.js"></script>
+<%- include ./shared/_footer %>

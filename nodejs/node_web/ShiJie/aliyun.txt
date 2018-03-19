@@ -1,0 +1,15 @@
+﻿server:120.79.76.22
+-----------------------
+aliyun:广视明宇
+password:50shijie
+
+windows
+-----------------------
+user:administrator
+password:Gsmy50shijie
+
+
+db
+-----------------------
+password: Gsmy50shijie
+server: 120.79.76.22

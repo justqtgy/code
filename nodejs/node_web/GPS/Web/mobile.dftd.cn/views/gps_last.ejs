@@ -1,0 +1,49 @@
+
+<%- include ./shared/_header %>  
+<%- include ./shared/_top %>   
+
+<header class="bar bar-nav">
+  <a class="icon icon-left-nav pull-left" href="/" ></a>
+  <a class="icon icon-search pull-right" href="#searchModal"></a>
+  <h1 class="title">车辆状态</h1>
+</header>
+
+
+<div id = "grid" class="content top-title bottom-title">
+  <ul  class="table-view" v-if = "DataList.length > 0">
+    <li class="table-view-cell media" v-for = "(item, index) in DataList">
+        <img class="media-object pull-left" src="images/arrow_icon.png">      
+        <div class="media-body" v-cloak>
+          {{item.VehicleNo}}
+          <p v-if="(new Date(getCurrentTime()) - new Date(new Date(item.UpdateTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS'))) > 600000"></p>
+          <p v-else>当前油量：{{item.CurOil}}L</p>
+          <p>当前状态：{{ (new Date(getCurrentTime()) - new Date(new Date(item.UpdateTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS'))) > 600000 ? "设备异常" :"设备正常" }}
+          </p>
+          <p v-if="(new Date(getCurrentTime()) - new Date(new Date(item.UpdateTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS'))) > 600000"></p>
+          <p v-else><a href='javascript:;' v-on:click="showMap(item.Lat,item.Lng)">查看定位</a></p>
+        </div>
+
+    </li>
+  </ul>
+  <ul class="table-view" v-else>
+    <li class="table-view-cell" v-cloak>
+      {{MsgInfo}}
+    </li>
+  </ul>
+</div>
+<nav id="page" class="bar bar-tab">
+    <a class="tab-item" id="more" href="javascript:void(0)">
+      加载更多
+  </a>
+</nav>
+
+<%- include ./control/_map %>
+<%- include ./control/_search-page %>
+<%- include ./shared/_scripts %>
+<%- include ./shared/_popup %>
+<%- include ./control/_search-js %>
+<script src="/javascripts/include/date-utils.min.js"></script>
+<script src="/javascripts/include/date_now.js"></script>
+<script src="/javascripts/include/query.js"></script>
+<script src="/javascripts/gps_last.js"></script>
+<%- include ./shared/_footer %>

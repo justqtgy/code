@@ -1,0 +1,20 @@
+<div id="searchModal" class="modal">
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#searchModal"></a>
+        <h1 class="title">查找</h1>
+    </header>
+
+    <div class="content">
+        <form class="input-group" id="search">
+            <ul class="table-view">
+                <li class="table-view-cell over-show">选择车辆：<select id="mulVehicle" class="multiselect"  multiple="multiple" ></select> </li>
+                <li class="table-view-cell begin-time">开始时间：<input class="input-width"  type="datetime-local" name="begintime"  value="<%= start_date %>" style="width:auto;"></li>
+                <li class="table-view-cell end-time">结束时间：<input class="input-width"  type="datetime-local" name = "endtime"  value="<%= end_date %>" style="width:auto;"></li>
+            </ul>
+            <button id="btnSearch" class="btn btn-primary btn-block">查询</button>
+        </form>
+    </div>
+</div>
+<div id="loading">
+    <img src="/images/loading.gif" alt="loading" />
+</div>
