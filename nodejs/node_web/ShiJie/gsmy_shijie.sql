@@ -23,42 +23,42 @@ create table order_list(
 	member_id int not null, --代理id
 	number int not null, --数量
 	price money not null, --单价
-	add_time datetime not null, --下单时间
+	add_time timestamp not null, --下单时间
 	status int not null, --状态：2成功发货，1上级确认，0正常，-1取消，-2驳回
 )
 
 --日志表:升级、拿货信息推送
 create table order_log(
-	id int identity(1,1),
+	id serial primary key,
 	member_id int not null,  --代理成员id
 	content varchar(max) not null, --内容
 	status int not null, --状态：2成功发货，1上级确认，-1取消，-2驳回
-	add_time datetime not null --添加时间
+	add_time timestamp not null --添加时间
 )
 
 --奖励表
 create table bounty(
-	id int identity(1,1),	
+	id serial primary key,
 	member_id int not null,  --代理id
-	content varchar(max) not null, --奖励内容
+	content varchar(250) not null, --奖励内容
 	status int not null,	--状态
 	--Adminid int not null, --
-	add_time datetime not null
+	add_time timestamp not null
 )
-
-create table config_grade(
-	id int identity(1,1),
-	grade int not null,
+--等级
+create table member_level(
+	id serial primary key,
+	level int not null,
 	price money not null,
-	is_enabled bit not null
+	is_ok bit not null
 )
 
 create table sms(
-	id int identity(1,1)
+	id serial primary key,
 	member_id int not null,
 	mobile varchar(20) not null, 
-	content varchar(max) not null,
-	add_time datetime not null
+	content varchar(250) not null,
+	add_time timestamp not null
 )
 
 /*
