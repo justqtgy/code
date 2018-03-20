@@ -35,6 +35,7 @@ class pssql_helper{
     }
 
     async exec(sql, params){
+        logHeper.info('sql =>', sql, params);
         try{
             var pool = new pg.Pool(config);
             var connect = await pool.connect();

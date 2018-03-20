@@ -1,6 +1,6 @@
-var mysql = require("mysql");
+var maria = require("mariadb");
 
-module.exports = class mysql_helper{
+module.exports = class maria_helper{
     constructor(dbconfig){
         this.config = dbconfig;
     }
@@ -12,7 +12,7 @@ module.exports = class mysql_helper{
         logHeper.info('sql =>', sql, params);
         var config = this.config;
         return new Promise(function(resolve, reject) { 
-            var pool = mysql.createPool(config);           
+            var pool = maria.createPool(config);           
             pool.getConnection(function(err, connection) {
                 if (err) {
                     console.log('error => ', err);
