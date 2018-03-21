@@ -44,9 +44,9 @@ function showTreeGroup(data) {
         "plugins": ["types","state", "checkbox"],
 
     }).bind("activate_node.jstree", function(e, data) {
-        get_position();
+
     }).bind("ready.jstree", function(e, data){
-        get_position();
+
     });
 }
 
@@ -75,56 +75,15 @@ function get_position() {
     });
 }
 
-var map = new AMap.Map("container", {resizeEnable: true});
-var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
-//逆地理编码
-var geocoder = new AMap.Geocoder({
-    radius: 1000,
-    extensions: "all"
-});
-
-function showLocation(data) {console.log(data);
-    var lnglats = []
-    $.each(data, function(i, item){
-        //经度
-        var lng = Number(item.Lng);
-        var lat = Number(item.Lat);
-        var pos = wgs84togcj02(lng, lat);
-        lnglats.push(pos);
+function send_data(){
+    var txt = 'aaaaaaaaaaaaa';
+    var socket = io.connect('http://120.24.68.95:7777');
+	//向服务器发消息
+    socket.emit("data", {content:txt});
+    //从服务器获得消息
+    socket.on("message", function(msg){
+        alert('服务器回复：'+msg)
     });
-
-    map.clearMap();
-    for(var i=0, marker;i<lnglats.length;i++){
-        (function(i){
-            // 实例化点标记
-            var marker = new AMap.Marker({ //添加自定义点标记
-                map: map,
-                position: lnglats[i], //基点位置
-                icon: "http://webapi.amap.com/images/car.png",
-                //offset: new AMap.Pixel(-10, -12), //相对于基点的偏移位置
-            });
-
-            geocoder.getAddress(lnglats[i], function(status, result) {
-                if (status === 'complete' && result.info === 'OK') {
-                    var address = result.regeocode.formattedAddress; //返回地址描述  
-                    address = '当前车辆：' + data[i].VehicleNo
-                            + '<br/>当前油量：' + data[i].CurOil
-                            + '<br/>当前位置：' + address
-                            + '<br/>更新时间：' + new Date(data[i].UpdateTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')
-                            
-                    marker.content = address;
-                    marker.on('click', markerClick);
-                    marker.emit('click', {target: marker});
-                }
-            });
-        })(i);
-    }
-    map.setFitView();
-}
-
-function markerClick(e) {
-    infoWindow.setContent(e.target.content);
-    infoWindow.open(map, e.target.getPosition());
 }
 
 var app = new Vue({
@@ -136,7 +95,9 @@ var app = new Vue({
         init: function() {
             var _h = $(document.body).height();
             $(".map").css("height", _h-160);
-            load_tree();          
+            load_tree();   
+            
+            $("#send").click(function(){ send_data(); });
         }
     }
 });

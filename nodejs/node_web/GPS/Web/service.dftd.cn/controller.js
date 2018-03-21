@@ -18,6 +18,7 @@ var gps_rubbish = require('./routes/gps_rubbish');
 var gps_sending = require('./routes/gps_sending');
 var driver_card = require('./routes/driver_card');
 var gps_level = require('./routes/gps_level');
+var upgrade = require('./routes/upgrade');
 
 exports.init_route = function(app) {
     console.log('init_route begin');
@@ -42,6 +43,7 @@ exports.init_route = function(app) {
     app.use('/driver_card', driver_card);
     app.use('/gps_level', gps_level);
     app.use('/gps_location', gps_location);
+    app.use('/upgrade', upgrade);
 
     console.log('init_route end');
 };

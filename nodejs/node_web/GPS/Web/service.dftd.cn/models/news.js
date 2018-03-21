@@ -63,13 +63,14 @@ news.get_single = function(id, callback) {
 
 
 news.add = function(params, callback) {
-    var sql = "insert into News(Title,Content,AddTime,AdminID, AdminName, LastUpdateTime) values('%s','%s',GETDATE(),'%s','%s',GETDATE())";
+    var sql = "insert into News(Title,Content,AddTime,AdminID, AdminName, LastUpdateTime) values('%s','%s',GETDATE(),'%s','%s',GETDATE()); select @@identity as rid;";
     sql = util.format(sql, params.title, params.content, params.adminID, params.adminName);
     console.log(sql);
     db.execSQL(sql, function(err, result) {
         if (err) {
             return callback(err);
         }
+
         callback(err, result);
     });
 }
@@ -94,6 +95,7 @@ news.delete = function(params, callback) {
         if (err) {
             return callback(err);
         }
+       
         callback(err, result);
     });
 };

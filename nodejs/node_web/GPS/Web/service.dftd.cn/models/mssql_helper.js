@@ -3,47 +3,39 @@ var config = require('./../config/settings').dbconfig;
 
 module.exports.execSQL = function(sqlText, cb) {
     console.log(sqlText);
-    var connection = new sql.Connection(config, function(err) {
+    var pool = new sql.ConnectionPool(config, function(err) {
         if (err) {
             log.error('error => ', err);
             return cb(err);
         }
         // Query 
-        var request = new sql.Request(connection); // or: var request = connection.request(); 
+        var request = new sql.Request(pool); // or: var request = connection.request(); 
         request.query(sqlText, function(err, result) {
-            cb(err, result);
+            pool.close();
+            console.log('===============>', result);
+            //output是对象{}
+            //recordset数组，每行记录
+            //rowsAffected数组执行语句所影响的行数，可以通过判断lenght来判断是否成功
+            cb(err, result.recordset);
         });
     });
 
-    connection.on('error', function(err) {
+    pool.on('error', function(err) {
         // ... error handler 
         log.error('error => ', err);
         cb(err);
     });
-
-    // sql.connect(config).then(function(connection) {
-    //     new sql.Request(connection)
-    //         .query(sqlText)
-    //         .then(function(result) {
-    //             cb(null, result);
-    //         }).catch(function(err) {
-    //             cb(err, '');
-    //         });
-
-    // }).catch(function(err) {
-    //     cb(err, '');
-    // });
 };
 
 module.exports.execSP = function(spName, params, cb) {
-    var connection = new sql.Connection(config, function(err) {
+    var pool = new sql.ConnectionPool(config, function(err) {
         // ... error checks 
         if (err) {
             log.error('error => ', err);
             return cb(err, '');
         }
         // Stored Procedure 
-        var request = new sql.Request(connection); // or: var request = connection.request(); 
+        var request = new sql.Request(pool); // or: var request = connection.request(); 
         request.verbose = true;
         for (var p in params) {
             request.input(params[p].name, params[p].type, params[p].value);
@@ -57,12 +49,12 @@ module.exports.execSP = function(spName, params, cb) {
             console.log(result.output) // key/value collection of output values 
             console.log(result.rowsAffected) // array of numbers, each number represents the number of rows affected by executed statemens 
             */
-
+            pool.close();
             cb(err, result);
         });
     });
 
-    connection.on('error', function(err) {
+    pool.on('error', function(err) {
         // ... error handler 
         log.error('error => ', err);
         cb(err);

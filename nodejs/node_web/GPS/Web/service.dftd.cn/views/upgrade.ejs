@@ -39,8 +39,16 @@
                     <div class="profile-content" >
                         <div class="row">
                             <div class="col-md-12" >
-                                <div class="portlet light map" style="overflow:hidden;">
-                                    <div id="container" ></div>
+                                <div class="portlet light" style="overflow:hidden;">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active">
+                                            <div class="scroller" style="height: 500px;" data-always-visible="1" data-rail-visible="0">                                               
+                                                <button id="send">开始升级</button>
+                                               
+                                                <div id="result" style="width:900px;height:250px;border:2px solid gray;margin-top:30px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>                                
                             </div>                            
                         </div>
@@ -57,13 +65,11 @@
     
 <%- include ./shared/_bottom %>
 <%- include ./shared/_scripts %>
-    <script type="text/javascript" src="http://cache.amap.com/lbs/static/es5.min.js"></script>    
-    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=e12cc6ed395c712532ee84dabf3467d0&plugin=AMap.Geocoder"></script>
-    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
-    <script type="text/javascript" src="javascripts/include/map.js"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="../assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->
+    <script src="/javascripts/include/socket.js"></script>
+    <script src="/javascripts/include/query-sending.js"></script>
     <script src="/javascripts/include/date-utils.min.js"></script>
     <script src="/javascripts/include/query.js"></script>
     <script src="/javascripts/upgrade.js"></script>

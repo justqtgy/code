@@ -10,5 +10,6 @@ module.exports.dbconfig = {
         max: 10,
         min: 0,
         idleTimeoutMillis: 30000
-    }
+    },
+    driver: null
 };
