@@ -1,3 +1,6 @@
+var svrAddress = 'http://127.0.0.1:7777';//'http://120.24.68.95:7777'
+var socket = null;
+
 var icons = {
     0: "fa fa-folder icon-state-warning icon-lg",
     1: "fa fa-folder icon-state-warning icon-lg",
@@ -13,7 +16,7 @@ function load_tree(){
                 data.push({ "gid": item.GroupID, "vid":0, "text": item.GroupName, "children" : [] });
             } else {
                 var index = data.length-1;
-                data[index]["children"].push({"vid" : item.VehicleID, "text" : item.VehicleNo})
+                data[index]["children"].push({"vid" : item.VehicleID, "text" : item.VehicleNo, "gpsid":item.GPSID})
             }
         });
 
@@ -75,14 +78,40 @@ function get_position() {
     });
 }
 
-function send_data(){
-    var txt = 'aaaaaaaaaaaaa';
-    var socket = io.connect('http://120.24.68.95:7777');
-	//向服务器发消息
-    socket.emit("data", {content:txt});
+
+function connect_server(){
+    socket = io.connect(svrAddress);
+
+    //向服务器发消息
+    socket.emit('online', "get_online");
     //从服务器获得消息
-    socket.on("message", function(msg){
-        alert('服务器回复：'+msg)
+    socket.on("online", function(msg){        
+        console.log(msg);
+    });
+}
+
+function send_data(){
+    var ids =[]
+    var tree = $("#tree_group").jstree();
+    var nodes=$("#tree_group").jstree("get_selected"); 
+    
+    $.each(nodes, function(i, n) { 
+        var item = tree.get_node(n);
+        console.log(item)
+        if(item.original.vid>0 && item.original.gpsid){
+            ids.push(item.original.gpsid)
+        }
+    }); 
+    if(ids.length==0) {
+        return alert('请选择要升级的设备');
+    }
+
+
+	//向服务器发消息
+    socket.emit("data", 'upgrade|'+ ids.join('|'));
+    //从服务器获得消息
+    socket.on("message", function(msg){        
+        $("#msg").append('服务器回复：'+msg)
     });
 }
 
@@ -98,6 +127,7 @@ var app = new Vue({
             load_tree();   
             
             $("#send").click(function(){ send_data(); });
+            $("#connect").click(function(){ connect_server(); });
         }
     }
 });

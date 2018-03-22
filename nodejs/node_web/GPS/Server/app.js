@@ -12,6 +12,7 @@ try {
 
     //定义一个全局的客户端列表对象
     global.socketList = {};
+
 } catch (err) {
     console.log(err);
 }
@@ -21,17 +22,13 @@ try {
 // 在每一个“connection”事件中，该回调函数接收到的socket对象是唯一的
 net.createServer(function(socket) {
     // 我们获得一个连接 - 该连接自动关联一个socketet对象
-    console.log('CONNECTED: ' +
-        socket.remoteAddress + ':' + socket.remotePort);
+    var ipAddress = socket.remoteAddress + ':' + socket.remotePort;
+    console.log('CONNECTED: ' + ipAddress);
 
-    var ipAddress = socket.remoteAddress.replace('::ffff:', '');
-    // if (!socketList[ipAddress] || !socketList[ipAddress].indexOf(socket)) {
-    //     soketList[ipAddress].push(socket);
-    // }
-    var obj = socketList[ipAddress] || [];
-    if (!obj || obj.indexOf(socket) < 0) {
-        obj.push(socket);
-        socketList[ipAddress] = obj;
+    ipAddress = ipAddress.replace('::ffff:', '');
+
+    if (!socketList[ipAddress]) {
+        socketList[ipAddress]=socket;
     }
 
     // 为这个socketet实例添加一个"data"事件处理函数
@@ -77,21 +74,30 @@ var http_server = require('http').createServer(function(req, res) {
 
 var io = require('socket.io').listen(http_server);
 io.sockets.on('connection', function(socket) {
-    socket.on("data", function(data) {
-        socket.send('OK');
-        console.log(data.content);
-        var client = net.connect({ server: HOST, port: PORT }, function() {
-            client.write('socket.io' + data.content);
-        });
+    socket.on("online", function(data){        
+        for(var s in socketList){
+            console.log(data, s)
+            socket.emit('online',s)
+        }            
+    });
 
-        // var _data;
-        // if (Buffer.isBuffer(data)) {
-        //     _data = JSON.parse(data);
-        // } else {
-        //     _data = data;
-        // }
-        // logger.info('[web socket] Date = ' + _data);
-        // //处理命令
+    socket.on("data", function(data) {
+        socket.send('send data success');
+        console.log(data.content);
+        // var client = net.connect({ server: HOST, port: PORT }, function() {
+        //     client.write('socket.io' + data.content);
+        // });
+
+        
+
+        var _data;
+        if (Buffer.isBuffer(data)) {
+            _data = JSON.parse(data);
+        } else {
+            _data = data;
+        }
+        logger.info('[web socket] Date = ' , _data);
+        //处理命令
         // protocol.parse(socket, 'socket.io' + data);
     });
 

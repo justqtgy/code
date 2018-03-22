@@ -179,6 +179,14 @@ module.exports.parse = function(socket, data) {
     }
 
     if (list.length === 1) {
+        if(list[0].indexOf('upgrade')>=0){
+            var arr =list[0].split('|');
+            if(arr.length>1){
+                
+
+            }
+            
+        }
         if (list[0].indexOf('SSSA') >= 0) {
             gps_test.add_test_data(list);
         }

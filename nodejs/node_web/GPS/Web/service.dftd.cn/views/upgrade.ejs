@@ -3,7 +3,6 @@
     <!-- BEGIN PAGE LEVEL PLUGINS -->    
     <link href="../assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />    
     <link href="/stylesheets/profile.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
     <!-- END PAGE LEVEL PLUGINS -->
 <%- include ./shared/_top %>
 <%- include ./shared/_sidebar %>        
@@ -43,9 +42,9 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active">
                                             <div class="scroller" style="height: 500px;" data-always-visible="1" data-rail-visible="0">                                               
-                                                <button id="send">开始升级</button>
-                                               
-                                                <div id="result" style="width:900px;height:250px;border:2px solid gray;margin-top:30px;"></div>
+                                                <button id="connect">连接服务器</button>
+                                               <button id="send">开始升级</button>
+                                                <div id="msg" class="input_text"></div>
                                             </div>
                                         </div>
                                     </div>

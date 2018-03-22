@@ -420,3 +420,7 @@
 [v-cloak] {
     display: none;
 }
+
+.input_text {
+    width:900px;height:250px;border:2px solid gray;margin-top:30px;
+}

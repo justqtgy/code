@@ -3,7 +3,7 @@ $("#send").click(function(){
     var txt2 = $("#data").val();
 	$("#result").html('')
 	var now = getCurrentTime();
-    var txt = txt1+txt2;
+    var txt = 'socket.io'+txt1+txt2;
     console.log(txt);
 	
     if($("#GPSID").val()==''){
