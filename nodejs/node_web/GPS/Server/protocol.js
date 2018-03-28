@@ -20,6 +20,7 @@ var util = require('util');
 var response = require('./parse/response');
 var gps_response = require('./parse/gps_response');
 var gps_level = require('./parse/gps_level');
+var gps_upgrade = require('./parse/gps_upgrade');
 
 /**
  * 解析协议
@@ -179,14 +180,6 @@ module.exports.parse = function(socket, data) {
     }
 
     if (list.length === 1) {
-        if(list[0].indexOf('upgrade')>=0){
-            var arr =list[0].split('|');
-            if(arr.length>1){
-                
-
-            }
-            
-        }
         if (list[0].indexOf('SSSA') >= 0) {
             gps_test.add_test_data(list);
         }
@@ -432,3 +425,4 @@ module.exports.parse = function(socket, data) {
         }
     }
 };
+

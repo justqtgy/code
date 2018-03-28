@@ -76,28 +76,36 @@ var io = require('socket.io').listen(http_server);
 io.sockets.on('connection', function(socket) {
     socket.on("online", function(data){        
         for(var s in socketList){
-            console.log(data, s)
+            
             socket.emit('online',s)
         }            
+        socket.emit('online_end', 'end');
+    });
+
+    socket.on('upgrade', function(data){
+        socket.emit('upgrade_begin', '开始升级....');
+        var text = new Buffer('~START-UPDATE~');
+        for(var i in data){
+            var client = socketList[data[i]]            
+            client.write(text);
+        }
+        //socket.emit('upgrade_end', '升级完成');
     });
 
     socket.on("data", function(data) {
         socket.send('send data success');
-        console.log(data.content);
         // var client = net.connect({ server: HOST, port: PORT }, function() {
         //     client.write('socket.io' + data.content);
-        // });
+        // });        
 
-        
-
-        var _data;
-        if (Buffer.isBuffer(data)) {
-            _data = JSON.parse(data);
-        } else {
-            _data = data;
-        }
-        logger.info('[web socket] Date = ' , _data);
-        //处理命令
+        // var _data;
+        // if (Buffer.isBuffer(data)) {
+        //     _data = JSON.parse(data);
+        // } else {
+        //     _data = data;
+        // }
+        // logger.info('[web socket] Date = ' , _data);
+        // 处理命令
         // protocol.parse(socket, 'socket.io' + data);
     });
 
