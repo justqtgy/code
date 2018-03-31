@@ -29,7 +29,7 @@ var pg = require('pg');
 //     }
 // }
 
-class pssql_helper{
+class pgsql_helper{
     constructor(dbconfig){
         this.config = dbconfig;
     }

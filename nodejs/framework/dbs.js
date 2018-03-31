@@ -10,9 +10,6 @@ var dbs = {
     mysql : function(config){
         return new _mysql(config);
     },
-    maria : function(config){
-        return new _maria(config);
-    },
     pgsql : function(config){
         return new _pgsql(config);
     }
