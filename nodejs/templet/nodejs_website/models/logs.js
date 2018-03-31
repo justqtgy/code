@@ -1,4 +1,4 @@
-var dbs = require('./_dbs');
+var dbs = require('./dbs');
 var db = dbs.mssql(dbconfigs.shijie);
 
 function logs(model) {

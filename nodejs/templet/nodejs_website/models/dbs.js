@@ -1,5 +1,5 @@
 var _mssql = require('./dbs_lib/mssql_helper');
-var _mysql = require('./dbs_lib/mysql_helper');
+var _mysql = require('./dbs_lib//mysql_helper');
 var _pgsql = require('./dbs_lib/pgsql_helper');
 
 var dbs = {
