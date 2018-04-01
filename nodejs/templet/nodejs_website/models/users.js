@@ -1,4 +1,4 @@
-var db = require('./mysql_helper');
+var db = dbs.mysql(dbconfigs.mydb);
 
 function users(model) {
     
