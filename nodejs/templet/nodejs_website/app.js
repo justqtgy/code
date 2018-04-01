@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logUtil = require('./framework/logUtil');
+var dbs = require('./framework/dbs');
 var dbconfigs = require('./config/dbconfigs');
 var controller = require('./controller');
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //加载日志中间件
 app.use(logUtil);
 
+global.dbs = dbs;
 global.dbconfigs = dbconfigs;
 //加载路由
 controller(app);

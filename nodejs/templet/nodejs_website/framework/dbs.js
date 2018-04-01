@@ -4,13 +4,13 @@ var _pgsql = require('./dbs_lib/pgsql_helper');
 
 var dbs = {
     mssql : function(config){
-        return new _mssql(config || dbconfig.default);
+        return new _mssql(config || dbconfigs.default);
     },
     mysql : function(config){
-        return new _mysql(config || dbconfig.default);
+        return new _mysql(config || dbconfigs.default);
     },
     pgsql : function(config){
-        return new _pgsql(config || dbconfig.default);
+        return new _pgsql(config || dbconfigs.default);
     }
 };
 
