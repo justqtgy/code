@@ -12,8 +12,9 @@ function get_list(pageIndex) {
             bootbox.alert(json.msg);
             return;
         }
-        //show_list(json.rows);
-        app.DataList = json.rows;
+
+        console.log(json.result);
+        app.DataList = json.result;
         q.showPagination(json.total, get_list);
     });
 }
@@ -26,7 +27,7 @@ var app = new Vue({
     },
     methods: {
         loadPage: function() {
-            this.DataList.length = 0;
+            this.DataList = [];
             setTimeout(function() {
                 get_list(1);
             }, 100);

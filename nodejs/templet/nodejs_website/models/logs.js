@@ -24,7 +24,7 @@ logs.get_pages = async function(args) {
     try {
         let pageIndex = parseInt(args.pageIndex);
         let pageSize = parseInt(args.pageSize);
-        let beginID = (pageIndex - 1) * pageSize ;
+        let beginID = (pageIndex - 1) * pageSize +1;
         let endID = pageIndex * pageSize;
 
         let sql = `select * from logs limit ${beginID}, ${endID}`
