@@ -1,0 +1,165 @@
+﻿<%- include ./shared/_header %>
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<link href="../assets/global/plugins/bootstrap-datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+<link href="../stylesheets/pricing.css" rel="stylesheet" type="text/css" />
+<link href="../stylesheets/profile-2.css" rel="stylesheet" type="text/css" />
+<!-- END PAGE LEVEL PLUGINS -->
+<%- include ./shared/_top %>
+<%- include ./shared/_sidebar %>
+
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper">
+	 <div class="page-content">
+		<!-- BEGIN PAGE HEADER-->
+		<h1 class="page-title">
+		进货下单 <small>下单进货统计</small>
+		</h1>
+		<!-- END PAGE HEADER-->
+		
+		<!-- BEGIN PAGE CONTENT-->
+		<div class="portlet light portlet-fit bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-share font-green"></i>
+					<span class="caption-subject font-green bold uppercase">我要下单</span>
+				</div>
+				 
+			</div>
+			<div class="portlet-body">
+				<div class="pricing-content-1">
+					<div class="row" id = "grid">
+						<div class="col-md-3">
+							<div class="price-column-container border-active">
+								<div class="price-table-head bg-blue">
+									<h2 class="no-margin">{{myPricing.title}}</h2>
+								</div>
+								<div class="arrow-down border-top-blue"></div>
+								<div class="price-table-pricing">
+									<h3>
+										<sup class="price-sign">¥</sup>{{myPricing.amount}}</h3>
+									<p>&nbsp</p>
+								</div>
+								<div class="price-table-content">
+									<div class="row mobile-padding">
+										<div class="col-xs-3 text-right mobile-padding">
+											<i class="icon-feed"></i>
+										</div>
+										<div class="col-xs-9 text-left mobile-padding">单价：¥{{myPricing.price}}</div>
+									</div>
+									 
+									<div class="row mobile-padding">
+										<div class="col-xs-3 text-right mobile-padding">
+											<i class="icon-screen-smartphone"></i>
+										</div>
+										<div class="col-xs-9 text-left mobile-padding">金额：¥{{myPricing.price}}</div>
+									</div>
+									<div class="row mobile-padding">
+										<div class="col-xs-3 text-right mobile-padding">
+											<i class="icon-refresh"></i>
+										</div>
+										<div class="col-xs-9 text-left mobile-padding">补货量：{{myPricing.number}}(支)</div>
+									</div>
+									<div class="row mobile-padding">
+										<div class="col-xs-3 text-right mobile-padding">
+											<i class="icon-refresh"></i>
+										</div>
+										<div class="col-xs-9 text-left mobile-padding">数量：{{myPricing.number}}(支)</div>
+									</div>
+								</div>
+								
+								<div class="arrow-down arrow-grey"></div>
+								<div class="price-table-footer">
+									<button type="button" class="btn green price-button sbold uppercase">快速下单</button>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-4">
+							<div class="portlet sale-summary">
+								<div class="portlet-title">
+									<div class="caption font-red sbold">个人汇总 </div>
+									 
+								</div>
+								<div class="portlet-body">
+									<ul class="list-unstyled">
+										<li>
+											<span class="sale-info"> 进货总量
+												<i class="fa fa-img-up"></i>
+											</span>
+											<span class="sale-num"> 23 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 总金额
+												<i class="fa fa-img-down"></i>
+											</span>
+											<span class="sale-num"> ¥4000.50 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 最后一次进货时间 </span>
+											<span class="sale-num"> 2017-09-01 10:32:25 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 最后一次进货量 </span>
+											<span class="sale-num"> 60 </span>
+										</li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="portlet sale-summary">
+								<div class="portlet-title">
+									<div class="caption font-purple sbold"> 团队汇总 </div>
+								</div>
+								<div class="portlet-body">
+									<ul class="list-unstyled">
+										<li>
+											<span class="sale-info"> 进货总量
+												<i class="fa fa-img-up"></i>
+											</span>
+											<span class="sale-num"> 23 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 总金额
+												<i class="fa fa-img-down"></i>
+											</span>
+											<span class="sale-num"> ¥40.50 </span>
+										</li>
+										<!-- <li>
+											<span class="sale-info"> 最后一次进货时间 </span>
+											<span class="sale-num"> 2017-09-01 10:32:25 </span>
+										</li>
+										<li>
+											<span class="sale-info"> 最后一次进货量 </span>
+											<span class="sale-num"> 60 </span>
+										</li> -->
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END PAGE CONTENT-->
+		 
+	  </div>
+	</div>
+	<!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+
+
+<%- include shared/_bottom %>
+<%- include shared/_scripts %>
+<script src="../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-paginator/bootstrap-paginator.js"></script>
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../assets/global/plugins/bootstrap-datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="/javascripts/include/date-utils.min.js"></script>
+<script src="/javascripts/include/query.js"></script>
+<script src="/javascripts/pricing.js" type="text/javascript"></script>
+<%- include shared/_footer %>
