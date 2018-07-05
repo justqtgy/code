@@ -1,7 +1,7 @@
 var express = require('express');
 var utils = require('utility');
 var date = require('date-utils');
-var users = require('../models/member');
+var users = require('../models/users');
 var router = express.Router();
 
 router.requireAuthentication = function(req, res, next) {

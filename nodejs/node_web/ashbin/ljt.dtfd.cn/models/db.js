@@ -2,6 +2,7 @@ var sql = require('mssql');
 var config = require('./../config/settings').dbconfig;
 
 module.exports.execSQL = function(sqlText, cb) {
+    log.info('sql => ', sqlText);
     var connection = new sql.Connection(config, function(err) {
         if (err) {
             log.error('error => ', err);
