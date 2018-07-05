@@ -1,7 +1,11 @@
 
 var net = require('net');
-/*
 var log4js = require('log4js');
+var protocol = require('./protocol');
+
+var HOST = '127.0.0.1',
+    PORT = 9000;
+
 // 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
 try {
     log4js.configure('config/log4js.json', { reloadSecs: 300 });
@@ -13,7 +17,7 @@ try {
 } catch (err) {
     console.log(err);
 }
-*/
+
 
 // 创建一个TCP服务器实例，调用listen函数开始监听指定端口
 // 传入net.createServer()的回调函数将作为”connection“事件的处理函数
