@@ -1,7 +1,7 @@
-﻿var date = require('date-utils');
+﻿// var date = require('date-utils');
+var async = require('async');
 var common = require('./../cores/common');
-var gps_data = require('./../db/gps_data');
-var gps_last = require('./gps_last');
+var dao = require('./../db/dao');
 
 /**
  * 部标协议：
@@ -15,9 +15,7 @@ module.exports.add_data = async function(data) {
     if (data.length <= 114) {
         return;
     }
-
     //data = data.replace('7d01', '7d').replace('7d02', '7e');
-
     var start = data.slice(0, 2),
         end = data.slice(data.length - 2);
 
@@ -25,17 +23,19 @@ module.exports.add_data = async function(data) {
         item.gps_id = data.slice(10, 22);
         item.sn = parseInt(data.slice(22, 26), 16);
         item.num = parseInt(data.slice(46, 48), 16);
-        item.weight1 = 0.1*parseInt(data.slice(48, 52), 16);
-        item.volume1 = 0.01*parseInt(data.slice(52, 56), 16);
-        item.capacity1_c1 = 0.01*parseInt(data.slice(56, 62), 16);
-        item.capacity1_c2 = 0.01*parseInt(data.slice(62, 68), 16);
-        item.weight2 = 0.1*parseInt(data.slice(68, 72), 16);
-        item.volume2 = 0.01*parseInt(data.slice(72, 76), 16);
-        item.capacity2_c1 = 0.01*parseInt(data.slice(76, 82), 16);
-        item.capacity2_c2 = 0.01*parseInt(data.slice(82, 88), 16);
+        item.one_zl = 0.1*parseInt(data.slice(48, 52), 16);
+        item.one_rl = 0.01*parseInt(data.slice(52, 56), 16);
+        item.one_c1 = 0.01*parseInt(data.slice(56, 62), 16);
+        item.one_c2 = 0.01*parseInt(data.slice(62, 68), 16);
+        item.two_zl = 0.1*parseInt(data.slice(68, 72), 16);
+        item.two_rl = 0.01*parseInt(data.slice(72, 76), 16);
+        item.two_c1 = 0.01*parseInt(data.slice(76, 82), 16);
+        item.two_c2 = 0.01*parseInt(data.slice(82, 88), 16);
         item.power = parseInt(data.slice(88, 90), 16);
         item.alarm = parseInt(data.slice(90, 98),16).toString(2);
+        item.alarm = common.PrefixInteger(item.alarm, 32);
         item.status = parseInt(data.slice(98, 106),16).toString(2);
+        item.status = common.PrefixInteger(item.status, 32);
         var _lng = parseInt(data.slice(106, 114), 16);
         item.lng = parseFloat(_lng) / 100000;
         var _lat = parseInt(data.slice(114, 122), 16);
@@ -50,22 +50,72 @@ module.exports.add_data = async function(data) {
         item.dist_id = parseInt(data.slice(146, 150));
         item.distance = parseInt(data.slice(150, 158), 16);
         
-        try {
-            let result = await gps_data.get_carlist(item.gps_id);
-            let rows = result.recordsets;
-            if (rows.length == 0) {
-                logger.error('获取车辆信息失败：该车不存在');
-                return;
+        item.alarm_info = item.alarm.slice(0,2)|item.alarm.slice(0,2);
+        
+        async.waterfall([
+            cb=>{
+                dao.add_gps_data(item, function(err, result){
+                    item.result_id = result[0].ID
+                    cb(null)
+                });
+            },
+            cb=>{
+                getLastInfo(item.gps_id, (err, info)=>{
+                    cb(null, info)
+                })
+            },
+            (_info, cb)=>{
+                //更新最后信息
+                if(_info.id ==0 ){
+                    dao.add_gps_last(item)
+                }else{
+                    dao.set_gps_last(item)
+                }                
+                //判断电量是否变化
+                if(_info.power!=item.power){
+                    dao.add_gps_power(item)
+                }
+                //判断是否告警
+                if(item.alarm_1 || item.alarm_2){
+                    dao.add_gps_alarm(item)
+                }
+                //判断是否垃圾桶是否有变化
+                if(item.one_zl != _info.one_zl || item.one_rl != _info.one_rl
+                        || item.one_c1 != _info.one_c1 || item.one_c2 != _info.one_c2
+                        || item.two_zl != _info.two_zl || item.two_rl != _info.two_rl
+                        || item.two_c1 != _info.two_c1 || item.two_c2 != _info.two_c2){
+                    dao.add_gps_capacity(item)
+                }
+
+                cb(null)
             }
-
-            item.vehicle_id = rows[0].VehicleID;
-            item.vehicle_no = rows[0].VehicleNo;
-
-            result = await gps_data.add_data(item);
-            logger.info('Result = ', result);
-
-        } catch (error) {
-            return logger.error('Error = ', err);
-        }
+        ], function(err) {
+            if (err) {
+                return logger.error('Error = ', err);
+            }
+            logger.info('Result = ', item.result_id);        
+        });
     }
+}
+
+function getLastInfo(gps_id, cb) {
+    dao.get_gps_last(gps_id, function(error, result) {
+        if (error) {
+            return cb(error);
+        }
+        var lastInfo = {}
+        lastInfo.id = 0;
+        if (result.length > 0) {
+            lastInfo.id = result[0].id;
+            lastInfo.lng = result[0].lng;
+            lastInfo.lat = result[0].lat;
+            lastInfo.one_zl = result[0].one_zl;
+            lastInfo.one_rl = result[0].one_rl;
+            lastInfo.one_c1 = result[0].one_c1;
+            lastInfo.one_c2 = result[0].one_c2;
+            lastInfo.power = result[0].power;
+            lastInfo.distance = result[0].distance;
+        }
+        cb(null, lastInfo);
+    });
 }

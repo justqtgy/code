@@ -22,6 +22,10 @@ common.format_time = function(d, t) {
         return new Date().toFormat('YYYY-MM-DD HH24:MI:SS');
 };
 
+common.PrefixInteger = function(num, n) {
+    return (Array(n).join(0) + num).slice(-n);
+}
+
 // common.changeLocation = function(value) {
 //     var temp = value.toString();
 //     var arr = temp.split('.');

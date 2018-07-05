@@ -28,8 +28,8 @@ create table gps_data(
 create table gps_last(
     id int identity(1,1),
     gps_id varchar(20) not null,
-    alarm1 TINYINT not null,
-    alarm2 TINYINT not null,
+    sn int not null,
+    num int not null,
     one_zl decimal(10,2) not null,
     one_rl decimal(10,2) not null,
     one_c1 decimal(10,2) not null,
@@ -41,8 +41,10 @@ create table gps_last(
     power int not null,
     lng varchar(20) not null,
     lat varchar(20) not null,
+    dist_id int not null,
     distance int not null,
     gps_time varchar(20) not null,
+    alarm_info TINYINT not null,--0正常,1移走，10干扰, 11移走并干扰
     add_time DATETIME not null,
     update_time DATETIME not null
 )
@@ -57,10 +59,7 @@ create table gsp_info(
 
 create table gps_alarm(
     id int IDENTITY(1,1),
-    gps_id varchar(20) not null,
-    lng varchar(20) not null,
-    lat varchar(20) not null,
-    gps_time varchar(20) not null,
+    gps_id varchar(20) not null,    
     one_zl decimal(10,2) not null,
     one_rl decimal(10,2) not null,
     one_c1 decimal(10,2) not null,
@@ -69,16 +68,16 @@ create table gps_alarm(
     two_rl decimal(10,2) not null,
     two_c1 decimal(10,2) not null,
     two_c2 decimal(10,2) not null,
-    alarm_type TINYINT not null, --1移走，2干扰
+    lng varchar(20) not null,
+    lat varchar(20) not null,
+    gps_time varchar(20) not null,
+    alarm_info TINYINT not null, --1移走，10干扰, 11移走并干扰
     add_time DATETIME not null
 )
 
 create table gps_power(
     id int IDENTITY(1,1),
     gps_id varchar(20) not null,
-    lng varchar(20) not null,
-    lat varchar(20) not null,
-    gps_time varchar(20) not null,
     one_zl decimal(10,2) not null,
     one_rl decimal(10,2) not null,
     one_c1 decimal(10,2) not null,
@@ -88,15 +87,15 @@ create table gps_power(
     two_c1 decimal(10,2) not null,
     two_c2 decimal(10,2) not null,
     power int not null,
+    lng varchar(20) not null,
+    lat varchar(20) not null,
+    gps_time varchar(20) not null,
     add_time DATETIME not null
 )
 
 create table gps_capacity(
     id int IDENTITY(1,1),
     gps_id varchar(20) not null,
-    lng varchar(20) not null,
-    lat varchar(20) not null,
-    gps_time varchar(20) not null,
     one_zl decimal(10,2) not null,
     one_rl decimal(10,2) not null,
     one_c1 decimal(10,2) not null,
@@ -105,5 +104,8 @@ create table gps_capacity(
     two_rl decimal(10,2) not null,
     two_c1 decimal(10,2) not null,
     two_c2 decimal(10,2) not null,
+    lng varchar(20) not null,
+    lat varchar(20) not null,
+    gps_time varchar(20) not null,
     add_time DATETIME not null
 )
