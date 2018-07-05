@@ -7,23 +7,7 @@ var bodyParser = require('body-parser');
 //存储cookies
 var session = require('express-session');
 var log4js = require('log4js');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-var ctrl = require('./controller');
-
-
 var app = express();
-
-
-// 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
-try {
-    log4js.configure('config/log4js.json', { reloadSecs: 300 });
-    global.log = log4js.getLogger('dateFileLog');
-
-} catch (err) {
-    console.log(err);
-}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,13 +24,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/Views', express.static(__dirname + '/Views'));
 
+
+// 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
+try {
+    log4js.configure('config/log4js.json', { reloadSecs: 300 });
+    global.log = log4js.getLogger('dateFileLog');
+
+    require('./controller')(app);
+
+} catch (err) {
+    console.log(err);
+}
+
 //总是检查是否登录
 //app.all('*', users.requireAuthentication);
-
-app.use('/', index);
-app.use('/users', users);
-ctrl.init_route(app);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,6 +57,5 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-module.exports = app;
 
-module.export = server;
+module.exports = app;
