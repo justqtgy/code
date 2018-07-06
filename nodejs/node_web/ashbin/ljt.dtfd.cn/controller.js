@@ -4,7 +4,7 @@ const fs = require('fs');
 module.exports = function(app){
 	console.log('init_route begin');	
 	
-	app.use('/', require('./routes/index'));
+	//app.use('/', require('./routes/index'));
 
 	fs.readdirSync(__dirname + '/routes').filter((f) => {
         return f.endsWith('.js');

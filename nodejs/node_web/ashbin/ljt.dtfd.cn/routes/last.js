@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
 var last = require('../models/last');
 
 router.get('/', function(req, res, next) {
-	res.render('last');
+	var start_date = new moment().add(-10, 'days').format('YYYY-MM-DD'),
+        end_date = new moment().format('YYYY-MM-DD');
+    res.render('last', { start_date: start_date, end_date: end_date });
 });
 
 var get_count = function(req, res, next) {

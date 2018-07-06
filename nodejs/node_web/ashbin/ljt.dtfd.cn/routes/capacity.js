@@ -1,12 +1,13 @@
 ﻿var express = require('express');
 var router = express.Router();
 var async = require('async');
+var moment = require('moment');
 var capacity = require('../models/capacity');
 
 
 router.get('/', function(req, res, next) {
-    var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
-        end_date = new Date().toFormat('YYYY-MM-DD');
+    var start_date = new moment().add(-10, 'days').format('YYYY-MM-DD'),
+        end_date = new moment().format('YYYY-MM-DD');
     res.render('capacity', { start_date: start_date, end_date: end_date });
 });
 

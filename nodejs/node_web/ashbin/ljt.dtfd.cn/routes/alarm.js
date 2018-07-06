@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
 var alarm = require('../models/alarm');
 
 router.get('/', function(req, res, next) {
-	res.render('alarm');
+	var start_date = new moment().add(-10, 'days').format('YYYY-MM-DD'),
+        end_date = new moment().format('YYYY-MM-DD');
+	res.render('alarm', { start_date: start_date, end_date: end_date });
 });
 
 var get_count = function(req, res, next) {
