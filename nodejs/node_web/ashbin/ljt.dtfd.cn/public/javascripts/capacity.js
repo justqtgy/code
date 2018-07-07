@@ -1,9 +1,9 @@
 var displayNumber = 10;
-var editor;
 
 function get_list(pageIndex) {
-    var q = new Query('/capacity/pages', 'POST', $("#search"), pageIndex, displayNumber);
+    var q = new Query('/capacity/pages', 'GET', $("#search"), pageIndex, displayNumber);
     var params = q.init();
+    console.log(params)
     q.request(params, function(json) {
         if (!json.ok) {
             bootbox.alert(json.msg);
@@ -14,38 +14,6 @@ function get_list(pageIndex) {
         q.showPagination(json.total, get_list);
     });
 }
-
-//获取记录信息
-function get_record(id) {
-    var params = {
-        id: id
-    };
-
-    var q = new Query('/capacity/single', 'GET');
-    q.request(params, function(json) {
-        if (!json.ok) {
-            bootbox.alert(json.msg);
-            return;
-        }
-
-        var item = json.rows[0];
-        //显示记录
-        $("#txtID").val(item.ID);
-        $("#txtTitle").val(item.Title);
-        editor.setData(item.Content);
-        $("#mod_info").modal({ backdrop: 'static', keyboard: false });
-    });
-}
-
-function add_record() {
-    //显示记录
-    $("#txtID").val(0);
-    $("#txtTitle").val('');
-    editor.setData('');
-
-    $("#mod_info").modal({ backdrop: 'static', keyboard: false });
-}
-
 
 var app = new Vue({
     el: '#grid',
@@ -58,8 +26,6 @@ var app = new Vue({
                 autoclose: 1,
                 todayHighlight: 1
             });
-            CKEDITOR.replace('txtContent');
-            editor = CKEDITOR.instances.txtContent;
 
             get_list(1);
         },
@@ -71,9 +37,6 @@ var app = new Vue({
                 get_list(1);
             });
              
-        },
-        show_modal: function(id) {
-           
         },
     }
 });

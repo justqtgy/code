@@ -21,9 +21,9 @@
 			<div class="box-body">
 			    <form  id='search'>
 				<label class="control-label" for="txtBeginTime">开始时间：</label>
-				<input type="text" name="begintime"  class="date-picker input-control" value="<%= start_date %>"  data-date-format="yyyy-mm-dd"/>
+				<input type="text" name="begin_time"  class="date-picker input-control" value="<%= start_date %>"  data-date-format="yyyy-mm-dd"/>
 				<label class="control-label" for="txtEndTime">结束时间：</label>
-				<input type="text" name="endtime"  class="date-picker input-control" value="<%= end_date %>"  data-date-format="yyyy-mm-dd"/>
+				<input type="text" name="end_time"  class="date-picker input-control" value="<%= end_date %>"  data-date-format="yyyy-mm-dd"/>
 				<button type="button" id="btnSearch" class="btn btn-success"> <i class="fa fa-search"></i>查询 </button>
 			    </form>
 			</div><!-- /.box-body -->
@@ -46,8 +46,7 @@
 							<th rowspan="2">#</th>
 							<th rowspan="2">时间</th>
 							<th rowspan="2">设备</th>
-							<th rowspan="2">电量</th>
-							<th rowspan="2">位置</th>
+							<th rowspan="2">报警</th>
 							<th colspan="4" class="text-center">一号桶</th>
 							<th colspan="4" class="text-center">二号桶</th>
 						</tr>
@@ -65,11 +64,9 @@
 						<tbody v-if = "DataList.length > 0">
 							<tr v-for = "(item, index) in DataList">
 								<td>{{ index+1 }}</td> 
-								<td>{{ new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}</td> 
-								<td>{{ item.gps_id }}</td> 
-								<td>{{ item.power }}</td>
-								<td>{{ item.lng }},{{item.lat }}</td>
-
+								<td>{{ new Date(item.add_time).toUTCFormat('YYYY-MM-DD HH24:MI:SS') }}</td> 
+								<td>{{ item.gps_id }}</td> 								 
+								<td><font color=red>{{ _alarm[item.alarm_info] }}</font></td>
 								<td>{{ item.one_zl }}</td>
 								<td>{{ item.one_rl }}</td>
 								<td>{{ item.one_c1 }}</td>
@@ -86,7 +83,7 @@
 					</table>
 				</div>
 				<div>
-					<ul id="Pagination" class="pagination"></ul>
+					<ul id="pager" class="pagination"></ul>
 				</div>
 			</div>
 		</div>
@@ -98,8 +95,7 @@
           </div>
         </div>
         <!-- END CONTENT -->
-    </div>
-    <!-- END CONTAINER -->
+ 
 
 
 <%- include shared/_bottom %>

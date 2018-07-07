@@ -1,74 +1,80 @@
-<%- include shared/_header %>
-<%- include shared/_top %>
-<%- include shared/_sidebar %>
-        
-	<!-- BEGIN CONTENT -->
-	<div class="page-content-wrapper">
-		<!-- BEGIN CONTENT BODY -->
-		<div class="page-content">
-			<!-- BEGIN PAGE HEADER-->
-			<h3 class="page-title">
-				智能垃圾桶 <small></small>
-			</h3>		
-			<!-- END PAGE HEADER-->
-		
+<%- include ./shared/_header %>
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+
+    <!-- END PAGE LEVEL PLUGINS -->
+<%- include ./shared/_top %>
+<%- include ./shared/_sidebar %>
+
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+	     <div class="page-content">
+		    <!-- BEGIN PAGE HEADER-->
+		    <h3 class="page-title">
+		    智能垃圾桶 <small>......</small>
+		    </h3>
+		    <!-- END PAGE HEADER-->
+		    
 			<!-- BEGIN PAGE CONTENT-->
-			<div class="row"> 
-				<div class="col-md-9 col-sm-6" style="width:100%; ">
-					<!-- BEGIN PORTLET-->
-					<div class="portlet light">
-						<div class="portlet-title tabbable-line">
-							<div class="caption">
-								<i class="icon-share font-red-sunglo"></i>
-								<span class="caption-subject font-green-sharp bold uppercase">最新信息</span>
+            <div class="row" id="grid">
+				<div v-if = "DataList.length>0">
+					<div class="col-md-4 col-sm-4" v-for = "(item, index) in DataList" v-cloak>
+						<div class="portlet light ">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="icon-cursor font-dark hide"></i>
+									<span class="caption-subject font-dark bold uppercase">{{ item.gps_id }}</span>
+								</div>                                    
 							</div>
-							
-						</div>
-						<div class="portlet-body" style="min-height:500px; height:100%;">
-							<!--BEGIN TABS-->
-							<div class="tab-content">
-								<div class="tab-pane active" id="tab_1_1">
-									<div class="scroller" style="height: 500px;" data-always-visible="1" data-rail-visible="0">
-										<!--
-										<ul class="feeds" id="grid">
-											<li v-for = "item in DataList">
-												<div class="col1">
-													<div class="cont">
-														<div class="cont-col1">
-															<div class="label label-sm label-success">
-																<i class="fa fa-bell-o"></i>
-															</div>
-														</div>
-														<div class="cont-col2">
-															<div class="desc">
-																	{{ item.VehicleNo}} 在 {{new Date(item.AddTime).toUTCFormat('YYYY-MM-DD HH24:MI:SS')}}  发生漏油 {{item.AddOil }}  升
-																
-															</div>
-														</div>
-													</div>
-												</div>											 
-											</li>
-										</ul>-->
+							<div class="portlet-body">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="easy-pie-chart">
+											<div class="number" v-bind:data-percent= "item.one_rl" >
+												<span>{{ item.one_rl }}</span>% </div>
+											<a class="title" href="javascript:;"> 容量1
+												<i class="icon-arrow-right"></i>
+											</a>
+										</div>
 									</div>
-								</div>								 
-						
+									<div class="col-md-4">
+										<div class="easy-pie-chart">
+											<div class="number" v-bind:data-percent="item.two_rl">
+												<span>{{ item.two_rl }}</span>% </div>
+											<a class="title" href="javascript:;"> 容量2
+												<i class="icon-arrow-right"></i>
+											</a>
+										</div>
+									</div>
+								
+									<div class="margin-bottom-10 visible-sm"> </div>
+									<div class="col-md-4">
+										<div class="easy-pie-chart">
+											<div class="number" v-bind:data-percent=" item.power ">
+												<span>{{ item.power }}</span>% </div>
+											<a class="title" href="javascript:;"> 电量
+												<i class="icon-arrow-right"></i>
+											</a>
+										</div>
+									</div>
+									
+								</div>
 							</div>
-							<!--END TABS-->
 						</div>
 					</div>
-					<!-- END PORTLET-->
-				</div>
+	
 			</div>
+                    
 			<!-- END PAGE CONTENT-->
 		</div>
-		<!-- END CONTENT BODY -->
 	</div>
 	<!-- END CONTENT -->
-</div>
-<!-- END CONTAINER -->
-    
+
+
 <%- include shared/_bottom %>
 <%- include shared/_scripts %>
- <script src="/javascripts/include/date-utils.min.js"></script>
- <!--<script src="/javascripts/index.js"></script>-->
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script src="../assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
+	<script src="/javascripts/include/query.js"></script>
+	<script src="/javascripts/index.js" type="text/javascript"></script>
 <%- include shared/_footer %>

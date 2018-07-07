@@ -13,21 +13,7 @@
 		    订单信息 <small>......</small>
 		    </h3>
 		    <!-- END PAGE HEADER-->
-		    <div class="box box-solid">
-			<div class="box-header with-border">
-			    <i class="fa fa-search"></i>
-			    <h3 class="box-title">查询</h3>
-			</div><!-- /.box-header -->
-			<div class="box-body">
-			    <form  id='search'>
-				<label class="control-label" for="txtBeginTime">开始时间：</label>
-				<input type="text" name="begintime"  class="date-picker input-control" value="<%= start_date %>"  data-date-format="yyyy-mm-dd"/>
-				<label class="control-label" for="txtEndTime">结束时间：</label>
-				<input type="text" name="endtime"  class="date-picker input-control" value="<%= end_date %>"  data-date-format="yyyy-mm-dd"/>
-				<button type="button" id="btnSearch" class="btn btn-success"> <i class="fa fa-search"></i>查询 </button>
-			    </form>
-			</div><!-- /.box-body -->
-		    </div>
+
 			<!-- BEGIN PAGE CONTENT-->
             <div class="row">
               <div class="col-md-12">
@@ -36,7 +22,10 @@
 				<div class="caption">
 					<i class="fa fa-picture"></i> 数据列表
 				</div>
-				
+				<div class="actions">
+					<a href="javascript:;" class="btn btn-default btn-sm" onclick="app.add();" >
+					<i class="fa fa-pencil"></i> 添加 </a>
+				</div>
 			</div>
 			<div class="portlet-body">
 				<div class="table-scrollable">
@@ -45,8 +34,7 @@
 						<tr>
 							<th>#</th>
 							<th>GPSID</th>
-							<th>地址</th>
-							<th>状态</th>
+							<th>地址</th>						 
 							<th>备注</th>							
 						</tr>
 						</thead>
@@ -54,13 +42,13 @@
 							<tr v-for = "(item, index) in DataList">
 								<td>{{ index+1 }}</td> 								
 								<td>{{ item.gps_id }}</td> 
-								<td>{{ item.address }}</td>								 
-								<td>{{ _Status[item.status] }}</td>
+								<td>{{ item.address }}</td>							 
+								 
 								<td>{{ item.remark }}</td>
 							</tr>
 						</tbody>
 						<tbody v-else>
-							<tr><td colspan="13" class="text-center">没有数据</td></tr>
+							<tr><td colspan="5" class="text-center">没有数据</td></tr>
 						</tbody>                                
 					</table>
 				</div>
@@ -72,14 +60,48 @@
               </div>
             </div>
             <!-- END PAGE CONTENT-->
-
-            
           </div>
         </div>
         <!-- END CONTENT -->
-    </div>
-    <!-- END CONTAINER -->
+ 
 
+    <!-- edit -->
+    <div class="modal fade" id="mod_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" style="width:360px;">
+            <div class="modal-content">
+                <div class="box-header with-border">
+                    <i class="fa fa-list-alt"></i>
+                    <h3 class="box-title">垃圾桶设置</h3>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div><!-- /.box-header -->
+                <div class="modal-body ">   
+                    <form id="password">                    
+                    <div class="form-body"> 
+                        <div class="form-group">
+                            <label for="gps_id">GPSID</label>
+                            <input id="gps_id" name="gps_id" class="form-control input-large" placeholder="请输入GPS号"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">地址</label>
+                            <input id="address" name="address" class="form-control input-large" placeholder="请输入垃圾桶的位置"/>
+                        </div>
+						<div class="form-group">
+                            <label for="remark">备注</label>
+							<textarea id="remark" rows="4" class="form-control" placeholder="请输入备注"/></textarea>                            
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="id" class="form-control input-medium" placeholder="请输入ID" />                        
+                        </div>
+						
+                    </div></form>    
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
+                    <a href="#" id="btnChange" class="btn btn-primary">保存</a>
+                </div>
+            </div>
+        </div>
+    </div><!-- /edit -->
 
 <%- include shared/_bottom %>
 <%- include shared/_scripts %>

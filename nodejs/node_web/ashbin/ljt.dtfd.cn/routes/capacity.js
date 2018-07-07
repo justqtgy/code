@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
 
 var get_count = function(req, res, next) {
     var args = req.query;
-
     capacity.get_count(args, function(err, result) {
         if (err) {
             return next(err);
@@ -25,6 +24,7 @@ var get_count = function(req, res, next) {
 
 router.get('/pages', [get_count], function(req, res, next) {
     var args = req.query;
+    console.log('args=============>', args)
     capacity.get_pages(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });

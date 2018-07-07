@@ -10,7 +10,8 @@ router.get('/', function(req, res, next) {
 });
 
 var get_count = function(req, res, next) {
-	alarm.get_count(function(err, result){
+	var args = req.query;
+	alarm.get_count(args, function(err, result){
 		if(err){
 			return next(err);
 		}
@@ -20,7 +21,7 @@ var get_count = function(req, res, next) {
 };
 
 router.get('/pages', [get_count], function(req, res, next) {
-	var args = req.body;
+	var args = req.query;
 	alarm.get_pages(args, function(err, result){
 		if(err){
 			res.send({ ok : 0, msg : err });

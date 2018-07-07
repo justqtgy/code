@@ -2,23 +2,23 @@ var sql = require('mssql');
 var config = require('./../config/settings').dbconfig;
 
 module.exports.execSQL = function(sqlText, cb) {
-    log.info('sql => ', sqlText);
+    console.log(sqlText)
     var connection = new sql.Connection(config, function(err) {
         if (err) {
-            log.error('error => ', err);
+            logger.error('error => ', err);
             return cb(err);
         }
         // Query 
         var request = new sql.Request(connection); // or: var request = connection.request(); 
         request.query(sqlText, function(err, result) {
-            connection.close();
+            connection.close()
             cb(err, result);
         });
     });
 
     connection.on('error', function(err) {
         // ... error handler 
-        log.error('error => ', err);
+        logger.error('error => ', err);
         cb(err);
     });
 
@@ -40,7 +40,7 @@ module.exports.execSP = function(spName, params, cb) {
     var connection = new sql.Connection(config, function(err) {
         // ... error checks 
         if (err) {
-            log.error('error => ', err);
+            logger.error('error => ', err);
             return cb(err, '');
         }
         // Stored Procedure 
@@ -65,7 +65,7 @@ module.exports.execSP = function(spName, params, cb) {
 
     connection.on('error', function(err) {
         // ... error handler 
-        log.error('error => ', err);
+        logger.error('error => ', err);
         cb(err);
     });
 }

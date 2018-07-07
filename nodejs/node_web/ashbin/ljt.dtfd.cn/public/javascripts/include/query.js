@@ -1,9 +1,9 @@
 function Query(url, type, form, pageIndex, pageSize) {
     this.url = url;
     this.type = type || "GET";
-    this.form = form || "search";
-    this.pageIndex = pageIndex || 1;
-    this.pageSize = pageSize || 20;
+    this.form = form;
+    this.page = pageIndex || 1;
+    this.size = pageSize || 20;
 }
 
 Query.prototype = {
@@ -14,15 +14,16 @@ Query.prototype = {
             data_format = $.extend(true, {}, data)
         }
 
-        data_format.pageIndex = this.pageIndex;
-        data_format.pageSize = this.pageSize;
+        data_format.page = this.page;
+        data_format.size = this.size;
         data_format.r = Math.random();
-
-        var ctrls = this.form.serializeArray();
-        for (var c in ctrls) {
-            data_format[ctrls[c].name] = ctrls[c].value;
+        if(this.form){
+            var ctrls = this.form.serializeArray();
+            for (var c in ctrls) {
+                data_format[ctrls[c].name] = ctrls[c].value;
+            }
         }
-
+        
         return data_format;
     },
     request: function(data, cb) {
@@ -46,11 +47,11 @@ Query.prototype = {
         }
         var options = {
             bootstrapMajorVersion: 3,
-            currentPage: this.pageIndex,
+            currentPage: this.page,
             numberOfPages: 15,
-            totalPages: Math.ceil(total / this.pageSize),
+            totalPages: Math.ceil(total / this.size),
             onPageClicked: function(event, originalEvent, type, page) {
-                this.pageIndex = page;
+                this.page = page;
                 func(page);
             }
         };

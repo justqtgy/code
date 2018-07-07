@@ -1,13 +1,9 @@
 var displayNumber = 10;
 
 function get_list(pageIndex) {
-    var q = new Query('/gps_info/pages', 'GET', $("#search"), pageIndex, displayNumber);
-    var params = q.init();
-    if (!params.begintime || !params.endtime) {
-        alert('请选择日期');
-        return;
-    }
-    q.request(params, function(json) {
+    var q = new Query('/gps_info/pages', 'GET', null, pageIndex, displayNumber);
+    // var params = q.init();
+    q.request(null, function(json) {
         if (!json.ok) {
             bootbox.alert(json.msg);
             return;
@@ -44,6 +40,18 @@ function delete_record(id) {
     });
 }
 
+function add_record() {
+    //显示记录
+    $("#txtID").val(0);
+    // $("#txtAccount").val('');
+    // $("#txtPassword").val('');
+    // $("#txtTrueName").val('');
+    // $("#txtEmail").val('');
+    // $("#txtMobile").val('');
+    // $("#chkIsAdmin").attr("checked", false);
+    $("#mod_info").modal({ backdrop: 'static', keyboard: false });
+}
+
 var app = new Vue({
     el: '#grid',
     data: {
@@ -61,12 +69,7 @@ var app = new Vue({
                 get_list(1);
             }, 100);
         },
-        init: function() {
-            $(".date-picker").datepicker({
-                autoclose: 1,
-                todayHighlight: 1
-            });
-
+        init: function() {            
             var that = this;
             that.loadPage();
 
@@ -80,15 +83,9 @@ var app = new Vue({
             });
         },
          
-        get_do: function(id, status) {
-            var _do = '';
-            switch (status) {
-                case 0:
-                    _do = "<a href='javascript:void(" + id + ")' onclick='delete_record(" + id + ")'>取消订单</a>";
-
-            }
-            return _do;
-        },
+        add: function(){
+            add_record();
+        }
     }
 });
 
