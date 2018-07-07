@@ -1,5 +1,5 @@
-var serverPort = 6666;
-var server = '127.0.0.1'; //'120.24.68.95';
+var serverPort = 9000;
+var server = '127.0.0.1';//'120.24.68.95';
 
 var net = require('net');
 var readline = require('readline');
@@ -9,7 +9,7 @@ var rl = readline.createInterface({
     output: process.stdout
 });
 
-console.log('connecting to server...');
+console.log('connecting to server...', server);
 var client = net.connect({ server: server, port: serverPort }, function() {
     console.log('client connected');
 

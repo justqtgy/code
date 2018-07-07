@@ -227,4 +227,4 @@ create table logs
 
 /*初始化数据*/
 insert into users(account, password, user_name, weixin_id, mobile, add_time, status, is_admin)  
-values('admin','c475eeaec2d16f750c21e53a61884b35','admin','','',now(), 1, 1);
+values('admin','c475eeaec2d16f750c21e53a61884b35','admin','','',getdate(), 1, 1);

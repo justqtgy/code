@@ -27,11 +27,11 @@ net.createServer(function(socket) {
     var ipAddress = socket.remoteAddress + ':' + socket.remotePort;
     console.log('CONNECTED: ' + ipAddress);
 
-    ipAddress = ipAddress.replace('::ffff:', '');
+    // ipAddress = ipAddress.replace('::ffff:', '');
 
-    if (!socketList[ipAddress]) {
-        socketList[ipAddress]=socket;
-    }
+    // if (!socketList[ipAddress]) {
+    //     socketList[ipAddress]=socket;
+    // }
 
     // 为这个socketet实例添加一个"data"事件处理函数
     socket.on('data', function(data) {
@@ -47,7 +47,7 @@ net.createServer(function(socket) {
 
     // 为这个socketet实例添加一个"close"事件处理函数
     socket.on('close', function(data) {
-        socketList[ipAddress].splice(socketList[ipAddress].indexOf(socket), 1);
+        // socketList[ipAddress].splice(socketList[ipAddress].indexOf(socket), 1);
         logger.error('CLOSED: ' + socket.remoteAddress + ' ' + socket.remotePort + ' ' + data);
     });
 

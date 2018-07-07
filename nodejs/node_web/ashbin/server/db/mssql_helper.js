@@ -2,8 +2,8 @@ var sql = require('mssql');
 var config = require('../config/settings').dbconfig;
 
 module.exports.execSQL = function(sqlText, cb) {
-    console.log(sqlText);
-    var connection = new sql.ConnectionPool(config, function(err) {
+    console.log(sqlText)
+    var connection = new sql.Connection(config, function(err) {
         if (err) {
             logger.error('error => ', err);
             return cb(err);
@@ -11,7 +11,8 @@ module.exports.execSQL = function(sqlText, cb) {
         // Query 
         var request = new sql.Request(connection); // or: var request = connection.request(); 
         request.query(sqlText, function(err, result) {
-            connection.close();
+            //console.log(result)
+            connection.close()
             cb(err, result);
         });
     });
@@ -37,7 +38,7 @@ module.exports.execSQL = function(sqlText, cb) {
 };
 
 module.exports.execSP = function(spName, params, cb) {
-    var connection = new sql.ConnectionPool(config, function(err) {
+    var connection = new sql.Connection(config, function(err) {
         // ... error checks 
         if (err) {
             logger.error('error => ', err);
@@ -58,7 +59,7 @@ module.exports.execSP = function(spName, params, cb) {
             console.log(result.output) // key/value collection of output values 
             console.log(result.rowsAffected) // array of numbers, each number represents the number of rows affected by executed statemens 
             */
-            connection.close();
+
             cb(err, result);
         });
     });

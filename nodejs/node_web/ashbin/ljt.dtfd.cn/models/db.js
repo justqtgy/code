@@ -11,6 +11,7 @@ module.exports.execSQL = function(sqlText, cb) {
         // Query 
         var request = new sql.Request(connection); // or: var request = connection.request(); 
         request.query(sqlText, function(err, result) {
+            connection.close();
             cb(err, result);
         });
     });
