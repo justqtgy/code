@@ -16,7 +16,7 @@ module.exports.add_data = function(data) {
     if (data.length <= 114) {
         return;
     }
-    //data = data.replace('7d01', '7d').replace('7d02', '7e');
+    data = data.replace('7d01', '7d').replace('7d02', '7e');
  
     item.gps_id = data.slice(10, 22);
     item.sn = parseInt(data.slice(22, 26), 16);
