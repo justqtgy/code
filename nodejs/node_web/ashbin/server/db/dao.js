@@ -12,7 +12,7 @@ dao.add_gps_data = function(args, callback) {
         insert into gps_data(gps_id, sn, num, one_zl, one_rl, one_c1, one_c2, two_zl, two_rl, two_c1, two_c2,
              power, alarm, status, lng, lat, high, speed, direct, dist_id, distance, gps_time, add_time)
             values('%s', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
-             %s, %s, %s, '%s', '%s', %s, %s, %s, %s, %s, '%s', GETDATE())
+             %s, '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', GETDATE())
         ;SELECT @@IDENTITY as ret_id;`;
     sql = util.format(sql, args.gps_id,args.sn,args.num,args.one_zl,args.one_rl,args.one_c1,args.one_c2,args.two_zl, args.two_rl, args.two_c1, args.two_c2,
             args.power, args.alarm, args.status, args.lng, args.lat, args.high, args.speed, args.direct, args.dist_id, args.distance, args.gps_time);
