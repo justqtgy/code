@@ -1,4 +1,4 @@
-create table gps_data(
+﻿create table gps_data(
     id int PRIMARY KEY identity(1,1),
     gps_id varchar(20) not null,
     sn int not null,
@@ -167,7 +167,7 @@ create table users
 create index ix_account on users(account)
 create index ix_mobile on users(mobile)
 
-create table role
+create table roles
 (
 	id int PRIMARY KEY identity(1,1) not null,
 	role_name varchar(50) not null,
@@ -175,7 +175,7 @@ create table role
     -- primary key (id)
 )
 
-create table action
+create table actions
 (
 	id int PRIMARY KEY identity(1,1) not null,
 	action_name varchar(50) not null,
