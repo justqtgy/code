@@ -48,7 +48,7 @@ module.exports.add_data = function(data) {
     item.dist_id = parseInt(data.slice(146, 150));
     item.distance = parseInt(data.slice(150, 158), 16);
     
-    item.alarm_info = item.alarm.slice(15,2);//|item.alarm.slice(0,2);
+    item.alarm_info = item.alarm.slice(15,17);//|item.alarm.slice(0,2);
 
     async.waterfall([
         cb=>{
