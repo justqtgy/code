@@ -4,7 +4,7 @@ var logUtil = function(req, res, next){
     // 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
     try {
         log4js.configure('config/log4js.json', { reloadSecs: 300 });
-        global.logHeper = log4js.getLogger('dateFileLog');
+        global.logHelper = log4js.getLogger('dateFileLog');
         next();
     } catch (err) {
         //console.log(err);
@@ -15,14 +15,14 @@ var logUtil = function(req, res, next){
 //封装错误日志
 logUtil.logError = function (req, error) {
     if (req && error) {
-        logHeper.error(formatError(req, error));
+        logHelper.error(formatError(req, error));
     }
 };
 
 //封装响应日志
 logUtil.logRequest = function (req) {
     if (req) {
-        logHeper.info(formatReqLog(req));
+        logHelper.info(formatReqLog(req));
     }
 };
 

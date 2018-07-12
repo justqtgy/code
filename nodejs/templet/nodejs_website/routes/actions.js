@@ -3,44 +3,44 @@
  */
 var express = require('express');
 var router = express.Router();
-var action = require('../models/action');
+var actions = require('../models/actions');
 
 router.get('/', async function(req, res, next) {
-    res.send('action');
+    res.render('actions');
 });
 
 router.get('/single', async function(req, res, next) {
-    logHeper.info('req param =>', req.param);
+    logHelper.info('req param =>', req.param);
 
     try {
         let id = req.param.id;
-        let result = await action.get_single(id);
+        let result = await actions.get_single(id);
         res.send({ ok: 1, result: result });
     } catch (error) {
-        logHeper.error('error =>', req.param);
+        logHelper.error('error =>', req.param);
         res.send({ ok: 0, msg : error });
     }
 });
 
 router.get('/list', async function(req, res, next) {
     let args = req.param;
-    logHeper.info('req param =>', args);
+    logHelper.info('req param =>', args);
 
     try {
-        let count = await action.get_count(args);
-        let result = await action.get_list(args);
+        let count = await actions.get_count(args);
+        let result = await actions.get_list(args);
         res.send({ ok: 1, result: result, count : count });
     } catch (error) {
-        logHeper.error('error =>', req.param);
+        logHelper.error('error =>', req.param);
         res.send({ ok: 0, msg : error });
     }
 });
 
 router.post('/add', async function(req, res, next) {
     let args = req.param;
-    logHeper.info('req param =>', args);
+    logHelper.info('req param =>', args);
     try {        
-        let result = await action.add(args);
+        let result = await actions.add(args);
         //res.send({ok : 1, result: result});
         res.send({ ok: 1, result: result.insertId });
     } catch (error) {
@@ -50,10 +50,10 @@ router.post('/add', async function(req, res, next) {
 
 router.post('/set', async function(req, res, next) {
     let args = req.param;
-    logHeper.info('req param =>', args);
+    logHelper.info('req param =>', args);
 
     try {
-        let result = await action.add(args);
+        let result = await actions.add(args);
         res.send({ok : 1, result: result});
     } catch (error) {
         res.send({ ok: 0, msg : error });
@@ -63,10 +63,10 @@ router.post('/set', async function(req, res, next) {
 
 router.post('/delete', async function(req, res, next) {
     let args = req.param;
-    logHeper.info('req param =>', args);
+    logHelper.info('req param =>', args);
 
     try {
-        let result = await action.delete(args);
+        let result = await actions.delete(args);
         res.send({ ok: 1, result: result });
     } catch (error) {
         res.send({ ok: 0, msg : error });

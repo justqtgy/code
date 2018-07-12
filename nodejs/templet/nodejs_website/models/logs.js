@@ -1,4 +1,4 @@
-var db = dbs.mysql(dbconfigs.mydb);
+var db = dbs.pgsql(dbconfigs.pg_db);
 
 function logs(model) {
     
@@ -24,12 +24,12 @@ logs.get_pages = async function(args) {
     try {
         let pageIndex = parseInt(args.pageIndex);
         let pageSize = parseInt(args.pageSize);
-        let beginID = (pageIndex - 1) * pageSize +1;
-        let endID = pageIndex * pageSize;
+        let beginID = (pageIndex - 1) * pageSize ;
+        //let endID = pageIndex * pageSize;
 
-        let sql = `select * from logs limit ${beginID}, ${endID}`
-        let result = await db.exec(sql, null);
-        return result;
+        let sql = `select * from users limit $1 offset $2`
+        let result = await db.exec(sql, [pageSize, beginID]);
+        return result.rows;
     } catch (error) {
         throw error
     }
@@ -38,8 +38,8 @@ logs.get_pages = async function(args) {
 logs.get_single = async function(id) {
     try {
         let sql = `select * from logs where id = ${id}`;
-        let rows = await db.exec(sql);
-        return rows;
+        let result = await db.exec(sql);
+        return result.rows;
     } catch (error) {
         throw error
     }

@@ -1,14 +1,14 @@
 var db = dbs.mysql(dbconfigs.mydb);
 
-function action(model) {
+function roles(model) {
 
 }
 
-module.exports = action
+module.exports = roles;
 
-action.get_count = async function(args) {
+roles.get_count = async function(args) {
     try {
-        let sql = "select count(*) as total from action";
+        let sql = "select count(*) as total from roles";
         let result = await db.exec(sql);
         let total = 0;
         if (result.length > 0) {
@@ -20,14 +20,14 @@ action.get_count = async function(args) {
     }
 };
 
-action.get_list = async function(args, callback) {
+roles.get_pages = async function(args, callback) {
     try {
         let pageIndex = parseInt(args.pageIndex);
         let pageSize = parseInt(args.pageSize);
         let beginID = (pageIndex - 1) * pageSize + 1;
         let endID = pageIndex * pageSize;
 
-        let sql = `select * from action limit ${beginID}, ${endID}`
+        let sql = `select * from roles limit ${beginID}, ${endID}`
         let result = await db.exec(sql);
         return result;
     } catch (error) {
@@ -35,9 +35,9 @@ action.get_list = async function(args, callback) {
     }
 };
 
-action.get_single = async function(id) {
+roles.get_single = async function(id) {
     try {
-        let sql = `select * from action where id = ${id}`;
+        let sql = `select * from roles where id = ${id}`;
         let rows = await db.exec(sql);
         return rows;
     } catch (error) {
@@ -45,19 +45,10 @@ action.get_single = async function(id) {
     }
 };
 
-action.add = async function(args, callback) {
+roles.add = async function(args, callback) {
     try {
-        var sql = `insert into action(action_name, remark) 
-			   values('${args.action_name}','${args.remark}')`;
-        let result = await db.exec(sql);
-    } catch (error) {
-        throw error
-    }
-};
-
-action.update = async function(args, callback) {
-    try {
-        let sql = `update action set action_name='${args.action_name}', remark='${args.remark}' where id = ${args.id}`;
+        var sql = `insert into roles(roles_name, remark) 
+			   values('${args.roles_name}','${args.remark}')`;
         let result = await db.exec(sql);
         return result;
     } catch (error) {
@@ -65,9 +56,19 @@ action.update = async function(args, callback) {
     }
 };
 
-action.delete = async function(args) {
+roles.update = async function(args, callback) {
     try {
-        let sql = `delete from action where id = ${args.id}`;
+        let sql = `update roles set roles_name='${args.roles_name}', remark='${args.remark}' where id = ${args.id}`;
+        let result = await db.exec(sql);
+        return result;
+    } catch (error) {
+        throw error
+    }
+};
+
+roles.delete = async function(args) {
+    try {
+        let sql = `delete from roles where id = ${args.id}`;
         let result = await db.exec(sql);
         return result;
     } catch (error) {

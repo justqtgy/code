@@ -11,7 +11,7 @@ router.get('/', function(req, res, next){
 
 router.get('/pages', async function(req, res, next){
     let args = req.query;
-    logHeper.info('req param =>', args);
+    logHelper.info('req param =>', args);
 
     try {
         let count = await logs.get_count(args);
@@ -19,7 +19,7 @@ router.get('/pages', async function(req, res, next){
         console.log('result=============>', result);
         res.send({ ok: 1, result: result, count : count });
     } catch (error) {
-        logHeper.error('error =>', error);
+        logHelper.error('error =>', error);
         res.send({ ok: 0, msg : error });
     }
 });

@@ -82,7 +82,7 @@ module.exports = class mssql_helper{
         this.config = dbconfig;
     }
     async exec(sql, params){
-        logHeper.info('sql =>', sql, params);
+        logHelper.info('sql =>', sql, params);
         try{
             let pool = await mssql.connect(this.config);
             //let result = await pool.request().query(sql);

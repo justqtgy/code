@@ -1,4 +1,4 @@
-var db = dbs.mysql(dbconfigs.mydb);
+var db = dbs.pgsql(dbconfigs.pg_db);
 
 function users(model) {
     
@@ -27,7 +27,7 @@ users.get_pages = async function(args, callback) {
         let beginID = (pageIndex - 1) * pageSize + 1;
         let endID = pageIndex * pageSize;
 
-        let sql = `select * from users limit ${beginID}, ${endID}`
+        let sql = `select * from users limit ${pageSize} offset ${beginID}`
         let result = await db.exec(sql);
         return result;
     } catch (error) {
@@ -37,7 +37,7 @@ users.get_pages = async function(args, callback) {
 
 users.get_single = async function(account) {
     try {        
-        let sql = `select * from users where account = '${mysql.escape(account)}'`;
+        let sql = `select * from users where account = '${account}'`;
         let rows = await db.exec(sql);
         return rows;
     } catch (error) {

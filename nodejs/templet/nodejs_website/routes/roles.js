@@ -3,44 +3,44 @@
  */
 var express = require('express');
 var router = express.Router();
-var role = require('../models/role');
+var roles = require('../models/roles');
 
 router.get('/', async function(req, res, next) {
-    res.send('role');
+    res.send('roles');
 });
 
 router.get('/single', async function(req, res, next) {
-    logHeper.info('req param =>', req.param);
+    logHelper.info('req param =>', req.param);
 
     try {
         let id = req.param.id;
-        let result = await role.get_single(id);
+        let result = await roles.get_single(id);
         res.send({ ok: 1, result: result });
     } catch (error) {
-        logHeper.error('error =>', req.param);
+        logHelper.error('error =>', req.param);
         res.send({ ok: 0, msg : error });
     }
 });
 
 router.get('/list', async function(req, res, next) {
     let args = req.param;
-    logHeper.info('req param =>', args);
+    logHelper.info('req param =>', args);
 
     try {
-        let count = await role.get_count(args);
-        let result = await role.get_list(args);
+        let count = await roles.get_count(args);
+        let result = await roles.get_list(args);
         res.send({ ok: 1, result: result, count : count });
     } catch (error) {
-        logHeper.error('error =>', req.param);
+        logHelper.error('error =>', req.param);
         res.send({ ok: 0, msg : error });
     }
 });
 
 router.post('/add', async function(req, res, next) {
     let args = req.param;
-    logHeper.info('req param =>', args);
+    logHelper.info('req param =>', args);
     try {        
-        let result = await role.add(args);
+        let result = await roles.add(args);
         //res.send({ok : 1, result: result});
         res.send({ ok: 1, result: result.insertId });
     } catch (error) {
@@ -50,10 +50,10 @@ router.post('/add', async function(req, res, next) {
 
 router.post('/set', async function(req, res, next) {
     let args = req.param;
-    logHeper.info('req param =>', args);
+    logHelper.info('req param =>', args);
 
     try {
-        let result = await role.add(args);
+        let result = await roles.add(args);
         res.send({ok : 1, result: result});
     } catch (error) {
         res.send({ ok: 0, msg : error });
@@ -63,10 +63,10 @@ router.post('/set', async function(req, res, next) {
 
 router.post('/delete', async function(req, res, next) {
     let args = req.param;
-    logHeper.info('req param =>', args);
+    logHelper.info('req param =>', args);
 
     try {
-        let result = await role.delete(args);
+        let result = await roles.delete(args);
         res.send({ ok: 1, result: result });
     } catch (error) {
         res.send({ ok: 0, msg: error });
