@@ -19,5 +19,8 @@ module.exports = {
 			min: 0,
 			idleTimeoutMillis: 30000
 		}
+	},
+	pg_db:{
+		
 	}
 };

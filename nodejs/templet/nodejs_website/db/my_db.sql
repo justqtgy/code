@@ -34,7 +34,7 @@ create table users
     key ix_mobile(mobile)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-create table `role`
+create table `roles`
 (
 	id int auto_increment not null,
 	role_name varchar(50) not null,
@@ -42,7 +42,7 @@ create table `role`
     primary key (id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-create table `action`
+create table `actions`
 (
 	id int auto_increment not null,
 	action_name varchar(50) not null,

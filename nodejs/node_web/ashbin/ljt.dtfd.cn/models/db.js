@@ -5,7 +5,7 @@ module.exports.execSQL = function(sqlText, cb) {
     console.log(sqlText)
     var connection = new sql.Connection(config, function(err) {
         if (err) {
-            logger.error('error => ', err);
+            log.error('error => ', err);
             return cb(err);
         }
         // Query 
@@ -18,7 +18,7 @@ module.exports.execSQL = function(sqlText, cb) {
 
     connection.on('error', function(err) {
         // ... error handler 
-        logger.error('error => ', err);
+        log.error('error => ', err);
         cb(err);
     });
 
@@ -40,7 +40,7 @@ module.exports.execSP = function(spName, params, cb) {
     var connection = new sql.Connection(config, function(err) {
         // ... error checks 
         if (err) {
-            logger.error('error => ', err);
+            log.error('error => ', err);
             return cb(err, '');
         }
         // Stored Procedure 
@@ -65,7 +65,7 @@ module.exports.execSP = function(spName, params, cb) {
 
     connection.on('error', function(err) {
         // ... error handler 
-        logger.error('error => ', err);
+        log.error('error => ', err);
         cb(err);
     });
 }
