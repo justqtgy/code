@@ -22,12 +22,11 @@ users.get_count = async function(args) {
 
 users.get_pages = async function(args, callback) {
     try {
-        let pageIndex = parseInt(args.pageIndex);
-        let pageSize = parseInt(args.pageSize);
-        let beginID = (pageIndex - 1) * pageSize + 1;
-        let endID = pageIndex * pageSize;
+        let pageIndex   = parseInt(args.pageIndex);
+        let pageSize    = parseInt(args.pageSize);
+        let startIndex  = (pageIndex - 1) * pageSize ;
 
-        let sql = `select * from users limit ${pageSize} offset ${beginID}`
+        let sql = `select * from users limit ${pageSize} offset ${startIndex}`
         let result = await db.exec(sql);
         return result;
     } catch (error) {
@@ -80,7 +79,6 @@ users.delete = async function(args) {
 
 users.change_password = async function(args) {
     try {
-
         let sql = `update users set password=${args.password} where id = ${args.id}`;
         let result = await db.exec(sql);
         return result;

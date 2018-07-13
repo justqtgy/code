@@ -22,13 +22,13 @@ logs.get_count = async function(args) {
 
 logs.get_pages = async function(args) {
     try {
-        let pageIndex = parseInt(args.pageIndex);
-        let pageSize = parseInt(args.pageSize);
-        let beginID = (pageIndex - 1) * pageSize ;
+        let pageIndex   = parseInt(args.pageIndex);
+        let pageSize    = parseInt(args.pageSize);
+        let startIndex  = (pageIndex - 1) * pageSize ;
         //let endID = pageIndex * pageSize;
 
         let sql = `select * from users limit $1 offset $2`
-        let result = await db.exec(sql, [pageSize, beginID]);
+        let result = await db.exec(sql, [pageSize, startIndex]);
         return result.rows;
     } catch (error) {
         throw error

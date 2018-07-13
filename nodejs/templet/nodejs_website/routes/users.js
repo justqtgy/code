@@ -16,14 +16,14 @@ router.get('/login', async function(req, res, next) {
 
 //获取用户信息
 router.get('/single', async function(req, res, next) {
-    logHelper.info('req param =>', req.param);
+    logger.info('req param =>', req.param);
 
     try {
         let id = req.param.id;
         let result = await users.get_single(id);
         res.send({ ok: 1, result: result });
     } catch (error) {
-        logHelper.error('error =>', req.param);
+        logger.error('error =>', req.param);
         res.send({ ok: 0, msg: error });
     }
 });
@@ -31,14 +31,14 @@ router.get('/single', async function(req, res, next) {
 //获取用户列表
 router.get('/list', async function(req, res, next) {
     let args = req.param;
-    logHelper.info('req param =>', args);
+    logger.info('req param =>', args);
 
     try {
         let count = await users.get_count(args);
         let result = await users.get_list(args);
         res.send({ ok: 1, result: result, count : count });
     } catch (error) {
-        logHelper.error('error =>', req.param);
+        logger.error('error =>', req.param);
         res.send({ ok: 0, msg: error });
     }
 });
@@ -46,7 +46,7 @@ router.get('/list', async function(req, res, next) {
 //添加用户
 router.post('/add', async function(req, res, next) {
     let args = req.param;
-    logHelper.info('req param =>', args);
+    logger.info('req param =>', args);
     try {        
         let result = await users.add(args);
         //res.send({ok : 1, result: result});
@@ -59,7 +59,7 @@ router.post('/add', async function(req, res, next) {
 //修改用户信息
 router.post('/set', async function(req, res, next) {
     let args = req.param;
-    logHelper.info('req param =>', args);
+    logger.info('req param =>', args);
 
     try {
         let result = await users.add(args);
@@ -72,7 +72,7 @@ router.post('/set', async function(req, res, next) {
 //删除用户信息
 router.post('/delete', async function(req, res, next) {
     let args = req.param;
-    logHelper.info('req param =>', args);
+    logger.info('req param =>', args);
 
     try {
         let result = await users.delete(args);
@@ -90,14 +90,14 @@ router.get('/password', (req, res, next)=>{
 //修改密码
 router.post('/password', async function(req, res, next){
     let args = req.param;
-    logHelper.info('req param = >', args);
+    logger.info('req param = >', args);
 
     try{
         let result = await users.change_password(args);
         res.send({ok:1, result: result});
     } 
     catch(error){
-        logHelper.error('error => ', error);
+        logger.error('error => ', error);
         res.send({ok:0, msg: error});
     }
 });
@@ -105,7 +105,7 @@ router.post('/password', async function(req, res, next){
 //登录
 router.post('/login', async function(req, res, next){
     let args = req.body;
-    logHelper.info('req param = >', args);
+    logger.info('req param = >', args);
     try{
         let result = await users.get_single(args.username);
         if(!result){
@@ -129,7 +129,7 @@ router.post('/login', async function(req, res, next){
         res.send({ok:1});
     }
     catch(error){
-        logHelper.error('error => ', error);
+        logger.error('error => ', error);
         res.send({ok:0, msg: error});
     }
 });
@@ -137,7 +137,7 @@ router.post('/login', async function(req, res, next){
 //登出
 router.get('/logout', async function(req, res, next){
     let args = req.param;
-    logHelper.info('req param = >', args);
+    logger.info('req param = >', args);
     res.clearCookie("__user");
     res.redirect('/users/login');      
 });

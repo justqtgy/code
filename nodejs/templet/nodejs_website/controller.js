@@ -1,7 +1,12 @@
 
-const fs = require('fs');
+const fs 		= require('fs');
+const dbs 		= require('./framework/dbs');
+const dbconfigs = require('./config/dbconfigs');
 
 function controller(app){
+	global.dbs = dbs;
+	global.dbconfigs = dbconfigs;
+
 	console.log('init_route begin');	
 	
 	app.use('/', require('./routes/index'));

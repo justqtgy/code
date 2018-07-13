@@ -9,7 +9,7 @@ module.exports = class mysql_helper{
      * @param {*} sql 
      */
     exec(sql, params){
-        logHelper.info('sql =>', sql, params);
+        logger.info('sql =>', sql, params);
         var config = this.config;
         return new Promise(function(resolve, reject) { 
             var pool = mysql.createPool(config);           
