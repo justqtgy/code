@@ -33,7 +33,7 @@ try {
     require('./controller')(app);
 
 } catch (err) {
-    console.log(err);
+    console.log(err); 
 }
 
 //总是检查是否登录
