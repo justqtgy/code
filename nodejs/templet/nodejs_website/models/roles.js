@@ -22,12 +22,11 @@ roles.get_count = async function(args) {
 
 roles.get_pages = async function(args, callback) {
     try {
-        let pageIndex = parseInt(args.pageIndex);
-        let pageSize = parseInt(args.pageSize);
-        let beginID = (pageIndex - 1) * pageSize + 1;
-        let endID = pageIndex * pageSize;
+        let pageIndex  = parseInt(args.pageIndex);
+        let pageSize   = parseInt(args.pageSize);
+        let startIndex = (pageIndex - 1) * pageSize;
 
-        let sql = `select * from roles limit ${beginID}, ${endID}`
+        let sql = `select * from roles limit ${pageSize}, ${startIndex}`
         let result = await db.exec(sql);
         return result;
     } catch (error) {

@@ -22,12 +22,12 @@ actions.get_count = async function(args) {
 
 actions.get_list = async function(args, callback) {
     try {
-        let pageIndex = parseInt(args.pageIndex);
-        let pageSize = parseInt(args.pageSize);
-        let beginID = (pageIndex - 1) * pageSize + 1;
-        let endID = pageIndex * pageSize;
+        let pageIndex  = parseInt(args.pageIndex);
+        let pageSize   = parseInt(args.pageSize);
+        let startIndex = (pageIndex - 1) * pageSize;
 
-        let sql = `select * from actions limit ${beginID}, ${endID}`
+
+        let sql = `select * from actions limit ${pageSize}, ${startIndex}`
         let result = await db.exec(sql);
         return result;
     } catch (error) {

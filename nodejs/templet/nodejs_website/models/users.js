@@ -24,10 +24,9 @@ users.get_pages = async function(args, callback) {
     try {
         let pageIndex = parseInt(args.pageIndex);
         let pageSize = parseInt(args.pageSize);
-        let beginID = (pageIndex - 1) * pageSize + 1;
-        let endID = pageIndex * pageSize;
+        let startIndex = (pageIndex - 1) * pageSize;
 
-        let sql = `select * from users limit ${pageSize} offset ${beginID}`
+        let sql = `select * from users limit ${pageSize} offset ${startIndex}`
         let result = await db.exec(sql);
         return result;
     } catch (error) {
