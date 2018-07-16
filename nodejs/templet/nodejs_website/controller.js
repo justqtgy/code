@@ -1,11 +1,14 @@
-const dbs = require('./framework/dbs');
+
+const fs 		= require('fs');
+const dbs 		= require('./framework/dbs');
 const dbconfigs = require('./config/dbconfigs');
-const fs = require('fs');
 
 function controller(app){
 	global.dbs = dbs;
 	global.dbconfigs = dbconfigs;
 
+	console.log('init_route begin');	
+	
 	app.use('/', require('./routes/index'));
 
 	fs.readdirSync(__dirname + '/routes').filter((f) => {
