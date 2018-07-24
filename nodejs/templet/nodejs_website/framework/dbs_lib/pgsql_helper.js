@@ -6,7 +6,7 @@ var pg = require('pg');
 //     database:"ghost",
 //     password:"123456",
 //     port:5432,
-    
+//     host : '127.0.0.1',
 //     // 扩展属性
 //     max:20, // 连接池最大连接数
 //     idleTimeoutMillis:3000, // 连接最大空闲时间 3s

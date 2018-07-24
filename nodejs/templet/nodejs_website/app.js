@@ -17,6 +17,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({ resave: true, saveUninitialized: false, secret: 'gsmy-sj5.0' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 注：配置里的日志目录要先创建，才能加载配置，不然会出异常
@@ -53,10 +54,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+    res.render('error');
 });
 
 
