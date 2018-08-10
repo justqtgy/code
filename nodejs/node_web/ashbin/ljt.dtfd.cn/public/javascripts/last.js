@@ -42,7 +42,7 @@ var app = new Vue({
         init: function() {
             var that = this;
             that.initEasyPieCharts();
-        },
+        },        
     }
 });
 
