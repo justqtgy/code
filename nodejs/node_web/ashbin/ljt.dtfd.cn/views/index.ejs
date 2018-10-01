@@ -1,6 +1,8 @@
 <%- include ./shared/_header %>
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-
+<link href="../assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/profile.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
     <!-- END PAGE LEVEL PLUGINS -->
 <%- include ./shared/_top %>
 <%- include ./shared/_sidebar %>
@@ -15,66 +17,50 @@
 		    <!-- END PAGE HEADER-->
 		    
 			<!-- BEGIN PAGE CONTENT-->
-            <div class="row" id="grid">
-				<div v-if = "DataList.length>0">
-					<div class="col-md-4 col-sm-4" v-for = "(item, index) in DataList" v-cloak>
-						<div class="portlet light ">
-							<div class="portlet-title">
-								<div class="caption">
-									<i class="icon-cursor font-dark hide"></i>
-									<span class="caption-subject font-dark bold uppercase">{{ item.gps_id }}</span>
-								</div>                                    
-							</div>
-							<div class="portlet-body">
-								<div class="row">
-									<div class="col-md-4">
-										<div class="easy-pie-chart">
-											<div class="number" v-bind:data-percent= "item.one_rl" >
-												<span>{{ item.one_rl }}</span>% </div>
-											<a class="title" href="javascript:;"> 容量1
-												<i class="icon-arrow-right"></i>
-											</a>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="easy-pie-chart">
-											<div class="number" v-bind:data-percent="item.two_rl">
-												<span>{{ item.two_rl }}</span>% </div>
-											<a class="title" href="javascript:;"> 容量2
-												<i class="icon-arrow-right"></i>
-											</a>
-										</div>
-									</div>
-								
-									<div class="margin-bottom-10 visible-sm"> </div>
-									<div class="col-md-4">
-										<div class="easy-pie-chart">
-											<div class="number" v-bind:data-percent=" item.power ">
-												<span>{{ item.power }}</span>% </div>
-											<a class="title" href="javascript:;"> 电量
-												<i class="icon-arrow-right"></i>
-											</a>
-										</div>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-	
-			</div>
-                    
+			 <div class="row">
+				 <div class="col-md-12">
+					 <div class="profile-sidebar">
+						 <div class="portlet light profile-sidebar-portlet">
+							 <div class="portlet-title">
+								 <div class="caption">
+									 <i class="icon-social-dribbble font-blue-sharp"></i>
+									 <span class="caption-subject font-blue-sharp bold uppercase">垃圾桶信息</span>
+								 </div>
+							 </div>
+							 <div class="portlet-body">
+								 <div id="tree_group" class="tree-demo">
+								 </div>
+							 </div>
+						 </div>
+					 </div>
+
+					 <div class="profile-content" >
+						 <div class="row">
+							 <div class="col-md-12" >
+								 <div class="portlet light map" style="overflow:hidden;">
+									 <div id="container" ></div>
+								 </div>
+							 </div>
+						 </div>
+					 </div>
+				 </div>
+			 </div>
 			<!-- END PAGE CONTENT-->
-		</div>
+		 </div>
 	</div>
 	<!-- END CONTENT -->
 
 
 <%- include shared/_bottom %>
 <%- include shared/_scripts %>
+	<script type="text/javascript" src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=e12cc6ed395c712532ee84dabf3467d0&plugin=AMap.Geocoder"></script>
+	<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
-	<script src="../assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
-	<script src="/javascripts/include/query.js"></script>
-	<script src="/javascripts/index.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/javascripts/include/map.js"></script>
+	<script type="text/javascript" src="/javascripts/include/date-utils.min.js"></script>
+	<script type="text/javascript" src="/javascripts/include/query.js"></script>
+	<script type="text/javascript" src="/javascripts/index.js"></script>
 <%- include shared/_footer %>
