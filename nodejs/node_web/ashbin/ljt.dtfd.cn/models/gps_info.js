@@ -8,23 +8,10 @@ function gps_info(model) {
 
 module.exports = gps_info;
 
-gps_info.get_info = function(account, callback) {
-    var sql = " select * from gps_info where Account='%s'";
-    sql = util.format(sql, account);
-
-    db.execSQL(sql, function(err, rows) {
-        if (err) {
-            return callback(err);
-        }
-        callback(err, rows);
-    });
-};
-
 gps_info.get_count = function(params, callback) {
     var sql = "select count(*) as total from gps_info";
     db.execSQL(sql, function(err, result) {
-        if (err) {
-            log.error('Error = ', err);
+        if (err) {            
             return callback(err);
         }
         var total = 0;
@@ -50,37 +37,29 @@ gps_info.get_pages = function(params, callback) {
 
     db.execSQL(sql, function(err, rows) {
         if (err) {
-            log.error('Error = ', err);
-            return callback(err);
+            return callback(err)
         }
         callback(err, rows);
     });
 };
 
 gps_info.get_list = function(params, callback) {
-    var sql = ";with t as ( \
-					select *, 0 as Level from View_gps_info where gps_infoNo='0' \
-					union all \
-					select m.*, Level+1 from View_gps_info m inner join t on m.ParentID = t.ID \
-				) \
-				select * from t where Level<=3";
+    var sql = "select * from gps_info";
     
     db.execSQL(sql, function(err, rows) {
         if (err) {
-            log.error('Error = ', err);
-            return callback(err);
+            return callback(err)
         }
         callback(err, rows);
     });
 };
 
 gps_info.get_single = function(id, callback) {
-    var sql = "select * from gps_info where ID = %s";
+    var sql = "select * from gps_info where id = %s";
     sql = util.format(sql, id);
     db.execSQL(sql, function(err, rows) {
         if (err) {
-            log.error('Error = ', err);
-            return callback(err);
+            return callback(err)
         }
         callback(err, rows);
     });
@@ -94,8 +73,7 @@ gps_info.add = function(params, callback) {
     
     db.execSQL(sql, function(err, result) {
         if (err) {
-            log.error('Error = ', err);
-            return callback(err);
+            return callback(err)
         }
         callback(err, result);
     });
@@ -107,8 +85,7 @@ gps_info.update = function(params, callback) {
     
     db.execSQL(sql, function(err, result) {
         if (err) {
-            log.error('Error = ', err);
-            return callback(err);
+            return callback(err)
         }
         callback(err, result);
     });
@@ -120,8 +97,7 @@ gps_info.delete = function(params, callback) {
     
     db.execSQL(sql, function(err, result) {
         if (err) {
-            log.error('Error = ', err);
-            return callback(err);
+            return callback(err)
         }
         callback(err, result);
     });
