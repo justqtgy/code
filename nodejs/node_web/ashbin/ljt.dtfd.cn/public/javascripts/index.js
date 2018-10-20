@@ -17,6 +17,7 @@ var icons = {
 
 function load_tree(){
     $.get('/last/list',function(result){
+        console.log(result)
         var data = [];
         result.rows.forEach(function(item) {
             // if (item.Level.toString() === "0") {
@@ -25,7 +26,7 @@ function load_tree(){
             //     var index = data.length-1;
             //     data[index]["children"].push({"vid" : item.VehicleID, "text" : item.VehicleNo})
             // }
-            data.push({ "id": item.gps_id, "text": item.gps_id, "lng":item.lng, "lat":item.lat});
+            data.push({ "id": item.gps_id, "text": item.gps_name, "lng":item.lng, "lat":item.lat});
         });
 
         var _treeData = [{

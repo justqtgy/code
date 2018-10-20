@@ -1,9 +1,13 @@
 var displayNumber = 10;
+const _status = {
+    1 : '<font color="blue">正常</font>',
+    0 : '<font color="red">禁用</font>'
+}
 
 function get_list(pageIndex) {
     var q = new Query('/gps_info/pages', 'GET', null, pageIndex, displayNumber);
-    // var params = q.init();
-    q.request(null, function(json) {
+    var params = q.init();    
+    q.request(params, function(json) {
         if (!json.ok) {
             bootbox.alert(json.msg);
             return;
@@ -14,42 +18,51 @@ function get_list(pageIndex) {
     });
 }
  
-//删除记录信息
-function delete_record(id) {
-    bootbox.setLocale("zh_CN");
-    bootbox.confirm({
-        title: hint.box_title,
-        message: hint.confirm_delete,
-        callback: function(result) {
-            if (!result) return;
-
-            var params = {
-                id: id
-            };
-            var q = new Query('/gps_info/delete', 'POST');
-            q.request(params, function(json) {
-                if (json.ok != 1) {
-                    bootbox.alert(hint.delete_fail);
-                    return;
-                }
-                bootbox.alert(hint.delete_success, function() {
-                    get_list(1);
-                });
-            });
+//设置记录信息
+function save_record() {
+    var q = new Query('/gps_info/set', 'POST', $("#record"));
+    var params = q.init();
+    console.log(params);
+    q.request(params, function(json) {
+        if (!json.ok) {
+            bootbox.alert(hint.save_fail);
+            return;
         }
+        $("#mod_info").modal('hide');
+        bootbox.alert(hint.save_success, function() {
+            get_list(1);
+        });
     });
 }
 
 function add_record() {
-    //显示记录
-    $("#txtID").val(0);
-    // $("#txtAccount").val('');
-    // $("#txtPassword").val('');
-    // $("#txtTrueName").val('');
-    // $("#txtEmail").val('');
-    // $("#txtMobile").val('');
-    // $("#chkIsAdmin").attr("checked", false);
+    var ctrls = $("#record").serializeArray();
+    for (var c in ctrls) {
+        ctrls[c].value = '';
+    }
     $("#mod_info").modal({ backdrop: 'static', keyboard: false });
+}
+
+function get_record(id) {
+    var params = {
+        id: id
+    };
+
+    var q = new Query('/gps_info/single', 'GET', null);
+    q.request(params, function(json) {
+        if (!json.ok) {
+            bootbox.alert(json.msg);
+            return;
+        }
+        var item = json.rows[0];
+        //显示记录
+        var ctrls = $("#record").serializeArray();
+        for (var c in ctrls) {
+            console.log(ctrls[c].name);
+            $("#"+ctrls[c].name).val(item[ctrls[c].name]);
+        }
+        $("#mod_info").modal({ backdrop: 'static', keyboard: false });
+    });
 }
 
 var app = new Vue({
@@ -57,10 +70,6 @@ var app = new Vue({
     data: {
         DataList: [],
         MsgInfo: '正在加载......',
-        _Status : {
-            1 : '正常',
-            2 : '禁用'
-        }
     },
     methods: {
         loadPage: function() {
@@ -77,9 +86,8 @@ var app = new Vue({
                 that.loadPage();
             });
 
-            $("#more").click(function() {
-                var _p = pageOptions.pagination;
-                get_list(_p.pageIndex);
+            $("#btnChange").click(function() {
+                save_record();
             });
         },
          

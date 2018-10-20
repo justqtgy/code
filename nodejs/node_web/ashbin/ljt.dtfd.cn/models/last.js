@@ -31,8 +31,8 @@ last.get_pages = function(params, callback){
 	var end_id = pageIndex * pageSize;
 	var sql = `
 		;WITH t AS( 
-			SELECT ROW_NUMBER() OVER (ORDER BY ID DESC) AS R_Number,* 
-			FROM gps_last 
+			SELECT ROW_NUMBER() OVER (ORDER BY t1.id DESC) AS R_Number,t1.*, t2.gps_name 
+			FROM gps_last t1 inner join  gps_info t2 on t1.gps_id = t2.gps_id and t2.status=1
 			where add_time>='%s' and add_time<dateadd(day, 1, '%s')
 		) 
 		SELECT * FROM t WHERE R_Number BETWEEN %s AND %s `;
@@ -57,7 +57,7 @@ last.get_single = function(id,callback){
 };
 
 last.get_list = function(callback){
-	var sql = "select * from gps_last ";
+	var sql = "select t1.*, t2.gps_name, t2.status, t2.address from gps_last t1 inner join  gps_info t2 on t1.gps_id = t2.gps_id where t2.status=1 ";
 	db.execSQL(sql, function(err, rows){
 		if(err){
 			return callback(err)

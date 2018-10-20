@@ -32,8 +32,8 @@ power.get_pages = function(params, callback){
 	var end_id = pageIndex * pageSize;
 	var sql = `
 		;WITH t AS( 
-			SELECT ROW_NUMBER() OVER (ORDER BY ID DESC) AS R_Number,* 
-			FROM gps_power 
+			SELECT ROW_NUMBER() OVER (ORDER BY t1.id DESC) AS R_Number,t1.*, t2.gps_name 
+			FROM gps_power t1 inner join  gps_info t2 on t1.gps_id = t2.gps_id and t2.status=1
 			where add_time>='%s' and add_time<dateadd(day, 1, '%s')
 		) 
 		SELECT * FROM t WHERE R_Number BETWEEN %s AND %s `;

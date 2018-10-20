@@ -34,21 +34,26 @@
 						<tr>
 							<th>#</th>
 							<th>GPSID</th>
+							<th>名称</th>
 							<th>地址</th>						 
-							<th>备注</th>							
+							<th>备注</th>		
+							<th>状态</th>
+							<th>操作</th> 					
 						</tr>
 						</thead>
 						<tbody v-if = "DataList.length > 0">
 							<tr v-for = "(item, index) in DataList">
 								<td>{{ index+1 }}</td> 								
 								<td>{{ item.gps_id }}</td> 
+								<td>{{ item.name }}</td>							 
 								<td>{{ item.address }}</td>							 
-								 
-								<td>{{ item.remark }}</td>
+								<td>{{ item.remark }}</td> 								
+								<td><span v-html = _status[item.status] /></td> 								
+								<td><a href='#' v-on:click="get_record(item.id)">编辑</a></td>
 							</tr>
 						</tbody>
 						<tbody v-else>
-							<tr><td colspan="5" class="text-center">没有数据</td></tr>
+							<tr><td colspan="7" class="text-center">没有数据</td></tr>
 						</tbody>                                
 					</table>
 				</div>
@@ -75,11 +80,15 @@
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div><!-- /.box-header -->
                 <div class="modal-body ">   
-                    <form id="password">                    
+                    <form id="record">                    
                     <div class="form-body"> 
                         <div class="form-group">
                             <label for="gps_id">GPSID</label>
                             <input id="gps_id" name="gps_id" class="form-control input-large" placeholder="请输入GPS号"/>
+                        </div>
+						<div class="form-group">
+                            <label for="gps_name">名称</label>
+                            <input id="gps_name" name="gps_name" class="form-control input-large" placeholder="请输入垃圾桶的名称"/>
                         </div>
                         <div class="form-group">
                             <label for="address">地址</label>
@@ -87,10 +96,14 @@
                         </div>
 						<div class="form-group">
                             <label for="remark">备注</label>
-							<textarea id="remark" rows="4" class="form-control" placeholder="请输入备注"/></textarea>                            
+							<textarea id="remark" name="remark" rows="4" class="form-control" placeholder="请输入备注"></textarea>                            
+                        </div>
+						<div class="form-group">
+                            <label for="status">是否使用</label>
+							<input type="checkbox" id="status" name="status" checked="checked" />               
                         </div>
                         <div class="form-group">
-                            <input type="hidden" name="id" class="form-control input-medium" placeholder="请输入ID" />                        
+                            <input type="hidden" id="id" name="id" class="form-control input-medium" placeholder="请输入ID" />                        
                         </div>
 						
                     </div></form>    

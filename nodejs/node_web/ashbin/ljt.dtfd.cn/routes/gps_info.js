@@ -3,9 +3,7 @@ var router = express.Router();
 var gps_info = require('../models/gps_info');
  
 router.get('/', function(req, res, next) {
-    var start_date = new Date().add({ days: -10 }).toFormat('YYYY-MM-DD'),
-        end_date = new Date().toFormat('YYYY-MM-DD');
-    res.render('gps_info', { start_date: start_date, end_date: end_date });
+    res.render('gps_info');
 });
 
 var get_count = function(req, res, next) {
@@ -18,15 +16,27 @@ var get_count = function(req, res, next) {
     });
 };
 
-router.get('/list', function(req, res, next) {
-    var args = req.body;
-    console.log('get gps_info list : ', args)
-    gps_info.get_list(args, function(err, result) {
+router.get('/pages', [get_count], function(req, res, next) {
+    var args = req.query;
+    console.log('get gps_info pages: ', args);
+    gps_info.get_pages(args, function(err, result) {
         if (err) {
             res.send({ ok: 0, msg: err });
             return;
         }
         res.send({ ok: 1, total: req.total, rows: result });
+    });
+});
+
+
+router.get('/list', function(req, res, next) {
+    console.log('get gps_info list ')
+    gps_info.get_list(function(err, result) {
+        if (err) {
+            res.send({ ok: 0, msg: err });
+            return;
+        }
+        res.send({ ok: 1, rows: result });
     });
 });
 
@@ -37,28 +47,33 @@ router.get('/single', function(req, res, next) {
             res.send({ ok: 0, msg: err });
             return;
         }
-        gps_info.get_single(req.query.pid, function(err, parents) {
-            if (err) {
-                res.send({ ok: 0, msg: err });
-                return;
-            }
-
-            res.send({ ok: 1, rows: result, parents: parents });
-        });
+        res.send({ ok: 1, rows: result });
     });
 });
 
 
-router.post('/delete', function(req, res, next) {
-    var params = req.body;
-    console.log('gps_info delete args = ', params)
-    gps_info.delete(params, function(err, result) {
-        if (err) {
-            res.send({ ok: 0, msg: err });
-            return;
-        }
-        res.send({ ok: 1 });
-    });
+router.post('/set', function(req, res, next) {
+    var args = req.body;
+    console.log('gps_info set args = ', args)
+    if(args.id) {
+        gps_info.update(args, function(err, result){
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            res.send({ ok: 1 });
+        })
+    } else {
+        gps_info.add(args, function(err, result) {
+            if (err) {
+                res.send({ ok: 0, msg: err });
+                return;
+            }
+            res.send({ ok: 1 });
+        });
+        
+    }
+    
 });
 
 module.exports = router;
