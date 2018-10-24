@@ -1,8 +1,12 @@
 var displayNumber = 10;
 const _status = {
-    1 : '<font color="blue">正常</font>',
-    0 : '<font color="red">禁用</font>'
-}
+        1 : '<font color="blue">正常</font>',
+        0 : '<font color="red">禁用</font>'
+    },
+    _types = {
+        1 : '地埋式',
+        2 : '果皮桶'
+    }
 
 function get_list(pageIndex) {
     var q = new Query('/gps_info/pages', 'GET', null, pageIndex, displayNumber);

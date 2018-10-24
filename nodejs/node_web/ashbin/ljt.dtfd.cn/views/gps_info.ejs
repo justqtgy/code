@@ -37,6 +37,7 @@
 							<th>名称</th>
 							<th>地址</th>						 
 							<th>备注</th>		
+							<th>类型</th>
 							<th>状态</th>
 							<th>操作</th> 					
 						</tr>
@@ -45,9 +46,10 @@
 							<tr v-for = "(item, index) in DataList">
 								<td>{{ index+1 }}</td> 								
 								<td>{{ item.gps_id }}</td> 
-								<td>{{ item.name }}</td>							 
+								<td>{{ item.gps_name }}</td>							 
 								<td>{{ item.address }}</td>							 
-								<td>{{ item.remark }}</td> 								
+								<td>{{ item.remark }}</td> 		
+								<td>{{ _types[item.type] }}</td> 							
 								<td><span v-html = _status[item.status] /></td> 								
 								<td><a href='#' v-on:click="get_record(item.id)">编辑</a></td>
 							</tr>
@@ -93,6 +95,13 @@
                         <div class="form-group">
                             <label for="address">地址</label>
                             <input id="address" name="address" class="form-control input-large" placeholder="请输入垃圾桶的位置"/>
+						</div>
+						<div class="form-group">
+                            <label for="type">类型</label>
+                            <select id="type" name="type" class="form-control input-large" >
+								<option value="1">地埋式</option>
+								<option value="2">果皮桶</option>
+							</select>
                         </div>
 						<div class="form-group">
                             <label for="remark">备注</label>

@@ -67,8 +67,8 @@ gps_info.get_single = function (id, callback) {
 
 gps_info.add = function (params, callback) {
     var status = params.status ? 1 : 0;
-    var sql = "insert into gps_info(gps_id,gps_name,address,remark,status) values('%s','%s','%s','%s', %s);select @@identity as ID;";
-    sql = util.format(sql, params.gps_id, params.gps_name, params.address, params.remark, status);
+    var sql = "insert into gps_info(gps_id,gps_name,address,remark,status, type) values('%s','%s','%s','%s', %s, %s);select @@identity as ID;";
+    sql = util.format(sql, params.gps_id, params.gps_name, params.address, params.remark, status, params.type);
 
     db.execSQL(sql, function (err, result) {
         if (err) {
@@ -80,8 +80,8 @@ gps_info.add = function (params, callback) {
 
 gps_info.update = function (params, callback) {
     var status = params.status ? 1 : 0;
-    var sql = "update gps_info set gps_id='%s', gps_name='%s', address='%s', remark='%s', status='%s' where id = '%s'";
-    sql = util.format(sql, params.gps_id, params.gps_name, params.address, params.remark, status, params.id);
+    var sql = "update gps_info set gps_id='%s', gps_name='%s', address='%s', remark='%s', status='%s', type=%s where id = '%s'";
+    sql = util.format(sql, params.gps_id, params.gps_name, params.address, params.remark, status, params.type, params.id);
 
     db.execSQL(sql, function (err, result) {
         if (err) {
