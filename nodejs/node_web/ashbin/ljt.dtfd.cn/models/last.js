@@ -57,7 +57,7 @@ last.get_single = function(id,callback){
 };
 
 last.get_list = function(callback){
-	var sql = "select t1.*, t2.gps_name, t2.status, t2.address from gps_last t1 inner join  gps_info t2 on t1.gps_id = t2.gps_id where t2.status=1 ";
+	var sql = "select t1.*, t2.gps_name, t2.status, t2.address, t2.type from gps_last t1 inner join  gps_info t2 on t1.gps_id = t2.gps_id where t2.status=1 ";
 	db.execSQL(sql, function(err, rows){
 		if(err){
 			return callback(err)
