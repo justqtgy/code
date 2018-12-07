@@ -10,7 +10,11 @@ module.exports.parse = function(socket, data) {
         _data = _data.toUpperCase();
 
     if (_data.substring(0, 2) == '7E' && _data.indexOf('2A444654445F4C4A54') > 0) {
-        gps_data.add_data(_data);
+        gps_data.add_data_dili(_data);
+    }
+
+    if (_data.substring(0, 2) == '7E' && _data.indexOf('2A444D464C5F434152 ') > 0) {
+        gps_data.add_data_dimai(_data);
     }
 };
 
