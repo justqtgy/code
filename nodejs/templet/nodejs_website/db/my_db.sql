@@ -18,7 +18,7 @@
 -- )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*系统管理员及权限*/
-create table users
+create table user
 (
 	id int auto_increment not null, /*从1000001开始*/
 	account varchar(20) not null,
@@ -34,7 +34,7 @@ create table users
     key ix_mobile(mobile)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-create table `roles`
+create table `role`
 (
 	id int auto_increment not null,
 	role_name varchar(50) not null,
@@ -42,7 +42,7 @@ create table `roles`
     primary key (id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-create table `actions`
+create table `action`
 (
 	id int auto_increment not null,
 	action_name varchar(50) not null,

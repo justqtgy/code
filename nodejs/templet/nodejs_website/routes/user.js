@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 var utils = require('utility');
 var MSG = require('../config/tips');
-var users = require('../models/users');
+var user = require('../models/user');
 
 //用户管理首页
 router.get('/', async function(req, res, next) {
-    res.render('users');
+    res.render('user');
 });
 
 //登录
@@ -20,7 +20,7 @@ router.get('/single', async function(req, res, next) {
 
     try {
         let id = req.param.id;
-        let result = await users.get_single(id);
+        let result = await user.get_single(id);
         res.send({ ok: 1, result: result });
     } catch (error) {
         logger.error('error =>', req.param);
@@ -34,8 +34,8 @@ router.get('/list', async function(req, res, next) {
     logger.info('req param =>', args);
 
     try {
-        let count = await users.get_count(args);
-        let result = await users.get_list(args);
+        let count = await user.get_count(args);
+        let result = await user.get_list(args);
         res.send({ ok: 1, result: result, count : count });
     } catch (error) {
         logger.error('error =>', req.param);
@@ -48,7 +48,7 @@ router.post('/add', async function(req, res, next) {
     let args = req.param;
     logger.info('req param =>', args);
     try {        
-        let result = await users.add(args);
+        let result = await user.add(args);
         //res.send({ok : 1, result: result});
         res.send({ ok: 1, result: result.insertId });
     } catch (error) {
@@ -62,7 +62,7 @@ router.post('/set', async function(req, res, next) {
     logger.info('req param =>', args);
 
     try {
-        let result = await users.add(args);
+        let result = await user.add(args);
         res.send({ok : 1, result: result});
     } catch (error) {
         res.send({ ok: 0, msg: error });
@@ -75,7 +75,7 @@ router.post('/delete', async function(req, res, next) {
     logger.info('req param =>', args);
 
     try {
-        let result = await users.delete(args);
+        let result = await user.delete(args);
         res.send({ ok: 1, result: result });
     } catch (error) {
         res.send({ ok: 0, msg: error });
@@ -93,7 +93,7 @@ router.post('/password', async function(req, res, next){
     logger.info('req param = >', args);
 
     try{
-        let result = await users.change_password(args);
+        let result = await user.change_password(args);
         res.send({ok:1, result: result});
     } 
     catch(error){
@@ -107,7 +107,7 @@ router.post('/login', async function(req, res, next){
     let args = req.body;
     logger.info('req param = >', args);
     try{
-        let result = await users.get_single(args.username);
+        let result = await user.get_single(args.username);
         if(!result){
             res.send({ok:0, msg:MSG.EMPTY_ACCOUNT})
             return;
@@ -139,7 +139,7 @@ router.get('/logout', async function(req, res, next){
     let args = req.param;
     logger.info('req param = >', args);
     res.clearCookie("__user");
-    res.redirect('/users/login');      
+    res.redirect('/user/login');      
 });
 
 //检查用户是否登录
@@ -163,7 +163,7 @@ router.get('/check_login', function(req, res) {
 
 
 var cb0 = function (req, res, next) {
-  console.log('start users');
+  console.log('start user');
   next();
 }
 
@@ -172,7 +172,7 @@ router.get('/', [cb0], function (req, res, next) {
   console.log('response will be sent by the next function ...');
   next();
 }, function (req, res) {
-  res.render('users',{message : 'hello everyone'});
+  res.render('user',{message : 'hello everyone'});
 });
 
 module.exports = router;

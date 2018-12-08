@@ -3,10 +3,10 @@
  */
 var express = require('express');
 var router = express.Router();
-var actions = require('../models/actions');
+var action = require('../models/action');
 
 router.get('/', async function(req, res, next) {
-    res.render('actions');
+    res.render('action');
 });
 
 router.get('/single', async function(req, res, next) {
@@ -14,7 +14,7 @@ router.get('/single', async function(req, res, next) {
 
     try {
         let id = req.param.id;
-        let result = await actions.get_single(id);
+        let result = await action.get_single(id);
         res.send({ ok: 1, result: result });
     } catch (error) {
         logger.error('error =>', req.param);
@@ -27,8 +27,8 @@ router.get('/list', async function(req, res, next) {
     logger.info('req param =>', args);
 
     try {
-        let count = await actions.get_count(args);
-        let result = await actions.get_list(args);
+        let count = await action.get_count(args);
+        let result = await action.get_list(args);
         res.send({ ok: 1, result: result, count : count });
     } catch (error) {
         logger.error('error =>', req.param);
@@ -40,7 +40,7 @@ router.post('/add', async function(req, res, next) {
     let args = req.param;
     logger.info('req param =>', args);
     try {        
-        let result = await actions.add(args);
+        let result = await action.add(args);
         //res.send({ok : 1, result: result});
         res.send({ ok: 1, result: result.insertId });
     } catch (error) {
@@ -53,7 +53,7 @@ router.post('/set', async function(req, res, next) {
     logger.info('req param =>', args);
 
     try {
-        let result = await actions.add(args);
+        let result = await action.update(args);
         res.send({ok : 1, result: result});
     } catch (error) {
         res.send({ ok: 0, msg : error });
@@ -66,7 +66,7 @@ router.post('/delete', async function(req, res, next) {
     logger.info('req param =>', args);
 
     try {
-        let result = await actions.delete(args);
+        let result = await action.delete(args);
         res.send({ ok: 1, result: result });
     } catch (error) {
         res.send({ ok: 0, msg : error });
