@@ -3,10 +3,7 @@ var displayNumber = 20;
 function get_list(pageIndex) {
     var q = new Query('/role/list', 'GET', $("#search"), pageIndex, displayNumber);
     var params = q.init();
-    if (!params.begin_time || !params.end_time) {
-        alert('请选择日期');
-        return;
-    }
+    
     q.request(params, function (json) {
         if (!json.ok) {
             bootbox.alert(json.msg);
@@ -32,10 +29,9 @@ var app = new Vue({
                 get_list(1);
             }, 100);
         },
-        init: function () {
- 
+        init: function () { 
             var that = this;
-            that.loadPage();
+            //that.loadPage();
 
             $("#btnSearch").click(function () {
                 that.loadPage();

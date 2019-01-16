@@ -24,6 +24,7 @@ create table user
 	account varchar(20) not null,
 	`password` varchar(50) not null,
 	user_name varchar(20) not null,
+    avatar varchar(50) not null,
     weixin_id varchar(50) not null,
 	mobile varchar(50) not null,
 	add_time datetime not null,
@@ -39,6 +40,7 @@ create table `role`
 	id int auto_increment not null,
 	role_name varchar(50) not null,
 	remark varchar(50) not null,
+    is_builtin bit not null,/*内置角色，不能删除*/
     primary key (id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
@@ -46,7 +48,10 @@ create table `action`
 (
 	id int auto_increment not null,
 	action_name varchar(50) not null,
-	remark varchar(50) not null,
+    req_url varchar(50) not null,
+    icon varchar(50) not null,
+	parent_id int not null,
+    remark varchar(50) not null,    
     primary key (id)
 )ENGINE InnoDB DEFAULT CHARSET=utf8;
 

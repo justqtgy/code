@@ -44,6 +44,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>权限名</th>
+                                        <th>是否内置</th>
                                         <th>备注</th>
                                         <th style="width:120px;">操作</th>
                                     </tr>
@@ -52,6 +53,7 @@
                                     <tr v-for="(item, index) in DataList">
                                         <td>{{ index+1 }}</td>
                                         <td>{{ item.action_name }}</td>
+                                        <td>{{ item.is_builtin }}</td>
                                         <td>{{ item.remark }}</td>
                                         <td>
                                             <div v-html="get_do(item.ID, item.Status)"></div>
@@ -60,7 +62,7 @@
                                 </tbody>
                                 <tbody v-else>
                                     <tr>
-                                        <td colspan="3" style="text-align:center;">没有数据</td>
+                                        <td colspan="4" style="text-align:center;">没有数据</td>
                                     </tr>
                                 </tbody>
                             </table>

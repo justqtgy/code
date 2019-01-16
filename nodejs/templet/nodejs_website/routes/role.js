@@ -6,7 +6,7 @@ var router = express.Router();
 var role = require('../models/role');
 
 router.get('/', async function(req, res, next) {
-    res.send('role');
+    res.render('role');
 });
 
 router.get('/single', async function(req, res, next) {
